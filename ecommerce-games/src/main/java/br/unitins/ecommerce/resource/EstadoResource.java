@@ -5,7 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.EstadoDTO;
+import br.unitins.ecommerce.dto.estado.EstadoDTO;
+import br.unitins.ecommerce.dto.estado.EstadoResponseDTO;
 import br.unitins.ecommerce.model.endereco.Estado;
 import br.unitins.ecommerce.service.estado.EstadoService;
 import jakarta.inject.Inject;
@@ -34,10 +35,18 @@ public class EstadoResource {
     private static final Logger LOG = Logger.getLogger(EstadoResource.class);
 
     @GET
-    public List<Estado> getAll() {
+    public List<EstadoResponseDTO> getAll() {
         LOG.infof("Buscando todos os estados");
         LOG.debug("ERRO DE DEBUG.");
-        return estadoService.getAll();
+
+        try {
+            return estadoService.getAll();
+        } catch (Exception e) {
+
+            LOG.error(e);
+
+            return null;
+        }
     }
 
     @GET

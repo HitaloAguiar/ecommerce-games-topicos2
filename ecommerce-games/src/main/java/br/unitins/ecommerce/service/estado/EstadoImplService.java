@@ -3,7 +3,8 @@ package br.unitins.ecommerce.service.estado;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.EstadoDTO;
+import br.unitins.ecommerce.dto.estado.EstadoDTO;
+import br.unitins.ecommerce.dto.estado.EstadoResponseDTO;
 import br.unitins.ecommerce.model.endereco.Estado;
 import br.unitins.ecommerce.repository.EstadoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -24,9 +25,9 @@ public class EstadoImplService implements EstadoService {
     EstadoRepository estadoRepository;
 
     @Override
-    public List<Estado> getAll() {
+    public List<EstadoResponseDTO> getAll() {
         
-        return estadoRepository.findAll().list();
+        return estadoRepository.findAll().stream().map(EstadoResponseDTO::new).toList();
     }
 
     @Override

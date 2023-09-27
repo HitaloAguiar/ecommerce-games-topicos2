@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.estado;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
