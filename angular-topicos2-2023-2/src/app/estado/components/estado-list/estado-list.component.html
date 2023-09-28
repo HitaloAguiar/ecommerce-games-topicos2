@@ -1,4 +1,11 @@
-<mat-toolbar>Controle de Estados</mat-toolbar>
+<mat-toolbar>
+  <div class="flex-container">
+    <span class="toolbar-title"> Controle de Estados </span>
+    <button mat-mini-fab color="primary" routerLink="/estados/new">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
 
 <table mat-table [dataSource]="estados" class="mat-elevation-z8 demo-table">
     <!-- Id Column -->
@@ -23,5 +30,3 @@
     <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
   </table>
-  <button mat-raised-button color="primary"
-   routerLink="/estados/new">Novo Estado</button>
