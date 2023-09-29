@@ -7,6 +7,7 @@ import br.unitins.ecommerce.dto.PlataformaDTO;
 import br.unitins.ecommerce.model.produto.Plataforma;
 import br.unitins.ecommerce.repository.FabricanteRepository;
 import br.unitins.ecommerce.repository.PlataformaRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -29,8 +30,10 @@ public class PlataformaImplService implements PlataformaService {
 
     @Override
     public List<Plataforma> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return plataformaRepository.findAll().list();
+        return plataformaRepository.findAll(sort).list();
     }
 
     @Override

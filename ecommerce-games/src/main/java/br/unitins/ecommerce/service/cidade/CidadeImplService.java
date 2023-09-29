@@ -8,6 +8,7 @@ import br.unitins.ecommerce.dto.cidade.CidadeResponseDTO;
 import br.unitins.ecommerce.model.endereco.Cidade;
 import br.unitins.ecommerce.repository.CidadeRepository;
 import br.unitins.ecommerce.repository.EstadoRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -30,8 +31,10 @@ public class CidadeImplService implements CidadeService {
 
     @Override
     public List<CidadeResponseDTO> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return cidadeRepository.findAll().stream().map(CidadeResponseDTO::new).toList();
+        return cidadeRepository.findAll(sort).stream().map(CidadeResponseDTO::new).toList();
     }
 
     @Override

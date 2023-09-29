@@ -16,7 +16,7 @@ public record NoticiaDTO(
     @NotBlank(message = "O campo autor não pode estar nulo")
     String autor,
 
-    @NotBlank(message = "Campo dataPublicacao não pode estar vazio")
+    @NotNull(message = "Campo dataPublicacao não pode estar vazio")
     LocalDate dataPublicacao,
 
     @NotNull

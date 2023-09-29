@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.DeveloperDTO;
-import br.unitins.ecommerce.model.produto.Developer;
+import br.unitins.ecommerce.dto.developer.DeveloperDTO;
+import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
 import br.unitins.ecommerce.service.developer.DeveloperService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class DeveloperResource {
     private static final Logger LOG = Logger.getLogger(DeveloperResource.class);
 
     @GET
-    public List<Developer> getAll() {
+    public List<DeveloperResponseDTO> getAll() {
         LOG.infof("Buscando todos os developers");
         LOG.debug("ERRO DE DEBUG.");
         return developerService.getAll();
@@ -42,7 +42,7 @@ public class DeveloperResource {
 
     @GET
     @Path("/{id}")
-    public Developer getById(@PathParam("id") Long id) throws NotFoundException {
+    public DeveloperResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.infof("Buscando developers por ID. ", id);
         LOG.debug("ERRO DE DEBUG.");
         return developerService.getById(id);

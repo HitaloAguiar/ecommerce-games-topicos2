@@ -9,6 +9,7 @@ import br.unitins.ecommerce.repository.DeveloperRepository;
 import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.repository.GeneroRepository;
 import br.unitins.ecommerce.repository.PlataformaRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -37,8 +38,10 @@ public class GameImplService implements GameService {
 
     @Override
     public List<Game> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return gameRepository.findAll().list();
+        return gameRepository.findAll(sort).list();
     }
 
     @Override

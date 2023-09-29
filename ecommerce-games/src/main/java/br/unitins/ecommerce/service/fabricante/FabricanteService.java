@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.fabricante;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.FabricanteDTO;
-import br.unitins.ecommerce.model.produto.Fabricante;
+import br.unitins.ecommerce.dto.fabricante.FabricanteDTO;
+import br.unitins.ecommerce.dto.fabricante.FabricanteResponseDTO;
 
 public interface FabricanteService {
     
-    List<Fabricante> getAll();
+    List<FabricanteResponseDTO> getAll();
     
-    Fabricante getById(Long id);
+    FabricanteResponseDTO getById(Long id);
 
-    Fabricante insert(FabricanteDTO fabricanteDTO);
+    FabricanteResponseDTO insert(FabricanteDTO fabricanteDTO);
 
-    Fabricante update(Long id, FabricanteDTO fabricanteDTO);
+    FabricanteResponseDTO update(Long id, FabricanteDTO fabricanteDTO);
 
     void delete(Long id);
 }

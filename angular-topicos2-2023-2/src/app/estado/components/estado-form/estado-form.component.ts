@@ -53,20 +53,4 @@ export class EstadoFormComponent {
       }
     }
   }
-
-  // excluir() {
-
-  //   const novoEstado = this.formGroup.value;
-  //     if (novoEstado.id == null) {
-
-  //       this.estadoService.delete(novoEstado).subscribe({
-  //         next: (estadoCadastrado) => {
-  //           this.router.navigateByUrl('/estados/list');
-  //         },
-  //         error: (err) => {
-  //           console.log('Erro ao excluir' + JSON.stringify(err));
-  //         }
-  //       })
-  //     }
-  // }
 }

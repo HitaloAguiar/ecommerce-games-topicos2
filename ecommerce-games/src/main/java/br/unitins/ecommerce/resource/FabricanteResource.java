@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.FabricanteDTO;
-import br.unitins.ecommerce.model.produto.Fabricante;
+import br.unitins.ecommerce.dto.fabricante.FabricanteDTO;
+import br.unitins.ecommerce.dto.fabricante.FabricanteResponseDTO;
 import br.unitins.ecommerce.service.fabricante.FabricanteService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class FabricanteResource {
     private static final Logger LOG = Logger.getLogger(FabricanteResource.class);
 
     @GET
-    public List<Fabricante> getAll() {
+    public List<FabricanteResponseDTO> getAll() {
         LOG.infof("Buscando todos os fabricantes");
         LOG.debug("ERRO DE DEBUG.");
         return fabricanteService.getAll();
@@ -42,7 +42,7 @@ public class FabricanteResource {
 
     @GET
     @Path("/{id}")
-    public Fabricante getById(@PathParam("id") Long id) throws NotFoundException {
+    public FabricanteResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.infof("Buscando fabricantes por ID. ", id);
         LOG.debug("ERRO DE DEBUG.");
         return fabricanteService.getById(id);

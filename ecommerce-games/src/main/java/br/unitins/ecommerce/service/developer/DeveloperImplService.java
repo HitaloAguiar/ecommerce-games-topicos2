@@ -1,11 +1,14 @@
 package br.unitins.ecommerce.service.developer;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.DeveloperDTO;
+import br.unitins.ecommerce.dto.developer.DeveloperDTO;
+import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
 import br.unitins.ecommerce.model.produto.Developer;
 import br.unitins.ecommerce.repository.DeveloperRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,26 +26,32 @@ public class DeveloperImplService implements DeveloperService {
     @Inject
     DeveloperRepository developerRepository;
 
+    private DateTimeFormatter formatterGetAll = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
-    public List<Developer> getAll() {
+    public List<DeveloperResponseDTO> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return developerRepository.findAll().list();
+        return developerRepository.findAll(sort).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll)).toList();
     }
 
     @Override
-    public Developer getById(Long id) {
+    public DeveloperResponseDTO getById(Long id) {
         
         Developer developer = developerRepository.findById(id);
 
         if (developer == null)
             throw new NotFoundException("Não encontrado");
 
-        return developer;
+        return new DeveloperResponseDTO(developer, formatterGetById);
     }
 
     @Override
     @Transactional
-    public Developer insert(DeveloperDTO developerDTO) {
+    public DeveloperResponseDTO insert(DeveloperDTO developerDTO) {
         
         validar(developerDTO);
 
@@ -54,12 +63,12 @@ public class DeveloperImplService implements DeveloperService {
 
         developerRepository.persist(developer);
 
-        return developer;
+        return new DeveloperResponseDTO(developer);
     }
 
     @Override
     @Transactional
-    public Developer update(Long id, DeveloperDTO developerDTO) {
+    public DeveloperResponseDTO update(Long id, DeveloperDTO developerDTO) {
         
         validar(developerDTO);
 
@@ -72,7 +81,7 @@ public class DeveloperImplService implements DeveloperService {
 
         developer.setAnoFundacao(developerDTO.anoFundacao());
 
-        return developer;
+        return new DeveloperResponseDTO(developer);
     }
 
     @Override

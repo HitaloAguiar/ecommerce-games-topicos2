@@ -7,6 +7,7 @@ import br.unitins.ecommerce.dto.estado.EstadoDTO;
 import br.unitins.ecommerce.dto.estado.EstadoResponseDTO;
 import br.unitins.ecommerce.model.endereco.Estado;
 import br.unitins.ecommerce.repository.EstadoRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -26,8 +27,10 @@ public class EstadoImplService implements EstadoService {
 
     @Override
     public List<EstadoResponseDTO> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return estadoRepository.findAll().stream().map(EstadoResponseDTO::new).toList();
+        return estadoRepository.findAll(sort).stream().map(EstadoResponseDTO::new).toList();
     }
 
     @Override

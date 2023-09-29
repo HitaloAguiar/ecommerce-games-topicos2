@@ -1,11 +1,14 @@
 package br.unitins.ecommerce.service.fabricante;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.FabricanteDTO;
+import br.unitins.ecommerce.dto.fabricante.FabricanteDTO;
+import br.unitins.ecommerce.dto.fabricante.FabricanteResponseDTO;
 import br.unitins.ecommerce.model.produto.Fabricante;
 import br.unitins.ecommerce.repository.FabricanteRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -23,26 +26,32 @@ public class FabricanteImplService implements FabricanteService {
     @Inject
     FabricanteRepository fabricanteRepository;
 
+    private DateTimeFormatter formatterGetAll = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
-    public List<Fabricante> getAll() {
+    public List<FabricanteResponseDTO> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return fabricanteRepository.findAll().list();
+        return fabricanteRepository.findAll(sort).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
     }
 
     @Override
-    public Fabricante getById(Long id) {
+    public FabricanteResponseDTO getById(Long id) {
         
         Fabricante fabricante = fabricanteRepository.findById(id);
 
         if (fabricante == null)
             throw new NotFoundException("Não encontrado");
 
-        return fabricante;
+        return new FabricanteResponseDTO(fabricante, formatterGetById);
     }
 
     @Override
     @Transactional
-    public Fabricante insert(FabricanteDTO fabricanteDTO) {
+    public FabricanteResponseDTO insert(FabricanteDTO fabricanteDTO) {
         
         validar(fabricanteDTO);
 
@@ -54,12 +63,12 @@ public class FabricanteImplService implements FabricanteService {
 
         fabricanteRepository.persist(fabricante);
 
-        return fabricante;
+        return new FabricanteResponseDTO(fabricante);
     }
 
     @Override
     @Transactional
-    public Fabricante update(Long id, FabricanteDTO fabricanteDTO) {
+    public FabricanteResponseDTO update(Long id, FabricanteDTO fabricanteDTO) {
         
         validar(fabricanteDTO);
 
@@ -72,7 +81,7 @@ public class FabricanteImplService implements FabricanteService {
 
         fabricante.setAnoFundacao(fabricanteDTO.anoFundacao());
 
-        return fabricante;
+        return new FabricanteResponseDTO(fabricante);
     }
 
     @Override

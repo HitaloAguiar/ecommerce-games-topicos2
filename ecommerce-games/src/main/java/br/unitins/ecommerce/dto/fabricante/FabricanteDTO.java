@@ -1,15 +1,16 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.fabricante;
 
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record DeveloperDTO(
+public record FabricanteDTO(
 
     @NotBlank(message = "Campo nome não pode estar vazio")
     String nome,
 
-    @NotBlank(message = "Campo anoFundacao não pode estar vazio")
+    @NotNull(message = "Campo anoFundacao não pode estar vazio")
     LocalDate anoFundacao
 ) {
     

@@ -9,6 +9,7 @@ import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.repository.UsuarioRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -28,8 +29,10 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     public List<Usuario> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return usuarioRepository.findAll().list();
+        return usuarioRepository.findAll(sort).list();
     }
 
     @Override

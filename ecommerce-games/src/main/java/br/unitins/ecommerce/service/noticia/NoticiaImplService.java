@@ -7,6 +7,7 @@ import br.unitins.ecommerce.dto.NoticiaDTO;
 import br.unitins.ecommerce.model.noticia.Noticia;
 import br.unitins.ecommerce.model.noticia.TopicoPrincipal;
 import br.unitins.ecommerce.repository.NoticiaRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -27,7 +28,9 @@ public class NoticiaImplService implements NoticiaService {
     @Override
     public List<Noticia> getAll() {
         
-        return noticiaRepository.findAll().list();
+        Sort sort = Sort.by("id").ascending();
+
+        return noticiaRepository.findAll(sort).list();
     }
 
     @Override

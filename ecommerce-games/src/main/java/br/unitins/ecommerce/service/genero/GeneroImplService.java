@@ -6,6 +6,7 @@ import java.util.Set;
 import br.unitins.ecommerce.dto.GeneroDTO;
 import br.unitins.ecommerce.model.produto.Genero;
 import br.unitins.ecommerce.repository.GeneroRepository;
+import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -25,8 +26,10 @@ public class GeneroImplService implements GeneroService {
 
     @Override
     public List<Genero> getAll() {
+
+        Sort sort = Sort.by("id").ascending();
         
-        return generoRepository.findAll().list();
+        return generoRepository.findAll(sort).list();
     }
 
     @Override

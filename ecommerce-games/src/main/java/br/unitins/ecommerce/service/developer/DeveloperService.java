@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.developer;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.DeveloperDTO;
-import br.unitins.ecommerce.model.produto.Developer;
+import br.unitins.ecommerce.dto.developer.DeveloperDTO;
+import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
 
 public interface DeveloperService {
     
-    List<Developer> getAll();
+    List<DeveloperResponseDTO> getAll();
     
-    Developer getById(Long id);
+    DeveloperResponseDTO getById(Long id);
 
-    Developer insert(DeveloperDTO developerDTO);
+    DeveloperResponseDTO insert(DeveloperDTO developerDTO);
 
-    Developer update(Long id, DeveloperDTO developerDTO);
+    DeveloperResponseDTO update(Long id, DeveloperDTO developerDTO);
 
     void delete(Long id);
 }

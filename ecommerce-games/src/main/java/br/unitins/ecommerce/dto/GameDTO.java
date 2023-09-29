@@ -16,7 +16,7 @@ public record GameDTO(
     @NotNull(message = "O campo preco não pode estar nulo")
     Double preco,
 
-    @NotBlank(message = "O campo anoLancamento não pode estar nulo")
+    @NotNull(message = "O campo anoLancamento não pode estar nulo")
     LocalDate anoLancamento,
 
     @NotNull
