@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { ActivatedRoute, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
 import { Estado } from "src/app/models/estado.model";
 import { EstadoService } from "src/app/services/estado.service";
 

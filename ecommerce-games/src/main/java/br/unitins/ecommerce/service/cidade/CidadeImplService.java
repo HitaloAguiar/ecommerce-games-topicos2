@@ -3,7 +3,8 @@ package br.unitins.ecommerce.service.cidade;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.CidadeDTO;
+import br.unitins.ecommerce.dto.cidade.CidadeDTO;
+import br.unitins.ecommerce.dto.cidade.CidadeResponseDTO;
 import br.unitins.ecommerce.model.endereco.Cidade;
 import br.unitins.ecommerce.repository.CidadeRepository;
 import br.unitins.ecommerce.repository.EstadoRepository;
@@ -28,25 +29,25 @@ public class CidadeImplService implements CidadeService {
     EstadoRepository estadoRepository;
 
     @Override
-    public List<Cidade> getAll() {
+    public List<CidadeResponseDTO> getAll() {
         
-        return cidadeRepository.findAll().list();
+        return cidadeRepository.findAll().stream().map(CidadeResponseDTO::new).toList();
     }
 
     @Override
-    public Cidade getById(Long id) {
+    public CidadeResponseDTO getById(Long id) {
         
         Cidade cidade = cidadeRepository.findById(id);
 
         if (cidade == null)
             throw new NotFoundException("Não encontrado");
 
-        return cidade;
+        return new CidadeResponseDTO(cidade);
     }
 
     @Override
     @Transactional
-    public Cidade insert(CidadeDTO cidadeDTO) {
+    public CidadeResponseDTO insert(CidadeDTO cidadeDTO) {
         
         validar(cidadeDTO);
 
@@ -58,12 +59,12 @@ public class CidadeImplService implements CidadeService {
 
         cidadeRepository.persist(cidade);
 
-        return cidade;
+        return new CidadeResponseDTO(cidade);
     }
 
     @Override
     @Transactional
-    public Cidade update(Long id, CidadeDTO cidadeDTO) {
+    public CidadeResponseDTO update(Long id, CidadeDTO cidadeDTO) {
         
         validar(cidadeDTO);
 
@@ -76,7 +77,7 @@ public class CidadeImplService implements CidadeService {
 
         cidade.setEstado(estadoRepository.findById(cidadeDTO.estado()));
 
-        return cidade;
+        return new CidadeResponseDTO(cidade);
     }
 
     @Override

@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.CidadeDTO;
-import br.unitins.ecommerce.model.endereco.Cidade;
+import br.unitins.ecommerce.dto.cidade.CidadeDTO;
+import br.unitins.ecommerce.dto.cidade.CidadeResponseDTO;
 import br.unitins.ecommerce.service.cidade.CidadeService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class CidadeResource {
     private static final Logger LOG = Logger.getLogger(CidadeResource.class);
 
     @GET
-    public List<Cidade> getAll() {
+    public List<CidadeResponseDTO> getAll() {
         LOG.info("Buscando todos as cidades.");
         LOG.debug("ERRO DE DEBUG.");
         return cidadeService.getAll();
@@ -42,7 +42,7 @@ public class CidadeResource {
 
     @GET
     @Path("/{id}")
-    public Cidade getById(@PathParam("id") Long id) throws NotFoundException {
+    public CidadeResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando cidade por ID: " + id);
         LOG.debug("ERRO DE DEBUG.");
         return cidadeService.getById(id);
@@ -55,11 +55,11 @@ public class CidadeResource {
         Result result = null;
 
         try {
-            Cidade cidade = cidadeService.insert(cidadeDTO);
+            CidadeResponseDTO cidadeResponseDTO = cidadeService.insert(cidadeDTO);
 
-            LOG.infof("Cidade (%d) criado com sucesso.", cidade.getId());
+            LOG.infof("Cidade (%d) criado com sucesso.", cidadeResponseDTO.id());
 
-            return Response.status(Status.CREATED).entity(cidade).build();
+            return Response.status(Status.CREATED).entity(cidadeResponseDTO).build();
 
         } catch (ConstraintViolationException e) {
 

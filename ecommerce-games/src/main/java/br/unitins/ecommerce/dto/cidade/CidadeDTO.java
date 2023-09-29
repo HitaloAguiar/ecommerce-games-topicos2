@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.cidade;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

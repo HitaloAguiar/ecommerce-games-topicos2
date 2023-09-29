@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.cidade;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.CidadeDTO;
-import br.unitins.ecommerce.model.endereco.Cidade;
+import br.unitins.ecommerce.dto.cidade.CidadeDTO;
+import br.unitins.ecommerce.dto.cidade.CidadeResponseDTO;
 
 public interface CidadeService {
     
-    List<Cidade> getAll();
+    List<CidadeResponseDTO> getAll();
     
-    Cidade getById(Long id);
+    CidadeResponseDTO getById(Long id);
 
-    Cidade insert(CidadeDTO cidadeDTO);
+    CidadeResponseDTO insert(CidadeDTO cidadeDTO);
 
-    Cidade update(Long id, CidadeDTO cidadeDTO);
+    CidadeResponseDTO update(Long id, CidadeDTO cidadeDTO);
 
     void delete(Long id);
 }

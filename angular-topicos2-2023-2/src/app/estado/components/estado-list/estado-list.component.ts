@@ -9,7 +9,7 @@ import { EstadoService } from 'src/app/services/estado.service';
 })
 export class EstadoListComponent implements OnInit {
 
-  tableColumns: string[] = ['id-column', 'nome-column', 'sigla-column'];
+  tableColumns: string[] = ['id-column', 'nome-column', 'sigla-column', 'acoes-column'];
   estados: Estado[] = [];
 
   constructor(private estadoService: EstadoService) {}
@@ -20,4 +20,18 @@ export class EstadoListComponent implements OnInit {
     });
   }
 
+  excluir(estado: Estado) {
+
+      if (estado.id != null) {
+
+        this.estadoService.delete(estado).subscribe({
+          next: (estadoCadastrado) => {
+            this.ngOnInit();
+          },
+          error: (err) => {
+            console.log('Erro ao excluir' + JSON.stringify(err));
+          }
+        })
+      }
+  }
 }
