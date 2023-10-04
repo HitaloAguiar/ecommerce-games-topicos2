@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.plataforma;
 
 import java.time.LocalDate;
 

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import br.unitins.ecommerce.dto.developer.DeveloperDTO;
 import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
-import br.unitins.ecommerce.model.produto.Developer;
+import br.unitins.ecommerce.model.produto.developer.Developer;
 import br.unitins.ecommerce.repository.DeveloperRepository;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;

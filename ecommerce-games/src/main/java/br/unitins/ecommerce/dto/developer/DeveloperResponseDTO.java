@@ -2,7 +2,7 @@ package br.unitins.ecommerce.dto.developer;
 
 import java.time.format.DateTimeFormatter;
 
-import br.unitins.ecommerce.model.produto.Developer;
+import br.unitins.ecommerce.model.produto.developer.Developer;
 
 public record DeveloperResponseDTO(Long id, String nome, String anoFundacao) {
 

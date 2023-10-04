@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.PlataformaDTO;
-import br.unitins.ecommerce.model.produto.Plataforma;
+import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
+import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 import br.unitins.ecommerce.service.plataforma.PlataformaService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class PlataformaResource {
     private static final Logger LOG = Logger.getLogger(PlataformaResource.class);
 
     @GET
-    public List<Plataforma> getAll() {
+    public List<PlataformaResponseDTO> getAll() {
         LOG.info("Buscando todos as Plataformas.");
         LOG.debug("ERRO DE DEBUG.");
         return plataformaService.getAll();
@@ -42,7 +42,7 @@ public class PlataformaResource {
 
     @GET
     @Path("/{id}")
-    public Plataforma getById(@PathParam("id") Long id) throws NotFoundException {
+    public PlataformaResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando plataforma por ID: " + id);
         LOG.debug("ERRO DE DEBUG.");
         return plataformaService.getById(id);
@@ -55,9 +55,9 @@ public class PlataformaResource {
         Result result = null;
 
         try {
-            Plataforma plataforma = plataformaService.insert(plataformaDTO);
+            PlataformaResponseDTO plataforma = plataformaService.insert(plataformaDTO);
 
-            LOG.infof("Plataforma (%d) criado com sucesso.", plataforma.getId());
+            LOG.infof("Plataforma (%d) criado com sucesso.", plataforma.id());
 
             return Response.status(Status.CREATED).entity(plataforma).build();
 

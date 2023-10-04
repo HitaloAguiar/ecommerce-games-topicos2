@@ -1,9 +1,11 @@
 package br.unitins.ecommerce.service.plataforma;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.PlataformaDTO;
+import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
+import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 import br.unitins.ecommerce.model.produto.Plataforma;
 import br.unitins.ecommerce.repository.FabricanteRepository;
 import br.unitins.ecommerce.repository.PlataformaRepository;
@@ -28,28 +30,32 @@ public class PlataformaImplService implements PlataformaService {
     @Inject
     FabricanteRepository fabricanteRepository;
 
+    private DateTimeFormatter formatterGetAll = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
-    public List<Plataforma> getAll() {
+    public List<PlataformaResponseDTO> getAll() {
 
         Sort sort = Sort.by("id").ascending();
-        
-        return plataformaRepository.findAll(sort).list();
+
+        return plataformaRepository.findAll(sort).stream().map(plataforma -> new PlataformaResponseDTO(plataforma, formatterGetAll)).toList();
     }
 
     @Override
-    public Plataforma getById(Long id) {
+    public PlataformaResponseDTO getById(Long id) {
         
         Plataforma plataforma = plataformaRepository.findById(id);
 
         if (plataforma == null)
             throw new NotFoundException("Não encontrado");
 
-        return plataforma;
+        return new PlataformaResponseDTO(plataforma, formatterGetById);
     }
 
     @Override
     @Transactional
-    public Plataforma insert(PlataformaDTO plataformaDTO) {
+    public PlataformaResponseDTO insert(PlataformaDTO plataformaDTO) {
         
         validar(plataformaDTO);
 
@@ -65,12 +71,12 @@ public class PlataformaImplService implements PlataformaService {
 
         plataformaRepository.persist(plataforma);
 
-        return plataforma;
+        return new PlataformaResponseDTO(plataforma);
     }
 
     @Override
     @Transactional
-    public Plataforma update(Long id, PlataformaDTO plataformaDTO) {
+    public PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO) {
         
         validar(plataformaDTO);
 
@@ -87,7 +93,7 @@ public class PlataformaImplService implements PlataformaService {
 
         plataforma.setFabricante(fabricanteRepository.findById(plataformaDTO.fabricante()));
 
-        return plataforma;
+        return new PlataformaResponseDTO(plataforma);
     }
 
     @Override

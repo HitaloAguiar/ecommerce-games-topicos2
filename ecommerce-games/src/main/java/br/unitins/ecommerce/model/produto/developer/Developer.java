@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.model.produto;
+package br.unitins.ecommerce.model.produto.developer;
 
 import java.time.LocalDate;
 

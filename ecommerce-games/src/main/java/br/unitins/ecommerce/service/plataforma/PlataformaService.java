@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.plataforma;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.PlataformaDTO;
-import br.unitins.ecommerce.model.produto.Plataforma;
+import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
+import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 
 public interface PlataformaService {
     
-    List<Plataforma> getAll();
-    
-    Plataforma getById(Long id);
+    List<PlataformaResponseDTO> getAll();
 
-    Plataforma insert(PlataformaDTO plataformaDTO);
+    PlataformaResponseDTO getById(Long id);
 
-    Plataforma update(Long id, PlataformaDTO plataformaDTO);
+    PlataformaResponseDTO insert(PlataformaDTO plataformaDTO);
+
+    PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO);
 
     void delete(Long id);
 }
