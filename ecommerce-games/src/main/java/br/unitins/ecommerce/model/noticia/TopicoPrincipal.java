@@ -5,7 +5,8 @@ public enum TopicoPrincipal {
     EVENTO(1, "Evento"),
     LANCAMENTO(2, "Lançamento"),
     ANALISE_JOGO(3, "Análise de jogo"),
-    ATUALIZACAO(4, "Atualização");
+    ATUALIZACAO(4, "Atualização"),
+    CURIOSIDADES(5, "Curiosidades");
 
     private int id;
     private String label;

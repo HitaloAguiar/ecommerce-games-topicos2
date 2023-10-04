@@ -1,5 +1,3 @@
-import { TopicoPrincipal } from "./topico-principal.enum";
-
 export class Noticia {
 
   id!: number;
@@ -7,5 +5,5 @@ export class Noticia {
   conteudo!: string;
   dataPublicacao!: Date;
   autor!: string;
-  topicoPrincipal !: TopicoPrincipal;
+  topicoPrincipal !: string;
 }

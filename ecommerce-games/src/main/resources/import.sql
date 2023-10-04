@@ -45,3 +45,15 @@ INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
        VALUES ('SEGA Dreamcast', '', '1998-04-17', 4);
 INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante) 
        VALUES ('Xbox One', '', '2013-01-05', 3);
+
+INSERT INTO noticia (titulo, conteudo, dataPublicacao, autor, topicoPrincipal)
+       VALUES ('Nostalgia total: 7 games que eram sucesso em lan houses',
+'Os jogadores mais antigos vão se lembrar do King of Dragon Pass, lançado para PC e Mac em 1999 (posteriormente para iOS em 2011 e para Android em 2014). Ele acabou tendo uma sequência em 2018, chamada Six Ages. E agora, uma terceira obra está surpreendendo a indústria: Six Ages 2.
+
+O ano de 2023 viu o surgimento de apenas três jogos, que conseguiram obter a média quase perfeita de 96/100 no Metacritic, site agregador de classificação de jogos. Entre estes três títulos, dois nomes conhecidos estão no topo: Baldurs Gate III e The Legend of Zelda: Tears of the Kingdom. Porém, o desconhecido Six Ages 2: Lights Going Out, game desenvolvido pela A Sharp e publicado pela Kitfox Games, se meteu no meio.', '2023-09-30', 'Danilo da Silva', 5);
+INSERT INTO noticia (titulo, dataPublicacao, autor, topicoPrincipal)
+       VALUES ('Lançamentos: Games que você precisa jogar em outubro', '2023-10-03', 'Erick Santos', 2);
+INSERT INTO noticia (titulo, dataPublicacao, autor, topicoPrincipal)
+       VALUES ('NÃO ESQUEÇA NESTA TERÇA: Epic Games Store solta 2 jogos de graça', '2023-10-03', 'Luís Felipe', 1);
+INSERT INTO noticia (titulo, dataPublicacao, autor, topicoPrincipal)
+       VALUES ('Total War: Pharaoh tem lançamento adiado na loja da Epic Games', '2023-09-30', 'Emannuel Oliveira', 4);

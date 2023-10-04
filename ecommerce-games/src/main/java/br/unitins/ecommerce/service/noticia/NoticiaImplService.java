@@ -1,9 +1,11 @@
 package br.unitins.ecommerce.service.noticia;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.NoticiaDTO;
+import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
+import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 import br.unitins.ecommerce.model.noticia.Noticia;
 import br.unitins.ecommerce.model.noticia.TopicoPrincipal;
 import br.unitins.ecommerce.repository.NoticiaRepository;
@@ -25,28 +27,32 @@ public class NoticiaImplService implements NoticiaService {
     @Inject
     NoticiaRepository noticiaRepository;
 
+    private DateTimeFormatter formatterGetAll = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
-    public List<Noticia> getAll() {
+    public List<NoticiaResponseDTO> getAll() {
         
         Sort sort = Sort.by("id").ascending();
 
-        return noticiaRepository.findAll(sort).list();
+        return noticiaRepository.findAll(sort).stream().map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll)).toList();
     }
 
     @Override
-    public Noticia getById(Long id) {
+    public NoticiaResponseDTO getById(Long id) {
         
         Noticia noticia = noticiaRepository.findById(id);
 
         if (noticia == null)
             throw new NotFoundException("Não encontrado");
 
-        return noticia;
+        return new NoticiaResponseDTO(noticia, formatterGetById);
     }
 
     @Override
     @Transactional
-    public Noticia insert(NoticiaDTO noticiaDTO) {
+    public NoticiaResponseDTO insert(NoticiaDTO noticiaDTO) {
         
         validar(noticiaDTO);
 
@@ -64,12 +70,12 @@ public class NoticiaImplService implements NoticiaService {
 
         noticiaRepository.persist(noticia);
 
-        return noticia;
+        return new NoticiaResponseDTO(noticia);
     }
 
     @Override
     @Transactional
-    public Noticia update(Long id, NoticiaDTO noticiaDTO) {
+    public NoticiaResponseDTO update(Long id, NoticiaDTO noticiaDTO) {
         
         validar(noticiaDTO);
 
@@ -88,7 +94,7 @@ public class NoticiaImplService implements NoticiaService {
 
         noticia.setTopicoPrincipal(TopicoPrincipal.valueOf(noticiaDTO.topicoPrincipal()));
 
-        return noticia;
+        return new NoticiaResponseDTO(noticia);
     }
 
     @Override

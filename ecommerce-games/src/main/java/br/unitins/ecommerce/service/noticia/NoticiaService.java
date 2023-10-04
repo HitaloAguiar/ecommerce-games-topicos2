@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.noticia;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.NoticiaDTO;
-import br.unitins.ecommerce.model.noticia.Noticia;
+import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
+import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 
 public interface NoticiaService {
     
-    List<Noticia> getAll();
+    List<NoticiaResponseDTO> getAll();
     
-    Noticia getById(Long id);
+    NoticiaResponseDTO getById(Long id);
 
-    Noticia insert(NoticiaDTO noticiaDTO);
+    NoticiaResponseDTO insert(NoticiaDTO noticiaDTO);
 
-    Noticia update(Long id, NoticiaDTO noticiaDTO);
+    NoticiaResponseDTO update(Long id, NoticiaDTO noticiaDTO);
 
     void delete(Long id);
 }

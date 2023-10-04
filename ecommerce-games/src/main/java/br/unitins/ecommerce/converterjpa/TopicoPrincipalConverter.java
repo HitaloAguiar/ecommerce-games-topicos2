@@ -5,18 +5,18 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter(autoApply = true)
-public class TopicoPrincipalConverter implements AttributeConverter<TopicoPrincipal, String> {
+public class TopicoPrincipalConverter implements AttributeConverter<TopicoPrincipal, Integer> {
 
     @Override
-    public String convertToDatabaseColumn(TopicoPrincipal topicoPrincipal) {
+    public Integer convertToDatabaseColumn(TopicoPrincipal topicoPrincipal) {
         
-        return topicoPrincipal == null ? null : topicoPrincipal.getLabel();
+        return topicoPrincipal == null ? null : topicoPrincipal.getId();
     }
 
     @Override
-    public TopicoPrincipal convertToEntityAttribute(String label) {
+    public TopicoPrincipal convertToEntityAttribute(Integer id) {
         
-        return label == null ? null : TopicoPrincipal.valueOf(label.toUpperCase());
+        return id == null ? null : TopicoPrincipal.valueOf(id);
     }
     
 }

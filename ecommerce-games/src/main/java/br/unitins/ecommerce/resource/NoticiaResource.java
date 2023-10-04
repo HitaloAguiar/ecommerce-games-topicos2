@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.NoticiaDTO;
-import br.unitins.ecommerce.model.noticia.Noticia;
+import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
+import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 import br.unitins.ecommerce.service.noticia.NoticiaService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class NoticiaResource {
     private static final Logger LOG = Logger.getLogger(NoticiaResource.class);
 
     @GET
-    public List<Noticia> getAll() {
+    public List<NoticiaResponseDTO> getAll() {
         LOG.info("Buscando todos as Noticias.");
         LOG.debug("ERRO DE DEBUG.");
         return noticiaService.getAll();
@@ -42,7 +42,7 @@ public class NoticiaResource {
 
     @GET
     @Path("/{id}")
-    public Noticia getById(@PathParam("id") Long id) throws NotFoundException {
+    public NoticiaResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando Noticia por ID: " + id);
         LOG.debug("ERRO DE DEBUG.");
         return noticiaService.getById(id);
@@ -55,9 +55,9 @@ public class NoticiaResource {
         Result result = null;
 
         try {
-            Noticia noticia = noticiaService.insert(noticiaDTO);
+            NoticiaResponseDTO noticia = noticiaService.insert(noticiaDTO);
 
-            LOG.infof("noticia (%d) criado com sucesso.", noticia.getId());
+            LOG.infof("noticia (%d) criado com sucesso.", noticia.id());
 
             return Response.status(Status.CREATED).entity(noticia).build();
 

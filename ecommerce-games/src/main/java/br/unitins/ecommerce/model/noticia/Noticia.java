@@ -3,8 +3,10 @@ package br.unitins.ecommerce.model.noticia;
 import java.time.LocalDate;
 
 import br.unitins.ecommerce.model.DefaultEntity;
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Lob;
 
 @Entity
@@ -14,7 +16,8 @@ public class Noticia extends DefaultEntity {
     private String titulo;
 
     @Lob
-    @Column(nullable = false)
+    @Basic(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT")
     private String conteudo;
 
     @Column(nullable = false)

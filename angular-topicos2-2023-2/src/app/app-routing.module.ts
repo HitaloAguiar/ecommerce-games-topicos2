@@ -8,7 +8,8 @@ const routes: Routes = [
   {path: 'developers', loadChildren: () => import('./developer/developer.module').then(m => m.DeveloperModule)},
   {path: 'fabricantes', loadChildren: () => import('./fabricante/fabricante.module').then(m => m.FabricanteModule)},
   {path: 'plataformas', loadChildren: () => import('./plataforma/plataforma.module').then(m => m.PlataformaModule)},
-  {path: 'games', loadChildren: () => import('./game/game.module').then(m => m.GameModule)}
+  {path: 'games', loadChildren: () => import('./game/game.module').then(m => m.GameModule)},
+  {path: 'noticias', loadChildren: () => import('./noticia/noticia.module').then(m => m.NoticiaModule)}
 ];
 
 @NgModule({
