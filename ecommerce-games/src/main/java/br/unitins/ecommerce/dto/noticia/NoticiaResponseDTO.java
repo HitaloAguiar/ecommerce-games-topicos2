@@ -14,9 +14,9 @@ public record NoticiaResponseDTO(
    
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public NoticiaResponseDTO (Noticia noticia, DateTimeFormatter formatter) {
+    public NoticiaResponseDTO (Noticia noticia, DateTimeFormatter formatter, String topicoPrincipal) {
 
-        this(noticia.getId(), noticia.getTitulo(), noticia.getDataPublicacao().format(formatter), noticia.getAutor(), noticia.getTopicoPrincipal().getLabel());
+        this(noticia.getId(), noticia.getTitulo(), noticia.getDataPublicacao().format(formatter), noticia.getAutor(), topicoPrincipal);
     }
 
     public NoticiaResponseDTO (Noticia noticia) {

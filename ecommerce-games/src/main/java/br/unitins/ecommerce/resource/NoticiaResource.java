@@ -37,6 +37,7 @@ public class NoticiaResource {
     public List<NoticiaResponseDTO> getAll() {
         LOG.info("Buscando todos as Noticias.");
         LOG.debug("ERRO DE DEBUG.");
+
         return noticiaService.getAll();
     }
 

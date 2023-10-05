@@ -36,7 +36,9 @@ public class NoticiaImplService implements NoticiaService {
         
         Sort sort = Sort.by("id").ascending();
 
-        return noticiaRepository.findAll(sort).stream().map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll)).toList();
+        return noticiaRepository.findAll(sort).stream()
+        .map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll, noticia.getTopicoPrincipal().getLabel()))
+        .toList();
     }
 
     @Override
@@ -47,7 +49,7 @@ public class NoticiaImplService implements NoticiaService {
         if (noticia == null)
             throw new NotFoundException("Não encontrado");
 
-        return new NoticiaResponseDTO(noticia, formatterGetById);
+        return new NoticiaResponseDTO(noticia, formatterGetById, noticia.getTopicoPrincipal().toString());
     }
 
     @Override

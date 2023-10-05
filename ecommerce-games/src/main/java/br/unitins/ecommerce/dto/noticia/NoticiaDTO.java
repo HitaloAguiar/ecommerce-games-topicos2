@@ -19,8 +19,8 @@ public record NoticiaDTO(
     @NotNull(message = "Campo dataPublicacao não pode estar vazio")
     LocalDate dataPublicacao,
 
-    @NotNull
-    Integer topicoPrincipal
+    @NotBlank
+    String topicoPrincipal
 ) {
     
 }
