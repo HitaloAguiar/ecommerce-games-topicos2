@@ -3,7 +3,8 @@ package br.unitins.ecommerce.service.genero;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.GeneroDTO;
+import br.unitins.ecommerce.dto.genero.GeneroDTO;
+import br.unitins.ecommerce.dto.genero.GeneroResponseDTO;
 import br.unitins.ecommerce.model.produto.Genero;
 import br.unitins.ecommerce.repository.GeneroRepository;
 import io.quarkus.panache.common.Sort;
@@ -25,27 +26,27 @@ public class GeneroImplService implements GeneroService {
     GeneroRepository generoRepository;
 
     @Override
-    public List<Genero> getAll() {
+    public List<GeneroResponseDTO> getAll() {
 
         Sort sort = Sort.by("id").ascending();
         
-        return generoRepository.findAll(sort).list();
+        return generoRepository.findAll(sort).stream().map(GeneroResponseDTO::new).toList();
     }
 
     @Override
-    public Genero getById(Long id) {
+    public GeneroResponseDTO getById(Long id) {
         
         Genero genero = generoRepository.findById(id);
 
         if (genero == null)
             throw new NotFoundException("Não encontrado");
 
-        return genero;
+        return new GeneroResponseDTO(genero);
     }
 
     @Override
     @Transactional
-    public Genero insert(GeneroDTO generoDTO) {
+    public GeneroResponseDTO insert(GeneroDTO generoDTO) {
         
         validar(generoDTO);
 
@@ -55,12 +56,12 @@ public class GeneroImplService implements GeneroService {
 
         generoRepository.persist(genero);
 
-        return genero;
+        return new GeneroResponseDTO(genero);
     }
 
     @Override
     @Transactional
-    public Genero update(Long id, GeneroDTO generoDTO) {
+    public GeneroResponseDTO update(Long id, GeneroDTO generoDTO) {
         
         validar(generoDTO);
 
@@ -71,7 +72,7 @@ public class GeneroImplService implements GeneroService {
 
         genero.setNome(generoDTO.nome());
 
-        return genero;
+        return new GeneroResponseDTO(genero);
     }
 
     @Override

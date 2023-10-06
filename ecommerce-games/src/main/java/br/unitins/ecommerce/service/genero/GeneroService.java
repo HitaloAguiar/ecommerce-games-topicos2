@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.genero;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.GeneroDTO;
-import br.unitins.ecommerce.model.produto.Genero;
+import br.unitins.ecommerce.dto.genero.GeneroDTO;
+import br.unitins.ecommerce.dto.genero.GeneroResponseDTO;
 
 public interface GeneroService {
     
-    List<Genero> getAll();
+    List<GeneroResponseDTO> getAll();
     
-    Genero getById(Long id);
+    GeneroResponseDTO getById(Long id);
 
-    Genero insert(GeneroDTO generoDTO);
+    GeneroResponseDTO insert(GeneroDTO generoDTO);
 
-    Genero update(Long id, GeneroDTO generoDTO);
+    GeneroResponseDTO update(Long id, GeneroDTO generoDTO);
 
     void delete(Long id);
 }

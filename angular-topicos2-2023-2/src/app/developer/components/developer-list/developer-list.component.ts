@@ -10,7 +10,7 @@ import { DeveloperService } from 'src/app/services/developer.service';
 })
 export class DeveloperListComponent implements OnInit {
 
-  tableColumns: string[] = ['id-column', 'nome-column', 'ano-fundacao-column', 'acoes-column'];
+  tableColumns: string[] = ['id-column', 'nome-column', 'ano-fundacao-column', 'classificacao-column', 'acoes-column'];
   developers: Developer[] = [];
 
   constructor(private developerService: DeveloperService) {}

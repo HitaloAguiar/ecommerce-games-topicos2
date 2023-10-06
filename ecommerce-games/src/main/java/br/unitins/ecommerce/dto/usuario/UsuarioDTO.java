@@ -1,9 +1,8 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.usuario;
 
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record UsuarioDTO(
     @NotBlank(message = "O campo nome não pode estar nulo")
@@ -21,8 +20,8 @@ public record UsuarioDTO(
     @NotBlank(message = "O campo senha não pode estar nulo")
     String senha,
 
-    @NotNull
-    Integer perfil,
+    @NotBlank
+    String perfil,
 
     List<TelefoneDTO> telefones
 ) {

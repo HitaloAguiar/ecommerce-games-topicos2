@@ -25,6 +25,16 @@
                   O campo Ano de Fundação é obrigatória.
               </mat-error>
           </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width-input" color="accent">
+            <mat-label> Classificação </mat-label>
+            <mat-select formControlName="classificacao" name="classificacao">
+              <mat-option value="FIRST_PARTY">First party</mat-option>
+              <mat-option value="SECOND_PARTY">Second party</mat-option>
+              <mat-option value="THIRD_PARTY">Third party</mat-option>
+              <mat-option value="INDIE">Indie</mat-option>
+            </mat-select>
+          </mat-form-field>
       </form>
     </mat-card-content>
     <mat-card-actions>

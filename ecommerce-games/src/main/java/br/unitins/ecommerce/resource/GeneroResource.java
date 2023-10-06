@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.GeneroDTO;
-import br.unitins.ecommerce.model.produto.Genero;
+import br.unitins.ecommerce.dto.genero.GeneroDTO;
+import br.unitins.ecommerce.dto.genero.GeneroResponseDTO;
 import br.unitins.ecommerce.service.genero.GeneroService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class GeneroResource {
     private static final Logger LOG = Logger.getLogger(GeneroResource.class);
 
     @GET
-    public List<Genero> getAll() {
+    public List<GeneroResponseDTO> getAll() {
         LOG.infof("Buscando todos os gêneros");
         LOG.debug("ERRO DE DEBUG.");
         return generoService.getAll();
@@ -42,7 +42,7 @@ public class GeneroResource {
 
     @GET
     @Path("/{id}")
-    public Genero getById(@PathParam("id") Long id) throws NotFoundException {
+    public GeneroResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.infof("Buscando gêneros por ID. ", id);
         LOG.debug("ERRO DE DEBUG.");
         return generoService.getById(id);

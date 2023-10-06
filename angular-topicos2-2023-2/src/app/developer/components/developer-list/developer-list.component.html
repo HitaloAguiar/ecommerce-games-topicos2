@@ -26,6 +26,12 @@
         <td mat-cell *matCellDef="let developer"> {{developer.anoFundacao}} </td>
     </ng-container>
 
+    <!-- Classificacao Column -->
+    <ng-container matColumnDef="classificacao-column">
+      <th mat-header-cell *matHeaderCellDef> Classificação </th>
+      <td mat-cell *matCellDef="let developer"> {{developer.classificacao}} </td>
+    </ng-container>
+
     <!-- Ações Column -->
     <ng-container matColumnDef="acoes-column">
       <th mat-header-cell *matHeaderCellDef>Ações</th>

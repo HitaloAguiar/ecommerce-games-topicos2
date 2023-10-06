@@ -15,6 +15,9 @@ public class Developer extends DefaultEntity {
     @Column(nullable = false)
     private LocalDate anoFundacao;
 
+    @Column(nullable = false)
+    private Classificacao classificacao;
+
     public String getNome() {
         return nome;
     }
@@ -31,5 +34,11 @@ public class Developer extends DefaultEntity {
         this.anoFundacao = anoFundacao;
     }
 
-    
+    public Classificacao getClassificacao() {
+        return classificacao;
+    }
+
+    public void setClassificacao(Classificacao classificacao) {
+        this.classificacao = classificacao;
+    }
 }

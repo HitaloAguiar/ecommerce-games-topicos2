@@ -16,11 +16,7 @@ public class TopicoPrincipalConverter implements AttributeConverter<TopicoPrinci
     @Override
     public TopicoPrincipal convertToEntityAttribute(String label) {
         
-        return label == null ? 
-        null : 
-        TopicoPrincipal.valueOf(label) == null?
-         null : 
-         TopicoPrincipal.valueOf(label);
+        return label == null ? null : TopicoPrincipal.valueOf(label);
     }
     
 }

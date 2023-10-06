@@ -1,6 +1,6 @@
 package br.unitins.ecommerce.model.usuario;
 
-import br.unitins.ecommerce.dto.TelefoneDTO;
+import br.unitins.ecommerce.dto.usuario.TelefoneDTO;
 import br.unitins.ecommerce.model.DefaultEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

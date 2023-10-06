@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.game;
 
 import java.time.LocalDate;
 import java.util.List;

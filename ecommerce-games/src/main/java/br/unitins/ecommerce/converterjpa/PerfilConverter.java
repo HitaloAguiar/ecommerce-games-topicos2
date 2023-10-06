@@ -10,7 +10,7 @@ public class PerfilConverter implements AttributeConverter<Perfil, String> {
     @Override
     public String convertToDatabaseColumn(Perfil perfil) {
         
-        return perfil == null ? null : perfil.getLabel();
+        return perfil == null ? null : perfil.toString();
     }
 
     @Override

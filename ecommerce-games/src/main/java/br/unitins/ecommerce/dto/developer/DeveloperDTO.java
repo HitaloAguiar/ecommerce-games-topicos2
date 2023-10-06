@@ -11,7 +11,10 @@ public record DeveloperDTO(
     String nome,
 
     @NotNull(message = "Campo anoFundacao não pode estar vazio")
-    LocalDate anoFundacao
+    LocalDate anoFundacao,
+
+    @NotBlank
+    String classificacao
 ) {
     
 }

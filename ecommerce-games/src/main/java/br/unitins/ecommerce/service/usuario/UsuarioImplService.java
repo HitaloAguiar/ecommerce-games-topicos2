@@ -3,8 +3,9 @@ package br.unitins.ecommerce.service.usuario;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.TelefoneDTO;
-import br.unitins.ecommerce.dto.UsuarioDTO;
+import br.unitins.ecommerce.dto.usuario.TelefoneDTO;
+import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
+import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
@@ -28,27 +29,27 @@ public class UsuarioImplService implements UsuarioService {
     UsuarioRepository usuarioRepository;
 
     @Override
-    public List<Usuario> getAll() {
+    public List<UsuarioResponseDTO> getAll() {
 
         Sort sort = Sort.by("id").ascending();
         
-        return usuarioRepository.findAll(sort).list();
+        return usuarioRepository.findAll(sort).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
     }
 
     @Override
-    public Usuario getById(Long id) {
+    public UsuarioResponseDTO getById(Long id) {
         
         Usuario usuario = usuarioRepository.findById(id);
 
         if (usuario == null)
             throw new NotFoundException("Não encontrado");
 
-        return usuario;
+        return new UsuarioResponseDTO(usuario, usuario.getPerfil().toString());
     }
 
     @Override
     @Transactional
-    public Usuario insert(UsuarioDTO usuarioDto) {
+    public UsuarioResponseDTO insert(UsuarioDTO usuarioDto) {
         
         validar(usuarioDto);
 
@@ -73,12 +74,12 @@ public class UsuarioImplService implements UsuarioService {
 
         usuarioRepository.persist(entity);
 
-        return entity;
+        return new UsuarioResponseDTO(entity, null);
     }
 
     @Override
     @Transactional
-    public Usuario update(Long id, UsuarioDTO usuarioDto) {
+    public UsuarioResponseDTO update(Long id, UsuarioDTO usuarioDto) {
         
         validar(usuarioDto);
 
@@ -111,7 +112,7 @@ public class UsuarioImplService implements UsuarioService {
             entity.getTelefones().add(new Telefone(telefoneDTO));
         }
 
-        return entity;
+        return new UsuarioResponseDTO(entity, null);
     }
 
     @Override

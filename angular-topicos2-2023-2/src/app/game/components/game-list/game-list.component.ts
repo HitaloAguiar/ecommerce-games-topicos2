@@ -9,7 +9,7 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class GameListComponent implements OnInit {
 
-  tableColumns: string[] = ['id-column', 'nome-column', 'ano-lancamento-column', 'acoes-column'];
+  tableColumns: string[] = ['id-column', 'nome-column', 'ano-lancamento-column', 'developer-column', 'genero-column', 'plataforma-column', 'preco-column', 'acoes-column'];
   games: Game[] = [];
 
   constructor(private gameService: GameService) {}

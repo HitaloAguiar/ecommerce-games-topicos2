@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.UsuarioDTO;
-import br.unitins.ecommerce.model.usuario.Usuario;
+import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
+import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class UsuarioResource {
     private static final Logger LOG = Logger.getLogger(UsuarioResource.class);
 
     @GET
-    public List<Usuario> getAllUsuario() {
+    public List<UsuarioResponseDTO> getAllUsuario() {
 
         LOG.info("Buscando todos os usuários");
         LOG.debug("ERRO DE DEBUG.");
@@ -44,7 +44,7 @@ public class UsuarioResource {
 
     @GET
     @Path("/{id}")
-    public Usuario getById(@PathParam("id") Long id) throws NotFoundException {
+    public UsuarioResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando usuário por nome");
         LOG.debug("ERRO DE DEBUG.");
 

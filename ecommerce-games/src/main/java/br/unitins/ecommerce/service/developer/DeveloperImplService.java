@@ -6,6 +6,7 @@ import java.util.Set;
 
 import br.unitins.ecommerce.dto.developer.DeveloperDTO;
 import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
+import br.unitins.ecommerce.model.produto.developer.Classificacao;
 import br.unitins.ecommerce.model.produto.developer.Developer;
 import br.unitins.ecommerce.repository.DeveloperRepository;
 import io.quarkus.panache.common.Sort;
@@ -35,7 +36,7 @@ public class DeveloperImplService implements DeveloperService {
 
         Sort sort = Sort.by("id").ascending();
         
-        return developerRepository.findAll(sort).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll)).toList();
+        return developerRepository.findAll(sort).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll, developer.getClassificacao().getLabel())).toList();
     }
 
     @Override
@@ -46,7 +47,7 @@ public class DeveloperImplService implements DeveloperService {
         if (developer == null)
             throw new NotFoundException("Não encontrado");
 
-        return new DeveloperResponseDTO(developer, formatterGetById);
+        return new DeveloperResponseDTO(developer, formatterGetById, developer.getClassificacao().toString());
     }
 
     @Override
@@ -60,6 +61,8 @@ public class DeveloperImplService implements DeveloperService {
         developer.setNome(developerDTO.nome());
 
         developer.setAnoFundacao(developerDTO.anoFundacao());
+
+        developer.setClassificacao(Classificacao.valueOf(developerDTO.classificacao()));
 
         developerRepository.persist(developer);
 
@@ -80,6 +83,8 @@ public class DeveloperImplService implements DeveloperService {
         developer.setNome(developerDTO.nome());
 
         developer.setAnoFundacao(developerDTO.anoFundacao());
+
+        developer.setClassificacao(Classificacao.valueOf(developerDTO.classificacao()));
 
         return new DeveloperResponseDTO(developer);
     }

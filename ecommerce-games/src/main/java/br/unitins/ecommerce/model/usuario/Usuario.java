@@ -29,7 +29,7 @@ public class Usuario extends DefaultEntity {
     private String senha;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_telefone")
+    @JoinColumn(name = "id_usuario")
     private List<Telefone> telefones;
 
     @Column(nullable = false)

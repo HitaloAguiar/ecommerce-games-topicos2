@@ -2,18 +2,18 @@ package br.unitins.ecommerce.service.usuario;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.UsuarioDTO;
-import br.unitins.ecommerce.model.usuario.Usuario;
+import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
+import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 
 public interface UsuarioService {
     
-    List<Usuario> getAll();
+    List<UsuarioResponseDTO> getAll();
 
-    Usuario getById(Long id);
+    UsuarioResponseDTO getById(Long id);
 
-    Usuario insert(UsuarioDTO usuarioDto);
+    UsuarioResponseDTO insert(UsuarioDTO usuarioDto);
 
-    Usuario update(Long id, UsuarioDTO usuarioDto);
+    UsuarioResponseDTO update(Long id, UsuarioDTO usuarioDto);
 
     void delete(Long id);
 }

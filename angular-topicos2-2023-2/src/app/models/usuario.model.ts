@@ -1,4 +1,3 @@
-import { Perfil } from "./perfil.enum";
 import { Telefone } from "./telefone.model";
 
 export class Usuario {
@@ -9,6 +8,6 @@ export class Usuario {
   email!: string;
   login!: string;
   senha!: string;
-  perfil!: Perfil;
+  perfil!: string;
   telefones!: Telefone[];
 }

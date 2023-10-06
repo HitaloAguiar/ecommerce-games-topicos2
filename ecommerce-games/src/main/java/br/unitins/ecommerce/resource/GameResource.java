@@ -5,8 +5,8 @@ import java.util.List;
 import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.application.Result;
-import br.unitins.ecommerce.dto.GameDTO;
-import br.unitins.ecommerce.model.produto.Game;
+import br.unitins.ecommerce.dto.game.GameDTO;
+import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
@@ -34,7 +34,7 @@ public class GameResource {
     private static final Logger LOG = Logger.getLogger(GameResource.class);
 
     @GET
-    public List<Game> getAll() {
+    public List<GameResponseDTO> getAll() {
         LOG.info("Buscando todos as Games.");
         LOG.debug("ERRO DE DEBUG.");
         return gameService.getAll();
@@ -42,7 +42,7 @@ public class GameResource {
 
     @GET
     @Path("/{id}")
-    public Game getById(@PathParam("id") Long id) throws NotFoundException {
+    public GameResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando Game por ID: " + id);
         LOG.debug("ERRO DE DEBUG.");
         return gameService.getById(id);
@@ -55,9 +55,9 @@ public class GameResource {
         Result result = null;
 
         try {
-            Game game = gameService.insert(gameDTO);
+            GameResponseDTO game = gameService.insert(gameDTO);
 
-            LOG.infof("Game (%d) criado com sucesso.", game.getId());
+            LOG.infof("Game (%d) criado com sucesso.", game.id());
 
             return Response.status(Status.CREATED).entity(game).build();
 

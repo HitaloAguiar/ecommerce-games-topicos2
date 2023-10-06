@@ -1,4 +1,4 @@
-package br.unitins.ecommerce.dto;
+package br.unitins.ecommerce.dto.genero;
 
 import jakarta.validation.constraints.NotBlank;
 

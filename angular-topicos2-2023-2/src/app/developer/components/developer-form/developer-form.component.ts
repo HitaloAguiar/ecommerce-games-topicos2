@@ -23,7 +23,8 @@ export class DeveloperFormComponent {
     this.formGroup = formBuilder.group({
       id:[(developer && developer.id)? developer.id : null],
       nome:[(developer && developer.nome)? developer.nome : '', Validators.required],
-      anoFundacao:[(developer && developer.anoFundacao)? developer.anoFundacao : '', Validators.required]
+      anoFundacao:[(developer && developer.anoFundacao)? developer.anoFundacao : '', Validators.required],
+      classificacao:[(developer && developer.classificacao)? developer.classificacao : '', Validators.required]
     })
   }
 

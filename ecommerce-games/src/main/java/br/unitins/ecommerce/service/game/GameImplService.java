@@ -1,9 +1,11 @@
 package br.unitins.ecommerce.service.game;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.GameDTO;
+import br.unitins.ecommerce.dto.game.GameDTO;
+import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.repository.DeveloperRepository;
 import br.unitins.ecommerce.repository.GameRepository;
@@ -36,28 +38,32 @@ public class GameImplService implements GameService {
     @Inject
     PlataformaRepository plataformaRepository;
 
+    private DateTimeFormatter formatterGetAll = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @Override
-    public List<Game> getAll() {
+    public List<GameResponseDTO> getAll() {
 
         Sort sort = Sort.by("id").ascending();
         
-        return gameRepository.findAll(sort).list();
+        return gameRepository.findAll(sort).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
     }
 
     @Override
-    public Game getById(Long id) {
+    public GameResponseDTO getById(Long id) {
         
         Game game = gameRepository.findById(id);
 
         if (game == null)
             throw new NotFoundException("Não encontrado");
 
-        return game;
+        return new GameResponseDTO(game, formatterGetById);
     }
 
     @Override
     @Transactional
-    public Game insert(GameDTO gameDTO) {
+    public GameResponseDTO insert(GameDTO gameDTO) {
         
         validar(gameDTO);
 
@@ -85,14 +91,16 @@ public class GameImplService implements GameService {
 
         gameRepository.persist(game);
 
-        return game;
+        return new GameResponseDTO(game);
     }
 
     @Override
     @Transactional
-    public Game update(Long id, GameDTO gameDTO) {
+    public GameResponseDTO update(Long id, GameDTO gameDTO) {
         
         validar(gameDTO);
+
+        int tamanhoArray;
 
         Game game = gameRepository.findById(id);
 
@@ -109,9 +117,27 @@ public class GameImplService implements GameService {
 
         game.setDeveloper(developerRepository.findById(gameDTO.developer()));
 
+        tamanhoArray = game.getGeneros().size();
+
+        while (tamanhoArray != 0) {
+            
+            game.getGeneros().remove(0);
+
+            tamanhoArray--;
+        }
+
         for (Long genero : gameDTO.generos()) {
             
             game.plusGeneros(generoRepository.findById(genero));
+        }
+
+        tamanhoArray = game.getPlataformas().size();
+
+        while (tamanhoArray != 0) {
+            
+            game.getPlataformas().remove(0);
+
+            tamanhoArray--;
         }
 
         for (Long plataforma : gameDTO.plataformas()) {
@@ -119,7 +145,7 @@ public class GameImplService implements GameService {
             game.plusPlataformas(plataformaRepository.findById(plataforma));
         }
         
-        return game;
+        return new GameResponseDTO(game);
     }
 
     @Override
