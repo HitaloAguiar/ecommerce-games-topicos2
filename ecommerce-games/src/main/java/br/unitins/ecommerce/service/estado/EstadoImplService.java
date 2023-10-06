@@ -25,12 +25,12 @@ public class EstadoImplService implements EstadoService {
     @Inject
     EstadoRepository estadoRepository;
 
-    @Override
-    public List<EstadoResponseDTO> getAll() {
+    private Sort sort = Sort.by("id").ascending();
 
-        Sort sort = Sort.by("id").ascending();
+    @Override
+    public List<EstadoResponseDTO> getAll(int page, int pageSize) {
         
-        return estadoRepository.findAll(sort).stream().map(EstadoResponseDTO::new).toList();
+        return estadoRepository.findAll(sort).page(page, pageSize).stream().map(EstadoResponseDTO::new).toList();
     }
 
     @Override
@@ -93,6 +93,24 @@ public class EstadoImplService implements EstadoService {
 
         else
             throw new NotFoundException("Nenhum estado encontrado");
+    }
+
+    @Override
+    public List<EstadoResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return estadoRepository.findByNome(nome, sort).page(page, pageSize).stream().map(EstadoResponseDTO::new).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return estadoRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return estadoRepository.findByNome(nome, sort).count();
     }
     
     private void validar(EstadoDTO estadoDTO) throws ConstraintViolationException {
