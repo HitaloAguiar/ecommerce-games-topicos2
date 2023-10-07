@@ -34,7 +34,7 @@ export class PlataformaFormComponent {
   }
 
   ngOnInit(): void {
-    this.fabricanteService.findAll().subscribe(data => {
+    this.fabricanteService.findAll(0, 5).subscribe(data => {
       this.fabricantes = data;
     });
   }

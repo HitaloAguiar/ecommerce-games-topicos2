@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -34,10 +36,13 @@ public class FabricanteResource {
     private static final Logger LOG = Logger.getLogger(FabricanteResource.class);
 
     @GET
-    public List<FabricanteResponseDTO> getAll() {
+    public List<FabricanteResponseDTO> getAll(
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize
+    ) {
         LOG.infof("Buscando todos os fabricantes");
         LOG.debug("ERRO DE DEBUG.");
-        return fabricanteService.getAll();
+        return fabricanteService.getAll(page, pageSize);
     }
 
     @GET
@@ -116,5 +121,29 @@ public class FabricanteResource {
             LOG.error("Erro ao deletar um fabricante: parâmetros inválidos.", e);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/search/{nome}")
+    public List<FabricanteResponseDTO> search(
+            @PathParam("nome") String nome,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+
+        return fabricanteService.findByNome(nome, page, pageSize);
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+
+        return fabricanteService.count();
+    }
+
+    @GET
+    @Path("/search/{nome}/count")
+    public long countByNome(@PathParam("nome") String nome){
+        
+        return fabricanteService.countByNome(nome);
     }
 }

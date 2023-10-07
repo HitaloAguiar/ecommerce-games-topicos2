@@ -30,12 +30,12 @@ public class FabricanteImplService implements FabricanteService {
 
     private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    @Override
-    public List<FabricanteResponseDTO> getAll() {
+    private Sort sort = Sort.by("id").ascending();
 
-        Sort sort = Sort.by("id").ascending();
+    @Override
+    public List<FabricanteResponseDTO> getAll(int page, int pageSize) {
         
-        return fabricanteRepository.findAll(sort).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
+        return fabricanteRepository.findAll(sort).page(page, pageSize).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
     }
 
     @Override
@@ -98,6 +98,23 @@ public class FabricanteImplService implements FabricanteService {
 
         else
             throw new NotFoundException("Nenhum fabricante encontrado");
+    }
+
+    public List<FabricanteResponseDTO> findByNome(String nome, int page, int pageSize) {
+
+        return fabricanteRepository.findByNome(nome, sort).page(page, pageSize).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
+    }
+
+    @Override
+    public Long count() {
+
+        return fabricanteRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return fabricanteRepository.findByNome(nome, sort).count();
     }
     
     private void validar(FabricanteDTO fabricanteDTO) throws ConstraintViolationException {

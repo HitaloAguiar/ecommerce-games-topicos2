@@ -12,8 +12,12 @@ export class FabricanteService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<Fabricante[]> {
-    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes`);
+  findAll(pagina: number, tamanhoPagina: number): Observable<Fabricante[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes`, {params});
   }
 
   findById(id: string): Observable<Fabricante> {
@@ -30,5 +34,21 @@ export class FabricanteService {
 
   delete(fabricante: Fabricante): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/fabricantes/${fabricante.id}`);
+  }
+
+  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Fabricante[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes/search/${nome}`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/fabricantes/count`);
+  }
+
+  countByNome(nome: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/fabricantes/search/${nome}/count`);
   }
 }
