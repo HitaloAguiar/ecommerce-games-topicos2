@@ -9,6 +9,8 @@ public interface GeneroService {
     
     List<GeneroResponseDTO> getAll();
     
+    List<GeneroResponseDTO> getAll(int page, int pageSize);
+    
     GeneroResponseDTO getById(Long id);
 
     GeneroResponseDTO insert(GeneroDTO generoDTO);
@@ -16,4 +18,10 @@ public interface GeneroService {
     GeneroResponseDTO update(Long id, GeneroDTO generoDTO);
 
     void delete(Long id);
+
+    List<GeneroResponseDTO> getByNome(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByNome(String nome);
 }

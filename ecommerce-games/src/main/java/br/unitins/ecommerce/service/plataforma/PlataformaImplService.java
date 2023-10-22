@@ -34,12 +34,18 @@ public class PlataformaImplService implements PlataformaService {
 
     private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<PlataformaResponseDTO> getAll() {
 
-        Sort sort = Sort.by("id").ascending();
-
         return plataformaRepository.findAll(sort).stream().map(plataforma -> new PlataformaResponseDTO(plataforma, formatterGetAll)).toList();
+    }
+
+    @Override
+    public List<PlataformaResponseDTO> getAll(int page, int pageSize) {
+        
+        return plataformaRepository.findAll(sort).page(page, pageSize).stream().map(plataforma -> new PlataformaResponseDTO(plataforma, formatterGetAll)).toList();
     }
 
     @Override
@@ -110,6 +116,24 @@ public class PlataformaImplService implements PlataformaService {
 
         else
             throw new NotFoundException("Nenhuma plataforma encontrado");
+    }
+
+    @Override
+    public List<PlataformaResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return plataformaRepository.findByNome(nome, sort).page(page, pageSize).stream().map(plataforma -> new PlataformaResponseDTO(plataforma, formatterGetAll)).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return plataformaRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return plataformaRepository.findByNome(nome, sort).count();
     }
     
     private void validar(PlataformaDTO plataformaDTO) throws ConstraintViolationException {

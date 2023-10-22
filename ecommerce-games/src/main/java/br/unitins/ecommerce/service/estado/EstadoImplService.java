@@ -28,6 +28,12 @@ public class EstadoImplService implements EstadoService {
     private Sort sort = Sort.by("id").ascending();
 
     @Override
+    public List<EstadoResponseDTO> getAll() {
+        
+        return estadoRepository.findAll(sort).stream().map(EstadoResponseDTO::new).toList();
+    }
+
+    @Override
     public List<EstadoResponseDTO> getAll(int page, int pageSize) {
         
         return estadoRepository.findAll(sort).page(page, pageSize).stream().map(EstadoResponseDTO::new).toList();

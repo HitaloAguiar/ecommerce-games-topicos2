@@ -42,12 +42,18 @@ public class GameImplService implements GameService {
 
     private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<GameResponseDTO> getAll() {
-
-        Sort sort = Sort.by("id").ascending();
         
         return gameRepository.findAll(sort).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
+    }
+
+    @Override
+    public List<GameResponseDTO> getAll(int page, int pageSize) {
+        
+        return gameRepository.findAll(sort).page(page, pageSize).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
     }
 
     @Override
@@ -162,6 +168,24 @@ public class GameImplService implements GameService {
 
         else
             throw new NotFoundException("Nenhum game encontrado");
+    }
+
+    @Override
+    public List<GameResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return gameRepository.findByNome(nome, sort).page(page, pageSize).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return gameRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return gameRepository.findByNome(nome, sort).count();
     }
  
     private void validar(GameDTO gameDTO) throws ConstraintViolationException {

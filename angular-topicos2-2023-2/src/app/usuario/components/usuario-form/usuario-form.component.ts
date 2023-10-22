@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Telefone } from 'src/app/models/telefone.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { TelefoneDialogComponent } from '../telefone-dialog/telefone-dialog.component';
 
 @Component({
   selector: 'app-usuario-form',
@@ -17,13 +16,10 @@ export class UsuarioFormComponent {
   formGroup: FormGroup;
   tableColumns: string[] = ['codigo-area-column', 'numero-column', 'acoes-column'];
 
-  telefones: Telefone[] = [];
-
   constructor(private formBuilder: FormBuilder,
               private usuarioService: UsuarioService,
               private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private dialog: MatDialog) {
+              private activatedRoute: ActivatedRoute) {
 
     const usuario: Usuario = this.activatedRoute.snapshot.data['usuario'];
     this.formGroup = formBuilder.group({
@@ -34,31 +30,20 @@ export class UsuarioFormComponent {
       login:[(usuario && usuario.login)? usuario.login : '', Validators.required],
       senha:[(usuario && usuario.senha)? usuario.senha : '', Validators.required],
       perfil:[(usuario && usuario.perfil)? usuario.perfil : '', Validators.required],
-      telefones:[(usuario && usuario.telefones)? null : '', Validators.required]
+      telefones: (usuario && usuario.telefones)? this.formBuilder.array(usuario.telefones) : this.formBuilder.array([])
     })
   }
 
-  addTelefone() {
-
-    if (this.telefones == null) {
-
-      this.telefones = [];
-    }
-
-    const dialogRef = this.dialog.open(TelefoneDialogComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.telefones.push(result);
-      }
-    });
+  get telefones() {
+    return this.formGroup.get('telefones') as FormArray;
   }
 
-  removerTelefone(telefone: Telefone) {
+  adicionarTelefone() {
+    this.telefones.push(this.formBuilder.control(''));
+  }
 
-    if (telefone.id != null) {
-
-      this.telefones.splice(this.telefones.indexOf(telefone), 1);
-    }
+  removerTelefone(index: number) {
+    this.telefones.removeAt(index);
   }
 
   salvar() {

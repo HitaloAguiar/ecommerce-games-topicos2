@@ -9,6 +9,8 @@ public interface GameService {
     
     List<GameResponseDTO> getAll();
     
+    List<GameResponseDTO> getAll(int page, int pageSize);
+    
     GameResponseDTO getById(Long id);
 
     GameResponseDTO insert(GameDTO gameDTO);
@@ -16,4 +18,10 @@ public interface GameService {
     GameResponseDTO update(Long id, GameDTO gameDTO);
 
     void delete(Long id);
+
+    List<GameResponseDTO> getByNome(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByNome(String nome);
 }

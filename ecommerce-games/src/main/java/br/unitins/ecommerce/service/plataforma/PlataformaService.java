@@ -8,7 +8,9 @@ import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 public interface PlataformaService {
     
     List<PlataformaResponseDTO> getAll();
-
+    
+    List<PlataformaResponseDTO> getAll(int page, int pageSize);
+    
     PlataformaResponseDTO getById(Long id);
 
     PlataformaResponseDTO insert(PlataformaDTO plataformaDTO);
@@ -16,4 +18,10 @@ public interface PlataformaService {
     PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO);
 
     void delete(Long id);
+
+    List<PlataformaResponseDTO> getByNome(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByNome(String nome);
 }

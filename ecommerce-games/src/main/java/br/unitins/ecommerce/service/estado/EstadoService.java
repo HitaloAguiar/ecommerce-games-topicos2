@@ -8,6 +8,8 @@ import br.unitins.ecommerce.model.endereco.Estado;
 
 public interface EstadoService {
     
+    List<EstadoResponseDTO> getAll();
+
     List<EstadoResponseDTO> getAll(int page, int pageSize);
     
     Estado getById(Long id);

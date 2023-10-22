@@ -12,24 +12,20 @@ export class EstadoService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(pagina: number, tamanhoPagina: number): Observable<Estado[]> {
+  findAll(): Observable<Estado[]> {
+    return this.http.get<Estado[]>(`${this.baseURL}/estados`);
+  }
+
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Estado[]> {
     const params = {
       page: pagina.toString(),
       pageSize: tamanhoPagina.toString()
     }
-    return this.http.get<Estado[]>(`${this.baseURL}/estados`, {params});
+    return this.http.get<Estado[]>(`${this.baseURL}/estados/paginado`, {params});
   }
 
   findById(id: string): Observable<Estado> {
     return this.http.get<Estado>(`${this.baseURL}/estados/${id}`);
-  }
-
-  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Estado[]> {
-    const params = {
-      page: pagina.toString(),
-      pageSize: tamanhoPagina.toString()
-    }
-    return this.http.get<Estado[]>(`${this.baseURL}/estados/search/${nome}`, {params});
   }
 
   save(estado: Estado): Observable<Estado> {
@@ -42,6 +38,14 @@ export class EstadoService {
 
   delete(estado: Estado): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/estados/${estado.id}`);
+  }
+
+  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Estado[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Estado[]>(`${this.baseURL}/estados/search/${nome}`, {params});
   }
 
   count(): Observable<number> {

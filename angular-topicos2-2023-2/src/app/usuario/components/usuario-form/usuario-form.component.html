@@ -56,6 +56,18 @@
               <mat-option value="ADMIN">Administrador</mat-option>
             </mat-select>
           </mat-form-field>
+          <div formArrayName="telefones">
+            <div *ngFor="let telefone of telefones.controls; let i = index">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput [formControlName]="i">
+                </mat-form-field>
+                <button mat-icon-button (click)="removerTelefone(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <button mat-raised-button (click)="adicionarTelefone()" color="primary">Adicionar Telefone</button>
+        </div>
       </form>
     </mat-card-content>
     <mat-card-actions>

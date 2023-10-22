@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -40,6 +42,24 @@ public class UsuarioResource {
         LOG.debug("ERRO DE DEBUG.");
 
         return usuarioService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
+    public List<UsuarioResponseDTO> getAll(
+                            @QueryParam("page") @DefaultValue("0") int page,
+                            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.infof("Buscando todos os usuarios");
+        LOG.debug("ERRO DE DEBUG.");
+
+        try {
+            return usuarioService.getAll(page, pageSize);
+        } catch (Exception e) {
+
+            LOG.error(e);
+
+            return null;
+        }
     }
 
     @GET
@@ -120,5 +140,29 @@ public class UsuarioResource {
             LOG.error("Erro ao deletar usuário: parâmetros inválidos.", e);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/search/{nome}")
+    public List<UsuarioResponseDTO> search(
+            @PathParam("nome") String nome,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+                
+        return usuarioService.getByNome(nome, page, pageSize);
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+
+        return usuarioService.count();
+    }
+
+    @GET
+    @Path("/search/{nome}/count")
+    public long count(@PathParam("nome") String nome){
+
+        return usuarioService.countByNome(nome);
     }
 }

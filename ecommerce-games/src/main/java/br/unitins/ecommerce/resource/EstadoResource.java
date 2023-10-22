@@ -37,6 +37,14 @@ public class EstadoResource {
     private static final Logger LOG = Logger.getLogger(EstadoResource.class);
 
     @GET
+    public List<EstadoResponseDTO> getAll() {
+        LOG.info("Buscando todos as estados.");
+        LOG.debug("ERRO DE DEBUG.");
+        return estadoService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
     public List<EstadoResponseDTO> getAll(
                             @QueryParam("page") @DefaultValue("0") int page,
                             @QueryParam("pageSize") @DefaultValue("10") int pageSize) {

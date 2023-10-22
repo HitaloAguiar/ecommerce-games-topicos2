@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -38,6 +40,24 @@ public class PlataformaResource {
         LOG.info("Buscando todos as Plataformas.");
         LOG.debug("ERRO DE DEBUG.");
         return plataformaService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
+    public List<PlataformaResponseDTO> getAll(
+                            @QueryParam("page") @DefaultValue("0") int page,
+                            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.infof("Buscando todas as plataformas");
+        LOG.debug("ERRO DE DEBUG.");
+
+        try {
+            return plataformaService.getAll(page, pageSize);
+        } catch (Exception e) {
+
+            LOG.error(e);
+
+            return null;
+        }
     }
 
     @GET
@@ -119,5 +139,29 @@ public class PlataformaResource {
             LOG.errorf("Plataforma (%d) não encontrado.", id);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/search/{nome}")
+    public List<PlataformaResponseDTO> search(
+            @PathParam("nome") String nome,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+                
+        return plataformaService.getByNome(nome, page, pageSize);
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+
+        return plataformaService.count();
+    }
+
+    @GET
+    @Path("/search/{nome}/count")
+    public long count(@PathParam("nome") String nome){
+
+        return plataformaService.countByNome(nome);
     }
 }

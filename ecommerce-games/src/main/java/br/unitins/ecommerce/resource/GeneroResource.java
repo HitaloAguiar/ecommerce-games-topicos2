@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -38,6 +40,24 @@ public class GeneroResource {
         LOG.infof("Buscando todos os gêneros");
         LOG.debug("ERRO DE DEBUG.");
         return generoService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
+    public List<GeneroResponseDTO> getAll(
+                            @QueryParam("page") @DefaultValue("0") int page,
+                            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.infof("Buscando todos os estados");
+        LOG.debug("ERRO DE DEBUG.");
+
+        try {
+            return generoService.getAll(page, pageSize);
+        } catch (Exception e) {
+
+            LOG.error(e);
+
+            return null;
+        }
     }
 
     @GET
@@ -116,5 +136,29 @@ public class GeneroResource {
             LOG.error("Erro ao deletar um gênero: parâmetros inválidos.", e);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/search/{nome}")
+    public List<GeneroResponseDTO> search(
+            @PathParam("nome") String nome,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+                
+        return generoService.getByNome(nome, page, pageSize);
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+
+        return generoService.count();
+    }
+
+    @GET
+    @Path("/search/{nome}/count")
+    public long count(@PathParam("nome") String nome){
+
+        return generoService.countByNome(nome);
     }
 }

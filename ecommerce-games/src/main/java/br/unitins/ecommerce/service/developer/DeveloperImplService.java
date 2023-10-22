@@ -31,12 +31,18 @@ public class DeveloperImplService implements DeveloperService {
 
     private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<DeveloperResponseDTO> getAll() {
-
-        Sort sort = Sort.by("id").ascending();
         
         return developerRepository.findAll(sort).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll, developer.getClassificacao().getLabel())).toList();
+    }
+
+    @Override
+    public List<DeveloperResponseDTO> getAll(int page, int pageSize) {
+        
+        return developerRepository.findAll(sort).page(page, pageSize).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll, developer.getClassificacao().getLabel())).toList();
     }
 
     @Override
@@ -103,6 +109,24 @@ public class DeveloperImplService implements DeveloperService {
 
         else
             throw new NotFoundException("Nenhum developer encontrado");
+    }
+
+    @Override
+    public List<DeveloperResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return developerRepository.findByNome(nome, sort).page(page, pageSize).stream().map(developer -> new DeveloperResponseDTO(developer, formatterGetAll, developer.getClassificacao().getLabel())).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return developerRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return developerRepository.findByNome(nome, sort).count();
     }
     
     private void validar(DeveloperDTO developerDTO) throws ConstraintViolationException {

@@ -35,7 +35,7 @@ export class EstadoListComponent implements OnInit {
       });
     } else {
       // buscando todos os estados
-      this.estadoService.findAll(this.pagina, this.pageSize).subscribe(data => {
+      this.estadoService.findAllPaginado(this.pagina, this.pageSize).subscribe(data => {
         this.estados = data;
       });
     }

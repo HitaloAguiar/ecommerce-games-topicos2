@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Genero } from 'src/app/models/genero.model';
 import { GeneroService } from 'src/app/services/genero.service';
 
@@ -12,12 +13,45 @@ export class GeneroListComponent implements OnInit {
   tableColumns: string[] = ['id-column', 'nome-column', 'acoes-column'];
   generos: Genero[] = [];
 
+  totalRegistros = 0;
+  pageSize = 2;
+  pagina = 0;
+  filtro: string = "";
+
   constructor(private generoService: GeneroService) {}
 
   ngOnInit(): void {
-    this.generoService.findAll().subscribe(data => {
-      this.generos = data;
-    });
+
+    this.carregarGeneros();
+    this.carregarTotalRegistros();
+  }
+
+  carregarGeneros() {
+
+    // se existe dados no filtro
+    if (this.filtro) {
+      this.generoService.findByNome(this.filtro, this.pagina, this.pageSize).subscribe(data => {
+        this.generos = data;
+      });
+    } else {
+      // buscando todos os generos
+      this.generoService.findAllPaginado(this.pagina, this.pageSize).subscribe(data => {
+        this.generos = data;
+      });
+    }
+  }
+
+  carregarTotalRegistros() {
+    // se existe dados no filtro
+    if (this.filtro) {
+      this.generoService.countByNome(this.filtro).subscribe(data => {
+        this.totalRegistros = data;
+      });
+    } else {
+      this.generoService.count().subscribe(data => {
+        this.totalRegistros = data;
+      });
+    }
   }
 
   excluir(genero: Genero) {
@@ -33,5 +67,17 @@ export class GeneroListComponent implements OnInit {
           }
         })
       }
+  }
+
+  // Método para paginar os resultados
+  paginar(event: PageEvent): void {
+    this.pagina = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.carregarGeneros();
+  }
+
+  aplicarFiltro() {
+    this.carregarGeneros();
+    this.carregarTotalRegistros();
   }
 }

@@ -12,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.POST;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
@@ -39,6 +41,24 @@ public class NoticiaResource {
         LOG.debug("ERRO DE DEBUG.");
 
         return noticiaService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
+    public List<NoticiaResponseDTO> getAll(
+                            @QueryParam("page") @DefaultValue("0") int page,
+                            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+        LOG.infof("Buscando todas as noticias");
+        LOG.debug("ERRO DE DEBUG.");
+
+        try {
+            return noticiaService.getAll(page, pageSize);
+        } catch (Exception e) {
+
+            LOG.error(e);
+
+            return null;
+        }
     }
 
     @GET
@@ -120,5 +140,29 @@ public class NoticiaResource {
             LOG.errorf("Noticia (%d) não encontrado.", id);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/search/{titulo}")
+    public List<NoticiaResponseDTO> search(
+            @PathParam("titulo") String titulo,
+            @QueryParam("page") @DefaultValue("0") int page,
+            @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
+                
+        return noticiaService.getByTitulo(titulo, page, pageSize);
+    }
+
+    @GET
+    @Path("/count")
+    public long count(){
+
+        return noticiaService.count();
+    }
+
+    @GET
+    @Path("/search/{titulo}/count")
+    public long count(@PathParam("titulo") String titulo){
+
+        return noticiaService.countByTitulo(titulo);
     }
 }

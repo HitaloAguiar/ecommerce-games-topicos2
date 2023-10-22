@@ -9,5 +9,5 @@ export class Usuario {
   login!: string;
   senha!: string;
   perfil!: string;
-  telefones!: Telefone[];
+  telefones!: string[];
 }

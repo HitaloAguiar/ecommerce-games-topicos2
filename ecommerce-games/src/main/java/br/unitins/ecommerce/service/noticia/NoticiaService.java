@@ -9,6 +9,8 @@ public interface NoticiaService {
     
     List<NoticiaResponseDTO> getAll();
     
+    List<NoticiaResponseDTO> getAll(int page, int pageSize);
+    
     NoticiaResponseDTO getById(Long id);
 
     NoticiaResponseDTO insert(NoticiaDTO noticiaDTO);
@@ -16,4 +18,10 @@ public interface NoticiaService {
     NoticiaResponseDTO update(Long id, NoticiaDTO noticiaDTO);
 
     void delete(Long id);
+
+    List<NoticiaResponseDTO> getByTitulo(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByTitulo(String nome);
 }

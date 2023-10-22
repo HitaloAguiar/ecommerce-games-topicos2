@@ -9,6 +9,8 @@ public interface CidadeService {
     
     List<CidadeResponseDTO> getAll();
     
+    List<CidadeResponseDTO> getAll(int page, int pageSize);
+    
     CidadeResponseDTO getById(Long id);
 
     CidadeResponseDTO insert(CidadeDTO cidadeDTO);
@@ -16,4 +18,10 @@ public interface CidadeService {
     CidadeResponseDTO update(Long id, CidadeDTO cidadeDTO);
 
     void delete(Long id);
+
+    List<CidadeResponseDTO> getByNome(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByNome(String nome);
 }

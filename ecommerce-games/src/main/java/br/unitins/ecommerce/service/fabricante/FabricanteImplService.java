@@ -33,6 +33,12 @@ public class FabricanteImplService implements FabricanteService {
     private Sort sort = Sort.by("id").ascending();
 
     @Override
+    public List<FabricanteResponseDTO> getAll() {
+        
+        return fabricanteRepository.findAll(sort).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
+    }
+
+    @Override
     public List<FabricanteResponseDTO> getAll(int page, int pageSize) {
         
         return fabricanteRepository.findAll(sort).page(page, pageSize).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
@@ -100,7 +106,7 @@ public class FabricanteImplService implements FabricanteService {
             throw new NotFoundException("Nenhum fabricante encontrado");
     }
 
-    public List<FabricanteResponseDTO> findByNome(String nome, int page, int pageSize) {
+    public List<FabricanteResponseDTO> getByNome(String nome, int page, int pageSize) {
 
         return fabricanteRepository.findByNome(nome, sort).page(page, pageSize).stream().map(fabricante -> new FabricanteResponseDTO(fabricante, formatterGetAll)).toList();
     }

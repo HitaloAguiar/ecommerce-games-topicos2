@@ -16,6 +16,14 @@ export class CidadeService {
     return this.http.get<Cidade[]>(`${this.baseURL}/cidades`);
   }
 
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Cidade[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Cidade[]>(`${this.baseURL}/cidades/paginado`, {params});
+  }
+
   findById(id: string): Observable<Cidade> {
     return this.http.get<Cidade>(`${this.baseURL}/cidades/${id}`);
   }
@@ -30,5 +38,21 @@ export class CidadeService {
 
   delete(cidade: Cidade): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/cidades/${cidade.id}`);
+  }
+
+  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Cidade[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Cidade[]>(`${this.baseURL}/cidades/search/${nome}`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/cidades/count`);
+  }
+
+  countByNome(nome: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/cidades/search/${nome}/count`);
   }
 }

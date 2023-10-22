@@ -34,7 +34,7 @@ export class FabricanteListComponent implements OnInit {
       });
     } else {
       // buscando todos os fabricantes
-      this.fabricanteService.findAll(this.pagina, this.pageSize).subscribe(data => {
+      this.fabricanteService.findAllPaginado(this.pagina, this.pageSize).subscribe(data => {
         this.fabricantes = data;
       });
     }

@@ -25,12 +25,18 @@ public class GeneroImplService implements GeneroService {
     @Inject
     GeneroRepository generoRepository;
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<GeneroResponseDTO> getAll() {
-
-        Sort sort = Sort.by("id").ascending();
         
         return generoRepository.findAll(sort).stream().map(GeneroResponseDTO::new).toList();
+    }
+
+    @Override
+    public List<GeneroResponseDTO> getAll(int page, int pageSize) {
+        
+        return generoRepository.findAll(sort).page(page, pageSize).stream().map(GeneroResponseDTO::new).toList();
     }
 
     @Override
@@ -89,6 +95,24 @@ public class GeneroImplService implements GeneroService {
 
         else
             throw new NotFoundException("Nenhum genero encontrado");
+    }
+
+    @Override
+    public List<GeneroResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return generoRepository.findByNome(nome, sort).page(page, pageSize).stream().map(GeneroResponseDTO::new).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return generoRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return generoRepository.findByNome(nome, sort).count();
     }
     
     private void validar(GeneroDTO generoDTO) throws ConstraintViolationException {

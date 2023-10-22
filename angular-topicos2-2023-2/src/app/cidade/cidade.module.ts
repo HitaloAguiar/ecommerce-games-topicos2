@@ -17,6 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatIconModule} from '@angular/material/icon';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     CidadeListComponent,
@@ -33,7 +36,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    FormsModule
   ]
 })
 export class CidadeModule { }

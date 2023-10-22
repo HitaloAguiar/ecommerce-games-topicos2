@@ -22,6 +22,9 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import {MatListModule} from '@angular/material/list';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     GameListComponent,
@@ -41,7 +44,9 @@ import {MatListModule} from '@angular/material/list';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatListModule
+    MatListModule,
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }

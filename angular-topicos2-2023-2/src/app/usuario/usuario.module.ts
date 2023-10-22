@@ -18,16 +18,19 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 
 import {MatListModule} from '@angular/material/list';
-import { TelefoneDialogComponent } from './components/telefone-dialog/telefone-dialog.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
+
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
+import { TelefoneFormComponent } from './components/telefone-form/telefone-form.component';
 
 @NgModule({
   declarations: [
     UsuarioListComponent,
     UsuarioFormComponent,
-    TelefoneDialogComponent
+    TelefoneFormComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,9 @@ import {MatChipsModule} from '@angular/material/chips';
     MatSelectModule,
     MatListModule,
     MatDialogModule,
-    MatChipsModule
+    MatChipsModule,
+    MatPaginatorModule,
+    FormsModule
   ]
 })
 export class UsuarioModule { }

@@ -1,15 +1,11 @@
 package br.unitins.ecommerce.model.usuario;
 
-import br.unitins.ecommerce.dto.usuario.TelefoneDTO;
 import br.unitins.ecommerce.model.DefaultEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
 public class Telefone extends DefaultEntity {
-    
-    @Column(nullable = false)
-    private String codigoArea;
 
     @Column(nullable = false)
     private String numero;
@@ -18,18 +14,8 @@ public class Telefone extends DefaultEntity {
         
     }
 
-    public Telefone (TelefoneDTO telefoneDTO) {
-
-        this.codigoArea = telefoneDTO.codigoArea();
-        this.numero = telefoneDTO.numero();
-    }
-
-    public String getCodigoArea() {
-        return codigoArea;
-    }
-
-    public void setCodigoArea(String codigoArea) {
-        this.codigoArea = codigoArea;
+    public Telefone(String numero) {
+        this.numero = numero;
     }
 
     public String getNumero() {

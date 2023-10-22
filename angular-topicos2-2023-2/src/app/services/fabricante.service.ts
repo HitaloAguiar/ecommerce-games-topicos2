@@ -12,12 +12,16 @@ export class FabricanteService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(pagina: number, tamanhoPagina: number): Observable<Fabricante[]> {
+  findAll(): Observable<Fabricante[]> {
+    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes`);
+  }
+
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Fabricante[]> {
     const params = {
       page: pagina.toString(),
       pageSize: tamanhoPagina.toString()
     }
-    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes`, {params});
+    return this.http.get<Fabricante[]>(`${this.baseURL}/fabricantes/paginado`, {params});
   }
 
   findById(id: string): Observable<Fabricante> {

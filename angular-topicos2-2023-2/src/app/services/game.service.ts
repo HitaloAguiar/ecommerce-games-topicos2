@@ -16,6 +16,14 @@ export class GameService {
     return this.http.get<Game[]>(`${this.baseURL}/games`);
   }
 
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Game[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Game[]>(`${this.baseURL}/games/paginado`, {params});
+  }
+
   findById(id: string): Observable<Game> {
     return this.http.get<Game>(`${this.baseURL}/games/${id}`);
   }
@@ -30,5 +38,21 @@ export class GameService {
 
   delete(game: Game): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/games/${game.id}`);
+  }
+
+  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Game[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Game[]>(`${this.baseURL}/games/search/${nome}`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/games/count`);
+  }
+
+  countByNome(nome: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/games/search/${nome}/count`);
   }
 }

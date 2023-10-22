@@ -23,7 +23,7 @@ public record UsuarioDTO(
     @NotBlank
     String perfil,
 
-    List<TelefoneDTO> telefones
+    List<String> telefones
 ) {
     
 }

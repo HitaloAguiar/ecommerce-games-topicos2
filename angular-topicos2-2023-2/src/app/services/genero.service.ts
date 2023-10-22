@@ -16,6 +16,14 @@ export class GeneroService {
     return this.http.get<Genero[]>(`${this.baseURL}/generos`);
   }
 
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Genero[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Genero[]>(`${this.baseURL}/generos/paginado`, {params});
+  }
+
   findById(id: string): Observable<Genero> {
     return this.http.get<Genero>(`${this.baseURL}/generos/${id}`);
   }
@@ -30,5 +38,21 @@ export class GeneroService {
 
   delete(genero: Genero): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/generos/${genero.id}`);
+  }
+
+  findByNome(nome: string, pagina: number, tamanhoPagina: number): Observable<Genero[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Genero[]>(`${this.baseURL}/generos/search/${nome}`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/generos/count`);
+  }
+
+  countByNome(nome: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/generos/search/${nome}/count`);
   }
 }

@@ -29,12 +29,18 @@ public class CidadeImplService implements CidadeService {
     @Inject
     EstadoRepository estadoRepository;
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<CidadeResponseDTO> getAll() {
-
-        Sort sort = Sort.by("id").ascending();
         
         return cidadeRepository.findAll(sort).stream().map(CidadeResponseDTO::new).toList();
+    }
+
+    @Override
+    public List<CidadeResponseDTO> getAll(int page, int pageSize) {
+        
+        return cidadeRepository.findAll(sort).page(page, pageSize).stream().map(CidadeResponseDTO::new).toList();
     }
 
     @Override
@@ -97,6 +103,24 @@ public class CidadeImplService implements CidadeService {
 
         else
             throw new NotFoundException("Nenhuma cidade encontrado");
+    }
+
+    @Override
+    public List<CidadeResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return cidadeRepository.findByNome(nome, sort).page(page, pageSize).stream().map(CidadeResponseDTO::new).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return cidadeRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return cidadeRepository.findByNome(nome, sort).count();
     }
     
     private void validar(CidadeDTO cidadeDTO) throws ConstraintViolationException {

@@ -16,6 +16,14 @@ export class NoticiaService {
     return this.http.get<Noticia[]>(`${this.baseURL}/noticias`);
   }
 
+  findAllPaginado(pagina: number, tamanhoPagina: number): Observable<Noticia[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Noticia[]>(`${this.baseURL}/noticias/paginado`, {params});
+  }
+
   findById(id: string): Observable<Noticia> {
     return this.http.get<Noticia>(`${this.baseURL}/noticias/${id}`);
   }
@@ -30,5 +38,21 @@ export class NoticiaService {
 
   delete(noticia: Noticia): Observable<any> {
     return this.http.delete<any>(`${this.baseURL}/noticias/${noticia.id}`);
+  }
+
+  findByTitulo(titulo: string, pagina: number, tamanhoPagina: number): Observable<Noticia[]> {
+    const params = {
+      page: pagina.toString(),
+      pageSize: tamanhoPagina.toString()
+    }
+    return this.http.get<Noticia[]>(`${this.baseURL}/noticias/search/${titulo}`, {params});
+  }
+
+  count(): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/noticias/count`);
+  }
+
+  countByTitulo(titulo: string): Observable<number> {
+    return this.http.get<number>(`${this.baseURL}/noticias/search/${titulo}/count`);
   }
 }

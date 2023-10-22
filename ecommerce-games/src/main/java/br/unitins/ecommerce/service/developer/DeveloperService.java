@@ -9,6 +9,8 @@ public interface DeveloperService {
     
     List<DeveloperResponseDTO> getAll();
     
+    List<DeveloperResponseDTO> getAll(int page, int pageSize);
+    
     DeveloperResponseDTO getById(Long id);
 
     DeveloperResponseDTO insert(DeveloperDTO developerDTO);
@@ -16,4 +18,10 @@ public interface DeveloperService {
     DeveloperResponseDTO update(Long id, DeveloperDTO developerDTO);
 
     void delete(Long id);
+
+    List<DeveloperResponseDTO> getByNome(String nome, int page, int pageSize);
+
+    Long count();
+
+    Long countByNome(String nome);
 }

@@ -31,14 +31,20 @@ public class NoticiaImplService implements NoticiaService {
 
     private DateTimeFormatter formatterGetById = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<NoticiaResponseDTO> getAll() {
-        
-        Sort sort = Sort.by("id").ascending();
 
         return noticiaRepository.findAll(sort).stream()
         .map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll, noticia.getTopicoPrincipal().getLabel()))
         .toList();
+    }
+
+    @Override
+    public List<NoticiaResponseDTO> getAll(int page, int pageSize) {
+        
+        return noticiaRepository.findAll(sort).page(page, pageSize).stream().map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll, noticia.getTopicoPrincipal().getLabel())).toList();
     }
 
     @Override
@@ -113,6 +119,24 @@ public class NoticiaImplService implements NoticiaService {
 
         else
             throw new NotFoundException("Nenhum noticia encontrado");
+    }
+
+    @Override
+    public List<NoticiaResponseDTO> getByTitulo(String nome, int page, int pageSize) {
+        
+        return noticiaRepository.findByNome(nome, sort).page(page, pageSize).stream().map(noticia -> new NoticiaResponseDTO(noticia, formatterGetAll, noticia.getTopicoPrincipal().getLabel())).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return noticiaRepository.count();
+    }
+
+    @Override
+    public Long countByTitulo(String nome) {
+
+        return noticiaRepository.findByNome(nome, sort).count();
     }
     
     private void validar(NoticiaDTO noticiaDTO) throws ConstraintViolationException {

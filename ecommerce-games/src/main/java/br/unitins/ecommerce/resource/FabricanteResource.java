@@ -36,6 +36,14 @@ public class FabricanteResource {
     private static final Logger LOG = Logger.getLogger(FabricanteResource.class);
 
     @GET
+    public List<FabricanteResponseDTO> getAll() {
+        LOG.info("Buscando todos as fabricantes.");
+        LOG.debug("ERRO DE DEBUG.");
+        return fabricanteService.getAll();
+    }
+
+    @GET
+    @Path("/paginado")
     public List<FabricanteResponseDTO> getAll(
             @QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("pageSize") @DefaultValue("10") int pageSize
@@ -130,7 +138,7 @@ public class FabricanteResource {
             @QueryParam("page") @DefaultValue("0") int page,
             @QueryParam("pageSize") @DefaultValue("10") int pageSize) {
 
-        return fabricanteService.findByNome(nome, page, pageSize);
+        return fabricanteService.getByNome(nome, page, pageSize);
     }
 
     @GET

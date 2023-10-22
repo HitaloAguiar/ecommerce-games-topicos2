@@ -3,7 +3,6 @@ package br.unitins.ecommerce.service.usuario;
 import java.util.List;
 import java.util.Set;
 
-import br.unitins.ecommerce.dto.usuario.TelefoneDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.usuario.Perfil;
@@ -28,12 +27,18 @@ public class UsuarioImplService implements UsuarioService {
     @Inject
     UsuarioRepository usuarioRepository;
 
+    private Sort sort = Sort.by("id").ascending();
+
     @Override
     public List<UsuarioResponseDTO> getAll() {
-
-        Sort sort = Sort.by("id").ascending();
         
         return usuarioRepository.findAll(sort).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> getAll(int page, int pageSize) {
+        
+        return usuarioRepository.findAll(sort).page(page, pageSize).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
     }
 
     @Override
@@ -67,9 +72,9 @@ public class UsuarioImplService implements UsuarioService {
 
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 
-        for (TelefoneDTO telefoneDTO : usuarioDto.telefones()) {
+        for (String telefone : usuarioDto.telefones()) {
             
-            entity.getTelefones().add(new Telefone(telefoneDTO));
+            entity.getTelefones().add(new Telefone(telefone));
         }
 
         usuarioRepository.persist(entity);
@@ -107,9 +112,9 @@ public class UsuarioImplService implements UsuarioService {
 
         entity.getTelefones().clear();
 
-        for (TelefoneDTO telefoneDTO : usuarioDto.telefones()) {
+        for (String telefones : usuarioDto.telefones()) {
             
-            entity.getTelefones().add(new Telefone(telefoneDTO));
+            entity.getTelefones().add(new Telefone(telefones));
         }
 
         return new UsuarioResponseDTO(entity, null);
@@ -129,6 +134,24 @@ public class UsuarioImplService implements UsuarioService {
 
         else
             throw new NotFoundException("Nenhum usuario encontrado");
+    }
+
+    @Override
+    public List<UsuarioResponseDTO> getByNome(String nome, int page, int pageSize) {
+        
+        return usuarioRepository.findByNome(nome, sort).page(page, pageSize).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();        
+    }
+
+    @Override
+    public Long count() {
+
+        return usuarioRepository.count();
+    }
+
+    @Override
+    public Long countByNome(String nome) {
+
+        return usuarioRepository.findByNome(nome, sort).count();
     }
     
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {

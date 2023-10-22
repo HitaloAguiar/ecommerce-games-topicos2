@@ -90,14 +90,14 @@ INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Agui
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Luísa Soares', '19429301284', 'luisa1263@hotmail.com', 'B1az3', 'luisa789', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '92874291092', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
 
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('011', '98456-7812', 1);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('061', '99901-5842', 1);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('061', '99933-0572', 1);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('063', '99933-0572', 2);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('078', '98203-3301', 3);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('092', '98382-0912', 3);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('012', '99928-0912', 4);
-INSERT INTO telefone (codigoarea, numero, id_usuario) VALUES ('071', '99283-8723', 4);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(011) 98456-7812', 1);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(061) 99901-5842', 1);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(061) 99933-0572', 1);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(069) 99933-0572', 2);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(078) 98203-3301', 3);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(092) 98382-0912', 3);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(012) 99928-0912', 4);
+INSERT INTO telefone (numero, id_usuario) VALUES ('(071) 99283-8723', 4);
 
 INSERT INTO noticia (titulo, conteudo, dataPublicacao, autor, topicoPrincipal)
        VALUES ('Nostalgia total: 7 games que eram sucesso em lan houses',
