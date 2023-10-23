@@ -12,6 +12,7 @@ import { GeneroService } from 'src/app/services/genero.service';
 export class GeneroFormComponent {
 
   formGroup: FormGroup;
+  apiResponse: any = null;
 
   constructor(private formBuilder: FormBuilder,
               private generoService: GeneroService,
@@ -34,8 +35,13 @@ export class GeneroFormComponent {
           next: (generoCadastrado) => {
             this.router.navigateByUrl('/generos/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+            // Processar erros da API
+           this.apiResponse = errorResponse.error; 
+
+           // Associar erros aos campos do formulário
+           this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+           console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
       }
@@ -50,6 +56,11 @@ export class GeneroFormComponent {
           }
         })
       }
+      
     }
+  }
+  getErrorMessage(fieldName: string): string {
+    const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+    return error ? error.message : '';
   }
 }

@@ -13,6 +13,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 
@@ -52,7 +53,7 @@ public class GeneroImplService implements GeneroService {
 
     @Override
     @Transactional
-    public GeneroResponseDTO insert(GeneroDTO generoDTO) {
+    public GeneroResponseDTO insert(@Valid GeneroDTO generoDTO) throws ConstraintViolationException {
         
         validar(generoDTO);
 
