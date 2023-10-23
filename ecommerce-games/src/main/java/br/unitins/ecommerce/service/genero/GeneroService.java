@@ -1,7 +1,7 @@
 package br.unitins.ecommerce.service.genero;
 
 import java.util.List;
-
+import jakarta.validation.Valid;
 import br.unitins.ecommerce.dto.genero.GeneroDTO;
 import br.unitins.ecommerce.dto.genero.GeneroResponseDTO;
 
@@ -13,7 +13,7 @@ public interface GeneroService {
     
     GeneroResponseDTO getById(Long id);
 
-    GeneroResponseDTO insert(GeneroDTO generoDTO);
+    GeneroResponseDTO insert(@Valid GeneroDTO generoDTO);
 
     GeneroResponseDTO update(Long id, GeneroDTO generoDTO);
 

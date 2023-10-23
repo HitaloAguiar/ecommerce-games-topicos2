@@ -71,28 +71,10 @@ public class GeneroResource {
     @POST
     public Response insert(GeneroDTO generoDTO) {
         LOG.infof("Inserindo um gênero: %s", generoDTO.nome());
-        Result result = null;
-        try {
 
-            return Response
-                    .status(Status.CREATED) // 201
-                    .entity(generoService.insert(generoDTO))
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao incluir um gênero.");
-            LOG.debug(e.getMessage());
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
-        return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
-                .build();
+        GeneroResponseDTO genero = generoService.insert(generoDTO);
+        LOG.infof("Genero (%d) criado com sucesso.", genero.id());
+        return Response.status(Status.CREATED).entity(genero).build();
     }
 
     @PUT
