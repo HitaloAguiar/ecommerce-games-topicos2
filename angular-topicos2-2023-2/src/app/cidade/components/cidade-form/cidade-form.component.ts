@@ -76,23 +76,6 @@ export class CidadeFormComponent {
     }
   }
 
-  excluir() {
-
-    const novaCidade = this.formGroup.value;
-
-    if (novaCidade.id == null) {
-
-      this.cidadeService.delete(novaCidade).subscribe({
-        next: (cidadeCadastrada) => {
-          this.router.navigateByUrl('/cidades/list');
-        },
-        error: (err) => {
-          console.log('Erro ao excluir' + JSON.stringify(err));
-        }
-      })
-    }
-  }
-
   getErrorMessage(fieldName: string): string {
     const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
     return error ? error.message : '';

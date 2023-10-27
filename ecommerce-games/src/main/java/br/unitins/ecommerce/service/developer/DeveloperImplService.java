@@ -15,6 +15,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 
@@ -58,7 +59,7 @@ public class DeveloperImplService implements DeveloperService {
 
     @Override
     @Transactional
-    public DeveloperResponseDTO insert(DeveloperDTO developerDTO) {
+    public DeveloperResponseDTO insert(@Valid DeveloperDTO developerDTO) {
         
         validar(developerDTO);
 
@@ -77,7 +78,7 @@ public class DeveloperImplService implements DeveloperService {
 
     @Override
     @Transactional
-    public DeveloperResponseDTO update(Long id, DeveloperDTO developerDTO) {
+    public DeveloperResponseDTO update(Long id, @Valid DeveloperDTO developerDTO) {
         
         validar(developerDTO);
 

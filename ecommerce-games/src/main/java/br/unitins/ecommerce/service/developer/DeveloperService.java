@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.developer.DeveloperDTO;
 import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
+import jakarta.validation.Valid;
 
 public interface DeveloperService {
     
@@ -13,9 +14,9 @@ public interface DeveloperService {
     
     DeveloperResponseDTO getById(Long id);
 
-    DeveloperResponseDTO insert(DeveloperDTO developerDTO);
+    DeveloperResponseDTO insert(@Valid DeveloperDTO developerDTO);
 
-    DeveloperResponseDTO update(Long id, DeveloperDTO developerDTO);
+    DeveloperResponseDTO update(Long id, @Valid DeveloperDTO developerDTO);
 
     void delete(Long id);
 

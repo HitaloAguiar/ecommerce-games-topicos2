@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.developer.DeveloperDTO;
 import br.unitins.ecommerce.dto.developer.DeveloperResponseDTO;
 import br.unitins.ecommerce.service.developer.DeveloperService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -70,56 +68,23 @@ public class DeveloperResource {
 
     @POST
     public Response insert(DeveloperDTO developerDTO) {
+
         LOG.infof("Inserindo um developer: %s", developerDTO.nome());
-        Result result = null;
-        try {
 
-            return Response
-                    .status(Status.CREATED) // 201
-                    .entity(developerService.insert(developerDTO))
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao incluir um developer.");
-            LOG.debug(e.getMessage());
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.CREATED) // 201
+                .entity(developerService.insert(developerDTO))
                 .build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, DeveloperDTO developerDTO) {
-        Result result = null;
-        try {
-            developerService.update(id, developerDTO);
-            LOG.infof("Developer (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.errorf("Erro ao atualizar um developer. ", id, e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
+        
+        developerService.update(id, developerDTO);
+        LOG.infof("Developer (%d) atualizado com sucesso.", id);
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.NO_CONTENT) // 204
                 .build();
     }
 
