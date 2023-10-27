@@ -38,13 +38,13 @@ export class EstadoFormComponent {
           },
           error: (errorResponse) => {
             // Processar erros da API
-           this.apiResponse = errorResponse.error; 
+            this.apiResponse = errorResponse.error;
 
-           // Associar erros aos campos do formulário
-           this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
-           this.formGroup.get('sigla')?.setErrors({ apiError: this.getErrorMessage('sigla') });
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('sigla')?.setErrors({ apiError: this.getErrorMessage('sigla') });
 
-           console.log('Erro ao incluir' + JSON.stringify(errorResponse));
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
       }
@@ -54,8 +54,15 @@ export class EstadoFormComponent {
           next: (estadoCadastrado) => {
             this.router.navigateByUrl('/estados/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            // Processar erros da API
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('sigla')?.setErrors({ apiError: this.getErrorMessage('sigla') });
+            console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
           }
         })
       }

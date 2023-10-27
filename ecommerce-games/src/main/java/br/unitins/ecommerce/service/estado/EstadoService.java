@@ -17,7 +17,7 @@ public interface EstadoService {
 
     EstadoResponseDTO insert(@Valid EstadoDTO estadoDto);
 
-    Estado update(Long id, EstadoDTO estadoDto);
+    Estado update(Long id, @Valid EstadoDTO estadoDto);
 
     void delete(Long id);
 

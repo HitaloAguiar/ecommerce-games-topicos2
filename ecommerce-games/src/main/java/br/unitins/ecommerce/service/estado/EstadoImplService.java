@@ -70,7 +70,7 @@ public class EstadoImplService implements EstadoService {
 
     @Override
     @Transactional
-    public Estado update(Long id, EstadoDTO estadoDto) {
+    public Estado update(Long id, @Valid EstadoDTO estadoDto) throws ConstraintViolationException {
         
         validar(estadoDto);
 

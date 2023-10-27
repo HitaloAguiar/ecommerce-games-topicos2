@@ -15,7 +15,7 @@ public interface GeneroService {
 
     GeneroResponseDTO insert(@Valid GeneroDTO generoDTO);
 
-    GeneroResponseDTO update(Long id, GeneroDTO generoDTO);
+    GeneroResponseDTO update(Long id, @Valid GeneroDTO generoDTO);
 
     void delete(Long id);
 

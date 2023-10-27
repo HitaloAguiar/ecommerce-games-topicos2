@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.genero.GeneroDTO;
 import br.unitins.ecommerce.dto.genero.GeneroResponseDTO;
 import br.unitins.ecommerce.service.genero.GeneroService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -80,28 +78,11 @@ public class GeneroResource {
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GeneroDTO generoDTO) {
-        Result result = null;
-        try {
-            generoService.update(id, generoDTO);
-            LOG.infof("Genero (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
 
-        } catch (ConstraintViolationException e) {
-            LOG.errorf("Erro ao atualizar um Genero. ", id, e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
+        generoService.update(id, generoDTO);
+        LOG.infof("Genero (%d) atualizado com sucesso.", id);
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.NO_CONTENT) // 204
                 .build();
     }
 

@@ -68,7 +68,7 @@ public class GeneroImplService implements GeneroService {
 
     @Override
     @Transactional
-    public GeneroResponseDTO update(Long id, GeneroDTO generoDTO) {
+    public GeneroResponseDTO update(Long id, @Valid GeneroDTO generoDTO) throws ConstraintViolationException {
         
         validar(generoDTO);
 
