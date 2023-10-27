@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.cidade.CidadeDTO;
 import br.unitins.ecommerce.dto.cidade.CidadeResponseDTO;
 import br.unitins.ecommerce.service.cidade.CidadeService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -70,56 +68,25 @@ public class CidadeResource {
 
     @POST
     public Response insert(CidadeDTO cidadeDTO) {
+        
         LOG.infof("Inserindo uma cidade: %s", cidadeDTO.nome());
 
-        Result result = null;
+        CidadeResponseDTO cidadeResponseDTO = cidadeService.insert(cidadeDTO);
 
-        try {
-            CidadeResponseDTO cidadeResponseDTO = cidadeService.insert(cidadeDTO);
+        LOG.infof("Cidade (%d) criado com sucesso.", cidadeResponseDTO.id());
 
-            LOG.infof("Cidade (%d) criado com sucesso.", cidadeResponseDTO.id());
-
-            return Response.status(Status.CREATED).entity(cidadeResponseDTO).build();
-
-        } catch (ConstraintViolationException e) {
-
-            LOG.error("Erro ao incluir uma cidade.");
-
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-
-            result = new Result(e.getMessage(), false);
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        return Response.status(Status.CREATED).entity(cidadeResponseDTO).build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, CidadeDTO cidadeDTO) {
-        Result result = null;
         
-        try {
-            cidadeService.update(id, cidadeDTO);
-            LOG.infof("Cidade (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro de validação ao atualizar a cidade.", e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro ao atualizar a cidade " + id + ".", e);
-            result = new Result(e.getMessage(), false);
-    
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        cidadeService.update(id, cidadeDTO);
+        LOG.infof("Cidade (%d) atualizado com sucesso.", id);
+        return Response
+                .status(Status.NO_CONTENT) // 204
+                .build();
     }
 
     @DELETE
