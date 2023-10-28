@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FabricanteRoutingModule } from './fabricante-routing.module';
 import { FabricanteListComponent } from './components/fabricante-list/fabricante-list.component';
 import { FabricanteFormComponent } from './components/fabricante-form/fabricante-form.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -44,7 +44,8 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
