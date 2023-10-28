@@ -3,7 +3,7 @@ package br.unitins.ecommerce.service.noticia;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
-
+import jakarta.validation.Valid;
 import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
 import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 import br.unitins.ecommerce.model.noticia.Noticia;
@@ -60,7 +60,7 @@ public class NoticiaImplService implements NoticiaService {
 
     @Override
     @Transactional
-    public NoticiaResponseDTO insert(NoticiaDTO noticiaDTO) {
+    public NoticiaResponseDTO insert(@Valid NoticiaDTO noticiaDTO) {
         
         validar(noticiaDTO);
 
@@ -83,7 +83,7 @@ public class NoticiaImplService implements NoticiaService {
 
     @Override
     @Transactional
-    public NoticiaResponseDTO update(Long id, NoticiaDTO noticiaDTO) {
+    public NoticiaResponseDTO update(Long id, @Valid NoticiaDTO noticiaDTO) {
         
         validar(noticiaDTO);
 

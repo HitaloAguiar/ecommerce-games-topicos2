@@ -1,7 +1,7 @@
 package br.unitins.ecommerce.service.noticia;
 
 import java.util.List;
-
+import jakarta.validation.Valid;
 import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
 import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 
@@ -13,9 +13,9 @@ public interface NoticiaService {
     
     NoticiaResponseDTO getById(Long id);
 
-    NoticiaResponseDTO insert(NoticiaDTO noticiaDTO);
+    NoticiaResponseDTO insert(@Valid NoticiaDTO noticiaDTO);
 
-    NoticiaResponseDTO update(Long id, NoticiaDTO noticiaDTO);
+    NoticiaResponseDTO update(Long id, @Valid NoticiaDTO noticiaDTO);
 
     void delete(Long id);
 

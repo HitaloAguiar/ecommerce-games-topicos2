@@ -13,6 +13,7 @@ import { NoticiaService } from 'src/app/services/noticia.service';
 export class NoticiaFormComponent {
 
   formGroup: FormGroup;
+  apiResponse: any = null;
 
   constructor(private formBuilder: FormBuilder,
               private noticiaService: NoticiaService,
@@ -40,8 +41,15 @@ export class NoticiaFormComponent {
           next: (noticiaCadastrado) => {
             this.router.navigateByUrl('/noticias/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('anoFundacao')?.setErrors({ apiError: this.getErrorMessage('anoFundacao') });
+
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
       }
@@ -51,11 +59,22 @@ export class NoticiaFormComponent {
           next: (noticiaCadastrado) => {
             this.router.navigateByUrl('/noticias/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('anoFundacao')?.setErrors({ apiError: this.getErrorMessage('anoFundacao') });
+
+            console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
           }
         })
       }
     }
   }
-}
+  getErrorMessage(fieldName: string): string {
+    const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+    return error ? error.message : '';
+  }
+} 

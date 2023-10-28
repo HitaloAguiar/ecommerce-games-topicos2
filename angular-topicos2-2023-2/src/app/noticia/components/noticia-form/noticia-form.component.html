@@ -7,37 +7,36 @@
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Título</mat-label>
               <input matInput type="text" formControlName="titulo"/>
-              <mat-error *ngIf="formGroup.get('titulo') &&
-                      formGroup.get('titulo')?.invalid &&
-                      formGroup.get('titulo')?.touched">
-                  Título é obrigatório.
+              <mat-error *ngIf="formGroup.get('titulo')?.hasError('apiError')">
+                {{ formGroup.get('titulo')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
+
           <mat-form-field class="full-width-input" appearance="outline" color="accent">
             <mat-label>Conteúdo da notícia</mat-label>
             <textarea matInput placeholder="Conteúdo da notícia" formControlName="conteudo"></textarea>
           </mat-form-field>
+
+
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Data de Publicação</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="dataPublicacao">
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="formGroup.get('dataPublicacao') &&
-                      formGroup.get('dataPublicacao')?.invalid &&
-                      formGroup.get('dataPublicacao')?.touched">
-                  O campo Data de Publicação é obrigatória.
+            <mat-error *ngIf="formGroup.get('dataPublicacao')?.hasError('apiError')">
+              {{ formGroup.get('dataPublicacao')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
+
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Autor</mat-label>
             <input matInput type="text" formControlName="autor"/>
-            <mat-error *ngIf="formGroup.get('autor') &&
-                    formGroup.get('autor')?.invalid &&
-                    formGroup.get('autor')?.touched">
-                Autor é obrigatório.
+            <mat-error *ngIf="formGroup.get('autor')?.hasError('apiError')">
+                {{ formGroup.get('autor')?.getError('apiError') }}
             </mat-error>
           </mat-form-field>
+          
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Tópico Principal</mat-label>
             <mat-select formControlName="topicoPrincipal" name="topicoPrincipal">

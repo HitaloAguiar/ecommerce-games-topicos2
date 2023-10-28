@@ -71,56 +71,21 @@ public class NoticiaResource {
 
     @POST
     public Response insert(NoticiaDTO noticiaDTO) {
+
         LOG.infof("Inserindo uma Noticia: %s", noticiaDTO.titulo());
 
-        Result result = null;
-
-        try {
-            NoticiaResponseDTO noticia = noticiaService.insert(noticiaDTO);
-
-            LOG.infof("noticia (%d) criado com sucesso.", noticia.id());
-
-            return Response.status(Status.CREATED).entity(noticia).build();
-
-        } catch (ConstraintViolationException e) {
-
-            LOG.error("Erro ao incluir uma Noticia.");
-
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-
-            result = new Result(e.getMessage(), false);
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        return Response.status(Status.CREATED).entity(noticiaService.insert(noticiaDTO)).build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, NoticiaDTO noticiaDTO) {
-        Result result = null;
         
-        try {
-            noticiaService.update(id, noticiaDTO);
-            LOG.infof("Noticia (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro de validação ao atualizar a Noticia.", e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro ao atualizar a Noticia " + id + ".", e);
-            result = new Result(e.getMessage(), false);
-    
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        noticiaService.update(id, noticiaDTO);
+        LOG.infof("Noticia (%d) atualizada com sucesso.", id);
+        return Response
+                .status(Status.NO_CONTENT) // 204
+                .build();
     }
 
     @DELETE
