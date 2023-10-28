@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
 import { Genero } from 'src/app/models/genero.model';
 import { GeneroService } from 'src/app/services/genero.service';
@@ -18,7 +20,7 @@ export class GeneroListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private generoService: GeneroService) {}
+  constructor(private generoService: GeneroService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
 
@@ -79,5 +81,30 @@ export class GeneroListComponent implements OnInit {
   aplicarFiltro() {
     this.carregarGeneros();
     this.carregarTotalRegistros();
+  }
+
+  openConfirmationDialog(genero: Genero) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { message: 'Deseja excluir este genero?' }
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.generoService.delete(genero).subscribe({
+            next: () => {
+              this.generos = this.generos.filter(u => u !== genero);
+              this.carregarTotalRegistros();
+              this.carregarGeneros();
+              console.log('Genero excluído com sucesso');
+            },
+            error: (error) => {
+              console.error('Erro ao excluir genero:', error);
+            }
+          });
+        }
+      }
+    });
   }
 }

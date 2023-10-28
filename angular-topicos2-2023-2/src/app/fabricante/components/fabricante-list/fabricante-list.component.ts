@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Fabricante } from 'src/app/models/fabricante.model';
 import { FabricanteService } from 'src/app/services/fabricante.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-fabricante-list',
@@ -18,7 +20,7 @@ export class FabricanteListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private fabricanteService: FabricanteService) {}
+  constructor(private fabricanteService: FabricanteService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.carregarFabricantes();
@@ -78,5 +80,30 @@ export class FabricanteListComponent implements OnInit {
   aplicarFiltro() {
     this.carregarFabricantes();
     this.carregarTotalRegistros();
+  }
+
+  openConfirmationDialog(fabricante: Fabricante) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { message: 'Tem certeza de que deseja excluir este fabricante?' }
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.fabricanteService.delete(fabricante).subscribe({
+            next: () => {
+              this.fabricantes = this.fabricantes.filter(u => u !== fabricante);
+              this.carregarTotalRegistros();
+              this.carregarFabricantes();
+              console.log('Fabricante excluído com sucesso');
+            },
+            error: (error) => {
+              console.error('Erro ao excluir fabricante:', error);
+            }
+          });
+        }
+      }
+    });
   }
 }

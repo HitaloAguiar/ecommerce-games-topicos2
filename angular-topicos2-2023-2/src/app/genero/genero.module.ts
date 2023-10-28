@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { GeneroRoutingModule } from './genero-routing.module';
 import { GeneroListComponent } from './components/genero-list/genero-list.component';
 import { GeneroFormComponent } from './components/genero-form/genero-form.component';
@@ -38,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatIconModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class GeneroModule { }
