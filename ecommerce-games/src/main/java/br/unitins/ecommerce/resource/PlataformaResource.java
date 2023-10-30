@@ -70,31 +70,12 @@ public class PlataformaResource {
 
     @POST
     public Response insert(PlataformaDTO plataformaDTO) {
+
         LOG.infof("Inserindo uma Plataforma: %s", plataformaDTO.nome());
 
-        Result result = null;
-
-        try {
-            PlataformaResponseDTO plataforma = plataformaService.insert(plataformaDTO);
-
-            LOG.infof("Plataforma (%d) criado com sucesso.", plataforma.id());
-
-            return Response.status(Status.CREATED).entity(plataforma).build();
-
-        } catch (ConstraintViolationException e) {
-
-            LOG.error("Erro ao incluir uma Plataforma.");
-
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-
-            result = new Result(e.getMessage(), false);
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        PlataformaResponseDTO plataformaResponseDTO = plataformaService.insert(plataformaDTO);
+        LOG.infof("Plataforma (%d) criada com sucesso.", plataformaResponseDTO.id());
+        return Response.status(Status.CREATED).entity(plataformaResponseDTO).build();
     }
 
     @PUT
