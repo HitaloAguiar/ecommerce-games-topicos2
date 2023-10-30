@@ -14,7 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class UsuarioFormComponent {
 
   formGroup: FormGroup;
-  tableColumns: string[] = ['codigo-area-column', 'numero-column', 'acoes-column'];
+  apiResponse: any = null;
 
   constructor(private formBuilder: FormBuilder,
               private usuarioService: UsuarioService,
@@ -55,8 +55,20 @@ export class UsuarioFormComponent {
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('cpf')?.setErrors({ apiError: this.getErrorMessage('cpf') });
+            this.formGroup.get('email')?.setErrors({ apiError: this.getErrorMessage('email') });
+            this.formGroup.get('login')?.setErrors({ apiError: this.getErrorMessage('login') });
+            this.formGroup.get('senha')?.setErrors({ apiError: this.getErrorMessage('senha') });
+            this.formGroup.get('perfil')?.setErrors({ apiError: this.getErrorMessage('perfil') });
+            this.formGroup.get('telefones')?.setErrors({ apiError: this.getErrorMessage('telefones') });
+
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
       }
@@ -66,11 +78,28 @@ export class UsuarioFormComponent {
           next: (usuarioCadastrado) => {
             this.router.navigateByUrl('/usuarios/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('cpf')?.setErrors({ apiError: this.getErrorMessage('cpf') });
+            this.formGroup.get('email')?.setErrors({ apiError: this.getErrorMessage('email') });
+            this.formGroup.get('login')?.setErrors({ apiError: this.getErrorMessage('login') });
+            this.formGroup.get('senha')?.setErrors({ apiError: this.getErrorMessage('senha') });
+            this.formGroup.get('perfil')?.setErrors({ apiError: this.getErrorMessage('perfil') });
+            this.formGroup.get('telefones')?.setErrors({ apiError: this.getErrorMessage('telefones') });
+
+            console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
           }
         })
       }
     }
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+    return error ? error.message : '';
   }
 }

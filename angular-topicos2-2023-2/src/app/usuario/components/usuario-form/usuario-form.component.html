@@ -7,46 +7,36 @@
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Nome</mat-label>
               <input matInput type="text" formControlName="nome"/>
-              <mat-error *ngIf="formGroup.get('nome') &&
-                      formGroup.get('nome')?.invalid &&
-                      formGroup.get('nome')?.touched">
-                  Nome é obrigatório.
+              <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
+                {{ formGroup.get('nome')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>CPF</mat-label>
-              <input matInput type="text" formControlName="cpf"/>
-              <mat-error *ngIf="formGroup.get('cpf') &&
-                      formGroup.get('cpf')?.invalid &&
-                      formGroup.get('cpf')?.touched">
-                  CPF é obrigatória.
+              <input matInput type="text" placeholder="Ex. 123.456.789-10" formControlName="cpf"/>
+              <mat-error *ngIf="formGroup.get('cpf')?.hasError('apiError')">
+                {{ formGroup.get('cpf')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Email</mat-label>
               <input matInput type="text" formControlName="email"/>
-              <mat-error *ngIf="formGroup.get('email') &&
-                      formGroup.get('email')?.invalid &&
-                      formGroup.get('email')?.touched">
-                  Email é obrigatória.
+              <mat-error *ngIf="formGroup.get('email')?.hasError('apiError')">
+                {{ formGroup.get('email')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Login</mat-label>
               <input matInput type="text" formControlName="login"/>
-              <mat-error *ngIf="formGroup.get('login') &&
-                      formGroup.get('login')?.invalid &&
-                      formGroup.get('login')?.touched">
-                  Login é obrigatória.
+              <mat-error *ngIf="formGroup.get('login')?.hasError('apiError')">
+                {{ formGroup.get('login')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Senha</mat-label>
               <input matInput type="password" formControlName="senha"/>
-              <mat-error *ngIf="formGroup.get('senha') &&
-                      formGroup.get('senha')?.invalid &&
-                      formGroup.get('senha')?.touched">
-                  Senha é obrigatória.
+              <mat-error *ngIf="formGroup.get('senha')?.hasError('apiError')">
+                {{ formGroup.get('senha')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
@@ -55,12 +45,18 @@
               <mat-option value="USER">Usuário</mat-option>
               <mat-option value="ADMIN">Administrador</mat-option>
             </mat-select>
+            <mat-error *ngIf="formGroup.get('perfil')?.hasError('apiError')">
+              {{ formGroup.get('perfil')?.getError('apiError') }}
+            </mat-error>
           </mat-form-field>
           <div formArrayName="telefones">
             <div *ngFor="let telefone of telefones.controls; let i = index">
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Telefone</mat-label>
                     <input matInput [formControlName]="i">
+                    <mat-error *ngIf="formGroup.get('telefones')?.hasError('apiError')">
+                      {{ formGroup.get('telefones')?.getError('apiError') }}
+                    </mat-error>
                 </mat-form-field>
                 <button mat-icon-button (click)="removerTelefone(i)">
                     <mat-icon>delete</mat-icon>
