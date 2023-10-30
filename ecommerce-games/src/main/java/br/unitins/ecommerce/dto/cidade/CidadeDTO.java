@@ -9,7 +9,7 @@ public record CidadeDTO(
     @Size(max = 60, message = "O campo nome deve possuir no máximo 60 caracteres.")
     String nome,
 
-    @NotNull
+    @NotNull(message = "Campo estado não pode estar vazio")
     Long estado
 ) {
     

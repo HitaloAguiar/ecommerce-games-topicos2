@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -72,54 +70,22 @@ public class GameResource {
     public Response insert(GameDTO gameDTO) {
         LOG.infof("Inserindo uma Game: %s", gameDTO.nome());
 
-        Result result = null;
+        GameResponseDTO game = gameService.insert(gameDTO);
 
-        try {
-            GameResponseDTO game = gameService.insert(gameDTO);
+        LOG.infof("Game (%d) criado com sucesso.", game.id());
 
-            LOG.infof("Game (%d) criado com sucesso.", game.id());
-
-            return Response.status(Status.CREATED).entity(game).build();
-
-        } catch (ConstraintViolationException e) {
-
-            LOG.error("Erro ao incluir uma Game.");
-
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-
-            result = new Result(e.getMessage(), false);
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        return Response.status(Status.CREATED).entity(game).build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GameDTO gameDTO) {
-        Result result = null;
         
-        try {
-            gameService.update(id, gameDTO);
-            LOG.infof("Game (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro de validação ao atualizar a Game.", e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro ao atualizar a Game " + id + ".", e);
-            result = new Result(e.getMessage(), false);
-    
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        gameService.update(id, gameDTO);
+        LOG.infof("Game (%d) atualizado com sucesso.", id);
+        return Response
+                .status(Status.NO_CONTENT) // 204
+                .build();
     }
 
     @DELETE

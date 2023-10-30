@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.fabricante.FabricanteDTO;
 import br.unitins.ecommerce.dto.fabricante.FabricanteResponseDTO;
+import jakarta.validation.Valid;
 
 public interface FabricanteService {
     
@@ -13,9 +14,9 @@ public interface FabricanteService {
     
     FabricanteResponseDTO getById(Long id);
 
-    FabricanteResponseDTO insert(FabricanteDTO fabricanteDTO);
+    FabricanteResponseDTO insert(@Valid FabricanteDTO fabricanteDTO);
 
-    FabricanteResponseDTO update(Long id, FabricanteDTO fabricanteDTO);
+    FabricanteResponseDTO update(Long id, @Valid FabricanteDTO fabricanteDTO);
 
     void delete(Long id);
 

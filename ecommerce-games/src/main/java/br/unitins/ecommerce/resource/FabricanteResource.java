@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.fabricante.FabricanteDTO;
 import br.unitins.ecommerce.dto.fabricante.FabricanteResponseDTO;
 import br.unitins.ecommerce.service.fabricante.FabricanteService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -64,55 +62,21 @@ public class FabricanteResource {
     @POST
     public Response insert(FabricanteDTO fabricanteDTO) {
         LOG.infof("Inserindo um fabricante: %s", fabricanteDTO.nome());
-        Result result = null;
-        try {
 
-            return Response
-                    .status(Status.CREATED) // 201
-                    .entity(fabricanteService.insert(fabricanteDTO))
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao incluir um fabricante.");
-            LOG.debug(e.getMessage());
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.CREATED) // 201
+                .entity(fabricanteService.insert(fabricanteDTO))
                 .build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, FabricanteDTO fabricanteDTO) {
-        Result result = null;
-        try {
-            fabricanteService.update(id, fabricanteDTO);
-            LOG.infof("Fabricante (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.errorf("Erro ao atualizar um Fabricante. ", id, e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
+        
+        fabricanteService.update(id, fabricanteDTO);
+        LOG.infof("Fabricante (%d) atualizado com sucesso.", id);
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.NO_CONTENT) // 204
                 .build();
     }
 

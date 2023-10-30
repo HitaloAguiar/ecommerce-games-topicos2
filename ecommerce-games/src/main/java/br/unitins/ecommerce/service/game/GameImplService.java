@@ -17,6 +17,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 
@@ -69,7 +70,7 @@ public class GameImplService implements GameService {
 
     @Override
     @Transactional
-    public GameResponseDTO insert(GameDTO gameDTO) {
+    public GameResponseDTO insert(@Valid GameDTO gameDTO) throws ConstraintViolationException {
         
         validar(gameDTO);
 
@@ -102,7 +103,7 @@ public class GameImplService implements GameService {
 
     @Override
     @Transactional
-    public GameResponseDTO update(Long id, GameDTO gameDTO) {
+    public GameResponseDTO update(Long id, @Valid GameDTO gameDTO) throws ConstraintViolationException {
         
         validar(gameDTO);
 

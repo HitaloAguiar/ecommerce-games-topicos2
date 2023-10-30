@@ -7,10 +7,8 @@
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
               <mat-label>Nome</mat-label>
               <input matInput type="text" formControlName="nome"/>
-              <mat-error *ngIf="formGroup.get('nome') &&
-                      formGroup.get('nome')?.invalid &&
-                      formGroup.get('nome')?.touched">
-                  Nome é obrigatório.
+              <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
+                {{ formGroup.get('nome')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width-input" appearance="outline" color="accent">
@@ -23,11 +21,9 @@
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="formGroup.get('anoLancamento') &&
-                      formGroup.get('anoLancamento')?.invalid &&
-                      formGroup.get('anoLancamento')?.touched">
-                  O campo Ano de Lançamento é obrigatória.
-              </mat-error>
+            <mat-error *ngIf="formGroup.get('anoFundacao')?.hasError('apiError')">
+              {{ formGroup.get('anoLancamento')?.getError('apiError') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Developer</mat-label>
@@ -37,6 +33,9 @@
                 {{developer.nome}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="formGroup.get('developer')?.hasError('apiError')">
+              {{ formGroup.get('developer')?.getError('apiError') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Gêneros</mat-label>
@@ -45,6 +44,9 @@
                 {{genero.nome}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="formGroup.get('generos')?.hasError('apiError')">
+              {{ formGroup.get('generos')?.getError('apiError') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Plataformas</mat-label>
@@ -53,14 +55,15 @@
                 {{plataforma.nome}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="formGroup.get('plataformas')?.hasError('apiError')">
+              {{ formGroup.get('plataformas')?.getError('apiError') }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width-input" color="accent">
             <mat-label>Preço</mat-label>
             <input matInput type="number" formControlName="preco"/>
-            <mat-error *ngIf="formGroup.get('preco') &&
-                    formGroup.get('preco')?.invalid &&
-                    formGroup.get('preco')?.touched">
-                    Preço é obrigatório.
+            <mat-error *ngIf="formGroup.get('preco')?.hasError('apiError')">
+              {{ formGroup.get('preco')?.getError('apiError') }}
             </mat-error>
         </mat-form-field>
       </form>

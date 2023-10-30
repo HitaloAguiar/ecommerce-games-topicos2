@@ -14,6 +14,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
 
@@ -57,7 +58,7 @@ public class FabricanteImplService implements FabricanteService {
 
     @Override
     @Transactional
-    public FabricanteResponseDTO insert(FabricanteDTO fabricanteDTO) {
+    public FabricanteResponseDTO insert(@Valid FabricanteDTO fabricanteDTO) {
         
         validar(fabricanteDTO);
 
@@ -74,7 +75,7 @@ public class FabricanteImplService implements FabricanteService {
 
     @Override
     @Transactional
-    public FabricanteResponseDTO update(Long id, FabricanteDTO fabricanteDTO) {
+    public FabricanteResponseDTO update(Long id, @Valid FabricanteDTO fabricanteDTO) {
         
         validar(fabricanteDTO);
 

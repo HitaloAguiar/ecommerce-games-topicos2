@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
+import jakarta.validation.Valid;
 
 public interface GameService {
     
@@ -13,9 +14,9 @@ public interface GameService {
     
     GameResponseDTO getById(Long id);
 
-    GameResponseDTO insert(GameDTO gameDTO);
+    GameResponseDTO insert(@Valid GameDTO gameDTO);
 
-    GameResponseDTO update(Long id, GameDTO gameDTO);
+    GameResponseDTO update(Long id, @Valid GameDTO gameDTO);
 
     void delete(Long id);
 

@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -74,55 +72,23 @@ public class UsuarioResource {
     @POST
     public Response insert(UsuarioDTO usuarioDto) {
 
-        Result result = null;
-        try {
-            LOG.infof("Usuário criado com sucesso.");
+        LOG.infof("Usuário criado com sucesso.");
 
-            return Response
-                    .status(Status.CREATED) // 201
-                    .entity(usuarioService.insert(usuarioDto))
-                    .build();
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro ao incluir Usuário.");
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.CREATED) // 201
+                .entity(usuarioService.insert(usuarioDto))
                 .build();
     }
 
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, UsuarioDTO usuarioDto) {
-        Result result = null;
-        try {
-            usuarioService.update(id, usuarioDto);
-            LOG.infof("Usuário (%d) atualizado com sucesso.", id);
+    
+        usuarioService.update(id, usuarioDto);
+        LOG.infof("Usuário (%d) atualizado com sucesso.", id);
 
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-
-        } catch (ConstraintViolationException e) {
-            LOG.errorf("Erro ao atualizar um usuário. ", id, e);
-            LOG.debug(e.getMessage());
-
-            result = new Result(e.getConstraintViolations());
-        } catch (Exception e) {
-            LOG.fatal("Erro sem identificacao: " + e.getMessage());
-            result = new Result(e.getMessage(), false);
-
-        }
         return Response
-                .status(Status.NOT_FOUND)
-                .entity(result)
+                .status(Status.NO_CONTENT) // 204
                 .build();
     }
 

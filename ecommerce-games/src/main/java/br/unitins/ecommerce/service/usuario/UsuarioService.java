@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
+import jakarta.validation.Valid;
 
 public interface UsuarioService {
     
@@ -13,9 +14,9 @@ public interface UsuarioService {
 
     UsuarioResponseDTO getById(Long id);
 
-    UsuarioResponseDTO insert(UsuarioDTO usuarioDto);
+    UsuarioResponseDTO insert(@Valid UsuarioDTO usuarioDto);
 
-    UsuarioResponseDTO update(Long id, UsuarioDTO usuarioDto);
+    UsuarioResponseDTO update(Long id, @Valid UsuarioDTO usuarioDto);
 
     void delete(Long id);
 

@@ -18,6 +18,7 @@ import { PlataformaService } from 'src/app/services/plataforma.service';
 export class GameFormComponent {
 
   formGroup: FormGroup;
+  apiResponse: any = null;
 
   developers: Developer[] = [];
   generos: Genero[] = [];
@@ -68,8 +69,19 @@ export class GameFormComponent {
           next: (gameCadastrado) => {
             this.router.navigateByUrl('/games/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('anoLancamento')?.setErrors({ apiError: this.getErrorMessage('anoLancamento') });
+            this.formGroup.get('developer')?.setErrors({ apiError: this.getErrorMessage('developer') });
+            this.formGroup.get('generos')?.setErrors({ apiError: this.getErrorMessage('generos') });
+            this.formGroup.get('plataformas')?.setErrors({ apiError: this.getErrorMessage('plataformas') });
+            this.formGroup.get('preco')?.setErrors({ apiError: this.getErrorMessage('preco') });
+
+            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
           }
         })
       }
@@ -79,11 +91,27 @@ export class GameFormComponent {
           next: (gameCadastrado) => {
             this.router.navigateByUrl('/games/list');
           },
-          error: (err) => {
-            console.log('Erro ao salvar' + JSON.stringify(err));
+          error: (errorResponse) => {
+
+            this.apiResponse = errorResponse.error;
+
+            // Associar erros aos campos do formulário
+            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+            this.formGroup.get('anoLancamento')?.setErrors({ apiError: this.getErrorMessage('anoLancamento') });
+            this.formGroup.get('developer')?.setErrors({ apiError: this.getErrorMessage('developer') });
+            this.formGroup.get('generos')?.setErrors({ apiError: this.getErrorMessage('generos') });
+            this.formGroup.get('plataformas')?.setErrors({ apiError: this.getErrorMessage('plataformas') });
+            this.formGroup.get('preco')?.setErrors({ apiError: this.getErrorMessage('preco') });
+
+            console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
           }
         })
       }
     }
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
+    return error ? error.message : '';
   }
 }

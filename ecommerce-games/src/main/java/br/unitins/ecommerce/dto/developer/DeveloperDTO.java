@@ -13,11 +13,11 @@ public record DeveloperDTO(
     @Size(max = 60, message = "O campo nome deve possuir no máximo 60 caracteres.")
     String nome,
 
-    @NotNull(message = "Campo anoFundacao não pode estar vazio")
+    @NotNull(message = "Campo ano de fundação não pode estar vazio")
     @PastOrPresent
     LocalDate anoFundacao,
 
-    @NotNull
+    @NotNull(message = "Campo classificação não pode estar vazio")
     String classificacao
 ) {
     

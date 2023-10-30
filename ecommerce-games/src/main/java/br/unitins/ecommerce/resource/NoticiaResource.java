@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.noticia.NoticiaDTO;
 import br.unitins.ecommerce.dto.noticia.NoticiaResponseDTO;
 import br.unitins.ecommerce.service.noticia.NoticiaService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
