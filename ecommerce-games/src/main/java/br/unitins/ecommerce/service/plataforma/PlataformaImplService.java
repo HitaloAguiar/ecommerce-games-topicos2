@@ -3,7 +3,7 @@ package br.unitins.ecommerce.service.plataforma;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
-
+import jakarta.validation.Valid;
 import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
 import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 import br.unitins.ecommerce.model.produto.Plataforma;
@@ -61,7 +61,7 @@ public class PlataformaImplService implements PlataformaService {
 
     @Override
     @Transactional
-    public PlataformaResponseDTO insert(PlataformaDTO plataformaDTO) {
+    public PlataformaResponseDTO insert(@Valid PlataformaDTO plataformaDTO) throws ConstraintViolationException {
         
         validar(plataformaDTO);
 

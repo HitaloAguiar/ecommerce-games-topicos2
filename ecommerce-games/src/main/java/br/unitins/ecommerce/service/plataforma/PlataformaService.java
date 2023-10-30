@@ -1,7 +1,7 @@
 package br.unitins.ecommerce.service.plataforma;
 
 import java.util.List;
-
+import jakarta.validation.Valid;
 import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
 import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 
@@ -13,7 +13,7 @@ public interface PlataformaService {
     
     PlataformaResponseDTO getById(Long id);
 
-    PlataformaResponseDTO insert(PlataformaDTO plataformaDTO);
+    PlataformaResponseDTO insert(@Valid PlataformaDTO plataformaDTO);
 
     PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO);
 
