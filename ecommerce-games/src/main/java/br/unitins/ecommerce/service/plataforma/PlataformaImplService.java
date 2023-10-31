@@ -82,7 +82,7 @@ public class PlataformaImplService implements PlataformaService {
 
     @Override
     @Transactional
-    public PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO) {
+    public PlataformaResponseDTO update(Long id, @Valid PlataformaDTO plataformaDTO) {
         
         validar(plataformaDTO);
 

@@ -15,7 +15,7 @@ public interface PlataformaService {
 
     PlataformaResponseDTO insert(@Valid PlataformaDTO plataformaDTO);
 
-    PlataformaResponseDTO update(Long id, PlataformaDTO plataformaDTO);
+    PlataformaResponseDTO update(Long id, @Valid PlataformaDTO plataformaDTO);
 
     void delete(Long id);
 

@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
-import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.plataforma.PlataformaDTO;
 import br.unitins.ecommerce.dto.plataforma.PlataformaResponseDTO;
 import br.unitins.ecommerce.service.plataforma.PlataformaService;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -81,26 +79,12 @@ public class PlataformaResource {
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, PlataformaDTO plataformaDTO) {
-        Result result = null;
-        
-        try {
-            plataformaService.update(id, plataformaDTO);
-            LOG.infof("Plataforma (%d) atualizado com sucesso.", id);
-            return Response
-                    .status(Status.NO_CONTENT) // 204
-                    .build();
-        } catch (ConstraintViolationException e) {
-            LOG.error("Erro de validação ao atualizar a Plataforma.", e);
-            LOG.debug(e.getMessage());
 
-            result = new Result(e.getConstraintViolations());
-
-        } catch (Exception e) {
-            LOG.fatal("Erro ao atualizar a Plataforma " + id + ".", e);
-            result = new Result(e.getMessage(), false);
-    
-        }
-        return Response.status(Status.NOT_FOUND).entity(result).build();
+        plataformaService.update(id, plataformaDTO);
+        LOG.infof("Plataforma (%d) atualizado com sucesso.", id);
+        return Response
+                .status(Status.NO_CONTENT) // 204
+                .build();
     }
 
     @DELETE

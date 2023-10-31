@@ -15,10 +15,10 @@ public record PlataformaDTO(
     @NotBlank(message = "Campo descrição não pode estar vazio")
     String descricao,
 
-    @NotNull(message = "Campo anoLancamento não pode estar vazio")
+    @NotNull(message = "Campo ano de Lançamento não pode estar vazio")
     LocalDate anoLancamento,
 
-    @NotNull
+    @NotNull(message = "Campo fabricante não pode estar vazio")
     Long fabricante
 ) {
     
