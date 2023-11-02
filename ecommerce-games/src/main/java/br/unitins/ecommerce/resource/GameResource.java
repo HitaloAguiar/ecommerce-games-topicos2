@@ -6,6 +6,7 @@ import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
+import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -21,6 +22,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.Response.Status;
 
 @Path("/games")
@@ -30,6 +32,9 @@ public class GameResource {
     
     @Inject
     GameService gameService;
+
+    @Inject
+    FileService fileService;
 
     private static final Logger LOG = Logger.getLogger(GameResource.class);
 
@@ -105,6 +110,18 @@ public class GameResource {
             LOG.errorf("Game (%d) não encontrado.", id);
             throw e;
         }
+    }
+
+    @GET
+    @Path("/image/download/{nomeImagem}")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public Response download(@PathParam("nomeImagem") String nomeImagem) {
+
+        LOG.info("pegou a imagem");
+
+        ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
+        response.header("Content-Disposition", "attachment;filename="+nomeImagem);
+        return response.build();
     }
 
     @GET

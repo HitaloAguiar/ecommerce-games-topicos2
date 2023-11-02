@@ -20,6 +20,8 @@ public interface GameService {
 
     void delete(Long id);
 
+    GameResponseDTO salvarImage(Long id, String nomeImagem);
+
     List<GameResponseDTO> getByNome(String nome, int page, int pageSize);
 
     Long count();

@@ -172,6 +172,16 @@ public class GameImplService implements GameService {
     }
 
     @Override
+    @Transactional
+    public GameResponseDTO salvarImage(Long id, String nomeImagem) {
+        
+        Game entity = gameRepository.findById(id);
+        entity.setNomeImagem(nomeImagem);
+
+        return new GameResponseDTO(entity);
+    }
+
+    @Override
     public List<GameResponseDTO> getByNome(String nome, int page, int pageSize) {
         
         return gameRepository.findByNome(nome, sort).page(page, pageSize).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();        

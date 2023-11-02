@@ -24,11 +24,13 @@ import {MatListModule} from '@angular/material/list';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { GameCardListComponent } from './components/game-card-list/game-card-list.component';
 
 @NgModule({
   declarations: [
     GameListComponent,
-    GameFormComponent
+    GameFormComponent,
+    GameCardListComponent
   ],
   imports: [
     CommonModule,

@@ -55,4 +55,8 @@ export class GameService {
   countByNome(nome: string): Observable<number> {
     return this.http.get<number>(`${this.baseURL}/games/search/${nome}/count`);
   }
+
+  getUrlImagem(nomeImagem: string): string {
+    return `${this.baseURL}/games/image/download/${nomeImagem}`;
+  }
 }

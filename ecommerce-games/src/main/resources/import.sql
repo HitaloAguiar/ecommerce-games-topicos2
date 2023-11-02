@@ -58,11 +58,11 @@ INSERT INTO produto (nome, descricao, preco) VALUES ('The Legend of Zelda: Tears
 INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'descricao exemplo', 150.15);
 INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'descricao exemplo', 160.90);
 
-INSERT INTO game (anoLancamento, id_developer, id) VALUES ('2017-10-27', 3, 1);
-INSERT INTO game (anoLancamento, id_developer, id) VALUES ('2022-11-09', 2, 2);
-INSERT INTO game (anoLancamento, id_developer, id) VALUES ('2023-05-17', 3, 3);
-INSERT INTO game (anoLancamento, id_developer, id) VALUES ('2020-06-19', 4, 4);
-INSERT INTO game (anoLancamento, id_developer, id) VALUES ('2020-03-20', 5, 5);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2017-10-27', 3, 'super-mario-odyssey-cover.jpg', 1);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2022-11-09', 2, 'god-of-war-ragnarok-cover.jpg', 2);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-05-17', 3, 'zelda-tears-of-kingdom-cover.jpg', 3);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-06-19', 4, 'the-last-of-us-part-2-cover.png', 4);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-03-20', 5, 'doom-eternal-cover.jpg', 5);
 
 INSERT INTO generos_game (id_game, id_genero) VALUES (1, 3);
 INSERT INTO generos_game (id_game, id_genero) VALUES (1, 6);

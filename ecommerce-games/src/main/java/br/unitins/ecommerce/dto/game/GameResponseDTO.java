@@ -13,6 +13,7 @@ public record GameResponseDTO(
     String nome,
     String descricao,
     Double preco,
+    String nomeImagem,
     String anoLancamento,
     DeveloperResponseDTO developer,
     List<GeneroResponseDTO> generos,
@@ -23,11 +24,11 @@ public record GameResponseDTO(
     
     public GameResponseDTO (Game game, DateTimeFormatter formatter) {
 
-        this(game.getId(), game.getNome(), game.getDescricao(), game.getPreco(), game.getAnoLancamento().format(formatter), new DeveloperResponseDTO(game.getDeveloper()), game.getGeneros().stream().map(GeneroResponseDTO::new).toList(), game.getPlataformas().stream().map(PlataformaResponseDTO::new).toList());
+        this(game.getId(), game.getNome(), game.getDescricao(), game.getPreco(), game.getNomeImagem(), game.getAnoLancamento().format(formatter), new DeveloperResponseDTO(game.getDeveloper()), game.getGeneros().stream().map(GeneroResponseDTO::new).toList(), game.getPlataformas().stream().map(PlataformaResponseDTO::new).toList());
     }
 
     public GameResponseDTO (Game game) {
 
-        this(game.getId(), game.getNome(), game.getDescricao(), game.getPreco(), game.getAnoLancamento().format(formatter), new DeveloperResponseDTO(game.getDeveloper()), game.getGeneros().stream().map(GeneroResponseDTO::new).toList(), game.getPlataformas().stream().map(PlataformaResponseDTO::new).toList());
+        this(game.getId(), game.getNome(), game.getDescricao(), game.getPreco(), game.getNomeImagem(), game.getAnoLancamento().format(formatter), new DeveloperResponseDTO(game.getDeveloper()), game.getGeneros().stream().map(GeneroResponseDTO::new).toList(), game.getPlataformas().stream().map(PlataformaResponseDTO::new).toList());
     }
 }

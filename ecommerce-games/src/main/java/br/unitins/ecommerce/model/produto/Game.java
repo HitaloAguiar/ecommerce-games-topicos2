@@ -16,6 +16,8 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 public class Game extends Produto {
+
+    private String nomeImagem;
     
     @Column(nullable = false)
     private LocalDate anoLancamento;
@@ -88,5 +90,13 @@ public class Game extends Produto {
         }
         
         this.plataformas.add(plataforma);
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 }
