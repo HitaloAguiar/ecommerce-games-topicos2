@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DeveloperRoutingModule } from './developer-routing.module';
 import { DeveloperListComponent } from './components/developer-list/developer-list.component';
 import { DeveloperFormComponent } from './components/developer-form/developer-form.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -43,7 +43,8 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
