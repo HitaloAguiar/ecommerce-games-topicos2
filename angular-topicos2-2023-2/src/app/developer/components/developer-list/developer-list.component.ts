@@ -3,6 +3,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Developer } from 'src/app/models/developer.model';
 import { DeveloperService } from 'src/app/services/developer.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-developer-list',
@@ -19,7 +21,7 @@ export class DeveloperListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private developerService: DeveloperService) {}
+  constructor(private developerService: DeveloperService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
 
@@ -81,4 +83,30 @@ export class DeveloperListComponent implements OnInit {
     this.carregarDevelopers();
     this.carregarTotalRegistros();
   }
+
+  openConfirmationDialog(developer: Developer) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { message: 'Tem certeza de que deseja excluir este developer?' }
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.developerService.delete(developer).subscribe({
+            next: () => {
+              this.developers = this.developers.filter(u => u !== developer);
+              this.carregarTotalRegistros();
+              this.carregarDevelopers();
+              console.log('Developer excluído com sucesso');
+            },
+            error: (error) => {
+              console.error('Erro ao excluir developer:', error);
+            }
+          });
+        }
+      }
+    });
+  }
+
 }

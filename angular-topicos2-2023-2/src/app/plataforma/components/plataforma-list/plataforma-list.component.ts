@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Plataforma } from 'src/app/models/plataforma.model';
 import { PlataformaService } from 'src/app/services/plataforma.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-plataforma-list',
@@ -18,7 +20,7 @@ export class PlataformaListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private plataformaService: PlataformaService) {}
+  constructor(private plataformaService: PlataformaService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
 
@@ -79,5 +81,30 @@ export class PlataformaListComponent implements OnInit {
   aplicarFiltro() {
     this.carregarPlataformas();
     this.carregarTotalRegistros();
+  }
+
+  openConfirmationDialog(plataforma: Plataforma) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: { message: 'Tem certeza de que deseja excluir esta plataforma?' }
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.plataformaService.delete(plataforma).subscribe({
+            next: () => {
+              this.plataformas = this.plataformas.filter(u => u !== plataforma);
+              this.carregarTotalRegistros();
+              this.carregarPlataformas();
+              console.log('Plataforma excluído com sucesso');
+            },
+            error: (error) => {
+              console.error('Erro ao excluir plataforma:', error);
+            }
+          });
+        }
+      }
+    });
   }
 }
