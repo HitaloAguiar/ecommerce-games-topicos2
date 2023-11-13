@@ -1,7 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { Game } from 'src/app/models/game.model';
 import { GameService } from 'src/app/services/game.service';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 
 type Card = {
   titulo: string;
@@ -17,6 +18,8 @@ type Card = {
 })
 export class GameCardListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+
   cards = signal<Card[]> ([]);
   games: Game[] = [];
 
@@ -25,7 +28,13 @@ export class GameCardListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private customPaginatorIntl: CustomPaginatorIntl) {}
+
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
+  }
 
   ngOnInit(): void {
     this.carregarGames();

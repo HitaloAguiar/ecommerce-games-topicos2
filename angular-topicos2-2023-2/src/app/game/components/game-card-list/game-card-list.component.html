@@ -31,10 +31,10 @@
           <button mat-flat-button color="accent" style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
       </mat-card-footer>
   </mat-card>
+
 </div>
-<mat-paginator color="accent"
-  [pageSizeOptions]="[2, 4, 8, 16]"
-  [pageSize]="pageSize"
-  [length]="totalRegistros"
-  (page)="paginar($event)">
+<div class="mat-elevation-z8">
+<mat-paginator [pageSizeOptions]="[2, 4, 8, 16]" [pageSize]="pageSize" [length]="totalRegistros"
+(page)="paginar($event)">
 </mat-paginator>
+</div>

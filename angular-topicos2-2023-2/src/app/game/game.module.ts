@@ -21,7 +21,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import {MatListModule} from '@angular/material/list';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { GameCardListComponent } from './components/game-card-list/game-card-list.component';
@@ -48,10 +48,12 @@ import { GameCardListComponent } from './components/game-card-list/game-card-lis
     MatNativeDateModule,
     MatListModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    CustomPaginatorIntl
   ]
 })
 export class GameModule { }

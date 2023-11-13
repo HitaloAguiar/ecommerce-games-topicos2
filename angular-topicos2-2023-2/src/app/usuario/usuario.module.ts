@@ -21,7 +21,7 @@ import {MatListModule} from '@angular/material/list';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatChipsModule} from '@angular/material/chips';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { TelefoneFormComponent } from './components/telefone-form/telefone-form.component';
@@ -49,6 +49,9 @@ import { TelefoneFormComponent } from './components/telefone-form/telefone-form.
     MatChipsModule,
     MatPaginatorModule,
     FormsModule
+  ],
+  providers: [
+    CustomPaginatorIntl
   ]
 })
 export class UsuarioModule { }
