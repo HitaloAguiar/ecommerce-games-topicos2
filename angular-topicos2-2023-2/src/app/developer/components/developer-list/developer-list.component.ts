@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { MatTableDataSource } from '@angular/material/table';
 import { Developer } from 'src/app/models/developer.model';
 import { DeveloperService } from 'src/app/services/developer.service';
@@ -13,6 +15,7 @@ import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirm
 })
 export class DeveloperListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   tableColumns: string[] = ['id-column', 'nome-column', 'ano-fundacao-column', 'classificacao-column', 'acoes-column'];
   developers: Developer[] = [];
 
@@ -21,8 +24,14 @@ export class DeveloperListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private developerService: DeveloperService, private dialog: MatDialog) {}
+  constructor(private developerService: DeveloperService, private dialog: MatDialog,  private customPaginatorIntl: CustomPaginatorIntl) {}
 
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
+  }
+  
   ngOnInit(): void {
 
     this.carregarDevelopers();

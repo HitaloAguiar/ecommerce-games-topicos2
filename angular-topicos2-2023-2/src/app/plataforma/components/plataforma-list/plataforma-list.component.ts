@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Plataforma } from 'src/app/models/plataforma.model';
 import { PlataformaService } from 'src/app/services/plataforma.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +14,8 @@ import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirm
 })
 export class PlataformaListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+
   tableColumns: string[] = ['id-column', 'nome-column','ano-lancamento-column','fabricante-column','acoes-column'];
   plataformas: Plataforma[] = [];
 
@@ -20,8 +24,14 @@ export class PlataformaListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private plataformaService: PlataformaService, private dialog: MatDialog) {}
+  constructor(private plataformaService: PlataformaService, private dialog: MatDialog, private customPaginatorIntl: CustomPaginatorIntl) {}
 
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
+  }
+  
   ngOnInit(): void {
 
     this.carregarPlataformas();

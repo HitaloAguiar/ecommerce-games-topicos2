@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-import { PageEvent } from '@angular/material/paginator';
 import { Genero } from 'src/app/models/genero.model';
 import { GeneroService } from 'src/app/services/genero.service';
 
@@ -12,6 +13,7 @@ import { GeneroService } from 'src/app/services/genero.service';
 })
 export class GeneroListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   tableColumns: string[] = ['id-column', 'nome-column', 'acoes-column'];
   generos: Genero[] = [];
 
@@ -20,7 +22,7 @@ export class GeneroListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private generoService: GeneroService, private dialog: MatDialog) {}
+  constructor(private generoService: GeneroService, private dialog: MatDialog, private customPaginatorIntl: CustomPaginatorIntl) {}
 
   ngOnInit(): void {
 
@@ -28,6 +30,12 @@ export class GeneroListComponent implements OnInit {
     this.carregarTotalRegistros();
   }
 
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
+  }
+  
   carregarGeneros() {
 
     // se existe dados no filtro

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CidadeRoutingModule } from './cidade-routing.module';
 import { CidadeListComponent } from './components/cidade-list/cidade-list.component';
 import { CidadeFormComponent } from './components/cidade-form/cidade-form.component';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -39,6 +39,9 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatPaginatorModule,
     FormsModule
+  ],
+  providers: [
+    CustomPaginatorIntl
   ]
 })
 export class CidadeModule { }

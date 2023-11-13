@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PlataformaRoutingModule } from './plataforma-routing.module';
@@ -47,7 +47,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    CustomPaginatorIntl
   ]
 })
 export class PlataformaModule { }

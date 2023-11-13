@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EstadoRoutingModule } from './estado-routing.module';
 import { EstadoListComponent } from './components/estado-list/estado-list.component';
 import { EstadoFormComponent } from './components/estado-form/estado-form.component';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -37,6 +37,9 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatPaginatorModule,
     FormsModule
+  ],
+  providers: [
+    CustomPaginatorIntl
   ]
 })
 export class EstadoModule { }

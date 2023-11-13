@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { Fabricante } from 'src/app/models/fabricante.model';
 import { FabricanteService } from 'src/app/services/fabricante.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +13,8 @@ import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirm
 })
 export class FabricanteListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+
   tableColumns: string[] = ['id-column', 'nome-column', 'ano-fundacao-column', 'acoes-column'];
   fabricantes: Fabricante[] = [];
 
@@ -20,11 +23,17 @@ export class FabricanteListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private fabricanteService: FabricanteService, private dialog: MatDialog) {}
+  constructor(private fabricanteService: FabricanteService, private dialog: MatDialog, private customPaginatorIntl: CustomPaginatorIntl) {}
 
   ngOnInit(): void {
     this.carregarFabricantes();
     this.carregarTotalRegistros();
+  }
+  
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
   }
 
   carregarFabricantes() {

@@ -71,10 +71,9 @@
       <td class="mat-cell" colspan="4">nenhuma plataforma encontrada com o nome "{{input.value}}"</td>
     </tr>
   </table>
-  <mat-paginator color="accent"
-    [pageSizeOptions]="[2, 4, 8, 16]"
-    [pageSize]="pageSize"
-    [length]="totalRegistros"
-    (page)="paginar($event)">
-  </mat-paginator>
+</div>
+<div class="mat-elevation-z8">
+<mat-paginator [pageSizeOptions]="[2, 4, 8, 16]" [pageSize]="pageSize" [length]="totalRegistros"
+(page)="paginar($event)">
+</mat-paginator>
 </div>

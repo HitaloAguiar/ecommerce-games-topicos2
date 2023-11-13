@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { Noticia } from 'src/app/models/noticia.model';
 import { NoticiaService } from 'src/app/services/noticia.service';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 
 @Component({
   selector: 'app-noticia-list',
@@ -9,6 +10,8 @@ import { NoticiaService } from 'src/app/services/noticia.service';
   styleUrls: ['./noticia-list.component.css']
 })
 export class NoticiaListComponent implements OnInit {
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
 
   tableColumns: string[] = ['id-column', 'titulo-column', 'data-publicacao-column', 'autor-column', 'topico-principal-column', 'acoes-column'];
   noticias: Noticia[] = [];
@@ -18,8 +21,14 @@ export class NoticiaListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private noticiaService: NoticiaService) {}
+  constructor(private noticiaService: NoticiaService, private CustomPaginatorIntl: CustomPaginatorIntl) {}
 
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.CustomPaginatorIntl; // Configuração da internacionalização
+    }
+  }
+  
   ngOnInit(): void {
 
     this.carregarNoticias();

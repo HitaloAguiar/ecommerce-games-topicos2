@@ -12,7 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatIconModule} from '@angular/material/icon';
@@ -48,7 +48,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    CustomPaginatorIntl
   ]
 })
 export class FabricanteModule { }

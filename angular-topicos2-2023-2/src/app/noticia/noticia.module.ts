@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 
@@ -46,7 +46,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    CustomPaginatorIntl
   ]
 })
 export class NoticiaModule { }

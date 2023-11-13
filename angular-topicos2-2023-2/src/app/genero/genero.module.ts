@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { GeneroRoutingModule } from './genero-routing.module';
@@ -40,6 +40,9 @@ import { FormsModule } from '@angular/forms';
     MatPaginatorModule,
     FormsModule,
     MatDialogModule
+  ],
+  providers: [
+    CustomPaginatorIntl
   ]
 })
 export class GeneroModule { }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { Cidade } from 'src/app/models/cidade.model';
 import { CidadeService } from 'src/app/services/cidade.service';
 
@@ -10,6 +11,8 @@ import { CidadeService } from 'src/app/services/cidade.service';
 })
 export class CidadeListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  
   tableColumns: string[] = ['id-column', 'nome-column', 'estado-column', 'acoes-column'];
   cidades: Cidade[] = [];
 
@@ -18,12 +21,18 @@ export class CidadeListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private cidadeService: CidadeService) {}
+  constructor(private cidadeService: CidadeService, private customPaginatorIntl: CustomPaginatorIntl) {}
 
   ngOnInit(): void {
 
     this.carregarCidades();
     this.carregarTotalRegistros();
+  }
+
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
   }
 
   carregarCidades() {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, signal } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { Estado } from 'src/app/models/estado.model';
 import { EstadoService } from 'src/app/services/estado.service';
 
@@ -10,6 +11,8 @@ import { EstadoService } from 'src/app/services/estado.service';
 })
 export class EstadoListComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  
   tableColumns: string[] = ['id-column', 'nome-column', 'sigla-column', 'acoes-column'];
   estados: Estado[] = [];
 
@@ -18,8 +21,14 @@ export class EstadoListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private estadoService: EstadoService) {}
+  constructor(private estadoService: EstadoService, private customPaginatorIntl: CustomPaginatorIntl) {}
 
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
+  }
+  
   ngOnInit(): void {
 
     this.carregarEstados();
