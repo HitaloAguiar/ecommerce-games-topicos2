@@ -89,6 +89,7 @@ INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('José Alen
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Aguiar', '89114182345', 'joao_aguia@gmail.com', 'Joao123', 'senha', 'ADMIN');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Luísa Soares', '19429301284', 'luisa1263@hotmail.com', 'B1az3', 'luisa789', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '92874291092', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('hitalo', '1111111111', 'hitalo@gmail.com','hitalo','TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'ADMIN');
 
 INSERT INTO telefone (numero, id_usuario) VALUES ('(011) 98456-7812', 1);
 INSERT INTO telefone (numero, id_usuario) VALUES ('(061) 99901-5842', 1);

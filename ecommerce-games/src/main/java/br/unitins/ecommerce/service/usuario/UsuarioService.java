@@ -22,6 +22,8 @@ public interface UsuarioService {
 
     List<UsuarioResponseDTO> getByNome(String nome, int page, int pageSize);
 
+    public UsuarioResponseDTO findByLoginAndSenha(String login, String senha);
+    
     Long count();
 
     Long countByNome(String nome);

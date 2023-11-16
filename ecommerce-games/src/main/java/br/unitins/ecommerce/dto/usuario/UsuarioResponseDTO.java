@@ -19,4 +19,8 @@ public record UsuarioResponseDTO(
 
         this(usuario.getId(), usuario.getNome(), usuario.getCpf(), usuario.getEmail(), usuario.getLogin(), usuario.getSenha(), perfil != null? perfil : usuario.getPerfil().getLabel(), usuario.getTelefones().stream().map(telefone -> telefone.getNumero()).toList());
     }
+
+    public static UsuarioResponseDTO valueOf(Usuario usuario) {
+        return null;
+    }
 }
