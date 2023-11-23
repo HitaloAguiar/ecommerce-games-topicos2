@@ -1,11 +1,15 @@
 package br.unitins.ecommerce.resource;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
+import br.unitins.ecommerce.form.GameImageForm;
 import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
@@ -14,6 +18,7 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -122,6 +127,21 @@ public class GameResource {
         ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
         response.header("Content-Disposition", "attachment;filename="+nomeImagem);
         return response.build();
+    }
+
+    @PATCH
+    @Path("/image/upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response salvarImagem(@MultipartForm GameImageForm form) {
+
+        try {
+            fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
+            return Response.noContent().build();
+        } catch (IOException e) {
+            Result result = new Result(e.getMessage());
+            return Response.status(Status.CONFLICT).entity(result).build();
+        }
+
     }
 
     @GET
