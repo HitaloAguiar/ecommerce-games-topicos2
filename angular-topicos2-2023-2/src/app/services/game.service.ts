@@ -59,4 +59,13 @@ export class GameService {
   getUrlImagem(nomeImagem: string): string {
     return `${this.baseURL}/games/image/download/${nomeImagem}`;
   }
+
+  uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('nomeImagem', imagem.name);
+    formData.append('imagem', imagem, imagem.name);
+
+    return this.http.patch<Game>(`${this.baseURL}/games/image/upload`, formData);
+  }
 }

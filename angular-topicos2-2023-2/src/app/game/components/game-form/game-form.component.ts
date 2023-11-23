@@ -24,6 +24,10 @@ export class GameFormComponent {
   generos: Genero[] = [];
   plataformas: Plataforma[] = [];
 
+  fileName: string = '';
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
+
   constructor(private formBuilder: FormBuilder,
               private gameService: GameService,
               private router: Router,
@@ -44,6 +48,11 @@ export class GameFormComponent {
       generos:[(game && game.generos)? game.generos.map((genero) => genero.id) : '', Validators.required],
       plataformas:[(game && game.plataformas)? game.plataformas.map((plataforma) => plataforma.id) : '', Validators.required]
     })
+
+    if (game && game.nomeImagem) {
+      this.imagePreview = this.gameService.getUrlImagem(game.nomeImagem);
+      this.fileName = game.nomeImagem;
+    }
   }
 
   ngOnInit(): void {
@@ -67,7 +76,7 @@ export class GameFormComponent {
 
         this.gameService.save(novoGame).subscribe({
           next: (gameCadastrado) => {
-            this.router.navigateByUrl('/games/list');
+            this.uploadImage(gameCadastrado.id);
           },
           error: (errorResponse) => {
 
@@ -89,7 +98,7 @@ export class GameFormComponent {
 
         this.gameService.update(novoGame).subscribe({
           next: (gameCadastrado) => {
-            this.router.navigateByUrl('/games/list');
+            this.uploadImage(gameCadastrado.id);
           },
           error: (errorResponse) => {
 
@@ -113,5 +122,36 @@ export class GameFormComponent {
   getErrorMessage(fieldName: string): string {
     const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
     return error ? error.message : '';
+  }
+
+  carregarImagemSelecionada(event: any) {
+
+    this.selectedFile = event.target.files[0];
+
+    if (this.selectedFile) {
+      this.fileName = this.selectedFile.name;
+      // carregando image preview
+      const reader = new FileReader();
+      reader.onload = e => this.imagePreview = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+  private uploadImage(faixaId: number) {
+
+    if (this.selectedFile) {
+      this.gameService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/games/list');
+        },
+        error: err => {
+          console.log('Erro ao fazer o upload da imagem');
+          // tratar o erro
+        }
+      })
+    } else {
+      this.router.navigateByUrl('/games/list');
+    }
   }
 }
