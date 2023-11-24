@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.events.Event;
+import com.itextpdf.kernel.events.IEventHandler;
 import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -262,5 +263,25 @@ public class GameImplService implements GameService {
         Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
         responseBuilder.header("Content-Disposition", "attachment; filename=relatorio.pdf");
         return responseBuilder.build();
+    }
+
+    class HeaderFooterHandler implements IEventHandler {
+        public void handleEvent(Event event) {
+            PdfDocumentEvent docEvent = (PdfDocumentEvent) event;
+            PdfDocument pdf = docEvent.getDocument();
+            PdfPage page = docEvent.getPage();
+            int pageNum = pdf.getPageNumber(page);
+
+            PdfCanvas canvas = new PdfCanvas(page.newContentStreamBefore(), page.getResources(), pdf);
+            canvas.beginText().setFontAndSize(pdf.getDefaultFont(), 12);
+
+            canvas.moveText(34, 20).showText("Página " + pageNum);
+
+            String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss"));
+            canvas.moveText(500 - 80, 0).showText(dataHora);
+
+            canvas.endText();
+
+        }
     }
 }
