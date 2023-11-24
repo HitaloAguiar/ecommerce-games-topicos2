@@ -184,45 +184,10 @@ public class GameResource {
         return gameService.countByNome(nome);
     }
 
-     @GET
+    @GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    @Path("/application/relatorio")
-    public Response gerarRelatorio() throws IOException {
-        // Cria um documento PDF
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PdfWriter writer = new PdfWriter(baos);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document doc = new Document(pdf, PageSize.A4);
-
-        // Adiciona um título ao relatório
-        Paragraph title = new Paragraph("Relatório de Produtos");
-        title.setTextAlignment(TextAlignment.CENTER);
-        doc.add(title);
-
-        // Cria uma tabela com os produtos
-       Table table = new Table(new float[]{1,2,1})
-        .setWidth(UnitValue.createPercentValue(100))
-        .setMargin(10);
-        table.addCell("ID");
-        table.addCell("Nome");
-        table.addCell("Preço");
-
-        // Adiciona uma linha para cada produto
-        List<Game> games = gameRepository.findAll().page(0, 20).list();
-        for (Produto produto : games) {
-            table.addCell(String.valueOf(produto.getId()));
-            table.addCell(produto.getNome());
-            table.addCell("R$ " + produto.getPreco());
-        }
-
-        // Adiciona a tabela ao documento
-        doc.add(table);
-
-        // Fecha o documento
-        doc.close();
-
-        Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
-        responseBuilder.header("Content-Disposition", "attachment; filename=relatorio.pdf");
-        return responseBuilder.build();
+    @Path("/relatorio")
+    public Response gerarRelatorio(){
+       return gameService.gerarRelatorio();
     }
 }
