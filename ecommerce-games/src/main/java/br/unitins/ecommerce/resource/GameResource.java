@@ -6,10 +6,22 @@ import java.util.List;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+
+import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.layout.Document;
 import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
+import br.unitins.ecommerce.model.produto.Game;
+import br.unitins.ecommerce.model.produto.Produto;
+import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
@@ -41,6 +53,9 @@ public class GameResource {
     @Inject
     FileService fileService;
 
+    @Inject
+    GameRepository gameRepository;
+    
     private static final Logger LOG = Logger.getLogger(GameResource.class);
 
     @GET
@@ -166,5 +181,45 @@ public class GameResource {
     public long count(@PathParam("nome") String nome){
 
         return gameService.countByNome(nome);
+    }
+
+     @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Path("/application/relatorio")
+    public Response gerarRelatorio() throws IOException {
+        // Cria um documento PDF
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(baos);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document doc = new Document(pdf, PageSize.A4);
+
+        // Adiciona um título ao relatório
+        Paragraph title = new Paragraph("Relatório de Produtos");
+        title.setTextAlignment(TextAlignment.CENTER);
+        doc.add(title);
+
+        // Cria uma tabela com os produtos
+        Table table = new Table(3);
+        table.addCell("ID");
+        table.addCell("Nome");
+        table.addCell("Preço");
+
+        // Adiciona uma linha para cada produto
+        List<Game> games = gameRepository.findAll().page(0, 20).list();
+        for (Produto produto : games) {
+            table.addCell(String.valueOf(produto.getId()));
+            table.addCell(produto.getNome());
+            table.addCell("R$ " + produto.getPreco());
+        }
+
+        // Adiciona a tabela ao documento
+        doc.add(table);
+
+        // Fecha o documento
+        doc.close();
+
+        Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
+        responseBuilder.header("Content-Disposition", "attachment; filename=relatorio.pdf");
+        return responseBuilder.build();
     }
 }
