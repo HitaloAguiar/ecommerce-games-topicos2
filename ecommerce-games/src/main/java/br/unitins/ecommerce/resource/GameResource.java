@@ -91,10 +91,11 @@ public class GameResource {
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GameDTO gameDTO) {
         
-        gameService.update(id, gameDTO);
+        GameResponseDTO game = gameService.update(id, gameDTO);
         LOG.infof("Game (%d) atualizado com sucesso.", id);
         return Response
-                .status(Status.NO_CONTENT) // 204
+                .status(Status.CREATED)
+                .entity(game) // 204
                 .build();
     }
 
@@ -122,7 +123,7 @@ public class GameResource {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response download(@PathParam("nomeImagem") String nomeImagem) {
 
-        LOG.info("pegou a imagem");
+        LOG.info("pego a imagem");
 
         ResponseBuilder response = Response.ok(fileService.download(nomeImagem));
         response.header("Content-Disposition", "attachment;filename="+nomeImagem);
