@@ -200,7 +200,9 @@ public class GameResource {
         doc.add(title);
 
         // Cria uma tabela com os produtos
-        Table table = new Table(3);
+       Table table = new Table(new float[]{1,2,1})
+        .setWidth(UnitValue.createPercentValue(100))
+        .setMargin(10);
         table.addCell("ID");
         table.addCell("Nome");
         table.addCell("Preço");
