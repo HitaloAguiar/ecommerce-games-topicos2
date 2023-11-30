@@ -243,6 +243,10 @@ public class GameImplService implements GameService {
         title.setTextAlignment(TextAlignment.CENTER);
         doc.add(title);
 
+         // Adiciona cabeçalho
+        HeaderFooterHandler headerFooterHandler = new HeaderFooterHandler();
+        pdf.addEventHandler(PdfDocumentEvent.END_PAGE, headerFooterHandler);
+
         // Cria uma tabela com os produtos
         Table table = new Table(new float[] { 1, 2, 1 })
                 .setWidth(UnitValue.createPercentValue(100))
