@@ -5,6 +5,7 @@ import java.util.List;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import jakarta.validation.Valid;
+import jakarta.ws.rs.core.Response;
 
 public interface GameService {
     
@@ -27,4 +28,6 @@ public interface GameService {
     Long count();
 
     Long countByNome(String nome);
+
+    Response gerarRelatorio();
 }

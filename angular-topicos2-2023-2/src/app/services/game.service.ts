@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Game } from '../models/game.model';
 
@@ -8,9 +8,9 @@ import { Game } from '../models/game.model';
 })
 export class GameService {
 
-  private baseURL: string =  'http://localhost:8080';
+  private baseURL: string = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   findAll(): Observable<Game[]> {
     return this.http.get<Game[]>(`${this.baseURL}/games`);
@@ -21,7 +21,7 @@ export class GameService {
       page: pagina.toString(),
       pageSize: tamanhoPagina.toString()
     }
-    return this.http.get<Game[]>(`${this.baseURL}/games/paginado`, {params});
+    return this.http.get<Game[]>(`${this.baseURL}/games/paginado`, { params });
   }
 
   findById(id: string): Observable<Game> {
@@ -45,7 +45,7 @@ export class GameService {
       page: pagina.toString(),
       pageSize: tamanhoPagina.toString()
     }
-    return this.http.get<Game[]>(`${this.baseURL}/games/search/${nome}`, {params});
+    return this.http.get<Game[]>(`${this.baseURL}/games/search/${nome}`, { params });
   }
 
   count(): Observable<number> {
@@ -68,4 +68,10 @@ export class GameService {
 
     return this.http.patch<Game>(`${this.baseURL}/games/image/upload`, formData);
   }
+
+  gerarRelatorio(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/games/relatorio`);
+  }
+  
+  
 }

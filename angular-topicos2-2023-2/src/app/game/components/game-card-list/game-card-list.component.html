@@ -9,6 +9,9 @@
             (click)="aplicarFiltro()">
       <mat-icon>search</mat-icon>
     </button>
+    <button mat-icon-button color="primary" class="search-button" (click)="gerarRelatorio()">
+      <mat-icon>description</mat-icon>
+    </button>    
   </div>
 </div>
 
@@ -34,7 +37,7 @@
 
 </div>
 <div class="mat-elevation-z8">
-<mat-paginator [pageSizeOptions]="[2, 4, 8, 16]" [pageSize]="pageSize" [length]="totalRegistros"
+<mat-paginator [pageSizeOptions]="[4, 8, 16, 20]" [pageSize]="pageSize" [length]="totalRegistros"
 (page)="paginar($event)">
 </mat-paginator>
 </div>

@@ -24,7 +24,7 @@ export class GameCardListComponent implements OnInit {
   games: Game[] = [];
 
   totalRegistros = 0;
-  pageSize = 2;
+  pageSize = 4;
   pagina = 0;
   filtro: string = "";
 
@@ -55,6 +55,19 @@ export class GameCardListComponent implements OnInit {
         this.carregarCards();
       });
     }
+  }
+
+  gerarRelatorio() {
+    this.gameService.gerarRelatorio().subscribe(
+      (response: any) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      (error) => {
+        console.error('Erro ao gerar relatório', error);
+      }
+    );
   }
 
   carregarTotalRegistros() {

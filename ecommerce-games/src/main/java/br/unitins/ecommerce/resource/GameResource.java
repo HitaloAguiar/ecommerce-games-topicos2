@@ -6,21 +6,10 @@ import java.util.List;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.properties.TextAlignment;
-
-import com.itextpdf.io.source.ByteArrayOutputStream;
-import com.itextpdf.layout.Document;
 import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
-import br.unitins.ecommerce.model.produto.Game;
-import br.unitins.ecommerce.model.produto.Produto;
 import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
@@ -188,6 +177,8 @@ public class GameResource {
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Path("/relatorio")
     public Response gerarRelatorio(){
+        LOG.info("Baixando relatório de games");
+        LOG.debug("ERRO DE DEBUG.");
        return gameService.gerarRelatorio();
     }
 }

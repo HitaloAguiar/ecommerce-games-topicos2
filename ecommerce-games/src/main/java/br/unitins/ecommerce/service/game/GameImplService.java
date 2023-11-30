@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.events.Event;
 import com.itextpdf.kernel.events.IEventHandler;
 import com.itextpdf.kernel.events.PdfDocumentEvent;
@@ -15,8 +16,11 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
@@ -65,19 +69,20 @@ public class GameImplService implements GameService {
 
     @Override
     public List<GameResponseDTO> getAll() {
-        
+
         return gameRepository.findAll(sort).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
     }
 
     @Override
     public List<GameResponseDTO> getAll(int page, int pageSize) {
-        
-        return gameRepository.findAll(sort).page(page, pageSize).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
+
+        return gameRepository.findAll(sort).page(page, pageSize).stream()
+                .map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
     }
 
     @Override
     public GameResponseDTO getById(Long id) {
-        
+
         Game game = gameRepository.findById(id);
 
         if (game == null)
@@ -89,11 +94,11 @@ public class GameImplService implements GameService {
     @Override
     @Transactional
     public GameResponseDTO insert(@Valid GameDTO gameDTO) throws ConstraintViolationException {
-        
+
         validar(gameDTO);
 
         Game game = new Game();
-        
+
         game.setNome(gameDTO.nome());
 
         game.setDescricao(gameDTO.descricao());
@@ -105,12 +110,12 @@ public class GameImplService implements GameService {
         game.setDeveloper(developerRepository.findById(gameDTO.developer()));
 
         for (Long genero : gameDTO.generos()) {
-            
+
             game.plusGeneros(generoRepository.findById(genero));
         }
 
         for (Long plataforma : gameDTO.plataformas()) {
-            
+
             game.plusPlataformas(plataformaRepository.findById(plataforma));
         }
 
@@ -122,7 +127,7 @@ public class GameImplService implements GameService {
     @Override
     @Transactional
     public GameResponseDTO update(Long id, @Valid GameDTO gameDTO) throws ConstraintViolationException {
-        
+
         validar(gameDTO);
 
         int tamanhoArray;
@@ -131,7 +136,7 @@ public class GameImplService implements GameService {
 
         if (game == null)
             throw new NotFoundException("Número fora das opções disponíveis");
-        
+
         game.setNome(gameDTO.nome());
 
         game.setDescricao(gameDTO.descricao());
@@ -145,38 +150,38 @@ public class GameImplService implements GameService {
         tamanhoArray = game.getGeneros().size();
 
         while (tamanhoArray != 0) {
-            
+
             game.getGeneros().remove(0);
 
             tamanhoArray--;
         }
 
         for (Long genero : gameDTO.generos()) {
-            
+
             game.plusGeneros(generoRepository.findById(genero));
         }
 
         tamanhoArray = game.getPlataformas().size();
 
         while (tamanhoArray != 0) {
-            
+
             game.getPlataformas().remove(0);
 
             tamanhoArray--;
         }
 
         for (Long plataforma : gameDTO.plataformas()) {
-            
+
             game.plusPlataformas(plataformaRepository.findById(plataforma));
         }
-        
+
         return new GameResponseDTO(game);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        
+
         if (id == null)
             throw new IllegalArgumentException("Número inválido");
 
@@ -192,7 +197,7 @@ public class GameImplService implements GameService {
     @Override
     @Transactional
     public GameResponseDTO salvarImage(Long id, String nomeImagem) {
-        
+
         Game entity = gameRepository.findById(id);
         entity.setNomeImagem(nomeImagem);
 
@@ -201,8 +206,9 @@ public class GameImplService implements GameService {
 
     @Override
     public List<GameResponseDTO> getByNome(String nome, int page, int pageSize) {
-        
-        return gameRepository.findByNome(nome, sort).page(page, pageSize).stream().map(game -> new GameResponseDTO(game, formatterGetAll)).toList();        
+
+        return gameRepository.findByNome(nome, sort).page(page, pageSize).stream()
+                .map(game -> new GameResponseDTO(game, formatterGetAll)).toList();
     }
 
     @Override
@@ -216,7 +222,7 @@ public class GameImplService implements GameService {
 
         return gameRepository.findByNome(nome, sort).count();
     }
- 
+
     private void validar(GameDTO gameDTO) throws ConstraintViolationException {
 
         Set<ConstraintViolation<GameDTO>> violations = validator.validate(gameDTO);
@@ -225,7 +231,6 @@ public class GameImplService implements GameService {
             throw new ConstraintViolationException(violations);
     }
 
-    @Override
     public Response gerarRelatorio() {
         // Cria um documento PDF
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -254,6 +259,17 @@ public class GameImplService implements GameService {
             table.addCell("R$ " + produto.getPreco());
         }
 
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String dataHoraFormatada = agora.format(formatter);
+
+        Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
+                .setFontColor(new DeviceRgb(128, 128, 128)) // Cor cinza
+                .setFontSize(12f)
+                .setTextAlignment(TextAlignment.CENTER);
+
+        doc.add(dataHora);
+
         // Adiciona a tabela ao documento
         doc.add(table);
 
@@ -261,7 +277,8 @@ public class GameImplService implements GameService {
         doc.close();
 
         Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
-        responseBuilder.header("Content-Disposition", "attachment; filename=relatorio.pdf");
+        responseBuilder.header("Content-Disposition", "attachment; filename=relatorio-produtos.pdf");
+        responseBuilder.header("Content-Type", "application/pdf");
         return responseBuilder.build();
     }
 
@@ -284,4 +301,6 @@ public class GameImplService implements GameService {
 
         }
     }
+
+   
 }

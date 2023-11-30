@@ -17,7 +17,7 @@ export class GameListComponent implements OnInit {
   games: Game[] = [];
 
   totalRegistros = 0;
-  pageSize = 2;
+  pageSize = 4;
   pagina = 0;
   filtro: string = "";
 
@@ -48,6 +48,22 @@ export class GameListComponent implements OnInit {
         this.games = data;
       });
     }
+  }
+
+  gerarRelatorio() {
+    this.gameService.gerarRelatorio().subscribe(
+      (response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'relatorio-produtos.pdf';
+        link.click();
+      },
+      (error) => {
+        console.error('Erro ao gerar relatório:', error);
+        // Adicione lógica de tratamento de erro conforme necessário
+      }
+    );
   }
 
   carregarTotalRegistros() {
