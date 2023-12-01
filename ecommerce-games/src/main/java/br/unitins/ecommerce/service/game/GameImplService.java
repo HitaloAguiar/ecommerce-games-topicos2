@@ -16,11 +16,8 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.element.Text;
-import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
@@ -231,6 +228,7 @@ public class GameImplService implements GameService {
             throw new ConstraintViolationException(violations);
     }
 
+    @Override
     public Response gerarRelatorio() {
         // Cria um documento PDF
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -298,7 +296,7 @@ public class GameImplService implements GameService {
 
             canvas.moveText(34, 20).showText("Página " + pageNum);
 
-            String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss"));
+            String dataHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm:ss"));
             canvas.moveText(500 - 80, 0).showText(dataHora);
 
             canvas.endText();
