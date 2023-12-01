@@ -54,7 +54,7 @@ INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
 
 INSERT INTO produto (nome, descricao, preco) VALUES ('Super Mario Odyssey', 'descricao exemplo', 289.90);
 INSERT INTO produto (nome, descricao, preco) VALUES ('God of War Ragnarok', 'descricao exemplo', 193.51);
-INSERT INTO produto (nome, descricao, preco) VALUES ('The Legend of Zelda: Tears of the Kingdom', 'descricao exemplo', 306.90);
+INSERT INTO produto (nome, descricao, preco) VALUES ('Zelda: Tears of the Kingdom', 'descricao exemplo', 306.90);
 INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'descricao exemplo', 150.15);
 INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'descricao exemplo', 160.90);
 
