@@ -50,20 +50,25 @@ export class GameListComponent implements OnInit {
     }
   }
 
-  gerarRelatorio() {
-    this.gameService.gerarRelatorio().subscribe(
-      (response) => {
-        const blob = new Blob([response], { type: 'application/pdf' });
+  gerarRelatorio(): void {
+    this.gameService.gerarRelatorio().subscribe({
+      next: (data: any) => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        // Simula um clique em um link invisível para iniciar o download
         const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'relatorio-produtos.pdf';
-        link.click();
+        link.href = url;
+        link.download = 'relatorio.pdf';
+        link.dispatchEvent(new MouseEvent('click'));
+
+        // Libera a URL do objeto Blob
+        window.URL.revokeObjectURL(url);
       },
-      (error) => {
-        console.error('Erro ao gerar relatório:', error);
-        // Adicione lógica de tratamento de erro conforme necessário
+      error: (error) => {
+        console.error('Erro ao baixar o relatório', error);
       }
-    );
+    });
   }
 
   carregarTotalRegistros() {
