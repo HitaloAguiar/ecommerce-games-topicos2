@@ -70,8 +70,18 @@ export class GameService {
   }
 
   gerarRelatorio(): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}/games/relatorio`);
+    const url = `${this.baseURL}/games/relatorio`;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', // Change Content-Type to application/json
+      'Accept': 'application/pdf'
+    });
+
+    const options = {
+      headers: headers,
+      responseType: 'blob' as 'json'
+    };
+
+    return this.http.get(url, options);
   }
-  
-  
 }
