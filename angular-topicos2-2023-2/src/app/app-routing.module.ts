@@ -6,16 +6,17 @@ import { EstadoFormComponent } from './estado/components/estado-form/estado-form
 import { UserTemplateComponent } from './shared/components/user-template/user-template.component';
 
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
   {path: 'admin', component: AdminTemplateComponent, },
-  {path: 'user',component: UserTemplateComponent,children: [{ path: 'login', component: LoginComponent },
+  {path: 'user',component: UserTemplateComponent,children: [
         // { path: 'register', component: RegisterComponent },
       ],
     },
     //{ path: '', redirectTo: '/user', pathMatch: 'full' }, // Rota padrão
     // { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
-  
-  
- 
+
+
+
   {path: 'estados', loadChildren: () => import('./estado/estado.module').then(m => m.EstadoModule)},
   {path: 'cidades', loadChildren: () => import('./cidade/cidade.module').then(m => m.CidadeModule)},
   {path: 'generos', loadChildren: () => import('./genero/genero.module').then(m => m.GeneroModule)},

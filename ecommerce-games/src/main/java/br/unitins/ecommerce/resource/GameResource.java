@@ -70,7 +70,7 @@ public class GameResource {
     }
 
     @GET
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/{id}")
     public GameResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando Game por ID: " + id);
@@ -79,7 +79,7 @@ public class GameResource {
     }
 
     @POST
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     public Response insert(GameDTO gameDTO) {
         LOG.infof("Inserindo uma Game: %s", gameDTO.nome());
 
@@ -91,7 +91,7 @@ public class GameResource {
     }
 
     @PUT
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GameDTO gameDTO) {
         
@@ -104,7 +104,7 @@ public class GameResource {
     }
 
     @DELETE
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) throws IllegalArgumentException, NotFoundException {
 
@@ -136,7 +136,7 @@ public class GameResource {
     }
 
     @PATCH
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm GameImageForm form) {
@@ -152,7 +152,7 @@ public class GameResource {
     }
 
     @GET
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/search/{nome}")
     public List<GameResponseDTO> search(
             @PathParam("nome") String nome,
@@ -163,7 +163,7 @@ public class GameResource {
     }
 
     @GET
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/count")
     public long count(){
 
@@ -171,7 +171,7 @@ public class GameResource {
     }
 
     @GET
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Path("/search/{nome}/count")
     public long count(@PathParam("nome") String nome){
 
@@ -179,7 +179,7 @@ public class GameResource {
     }
 
     @GET
-    @RolesAllowed("Admin")
+    // @RolesAllowed("Admin")
     @Produces("application/pdf")
     @Path("/relatorio")
     public Response gerarRelatorio(){
