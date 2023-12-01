@@ -13,6 +13,7 @@ import br.unitins.ecommerce.form.GameImageForm;
 import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -73,6 +74,7 @@ public class GameResource {
     }
 
     @GET
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public GameResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando Game por ID: " + id);
@@ -81,6 +83,7 @@ public class GameResource {
     }
 
     @POST
+    @RolesAllowed("Admin")
     public Response insert(GameDTO gameDTO) {
         LOG.infof("Inserindo uma Game: %s", gameDTO.nome());
 
@@ -92,6 +95,7 @@ public class GameResource {
     }
 
     @PUT
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GameDTO gameDTO) {
         
@@ -104,6 +108,7 @@ public class GameResource {
     }
 
     @DELETE
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) throws IllegalArgumentException, NotFoundException {
 
@@ -135,6 +140,7 @@ public class GameResource {
     }
 
     @PATCH
+    @RolesAllowed("Admin")
     @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm GameImageForm form) {
@@ -150,6 +156,7 @@ public class GameResource {
     }
 
     @GET
+    @RolesAllowed("Admin")
     @Path("/search/{nome}")
     public List<GameResponseDTO> search(
             @PathParam("nome") String nome,
@@ -160,6 +167,7 @@ public class GameResource {
     }
 
     @GET
+    @RolesAllowed("Admin")
     @Path("/count")
     public long count(){
 
@@ -167,6 +175,7 @@ public class GameResource {
     }
 
     @GET
+    @RolesAllowed("Admin")
     @Path("/search/{nome}/count")
     public long count(@PathParam("nome") String nome){
 
@@ -174,6 +183,7 @@ public class GameResource {
     }
 
     @GET
+    @RolesAllowed("Admin")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Path("/relatorio")
     public Response gerarRelatorio(){

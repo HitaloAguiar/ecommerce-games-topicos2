@@ -29,7 +29,6 @@ public class AuthResource {
     JwtService jwtService;
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
     public Response login(AuthUsuarioDTO authDTO) {
         String hash = hashService.getHashSenha(authDTO.senha());
 
@@ -39,7 +38,7 @@ public class AuthResource {
             return Response.status(Status.NOT_FOUND)
                 .entity("Usuario não encontrado").build();
         } 
-        return Response.ok()
+        return Response.ok(usuario)
             .header("Authorization", jwtService.generateJwt(usuario))
             .build();
 
