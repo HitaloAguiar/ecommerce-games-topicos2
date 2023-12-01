@@ -79,7 +79,7 @@ export class GameService {
 
     const options = {
       headers: headers,
-      responseType: 'blob' as 'json'
+      responseType: 'arraybuffer' as 'json'
     };
 
     return this.http.get(url, options);

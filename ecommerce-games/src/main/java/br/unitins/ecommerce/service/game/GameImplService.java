@@ -16,8 +16,11 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 
@@ -38,7 +41,6 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.ws.rs.NotFoundException;
-import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
 public class GameImplService implements GameService {
@@ -229,60 +231,133 @@ public class GameImplService implements GameService {
     }
 
     @Override
-    public Response gerarRelatorio() {
-        // Cria um documento PDF
+    public byte[] gerarPdf(List<Game> games) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PdfWriter writer = new PdfWriter(baos);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document doc = new Document(pdf, PageSize.A4);
 
-        // Adiciona um título ao relatório
-        Paragraph title = new Paragraph("Relatório de Produtos");
-        title.setTextAlignment(TextAlignment.CENTER);
-        doc.add(title);
+        try (PdfWriter pdfWriter = new PdfWriter(baos);
+                PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+                Document document = new Document(pdfDocument, PageSize.A4)) {
 
-         // Adiciona cabeçalho
-        HeaderFooterHandler headerFooterHandler = new HeaderFooterHandler();
-        pdf.addEventHandler(PdfDocumentEvent.END_PAGE, headerFooterHandler);
+            // Adiciona um título ao relatório
+            Paragraph title = new Paragraph("Relatório de Games")
+                    .setFontColor(new DeviceRgb(0, 0, 0)) // Cor preta
+                    .setFontSize(18f)
+                    .setBold()
+                    .setTextAlignment(TextAlignment.CENTER);
 
-        // Cria uma tabela com os produtos
-        Table table = new Table(new float[] { 1, 2, 1 })
-                .setWidth(UnitValue.createPercentValue(100))
-                .setMargin(10);
-        table.addCell("ID");
-        table.addCell("Nome");
-        table.addCell("Preço");
+            document.add(title);
+            LocalDateTime agora = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            String dataHoraFormatada = agora.format(formatter);
 
-        // Adiciona uma linha para cada produto
-        List<Game> games = gameRepository.findAll().page(0, 20).list();
-        for (Produto produto : games) {
-            table.addCell(String.valueOf(produto.getId()));
-            table.addCell(produto.getNome());
-            table.addCell("R$ " + produto.getPreco());
+            Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
+                    .setFontColor(new DeviceRgb(128, 128, 128)) // Cor cinza
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.CENTER);
+
+            document.add(dataHora);
+
+            Table table = new Table(3)
+                    .setHorizontalAlignment(HorizontalAlignment.CENTER).setWidth(UnitValue.createPercentValue(100)); // 3
+                                                                                                                     // colunas
+                                                                                                                     // para
+                                                                                                                     // ID,
+                                                                                                                     // Nome
+                                                                                                                     // e
+                                                                                                                     // Preço
+
+            for (Game game : games) {
+                Text idText = new Text("ID: " + game.getId())
+                        .setFontSize(12f)
+                        .setBold();
+
+                Text nomeText = new Text("Nome: " + game.getNome())
+
+                        .setFontSize(14f)
+                        .setItalic();
+
+                Text precoText = new Text("Preço: " + game.getPreco())
+
+                        .setFontSize(16f);
+
+                // Adicione as células à tabela
+                table.addCell(new Cell().add(new Paragraph().add(idText)));
+                table.addCell(new Cell().add(new Paragraph().add(nomeText)));
+                table.addCell(new Cell().add(new Paragraph().add(precoText)));
+            }
+
+            // Adicione a tabela ao documento
+            document.add(table);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        LocalDateTime agora = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        String dataHoraFormatada = agora.format(formatter);
-
-        Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
-                .setFontColor(new DeviceRgb(128, 128, 128)) // Cor cinza
-                .setFontSize(12f)
-                .setTextAlignment(TextAlignment.CENTER);
-
-        doc.add(dataHora);
-
-        // Adiciona a tabela ao documento
-        doc.add(table);
-
-        // Fecha o documento
-        doc.close();
-
-        Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
-        responseBuilder.header("Content-Disposition", "attachment; filename=relatorio-produtos.pdf");
-        responseBuilder.header("Content-Type", "application/pdf");
-        return responseBuilder.build();
+        return baos.toByteArray();
     }
+
+    @Override
+
+    public byte[] criarRelatorioGames(String filtro) {
+        List<Game> games = gameRepository.findAll().list();
+        return gerarPdf(games);
+    }
+
+    // @Override
+    // public Response gerarRelatorio() {
+    //     // Cria um documento PDF
+    //     ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    //     PdfWriter writer = new PdfWriter(baos);
+    //     PdfDocument pdf = new PdfDocument(writer);
+    //     Document doc = new Document(pdf, PageSize.A4);
+
+    //     // Adiciona um título ao relatório
+    //     Paragraph title = new Paragraph("Relatório de Produtos");
+    //     title.setTextAlignment(TextAlignment.CENTER);
+    //     doc.add(title);
+
+    //      // Adiciona cabeçalho
+    //     HeaderFooterHandler headerFooterHandler = new HeaderFooterHandler();
+    //     pdf.addEventHandler(PdfDocumentEvent.END_PAGE, headerFooterHandler);
+
+    //     // Cria uma tabela com os produtos
+    //     Table table = new Table(new float[] { 1, 2, 1 })
+    //             .setWidth(UnitValue.createPercentValue(100))
+    //             .setMargin(10);
+    //     table.addCell("ID");
+    //     table.addCell("Nome");
+    //     table.addCell("Preço");
+
+    //     // Adiciona uma linha para cada produto
+    //     List<Game> games = gameRepository.findAll().page(0, 20).list();
+    //     for (Produto produto : games) {
+    //         table.addCell(String.valueOf(produto.getId()));
+    //         table.addCell(produto.getNome());
+    //         table.addCell("R$ " + produto.getPreco());
+    //     }
+
+    //     LocalDateTime agora = LocalDateTime.now();
+    //     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    //     String dataHoraFormatada = agora.format(formatter);
+
+    //     Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
+    //             .setFontColor(new DeviceRgb(128, 128, 128)) // Cor cinza
+    //             .setFontSize(12f)
+    //             .setTextAlignment(TextAlignment.CENTER);
+
+    //     doc.add(dataHora);
+
+    //     // Adiciona a tabela ao documento
+    //     doc.add(table);
+
+    //     // Fecha o documento
+    //     doc.close();
+
+    //     Response.ResponseBuilder responseBuilder = Response.ok(baos.toByteArray());
+    //     responseBuilder.header("Content-Disposition", "attachment; filename=relatorio-produtos.pdf");
+    //     responseBuilder.header("Content-Type", "application/pdf");
+    //     return responseBuilder.build();
+    // }
 
     class HeaderFooterHandler implements IEventHandler {
         public void handleEvent(Event event) {
@@ -304,5 +379,4 @@ public class GameImplService implements GameService {
         }
     }
 
-   
 }

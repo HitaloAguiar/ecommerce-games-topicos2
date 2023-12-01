@@ -10,7 +10,6 @@ import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.game.GameDTO;
 import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
-import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.game.GameService;
 import jakarta.inject.Inject;
@@ -41,9 +40,6 @@ public class GameResource {
 
     @Inject
     FileService fileService;
-
-    @Inject
-    GameRepository gameRepository;
     
     private static final Logger LOG = Logger.getLogger(GameResource.class);
 
@@ -174,11 +170,13 @@ public class GameResource {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Produces("application/pdf")
     @Path("/relatorio")
     public Response gerarRelatorio(){
         LOG.info("Baixando relatório de games");
         LOG.debug("ERRO DE DEBUG.");
-       return gameService.gerarRelatorio();
+
+        byte[] pdf = gameService.criarRelatorioGames("");
+        return Response.ok(pdf).header("Content-Disposition", "filename=attachment;relatorioGames.pdf").build();
     }
 }

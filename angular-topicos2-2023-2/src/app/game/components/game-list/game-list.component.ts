@@ -28,7 +28,7 @@ export class GameListComponent implements OnInit {
       this.paginator._intl = this.CustomPaginatorIntl; // Configuração da internacionalização
     }
   }
-  
+
   ngOnInit(): void {
 
     this.carregarGames();
