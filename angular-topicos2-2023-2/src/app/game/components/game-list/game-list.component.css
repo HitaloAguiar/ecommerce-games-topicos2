@@ -27,6 +27,8 @@
   width: 54px;
   height: 54px;
   align-self: flex-start; /* Alinhar o botão verticalmente ao topo */
+  background-color: rgb(115, 42, 183);
+  margin-right: 10px;
 }
 
 /* Estilos para o ícone de pesquisa */
