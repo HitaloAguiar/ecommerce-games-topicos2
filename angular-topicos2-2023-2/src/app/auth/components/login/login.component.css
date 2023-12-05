@@ -1,47 +1,64 @@
+/* Estilo para o body, definindo a imagem de fundo */
+body {
+  background-image: url('src/assets/icons/login.png'); /* ajuste o caminho conforme necessário */
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo para o container principal do formulário */
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(to right, #32108f, #1b1b1b);
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  .login-box {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
+/* Estilo para a caixa do formulário */
+.login-box {
+  background-color: rgba(255, 255, 255, 0.8); /* fundo branco com 80% de opacidade */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
 
-  .login-icon {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 20px;
-    display: block;
-  }
+/* Estilo para o ícone de login */
+.login-icon {
+  width: 250px;
+  height: 150px;
+}
 
+/* Estilo para o título do formulário */
+.login-title {
+  margin-top: 10px;
+  font-size: 1.5em;
+  color: #333;
+}
 
+/* Estilo para os campos de entrada */
+.login-input {
+  width: 100%;
+  margin-top: 20px;
+}
 
-  .login-title {
-    font-size: 24px;
-    margin: 10px 0;
-    color: #333;
-  }
+/* Estilo para o botão de login */
+.login-button {
+  margin-top: 20px;
+}
 
-  .login-input {
-    width: 100%;
-    margin: 10px 0;
-  }
+/* Estilo para o link "Esqueceu a senha?" */
+.forgot-password {
+  margin-top: 10px;
+}
 
-  .login-button {
-    width: 100%;
-    margin-top: 20px;
-    background: #FF6636;
-    color: #fff;
-    transition: background 0.3s;
-  }
-
-  .login-button:hover {
-    background: #FF5722;
-  }
+/* Adicionando algum espaçamento entre os erros e os campos de entrada */
+.mat-error {
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: #ff0000;
+}

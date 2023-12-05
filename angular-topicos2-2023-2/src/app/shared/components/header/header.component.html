@@ -1,12 +1,14 @@
 <mat-toolbar color="primary">
   <button (click)="clickMenu()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>gamepad</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
+  <img class="icone" src="/assets/icons/slime.png" alt="logo">
   <span>Slime Games</span>
+
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="icon de usuario">
-    <mat-icon>person</mat-icon>
-  </button>
-  <span>Admin</span>
+   <button value="blah" mat-icon-button (click)="deslogar()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <span>{{usuarioLogado?.nome}}</span>
 </mat-toolbar>
 

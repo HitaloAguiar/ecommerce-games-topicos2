@@ -1,3 +1,13 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.demo-section + .demo-section {
+  margin-top: 16px;
+}
+
+/* Adicione este estilo para ajustar a imagem do logo */
+.icone {
+  height: 40px; /* Ajuste a altura conforme necessário */
+  margin-right: 10px; /* Ajuste a margem conforme necessário */
+}

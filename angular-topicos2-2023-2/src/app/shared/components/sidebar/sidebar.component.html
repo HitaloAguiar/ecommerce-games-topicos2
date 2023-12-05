@@ -1,8 +1,10 @@
 <mat-drawer-container class="container">
+
   <mat-drawer #drawer mode="side" opened>
       <mat-toolbar>
         <span>Menu</span>
       </mat-toolbar>
+      
       <mat-nav-list>
         <mat-list-item routerLink="/games/card-list">Home</mat-list-item>
         <mat-list-item routerLink="/usuarios/list"><mat-icon>person_add</mat-icon> Controle de Usuário</mat-list-item>
@@ -17,6 +19,7 @@
         <mat-list-item routerLink="/games/card-list"><mat-icon>shopping_cart</mat-icon> Cards de games</mat-list-item>
       </mat-nav-list>
   </mat-drawer>
+
   <mat-drawer-content>
     <router-outlet></router-outlet>
   </mat-drawer-content>
