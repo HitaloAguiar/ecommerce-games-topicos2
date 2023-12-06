@@ -1,6 +1,6 @@
 /* Estilo para o body, definindo a imagem de fundo */
 body {
-  background-image: url('src/assets/icons/login.png'); /* ajuste o caminho conforme necessário */
+  background-image: url('src/assets/icons/teladefundo.jpg'); /* ajuste o caminho conforme necessário */
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;

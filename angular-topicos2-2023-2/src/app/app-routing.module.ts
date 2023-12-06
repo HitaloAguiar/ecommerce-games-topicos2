@@ -75,7 +75,7 @@ const routes: Routes = [
       // { path: 'register', component: RegisterComponent },
     ],
   },
-  { path: '', redirectTo: '/user', pathMatch: 'full' }, // Rota padrão
+  { path: '', redirectTo: '/user/auth/login', pathMatch: 'full' }, // Rota padrão
   { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
 
 

@@ -9,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Ignora o interceptor para o endpoint do relatório
-    if (request.url.endsWith('/faixas/relatorio')) {
+    if (request.url.endsWith('/games/relatorio')) {
       return next.handle(request);
     }
 
