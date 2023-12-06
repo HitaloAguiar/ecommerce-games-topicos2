@@ -2,9 +2,12 @@ import { Game } from 'src/app/models/game.model';
 import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit, ViewChild, signal } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
+import { CarrinhoService } from 'src/app/services/carrinho.service';
 
 type Card = {
+  id: number;
   titulo: string;
   developer: string;
   preco: number;
@@ -28,17 +31,14 @@ export class GameCardListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private gameService: GameService, private customPaginatorIntl: CustomPaginatorIntl) {}
-
-  ngAfterViewInit() {
-    if (this.paginator) {
-      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
-    }
-  }
+  constructor(private gameService: GameService, private customPaginatorIntl: CustomPaginatorIntl, private carrinhoService: CarrinhoService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.carregarGames();
     this.carregarTotalRegistros();
+    if (this.paginator) {
+      this.paginator._intl = this.customPaginatorIntl; // Configuração da internacionalização
+    }
   }
 
   carregarGames() {
@@ -87,6 +87,7 @@ export class GameCardListComponent implements OnInit {
     const cards: Card[] = [];
     this.games.forEach(game => {
       cards.push({
+        id: game.id,
         titulo: game.nome,
         developer: game.developer.nome,
         preco: game.preco,
@@ -107,4 +108,22 @@ export class GameCardListComponent implements OnInit {
     this.carregarGames();
     this.carregarTotalRegistros();
   }
+  
+  adicionarAoCarrinho(card: Card): void {
+    this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
+    this.carrinhoService.adicionar({
+      id: 1,
+      nome: card.titulo,
+      preco: card.preco,
+      quantidade: 1,
+    });
+  }
+
+   showSnackbarTopPosition(content:any, action:any) {
+     this.snackBar.open(content, action, {
+       duration: 2000,
+       verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+     horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+     });
+   }
 }

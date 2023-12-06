@@ -6,9 +6,25 @@
   <span>Slime Games</span>
 
   <span class="example-spacer"></span>
-   <button value="blah" mat-icon-button (click)="deslogar()">
+
+  <ng-container *ngIf="usuarioLogado; else loginButton">
+    <!-- Botão de saída -->
+    <button value="blah" mat-icon-button class="mat-toolbar-content" (click)="deslogar()">
       <mat-icon>exit_to_app</mat-icon>
+      <span>{{usuarioLogado?.nome}}</span>
     </button>
-    <span>{{usuarioLogado?.nome}}</span>
+  </ng-container>
+  <span *ngIf="usuarioLogado">{{usuarioLogado?.nome}}</span>
+  
+  <ng-template #loginButton>
+    <!-- Botão de login -->
+    <button mat-icon-button class="mat-toolbar-content" routerLink="/user/auth/login">
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </ng-template>
+  
 </mat-toolbar>
+
+  
 

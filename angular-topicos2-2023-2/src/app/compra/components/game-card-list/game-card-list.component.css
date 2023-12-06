@@ -1,4 +1,10 @@
-/* Estilos para o contêiner principal */
+body {
+  background-color: #484747 ; /* ou qualquer outra cor de fundo desejada */
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}/* Estilos para o contêiner principal */
 .container-input {
   display: flex;
   flex-direction: column;

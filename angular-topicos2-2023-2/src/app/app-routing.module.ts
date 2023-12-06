@@ -66,16 +66,16 @@ const routes: Routes = [
         path: 'auth', loadChildren:
           () => import('./auth/auth.module')
             .then(m => m.AuthModule)
-      }
-      // {
-      //   path: 'compras', loadChildren:
-      //     () => import('./compra/compra.module')
-      //       .then(m => m.CompraModule)
-      // },
+      },
+       {
+        path: 'compras', loadChildren:
+          () => import('./compra/compra.module')
+            .then(m => m.CompraModule)
+      },
       // { path: 'register', component: RegisterComponent },
     ],
   },
-  { path: '', redirectTo: '/user/auth/login', pathMatch: 'full' }, // Rota padrão
+  { path: '', redirectTo: '/user/compras/produtos', pathMatch: 'full' }, // Rota padrão
   { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
 
 

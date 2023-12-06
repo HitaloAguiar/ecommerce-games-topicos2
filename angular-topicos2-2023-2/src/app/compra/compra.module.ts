@@ -23,10 +23,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import { MatListModule } from '@angular/material/list';
-import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { GameCardListComponent } from './components/game-card-list/game-card-list.component';
+import { Injectable } from '@angular/core';
+import { CustomPaginatorIntl } from '../models/custom-paginator-intl';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,12 @@ import { GameCardListComponent } from './components/game-card-list/game-card-lis
     MatNativeDateModule,
     MatListModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
+  ],
+  providers: [
+    CustomPaginatorIntl, // Adicione CustomPaginatorIntl à matriz de providers
+    // ... outros providers
   ]
 })
 export class CompraModule { }
