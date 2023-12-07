@@ -70,7 +70,7 @@ public class GameResource {
     }
 
     @GET
-    // @RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public GameResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
         LOG.info("Buscando Game por ID: " + id);
@@ -79,7 +79,7 @@ public class GameResource {
     }
 
     @POST
-    // @RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     public Response insert(GameDTO gameDTO) {
         LOG.infof("Inserindo uma Game: %s", gameDTO.nome());
 
@@ -91,7 +91,7 @@ public class GameResource {
     }
 
     @PUT
-    // @RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, GameDTO gameDTO) {
         
@@ -104,7 +104,7 @@ public class GameResource {
     }
 
     @DELETE
-    // @RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     @Path("/{id}")
     public Response delete(@PathParam("id") Long id) throws IllegalArgumentException, NotFoundException {
 

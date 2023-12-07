@@ -76,7 +76,7 @@ const routes: Routes = [
     ],
   },
   { path: '', redirectTo: '/user/compras/produtos', pathMatch: 'full' }, // Rota padrão
-  { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
+  // { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
 
 
 ];

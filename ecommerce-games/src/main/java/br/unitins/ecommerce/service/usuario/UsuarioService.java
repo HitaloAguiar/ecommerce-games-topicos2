@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
+import br.unitins.ecommerce.model.usuario.Usuario;
 import jakarta.validation.Valid;
 
 public interface UsuarioService {
@@ -22,7 +23,7 @@ public interface UsuarioService {
 
     List<UsuarioResponseDTO> getByNome(String nome, int page, int pageSize);
 
-    public UsuarioResponseDTO findByLoginAndSenha(String login, String senha);
+    public Usuario findByLoginAndSenha(String login, String senha);
     
     Long count();
 

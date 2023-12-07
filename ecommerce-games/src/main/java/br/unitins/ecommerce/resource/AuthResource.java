@@ -1,7 +1,9 @@
 package br.unitins.ecommerce.resource;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.ecommerce.dto.usuario.AuthUsuarioDTO;
-import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
+import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.service.HashService;
 import br.unitins.ecommerce.service.JwtService;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
@@ -28,20 +30,32 @@ public class AuthResource {
     @Inject
     JwtService jwtService;
 
+    private static final Logger LOG = Logger.getLogger(AuthResource.class);
+
     @POST
     public Response login(AuthUsuarioDTO authDTO) {
-        String hash = hashService.getHashSenha(authDTO.senha());
 
-        UsuarioResponseDTO usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
+        try {
+            
+            String hash = hashService.getHashSenha(authDTO.senha());
 
-        if (usuario == null) {
-            return Response.status(Status.NOT_FOUND)
-                .entity("Usuario não encontrado").build();
-        } 
-        return Response.ok(usuario)
-            .header("Authorization", jwtService.generateJwt(usuario))
-            .build();
+            Usuario usuario = usuarioService.findByLoginAndSenha(authDTO.login(), hash);
 
+            if (usuario == null) {
+                LOG.warn("Usuário não encontrado: " + authDTO.login());
+                return Response.status(Status.NOT_FOUND)
+                    .entity("Usuario não encontrado").build();
+            } 
+            LOG.info("Login do usuário bem-sucedido: " + authDTO.login());
+
+            return Response.ok(usuario)
+                .header("Authorization", jwtService.generateJwt(usuario))
+                .build();
+        } catch (Exception e) {
+            
+            LOG.error("Erro durante o login do usuário: " + authDTO.login(), e);
+            throw e;
+        }
     }
 
 }

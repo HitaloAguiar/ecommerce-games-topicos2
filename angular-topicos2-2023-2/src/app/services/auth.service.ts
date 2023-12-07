@@ -14,8 +14,8 @@ export class AuthService {
   private usuarioLogadoKey = 'usuario_logado';
   private usuarioLogadoSubject = new BehaviorSubject<Usuario | null>(null);
 
-  constructor(private http: HttpClient, 
-    @Inject(LocalStorageService) private localStorageService: LocalStorageService, 
+  constructor(private http: HttpClient,
+    @Inject(LocalStorageService) private localStorageService: LocalStorageService,
               private jwtHelper: JwtHelperService) {
 
     this.initUsuarioLogado();
@@ -33,9 +33,9 @@ export class AuthService {
   }
 
 
-  login(email: string, senha: string): Observable<any> {
+  login(login: string, senha: string): Observable<any> {
     const params = {
-      login: email,
+      login: login,
       senha: senha
     }
 

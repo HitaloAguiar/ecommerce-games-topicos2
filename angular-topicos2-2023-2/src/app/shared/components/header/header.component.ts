@@ -5,6 +5,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -21,13 +22,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private sidebarService: SidebarService,
             //  private carrinhoService: CarrinhoService,
               private authService: AuthService,
-              private localStorageService: LocalStorageService) {  
-              
+              private router: Router,
+              private localStorageService: LocalStorageService) {
+
   }
 
   ngOnInit(): void {
     //  this.obterQtdItensCarrinho();
-      this.obterUsuarioLogado();   
+      this.obterUsuarioLogado();
   }
 
   ngOnDestroy() {
@@ -53,5 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   deslogar() {
     this.authService.removeToken()
     this.authService.removeUsuarioLogado();
+
+    this.router.navigateByUrl('/user/compras/produtos');
   }
 }

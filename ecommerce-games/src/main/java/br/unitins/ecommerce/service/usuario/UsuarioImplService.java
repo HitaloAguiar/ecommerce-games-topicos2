@@ -165,8 +165,10 @@ public class UsuarioImplService implements UsuarioService {
     }
 
     @Override
-    public UsuarioResponseDTO findByLoginAndSenha(String login, String senha) {
+    public Usuario findByLoginAndSenha(String login, String senha) {
+
         Usuario usuario = usuarioRepository.findByLoginAndSenha(login, senha);
-        return UsuarioResponseDTO.valueOf(usuario);
+
+        return usuario;
     }
 }

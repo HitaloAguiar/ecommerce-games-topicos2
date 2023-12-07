@@ -87,7 +87,7 @@ INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 2);
 
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('José Alencar', '09112332145', 'jose_alencar@hotmail.com', 'JoseAlen', '1234', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Aguiar', '89114182345', 'joao_aguia@gmail.com', 'Joao123', 'senha', 'ADMIN');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Luísa Soares', '19429301284', 'luisa1263@hotmail.com', 'B1az3', 'luisa789', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Luísa Soares', '19429301284', 'luisa1263@hotmail.com', 'B1az3', '0r2p6DyRONqvuvLf1bkpivfs0sFL87+3MvcjeUkQcDWwfYDjODq7QvsIWNucXXBD+2ElXwsg2qxOQoz/XVORVg==', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '92874291092', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('hitalo', '1111111111', 'hitalo@gmail.com','hitalo','TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'ADMIN');
 
