@@ -1,5 +1,5 @@
 .main-container {
-  background-color: #484747 ; /* ou qualquer outra cor de fundo desejada */
+  background-color: #252525 ; /* ou qualquer outra cor de fundo desejada */
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -62,6 +62,7 @@ mat-card {
 
 /* Estilos para o ícone de pesquisa */
 mat-icon {
+  color:white;
   font-size: 24px;
 }
 
