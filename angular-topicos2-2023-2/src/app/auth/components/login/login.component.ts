@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          this.showSnackbarTopPosition("Usuário ou senha Inválidos", 'Fechar', 2000);
+          this.showSnackbarTopPosition("Usuário ou senha Inválidos ⚠️", 'Fechar', 2000);
         }
       });
     } else {
-      this.showSnackbarTopPosition("Dados inválidos", 'Fechar', 2000);
+      this.showSnackbarTopPosition("Dados inválidos ⛔", 'Fechar', 2000);
     }
   }
 

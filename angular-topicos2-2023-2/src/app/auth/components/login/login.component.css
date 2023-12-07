@@ -1,11 +1,12 @@
 /* Estilo para o body, definindo a imagem de fundo */
-body {
+body{
   background-image: url('src/assets/icons/teladefundo.jpg'); /* ajuste o caminho conforme necessário */
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
   margin: 0;
   padding: 0;
+  
 }
 
 /* Estilo para o container principal do formulário */
@@ -14,6 +15,12 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+/* Estilo para a palavra Slime Games no centro */
+.bold-purple {
+  font-weight: bold; /* Negrito */
+  color: rgb(115, 42, 183);
 }
 
 /* Estilo para a caixa do formulário */
@@ -46,9 +53,15 @@ body {
   margin-top: 20px;
 }
 
+.login-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(10, 10, 10, 9.35); /* Ajuste os valores para tornar a sombra mais evidente */
+}
+
 /* Estilo para o botão de login */
 .login-button {
   margin-top: 20px;
+  
 }
 
 /* Estilo para o link "Esqueceu a senha?" */
@@ -62,3 +75,5 @@ body {
   font-size: 0.8em;
   color: #ff0000;
 }
+
+
