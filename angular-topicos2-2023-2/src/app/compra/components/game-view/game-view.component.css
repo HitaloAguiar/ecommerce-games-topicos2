@@ -1,0 +1,133 @@
+.main-container {
+    background-color: #1b2838;
+    ;
+    /* ou qualquer outra cor de fundo desejada */
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    /* Espaçamento entre linhas */
+    justify-content: flex-start;
+    max-width: 100%;
+    /* ou defina uma largura máxima desejada */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    padding: 10px;
+    text-align: center;
+}
+.header-title{
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.div-secundaria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* Adicionado para posicionar 'image' à esquerda */
+    padding: 20px;
+    margin: 50px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    /* Adicionado para adicionar margem ao topo de 'main' */
+    margin-bottom: 20px;
+    /* Adicionado para adicionar margem à parte inferior de 'main' */
+    background-color: #1b2838;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    height: auto 100%;
+}
+
+.preco{
+    text-align: center;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    border: 3px solid #03502b;
+    border-radius: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #171e2a;
+    border: none;
+    cursor: pointer;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.image-and-cart {
+    display: flex; 
+    justify-content: center; /* Modificado para centralizar ambos os elementos */
+    align-items: flex-start;
+}
+
+.image {
+    width: 100%;
+    margin: 0 auto;
+    /* Define a largura máxima como metade da página */
+}
+
+.carrinho {
+    background-color: #3c3c3c;
+    padding: 20px;
+    flex-grow: 1;
+    box-sizing: border-box;
+    max-width: 50%; /* Adicionado para alinhar à direita */
+}
+
+.conteudo-carrinho{
+    margin: auto;
+}
+
+.game {
+    text-align: center;
+    max-width: 50%; /* Adicionado para limitar a largura máxima do jogo */
+    margin-right: auto;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Adicione mais estilos conforme necessário para o seu conteúdo */
+
+.imgCard {
+    width: 100%;
+    height: 50%;
+}

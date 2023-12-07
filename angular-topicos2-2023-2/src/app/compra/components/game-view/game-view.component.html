@@ -1,0 +1,48 @@
+
+<div class="main-container">
+    <header>
+    <div class="header-title">
+        <h1>{{game.nome}}</h1>
+    </div>
+    </header>
+    <div class="div-secundaria">
+        
+        <div class="image-and-cart">
+            
+            <section>
+                <div class="image">
+                <div class="carousel">
+                    <button class="arrow prev" (click)="prevImage()">&#9665;</button>
+                    <img class="imgCard" src="{{images[currentImageIndex].src}}"
+                        alt="{{images[currentImageIndex].alt}}" />
+                    <button class="arrow next" (click)="nextImage()">&#9655;</button>
+                </div>
+            </div>
+            </section>
+            <div class="carrinho">
+            <section class="conteudo-carrinho">
+                <h2 class="preco">R${{game.preco}}</h2>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+                <p>blablablablablablablablablablablablablablablablablabla</p>
+            </section>
+        </div>
+        </div>
+            <br>
+            <section class="game">
+
+                <h2>{{game.descricao}}</h2>
+                <p >"Elden Ring" é um projeto colaborativo entre o renomado desenvolvedor Hidetaka Miyazaki, conhecido por seu trabalho em jogos como "Dark Souls" e "Bloodborne", e o autor de fantasia George R. R. Martin, famoso pela série de livros "As Crônicas de Gelo e Fogo", que inspirou a série de televisão "Game of Thrones".
+
+                    O jogo se passa em um mundo de fantasia vasto e interconectado chamado de "The Lands Between". Os jogadores exploram paisagens expansivas, enfrentam inimigos desafiadores e mergulham em uma narrativa complexa e sombria. "Elden Ring" é conhecido por manter a tradição da dificuldade elevada que é característica dos jogos da FromSoftware.</p>
+            </section>
+            
+    </div>
+</div>

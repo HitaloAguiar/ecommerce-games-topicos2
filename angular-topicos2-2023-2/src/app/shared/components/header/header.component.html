@@ -1,9 +1,12 @@
 <mat-toolbar color="primary">
-  <button (click)="clickMenu()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <button *ngIf="usuarioLogado" (click)="clickMenu()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <img class="icone" src="/assets/icons/slime.png" alt="logo">
-  <span>Slime Games</span>
+  <img class="icone" src="/assets/icons/slime.png" routerLink="/compras/produtos" alt="logo">
+  <span class="titulo">Slime Games</span>
+    <button mat-button class="catalogo" routerLink="/compras/produtos">
+      <span>Catálogo de Jogos</span>
+    </button>
 
   <span class="example-spacer"></span>
 
