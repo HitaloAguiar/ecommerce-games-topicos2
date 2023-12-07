@@ -13,14 +13,14 @@
 
   <div class="cards">
     <div class="container responsive-grid">
-      <mat-card *ngFor="let card of cards()">
+      <mat-card  *ngFor="let card of cards()">
 
         <img mat-card-image [src]="card.urlImagem">
 
         <mat-card-title class="centered-text"> {{card.titulo}} </mat-card-title>
 
         <mat-card-content class="centered-text"> {{card.developer}} </mat-card-content>
-        <br />
+        
         <mat-card-content class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-content>
 
         <mat-card-actions class="centered-text">

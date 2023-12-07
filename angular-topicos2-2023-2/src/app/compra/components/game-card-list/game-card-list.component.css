@@ -113,7 +113,6 @@ img {
   justify-content: center;
   color: white;
 }
-
 /* Ajuste o tamanho da imagem dos cards para manter a proporção */
 
 /* Ajustes de margem para o paginador */
@@ -131,6 +130,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(3, 44, 106);
 }
 
 /* Ajustes para o botão "Ver mais" */
