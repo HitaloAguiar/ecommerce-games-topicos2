@@ -56,6 +56,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.removeToken()
     this.authService.removeUsuarioLogado();
 
-    this.router.navigateByUrl('/user/compras/produtos');
+    this.router.navigateByUrl('/compras/produtos');
   }
 }

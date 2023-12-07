@@ -1,10 +1,33 @@
-body {
+.main-container {
   background-color: #484747 ; /* ou qualquer outra cor de fundo desejada */
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6; /* Espaçamento entre linhas */
+  
 }/* Estilos para o contêiner principal */
+
+.main-container {
+  max-width: 100%; /* ou defina uma largura máxima desejada */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+mat-card {
+  width: 100%; /* ou ajuste conforme necessário */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
 .container-input {
   display: flex;
   flex-direction: column;
@@ -58,24 +81,70 @@ mat-icon {
 }
 
 img {
-  width: 100%;
-  height: 250px;
+  width: 100%; /* 75% de 100% para manter a proporção 3:4 */
+  height: auto;
   object-fit: cover;
 }
 
-.container {
-  padding: 20px;
+/* Adicione estas alterações no seu CSS */
+
+/* Estilos para a div que envolve os cards */
+.cards {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px; /* Adicione uma largura máxima conforme necessário */
+  margin: 20px auto; /* Centralize o contêiner */
+  overflow: hidden; /* Adicione overflow: hidden para evitar overflow dos elementos filhos */
 }
 
+
+/* Estilos para o contêiner dos cards */
+.container-input {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+
+/* Estilos para os cards dentro do grid responsivo */
 .responsive-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajuste a largura mínima e máxima conforme necessário */
   gap: 20px;
+  justify-content: center;
+  color: white;
 }
+
+/* Ajuste o tamanho da imagem dos cards para manter a proporção */
+
+/* Ajustes de margem para o paginador */
+.mat-elevation-z8 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 1200px; /* Adicione uma largura máxima conforme necessário */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 .centered-text {
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Ajustes para o botão "Ver mais" */
+.mat-card-actions button {
+  color: white; /* Cor do texto */
+  background-color: purple; /* Cor de fundo do botão */
+  transition: background-color 0.3s ease; /* Adiciona uma transição suave para a mudança de cor */
+}
+
+/* Altera a cor do botão quando hover (passar o mouse sobre) */
+.mat-card-actions button:hover {
+  background-color: darkpurple; /* Cor de fundo do botão ao passar o mouse sobre ele */
+}
+
+.mat-button{
+  background-color: white;
 }

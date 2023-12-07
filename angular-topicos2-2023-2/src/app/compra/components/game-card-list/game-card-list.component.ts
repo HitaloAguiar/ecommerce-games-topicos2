@@ -27,7 +27,7 @@ export class GameCardListComponent implements OnInit {
   games: Game[] = [];
 
   totalRegistros = 0;
-  pageSize = 4;
+  pageSize = 6;
   pagina = 0;
   filtro: string = "";
 
