@@ -126,22 +126,16 @@ export class GameCardListComponent implements OnInit {
 
   adicionarAoCarrinho(card: Card): void {
 
-    if (this.usuarioLogado) {
 
-      this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
-      this.carrinhoService.adicionar({
-        id: card.id,
-        nome: card.titulo,
-        preco: card.preco,
-        quantidade: 1,
-        urlImagem: card.urlImagem,
-      });
-    }
 
-    else {
-
-      this.showSnackbarTopPosition('Você precisa logar primeiramente para acessar o carrinho!', 'Fechar');
-    }
+    this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
+    this.carrinhoService.adicionar({
+      id: card.id,
+      nome: card.titulo,
+      preco: card.preco,
+      quantidade: 1,
+      urlImagem: card.urlImagem,
+    });
   }
 
   showSnackbarTopPosition(content: any, action: any) {
