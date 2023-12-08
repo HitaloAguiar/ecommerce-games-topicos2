@@ -28,7 +28,7 @@ export class GameCardListComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
 
-  cards = signal<Card[]> ([]);
+  cards = signal<Card[]>([]);
   games: Game[] = [];
 
   totalRegistros = 0;
@@ -36,11 +36,11 @@ export class GameCardListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private gameService: GameService, 
-    private customPaginatorIntl: CustomPaginatorIntl, 
-    private carrinhoService: CarrinhoService, 
+  constructor(private gameService: GameService,
+    private customPaginatorIntl: CustomPaginatorIntl,
+    private carrinhoService: CarrinhoService,
     private authService: AuthService,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.carregarGames();
@@ -123,7 +123,7 @@ export class GameCardListComponent implements OnInit {
     this.carregarGames();
     this.carregarTotalRegistros();
   }
-  
+
   adicionarAoCarrinho(card: Card): void {
     this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
     this.carrinhoService.adicionar({
@@ -131,14 +131,15 @@ export class GameCardListComponent implements OnInit {
       nome: card.titulo,
       preco: card.preco,
       quantidade: 1,
+      urlImagem: card.urlImagem,
     });
   }
 
-   showSnackbarTopPosition(content:any, action:any) {
-     this.snackBar.open(content, action, {
-       duration: 2000,
-       verticalPosition: "top", // Allowed values are  'top' | 'bottom'
-     horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
-     });
-   }
+  showSnackbarTopPosition(content: any, action: any) {
+    this.snackBar.open(content, action, {
+      duration: 2000,
+      verticalPosition: "top", // Allowed values are  'top' | 'bottom'
+      horizontalPosition: "center" // Allowed values are 'start' | 'center' | 'end' | 'left' | 'right'
+    });
+  }
 }

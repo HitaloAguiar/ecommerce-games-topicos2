@@ -14,8 +14,8 @@ export class CarrinhoComponent implements OnInit {
   carrinhoItens: ItemCarrinho[] = [];
 
   constructor(private carrinhoService: CarrinhoService,
-              private router: Router,
-              private pedidoService: PedidoService) {}
+    private router: Router,
+    private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
@@ -42,4 +42,6 @@ export class CarrinhoComponent implements OnInit {
       }
     });
   }
+
+  
 }

@@ -9,6 +9,9 @@ export class Game {
   descricao!: string;
   preco!: number;
   nomeImagem!: string;
+  nomeImagem1!: string;
+  nomeImagem2!: string;
+  nomeImagem3!: string;
   anoLancamento!: Date;
   developer!: Developer;
   generos!: Genero[];

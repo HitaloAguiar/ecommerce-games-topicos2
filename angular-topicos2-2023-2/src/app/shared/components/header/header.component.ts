@@ -40,11 +40,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sidebarService.toggle();
   }
 
-   obterQtdItensCarrinho() {
-     this.carrinhoService.carrinho$.subscribe(itens => {
-       this.qtdItensCarrinho = itens.length
-     });
-   }
+  obterQtdItensCarrinho() {
+    this.carrinhoService.carrinho$.subscribe(itens => {
+      this.qtdItensCarrinho = itens.length
+    });
+  }
 
   obterUsuarioLogado() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(

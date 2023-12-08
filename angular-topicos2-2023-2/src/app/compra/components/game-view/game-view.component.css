@@ -15,6 +15,10 @@
     padding: 20px;
 }
 
+div{
+    margin: 5px;
+}
+
 header {
     padding: 10px;
     text-align: center;
@@ -31,22 +35,15 @@ header h1 {
 
 .div-secundaria {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Alterado para fluxo de coluna */
     justify-content: flex-start;
-    /* Adicionado para posicionar 'image' à esquerda */
     padding: 20px;
-    margin: 50px;
-    margin-top: 0px;
-    margin-left: 100px;
-    margin-right: 100px;
-    /* Adicionado para adicionar margem ao topo de 'main' */
-    margin-bottom: 20px;
-    /* Adicionado para adicionar margem à parte inferior de 'main' */
+    margin: 5px 0 20px 100px; /* Ajustado para incluir a margem esquerda */
     background-color: #1b2838;
     color: #ffffff;
     font-family: 'Arial', sans-serif;
     height: auto 100%;
+
 }
 
 .preco{
@@ -91,32 +88,29 @@ header h1 {
 
 .image-and-cart {
     display: flex; 
-    justify-content: center; /* Modificado para centralizar ambos os elementos */
-    align-items: flex-start;
+    flex-direction: column; /* Alterado para fluxo de coluna */
+    max-width: 30%;
+    margin-left: auto; /* Alterado para colar à margem esquerda */
 }
 
-.image {
-    width: 100%;
-    margin: 0 auto;
-    /* Define a largura máxima como metade da página */
-}
-
-.carrinho {
-    background-color: #3c3c3c;
-    padding: 20px;
-    flex-grow: 1;
-    box-sizing: border-box;
-    max-width: 50%; /* Adicionado para alinhar à direita */
-}
-
-.conteudo-carrinho{
-    margin: auto;
+.imaged {
+    display: flex;
+    margin-right: auto;
+    max-width: 70%;
+    flex-direction: column;
 }
 
 .game {
     text-align: center;
-    max-width: 50%; /* Adicionado para limitar a largura máxima do jogo */
-    margin-right: auto;
+}
+
+.cont {
+    max-width: 100%;
+    background-color: #3c3c3c;
+    border-radius: 0%;
+  }
+.conteudo{
+    margin: auto;
 }
 
 .container {
@@ -130,4 +124,20 @@ header h1 {
 .imgCard {
     width: 100%;
     height: 50%;
+}
+
+mat-card {
+    width: 100%; /* ou ajuste conforme necessário */
+  }
+
+  img {
+  width: 100%; /* 75% de 100% para manter a proporção 3:4 */
+  height: auto;
+  object-fit: cover;
+}.write{
+    text-align: center;
+}
+
+.mat-card-footer{
+    background-color: aqua
 }

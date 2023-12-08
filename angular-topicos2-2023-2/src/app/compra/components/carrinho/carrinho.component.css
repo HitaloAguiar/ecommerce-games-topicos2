@@ -1,0 +1,67 @@
+/* Estilo para o contêiner do carrinho */
+body {
+    background-color: #1b2838; /* Cor de fundo para o corpo da página */
+    color: #fff; /* Cor do texto principal */
+  }
+
+.principal{
+    background-color: #1b2838; /* Cor de fundo para o corpo da página */
+    color: black; /* Cor do texto principal */
+}
+  .carrinho-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  /* Estilo para cada item no carrinho */
+  .carrinho-item {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carrinho-item img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 20px;
+    border-radius: 4px;
+  }
+  
+  .carrinho-item-details {
+    flex-grow: 1;
+    color: black;
+  }
+  
+  /* Estilo para o contêiner do carrinho total */
+  .carrinho-total {
+    margin: 40%;
+    margin-top: 20px;
+    padding: 20px;
+    color: black;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Estilo para a mensagem quando o carrinho está vazio */
+  .carrinho-vazio {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Estilo para os botões */
+  button {
+    margin-top: 10px;
+  }
+  
+.jj{
+    border: 2px solid #1b2838;
+  }

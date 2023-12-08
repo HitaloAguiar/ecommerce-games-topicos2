@@ -40,6 +40,10 @@ public class Game extends Produto {
     // Criando uma tabela auxiliar
     private List<Plataforma> plataformas;
 
+    private String nomeImagem1;
+    private String nomeImagem2;
+    private String nomeImagem3;
+
     public LocalDate getAnoLancamento() {
         return anoLancamento;
     }

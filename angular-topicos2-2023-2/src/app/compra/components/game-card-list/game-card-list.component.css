@@ -112,6 +112,7 @@ img {
   gap: 20px;
   justify-content: center;
   color: white;
+  
 }
 /* Ajuste o tamanho da imagem dos cards para manter a proporção */
 
@@ -147,6 +148,11 @@ img {
   align-items: center;
   justify-content: center;
   background-color: rgb(3, 44, 106);
+}
+mat-card{
+  border: 2px solid #ffffff; /* Adiciona uma borda de 2 pixels sólida com cor branca */
+  padding: 1px; /* Adiciona um preenchimento interno de 10 pixels para dar espaço à borda */
+  color: #ffffff;
 }
 
 /* Ajustes para o botão "Ver mais" */

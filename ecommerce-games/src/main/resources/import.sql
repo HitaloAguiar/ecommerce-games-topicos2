@@ -77,48 +77,48 @@ INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
 INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
        VALUES ('PlayStation 4', '', '2016-06-09', 2);--6
 
-INSERT INTO produto (nome, descricao, preco) VALUES ('Super Mario Odyssey', 'descricao exemplo', 289.90);--1
-INSERT INTO produto (nome, descricao, preco) VALUES ('God of War Ragnarok', 'descricao exemplo', 193.51);--2
-INSERT INTO produto (nome, descricao, preco) VALUES ('Zelda: Tears of the Kingdom', 'descricao exemplo', 306.90);--3
-INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'descricao exemplo', 150.15);--4
-INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'descricao exemplo', 160.90);--5
-INSERT INTO produto (nome, descricao, preco) VALUES ('Elden Ring', 'descricao exemplo', 229.90);--6
-INSERT INTO produto (nome, descricao, preco) VALUES ('GRIS', 'descricao exemplo', 46.99);--7
-INSERT INTO produto (nome, descricao, preco) VALUES ('Outer Wilds', 'descricao exemplo', 59.99);--8
-INSERT INTO produto (nome, descricao, preco) VALUES ('Hollow Knight', 'descricao exemplo', 62.50);--9
-INSERT INTO produto (nome, descricao, preco) VALUES ('Baldur''s Gate 3', 'descricao exemplo', 199.90);--10
-INSERT INTO produto (nome, descricao, preco) VALUES ('Sekiro: Shadows Die Twice', 'descricao exemplo', 274.00);--11
-INSERT INTO produto (nome, descricao, preco) VALUES ('Alan Wake 2', 'descricao exemplo', 225.00);--12
-INSERT INTO produto (nome, descricao, preco) VALUES ('Star Wars Jedi: Survivor', 'descricao exemplo', 299.00);--13
-INSERT INTO produto (nome, descricao, preco) VALUES ('Mega Man X Legacy Collection', 'descricao exemplo', 66.90);--14
-INSERT INTO produto (nome, descricao, preco) VALUES ('Hogwarts Legacy', 'descricao exemplo', 249.99);--15
-INSERT INTO produto (nome, descricao, preco) VALUES ('Cyberpunk 2077', 'descricao exemplo', 199.90);--16
-INSERT INTO produto (nome, descricao, preco) VALUES ('Death Stranding', 'descricao exemplo', 159.00);--17
-INSERT INTO produto (nome, descricao, preco) VALUES ('Katana ZERO', 'descricao exemplo', 46.99);--18
-INSERT INTO produto (nome, descricao, preco) VALUES ('Devil May Cry 5', 'descricao exemplo', 99.90);--19
-INSERT INTO produto (nome, descricao, preco) VALUES ('Dark Souls 3', 'descricao exemplo', 229.90);--20
+INSERT INTO produto (nome, descricao, preco) VALUES ('Super Mario Odyssey', 'Super Mario Odyssey: Mario viaja por mundos incríveis usando seu chapéu mágico para capturar inimigos e objetos, embarcando em uma missão emocionante para salvar a Princesa Peach das garras de Bowser', 289.90);--1
+INSERT INTO produto (nome, descricao, preco) VALUES ('God of War Ragnarok', 'God of War: Ragnarok é a continuação da saga de Kratos e Atreus. Ambientado no mundo nórdico, o jogo promete intensidade mitológica, batalhas colossais e uma narrativa envolvente enquanto pai e filho enfrentando desafios durante o apocalipse nórdico', 193.51);--2
+INSERT INTO produto (nome, descricao, preco) VALUES ('Zelda: Tears of the Kingdom', 'The Legend of Zelda: mergulha os jogadores em um épico reino de fantasia, onde Link enfrenta trevas e transformações para salvar Hyrule. Com gráficos aprimorados, narrativa envolvente, jornada cativante com quebra-cabeças desafiadores e batalhas épicas.', 306.90);--3
+INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'The Last of Us Part II, da Naughty Dog, é uma saga de Ellie em um mundo pós-apocalíptico. Com narrativa envolvente e gráficos deslumbrantes, o jogo explora temas profundos, como vingança e compaixão, oferecendo uma experiência emocional e impactante.', 150.15);--4
+INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'Doom Eternal, da id Software, é um frenesi demoníaco. O Doom Slayer enfrenta hordas do inferno com armas poderosas em ambientes épicos, proporcionando ação intensa e brutal. Um espetáculo infernal de destruição e sobrevivência.', 160.90);--5
+INSERT INTO produto (nome, descricao, preco) VALUES ('Elden Ring', 'Elden Ring, criação da FromSoftware em parceria com George R. R. Martin, é um épico de fantasia sombria. Com vastos reinos, combate desafiador e uma narrativa envolvente, o jogo promete uma jornada inesquecível em um mundo repleto de mistérios e perigos.', 229.90);--6
+INSERT INTO produto (nome, descricao, preco) VALUES ('GRIS', 'Gris é uma obra de arte visual e emocional. Sem palavras, a protagonista enfrenta a tristeza, explorando um mundo deslumbrante. Com bela trilha sonora, Gris é uma experiência poética de superação e descoberta.', 46.99);--7
+INSERT INTO produto (nome, descricao, preco) VALUES ('Outer Wilds', 'Outer Wilds: Exploração cósmica em loop temporal. Desvende segredos celestiais antes da supernova. Narrativa não linear, física cativante e uma jornada cósmica envolvente e única.', 59.99);--8
+INSERT INTO produto (nome, descricao, preco) VALUES ('Hollow Knight', 'Hollow Knight, obra-prima indie, mergulha jogadores em um mundo sombrio e encantador. Explore cavernas, enfrente criaturas e desvende mistérios, enquanto o cavaleiro vence desafios. Uma jornada atmosférica, rica em detalhes e repleta de descobertas', 62.50);--9
+INSERT INTO produto (nome, descricao, preco) VALUES ('Baldur''s Gate 3', 'Baldur''s Gate 3, da Larian Studios, é uma épica aventura de RPG baseada em Dungeons & Dragons. Com gráficos deslumbrantes e escolhas impactantes, os jogadores exploram traições, monstros e magias, moldando o destino em um mundo rico e cheio de perigos.', 199.90);--10
+INSERT INTO produto (nome, descricao, preco) VALUES ('Sekiro: Shadows Die Twice', 'Sekiro: Shadows Die Twice, da FromSoftware, é um jogo de ação desafiador ambientado no Japão feudal. Controle o astuto shinobi, enfrentando inimigos implacáveis, desvendando mistérios e dominando a arte da espada em um mundo sombrio e implacável.', 274.00);--11
+INSERT INTO produto (nome, descricao, preco) VALUES ('Alan Wake 2', 'Alan Wake 2 é um jogo de sobrevivência e terror feito pela Remedy Entertainment. É a sequência de Alan Wake, lançado em 2010. Alan Wake, um escritor de suspense, está preso em um mundo obscuro, onde seus pesadelos e medos se manifestam como realidade. ', 225.00);--12
+INSERT INTO produto (nome, descricao, preco) VALUES ('Star Wars Jedi: Survivor', 'Star Wars Jedi: Survivor é um jogo de ação e aventura que se passa cinco anos após a queda da Ordem Jedi. Cal Kestis, um Jedi sobrevivente, precisa encontrar um novo lugar para se esconder e treinar, enquanto é perseguido pelo Império.', 299.00);--13
+INSERT INTO produto (nome, descricao, preco) VALUES ('Mega Man X Legacy Collection', 'Mega Man X, clássico da Capcom, oferece ação intensa com o herói X enfrentando robôs rebeldes. Com gráficos avançados, armaduras poderosas e desafios eletrizantes, o jogo define a excelência dos jogos de plataforma e a nostalgia dos fãs.', 66.90);--14
+INSERT INTO produto (nome, descricao, preco) VALUES ('Hogwarts Legacy', 'Hogwarts Legacy mergulha os jogadores no Mundo Bruxo décadas antes de Harry Potter. Em uma escola expansiva, explore mistérios, aprenda magia, enfrente criaturas místicas. Uma jornada no universo mágico de Harry Potter', 249.99);--15
+INSERT INTO produto (nome, descricao, preco) VALUES ('Cyberpunk 2077', 'Cyberpunk 2077, da CD Projekt, é um RPG imersivo ambientado em Night City, uma metrópole futurista repleta de conspirações e tecnologia avançada. Com enredo cativante, escolhas impactantes e visuais deslumbrantes, o jogo oferece uma experiência intensa.', 199.90);--16
+INSERT INTO produto (nome, descricao, preco) VALUES ('Death Stranding', 'Death Stranding, dirigido por Hideo Kojima, é uma jornada única e misteriosa. Sam Bridges,  enfrenta um mundo fragmentado e conectado por laços emocionais. Com uma narrativa profunda, mecânicas inovadoras e paisagens deslumbrantes.', 159.00);--17
+INSERT INTO produto (nome, descricao, preco) VALUES ('Katana ZERO', 'Katana ZERO é um jogo indie frenético e estilizado. Como um samurai mercenário, que desafia o tempo para cortar inimigos com precisão. Com uma trama envolvente, estética pixel art e mecânicas ágeis, o jogo oferece uma experiência intensa e de cinema.', 46.99);--18
+INSERT INTO produto (nome, descricao, preco) VALUES ('Devil May Cry 5', 'Devil May Cry 5 (DMC5): Ação intensa e estilosa com Dante, Nero e V. Enfrente demônios, desvende mistérios e libere combos impressionantes. Com gráficos incríveis e uma trilha sonora empolgante, DMC5 é uma celebração da franquia hack and slash.', 99.90);--19
+INSERT INTO produto (nome, descricao, preco) VALUES ('Dark Souls 3', 'Dark Souls III: RPG implacável em mundo sombrio. Enfrente inimigos desafiadores, explore cenários detalhados e mergulhe na atmosfera épica. Com mecânicas profundas, é uma jornada desafiadora e inesquecível.', 229.90);--20
 
 
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2017-10-27', 3, 'super-mario-odyssey-cover.png', 1);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2022-11-09', 2, 'gow-cover.jpg', 2);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-05-17', 3, 'zelda-totk-cover.jpg', 3);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-06-19', 4, 'tlou-2-cover.jpg', 4);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-03-20', 5, 'doom-eternal-cover.png', 5);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2022-02-25', 7, 'elden-ring-cover.jpg', 6);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2018-12-13', 8, 'gris-cover.jpg', 7);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2019-05-28', 9, 'outer-wilds-cover.jpg', 8);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2017-02-24', 10, 'hollow-knight-cover.jpg', 9);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-08-03', 11, 'bg3-cover.png', 10);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2019-03-22', 7, 'sekiro-cover.jpg', 11);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-10-17', 12, 'alan-wake-2-cover.png', 12);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-04-28', 13, 'star-wars-jedi-survivor-cover.jpg', 13);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2018-07-24', 14, 'mega-man-x-cover.jpg', 14);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2023-02-10', 15, 'hogwarts-legacy-cover.jpg', 15);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-12-10', 16, 'cyberpunk-cover.jpg', 16);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2020-07-14', 17, 'death-stranding-cover.jpg', 17);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2019-04-18', 18, 'katana-zero-cover.jpg', 18);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2019-04-08', 14, 'dmc5-cover.jpg', 19);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, id) VALUES ('2016-04-16', 7, 'dark-souls-3-cover.png', 20);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-10-27', 3, 'super-mario-odyssey-cover.png', 'mario1.jpg', 'mario2.jpg', 'mario3.jpg', 1);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2022-11-09', 2, 'gow-cover.jpg', 'gow1.jpg', 'gow2.jpg', 'gow3.jpg', 2);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-05-17', 3, 'zelda-totk-cover.jpg', 'zelda1.jpg', 'zelda2.jpg' ,'zelda3.png', 3);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-06-19', 4, 'tlou-2-cover.jpg', 'tlou1.jpg', 'tlou2.jpg', 'tlou3.jpg', 4);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-03-20', 5, 'doom-eternal-cover.png', 'doom1.jpg', 'doom2.jpg', 'doom3.jpg', 5);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2022-02-25', 7, 'elden-ring-cover.jpg', 'elden1.jpg', 'elden2.jpg', 'elden3.jpg', 6);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2018-12-13', 8, 'gris-cover.jpg', 'gris1.jpg', 'gris2.jpg', 'gris2.jpg', 7);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-05-28', 9, 'outer-wilds-cover.jpg', 'outer1.jpg', 'outer2.jpg', 'outer3.jpg', 8);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-02-24', 10, 'hollow-knight-cover.jpg', 'hk1.jpg', 'hk2.jpg', 'hk3.jpg', 9);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-08-03', 11, 'bg3-cover.png', 'bg1.jpg', 'bg2.jpg', 'bg33.jpg', 10);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-03-22', 7, 'sekiro-cover.jpg', 'sekiro1.jpg', 'sekiro2.jpg', 'sekiro3.jpg', 11);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-10-17', 12, 'alan-wake-2-cover.png', 'wake1.jpg', 'wake2.jpg', 'wake3.png', 12);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-04-28', 13, 'star-wars-jedi-survivor-cover.jpg', 'star1.jpg', 'star2.jpg', 'star3.jpg', 13);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2018-07-24', 14, 'mega-man-x-cover.jpg', 'mega1.jpg', 'mega2.jpg', 'mega3.jpg', 14);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-02-10', 15, 'hogwarts-legacy-cover.jpg', 'hogwarts1.jpg', 'hogwarts2.jpg', 'hogwarts3.jpg', 15);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-12-10', 16, 'cyberpunk-cover.jpg', 'punk1.jpg', 'punk2.jpg', 'punk3.jpg', 16);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-07-14', 17, 'death-stranding-cover.jpg', 'strand1.jpg', 'strand2.jpg', 'strand3.jpg', 17);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-04-18', 18, 'katana-zero-cover.jpg', 'katana1.jpg', 'katana2.jpg', 'katana3.jpg', 18);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-04-08', 14, 'dmc5-cover.jpg', 'dmc1.jpg', 'dmc2.jpg', 'dmc3.jpg', 19);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2016-04-16', 7, 'dark-souls-3-cover.png', 'dark1.jpg', 'dark2.jpg', 'dark3.jpg', 20);
 
 INSERT INTO generos_game (id_game, id_genero) VALUES (1, 3);
 INSERT INTO generos_game (id_game, id_genero) VALUES (1, 6);
