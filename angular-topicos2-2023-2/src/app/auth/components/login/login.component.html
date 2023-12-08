@@ -13,6 +13,7 @@
                     <mat-error *ngIf="loginForm.get('password')!.hasError('required')">A senha é obrigatória</mat-error>
                 </mat-form-field>
                 <button mat-raised-button class="login-button" color="primary" type="submit">Entrar</button>
+                <button mat-raised-button class="login-button" color="warn" routerLink="/auth/cadastro">Cadastrar</button>
             </form>
         </div>
     </div>
