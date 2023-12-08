@@ -143,7 +143,7 @@ export class GameFormComponent {
       this.gameService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/games/list');
+          this.router.navigateByUrl('/admin/games/list');
         },
         error: err => {
           console.log('Erro ao fazer o upload da imagem');
@@ -151,7 +151,7 @@ export class GameFormComponent {
         }
       })
     } else {
-      this.router.navigateByUrl('/games/list');
+      this.router.navigateByUrl('/admin/games/list');
     }
   }
 }

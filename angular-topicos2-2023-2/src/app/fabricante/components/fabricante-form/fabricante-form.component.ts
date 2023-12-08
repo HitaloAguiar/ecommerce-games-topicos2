@@ -35,7 +35,7 @@ export class FabricanteFormComponent {
 
         this.fabricanteService.save(novoFabricante).subscribe({
           next: (fabricanteCadastrado) => {
-            this.router.navigateByUrl('/fabricantes/list');
+            this.router.navigateByUrl('/admin/fabricantes/list');
           },
           error: (errorResponse) => {
 
@@ -53,7 +53,7 @@ export class FabricanteFormComponent {
 
         this.fabricanteService.update(novoFabricante).subscribe({
           next: (fabricanteCadastrado) => {
-            this.router.navigateByUrl('/fabricantes/list');
+            this.router.navigateByUrl('/admin/fabricantes/list');
           },
           error: (errorResponse) => {
 

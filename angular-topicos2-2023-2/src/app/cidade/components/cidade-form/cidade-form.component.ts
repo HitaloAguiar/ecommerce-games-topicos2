@@ -44,7 +44,7 @@ export class CidadeFormComponent {
 
         this.cidadeService.save(novaCidade).subscribe({
           next: (cidadeCadastrada) => {
-            this.router.navigateByUrl('/cidades/list');
+            this.router.navigateByUrl('/admin/cidades/list');
           },
           error: (errorResponse) => {
 
@@ -60,7 +60,7 @@ export class CidadeFormComponent {
 
         this.cidadeService.update(novaCidade).subscribe({
           next: (cidadeCadastrada) => {
-            this.router.navigateByUrl('/cidades/list');
+            this.router.navigateByUrl('/admin/cidades/list');
           },
           error: (errorResponse) => {
 

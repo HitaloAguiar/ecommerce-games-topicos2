@@ -50,7 +50,7 @@ export class PlataformaFormComponent {
 
         this.plataformaService.save(novaPlataforma).subscribe({
           next: (plataformaCadastrada) => {
-            this.router.navigateByUrl('/plataformas/list');
+            this.router.navigateByUrl('/admin/plataformas/list');
           },
           error: (errorResponse) => {
 
@@ -68,7 +68,7 @@ export class PlataformaFormComponent {
 
         this.plataformaService.update(novaPlataforma).subscribe({
           next: (plataformaCadastrada) => {
-            this.router.navigateByUrl('/plataformas/list');
+            this.router.navigateByUrl('/admin/plataformas/list');
           },
           error: (errorResponse) => {
 

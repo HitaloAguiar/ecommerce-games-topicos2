@@ -33,7 +33,7 @@ export class GeneroFormComponent {
 
         this.generoService.save(novoGenero).subscribe({
           next: (generoCadastrado) => {
-            this.router.navigateByUrl('/generos/list');
+            this.router.navigateByUrl('/admin/generos/list');
           },
           error: (errorResponse) => {
             // Processar erros da API
@@ -49,7 +49,7 @@ export class GeneroFormComponent {
 
         this.generoService.update(novoGenero).subscribe({
           next: (generoCadastrado) => {
-            this.router.navigateByUrl('/generos/list');
+            this.router.navigateByUrl('/admin/generos/list');
           },
           error: (errorResponse) => {
 

@@ -34,7 +34,7 @@ export class EstadoFormComponent {
 
         this.estadoService.save(novoEstado).subscribe({
           next: (estadoCadastrado) => {
-            this.router.navigateByUrl('/estados/list');
+            this.router.navigateByUrl('/admin/estados/list');
           },
           error: (errorResponse) => {
             // Processar erros da API
@@ -52,7 +52,7 @@ export class EstadoFormComponent {
 
         this.estadoService.update(novoEstado).subscribe({
           next: (estadoCadastrado) => {
-            this.router.navigateByUrl('/estados/list');
+            this.router.navigateByUrl('/admin/estados/list');
           },
           error: (errorResponse) => {
 

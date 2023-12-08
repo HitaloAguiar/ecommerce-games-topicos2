@@ -36,7 +36,7 @@ export class DeveloperFormComponent {
 
         this.developerService.save(novoDeveloper).subscribe({
           next: (developerCadastrado) => {
-            this.router.navigateByUrl('/developers/list');
+            this.router.navigateByUrl('/admin/developers/list');
           },
           error: (errorResponse) => {
 
@@ -54,7 +54,7 @@ export class DeveloperFormComponent {
 
         this.developerService.update(novoDeveloper).subscribe({
           next: (developerCadastrado) => {
-            this.router.navigateByUrl('/developers/list');
+            this.router.navigateByUrl('/admin/developers/list');
           },
           error: (errorResponse) => {
 

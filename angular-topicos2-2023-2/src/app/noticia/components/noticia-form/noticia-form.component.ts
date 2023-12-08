@@ -39,7 +39,7 @@ export class NoticiaFormComponent {
 
         this.noticiaService.save(novaNoticia).subscribe({
           next: (noticiaCadastrado) => {
-            this.router.navigateByUrl('/noticias/list');
+            this.router.navigateByUrl('/admin/noticias/list');
           },
           error: (errorResponse) => {
 
@@ -58,7 +58,7 @@ export class NoticiaFormComponent {
 
         this.noticiaService.update(novaNoticia).subscribe({
           next: (noticiaCadastrado) => {
-            this.router.navigateByUrl('/noticias/list');
+            this.router.navigateByUrl('/admin/noticias/list');
           },
           error: (errorResponse) => {
 

@@ -53,7 +53,7 @@ export class UsuarioFormComponent {
 
         this.usuarioService.save(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {
-            this.router.navigateByUrl('/usuarios/list');
+            this.router.navigateByUrl('/admin/usuarios/list');
           },
           error: (errorResponse) => {
 
@@ -76,7 +76,7 @@ export class UsuarioFormComponent {
 
         this.usuarioService.update(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {
-            this.router.navigateByUrl('/usuarios/list');
+            this.router.navigateByUrl('/admin/usuarios/list');
           },
           error: (errorResponse) => {
 
