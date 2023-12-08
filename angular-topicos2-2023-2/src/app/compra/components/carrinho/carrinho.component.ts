@@ -1,5 +1,5 @@
 // carrinho.component.ts
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemCarrinho } from 'src/app/models/item-carrinho.interface';
 import { CarrinhoService } from 'src/app/services/carrinho.service';
@@ -13,9 +13,9 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class CarrinhoComponent implements OnInit {
   carrinhoItens: ItemCarrinho[] = [];
 
-  constructor(@Inject(CarrinhoService) private carrinhoService: CarrinhoService,
+  constructor(private carrinhoService: CarrinhoService,
               private router: Router,
-              @Inject(PedidoService) private pedidoService: PedidoService) {}
+              private pedidoService: PedidoService) {}
 
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
@@ -43,4 +43,3 @@ export class CarrinhoComponent implements OnInit {
     });
   }
 }
-

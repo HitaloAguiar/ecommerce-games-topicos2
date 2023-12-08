@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+import { MatBadgeModule } from '@angular/material/badge';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
@@ -30,7 +31,9 @@ import { LoginComponent } from '../auth/components/login/login.component';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule
+    
   ],
   exports: [
     HeaderComponent,

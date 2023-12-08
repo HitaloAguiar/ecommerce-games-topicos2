@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
-//import { CarrinhoService } from 'src/app/services/carrinho.service';
+import { CarrinhoService } from 'src/app/services/carrinho.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { LocalStorageService } from 'src/app/services/local-storage-service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   qtdItensCarrinho:number = 0;
 
   constructor(private sidebarService: SidebarService,
-            //  private carrinhoService: CarrinhoService,
+              private carrinhoService: CarrinhoService,
               private authService: AuthService,
               private router: Router,
               private localStorageService: LocalStorageService) {
@@ -40,11 +40,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sidebarService.toggle();
   }
 
-  // obterQtdItensCarrinho() {
-  //   this.carrinhoService.carrinho$.subscribe(itens => {
-  //     this.qtdItensCarrinho = itens.length
-  //   });
-  // }
+   obterQtdItensCarrinho() {
+     this.carrinhoService.carrinho$.subscribe(itens => {
+       this.qtdItensCarrinho = itens.length
+     });
+   }
 
   obterUsuarioLogado() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(

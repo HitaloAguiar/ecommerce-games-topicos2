@@ -98,7 +98,6 @@ img {
   overflow: hidden; /* Adicione overflow: hidden para evitar overflow dos elementos filhos */
 }
 
-
 /* Estilos para o contêiner dos cards */
 .container-input {
   padding: 20px;
@@ -127,6 +126,22 @@ img {
 
 
 .centered-text {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(3, 44, 106);
+}
+
+#logado{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(3, 44, 106);
+}
+
+#deslogado{
   text-align: center;
   display: flex;
   align-items: center;

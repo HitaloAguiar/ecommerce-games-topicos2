@@ -5,6 +5,9 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { CarrinhoService } from 'src/app/services/carrinho.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario.model';
 
 type Card = {
   id: number;
@@ -20,6 +23,8 @@ type Card = {
   styleUrls: ['./game-card-list.component.css']
 })
 export class GameCardListComponent implements OnInit {
+  usuarioLogado: Usuario | null = null;
+  private subscription = new Subscription();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
 
@@ -31,7 +36,11 @@ export class GameCardListComponent implements OnInit {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private gameService: GameService, private customPaginatorIntl: CustomPaginatorIntl, private carrinhoService: CarrinhoService, private snackBar: MatSnackBar) {}
+  constructor(private gameService: GameService, 
+    private customPaginatorIntl: CustomPaginatorIntl, 
+    private carrinhoService: CarrinhoService, 
+    private authService: AuthService,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.carregarGames();
@@ -68,6 +77,12 @@ export class GameCardListComponent implements OnInit {
         console.error('Erro ao gerar relatório', error);
       }
     );
+  }
+
+  obterUsuarioLogado() {
+    this.subscription.add(this.authService.getUsuarioLogado().subscribe(
+      usuario => this.usuarioLogado = usuario
+    ));
   }
 
   carregarTotalRegistros() {
