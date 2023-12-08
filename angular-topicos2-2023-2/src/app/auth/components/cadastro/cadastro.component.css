@@ -19,6 +19,7 @@
   /* para a div */
   .form-container {
     padding: 2rem;
+    background-image: url('src/assets/icons/teladefundo.jpg');
   }
   
   .centered-toolbar {
@@ -38,5 +39,7 @@
   }
   
   .main{
-    background-color: black;
+    background-image: url('src/assets/icons/teladefundo.jpg');
+    margin: auto;
   }
+  
