@@ -12,7 +12,6 @@ import org.jboss.logging.Logger;
 
 import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.repository.GameRepository;
-import br.unitins.ecommerce.resource.GameResource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -40,7 +39,6 @@ public class GameFileImplService implements FileService {
             String novoNomeImagem = salvarImagem(imagem, nomeImagem);
             LOG.info("chegou aqui");
             game.setNomeImagem(novoNomeImagem);
-            // excluir a imagem antiga (trabalho pra quem????)
         } catch (IOException e) {
             LOG.error(e.getMessage());
             throw e;

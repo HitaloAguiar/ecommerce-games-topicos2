@@ -15,7 +15,6 @@ import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.repository.PedidoRepository;
 import br.unitins.ecommerce.repository.UsuarioRepository;
-import br.unitins.ecommerce.resource.GameResource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

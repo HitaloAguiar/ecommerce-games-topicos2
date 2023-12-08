@@ -140,9 +140,10 @@ public class GameResource {
     @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response salvarImagem(@MultipartForm GameImageForm form) {
+        
+        LOG.info("chegou aqui?");
 
         try {
-            LOG.info("chegou aqui?");
             fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
             return Response.noContent().build();
         } catch (IOException e) {
