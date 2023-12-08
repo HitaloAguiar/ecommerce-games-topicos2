@@ -8,8 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.repository.GameRepository;
+import br.unitins.ecommerce.resource.GameResource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -26,6 +29,8 @@ public class GameFileImplService implements FileService {
     @Inject
     GameRepository gameRepository;
 
+    private static final Logger LOG = Logger.getLogger(GameFileImplService.class);
+
     @Override
     @Transactional
     public void salvar(Long id, String nomeImagem, byte[] imagem)  throws IOException {
@@ -33,14 +38,18 @@ public class GameFileImplService implements FileService {
 
         try {
             String novoNomeImagem = salvarImagem(imagem, nomeImagem);
+            LOG.info("chegou aqui");
             game.setNomeImagem(novoNomeImagem);
             // excluir a imagem antiga (trabalho pra quem????)
         } catch (IOException e) {
+            LOG.error(e.getMessage());
             throw e;
         }
     }
 
     private String salvarImagem(byte[] imagem, String nomeImagem) throws IOException {
+
+        LOG.info("Chegaste aqui?");
         
         // verificando o tipo da imagem
         String mimeType = Files.probeContentType(new File(nomeImagem).toPath());
@@ -68,7 +77,7 @@ public class GameFileImplService implements FileService {
         File file = new File(path);
         // alunos (melhorar :) // melhorar o que?
         if (file.exists())
-            throw new IOException("O nome gerado da imagem está repedido.");
+            throw new IOException("O nome gerado da imagem está repetido.");
 
         // criando um arquivo no S.O.
         file.createNewFile();

@@ -54,7 +54,7 @@ export class CadastroComponent {
 
         this.usuarioService.save(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {
-            this.router.navigateByUrl('/compras/produtos');
+            this.router.navigateByUrl('/auth/login');
           },
           error: (errorResponse) => {
 

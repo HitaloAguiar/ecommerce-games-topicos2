@@ -12,12 +12,12 @@ export class PedidoService {
   private baseURL: string =  'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
-  
-  save(carrinho: ItemCarrinho[] ): Observable<Estado> {
+
+  save(carrinho: ItemCarrinho[] ): Observable<any> {
     const itens = carrinho.map(item => ({
       quantidade: item.quantidade,
       preco: item.preco,
-      idFaixa: item.id
+      idGame: item.id
     }));
 
     const produtos = {
@@ -26,6 +26,4 @@ export class PedidoService {
 
     return this.http.post<any>(`${this.baseURL}/pedidos`, produtos);
   }
-
-
 }

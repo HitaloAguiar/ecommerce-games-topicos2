@@ -142,13 +142,13 @@ public class GameResource {
     public Response salvarImagem(@MultipartForm GameImageForm form) {
 
         try {
+            LOG.info("chegou aqui?");
             fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
             return Response.noContent().build();
         } catch (IOException e) {
             Result result = new Result(e.getMessage());
             return Response.status(Status.CONFLICT).entity(result).build();
         }
-
     }
 
     @GET

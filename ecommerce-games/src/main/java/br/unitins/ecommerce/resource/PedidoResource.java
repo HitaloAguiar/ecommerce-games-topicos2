@@ -42,8 +42,8 @@ public class PedidoResource {
 
     @GET
     @RolesAllowed({"User", "Admin"})
-    public Response findAll() {
+    public Response findAll(String login) {
         
-        return Response.ok(pedidoService.findByAll()).build();
+        return Response.ok(pedidoService.findByAll(login)).build();
     }
 }

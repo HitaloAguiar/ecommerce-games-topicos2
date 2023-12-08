@@ -1,13 +1,17 @@
 package br.unitins.ecommerce.form;
 
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
+import br.unitins.ecommerce.resource.GameResource;
 import jakarta.ws.rs.FormParam;
 
 public class GameImageForm {
 
+    private static final Logger LOG = Logger.getLogger(GameImageForm.class);
+
     @FormParam("id")
-    private Long id;
+    private long id;
 
     @FormParam("nomeImagem")
     private String nomeImagem;
@@ -33,6 +37,7 @@ public class GameImageForm {
     }
 
     public Long getId() {
+        LOG.info("chegaste?");
         return id;
     }
 

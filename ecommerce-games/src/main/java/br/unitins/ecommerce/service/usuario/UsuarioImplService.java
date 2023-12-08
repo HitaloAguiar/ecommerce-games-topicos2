@@ -9,6 +9,7 @@ import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.repository.UsuarioRepository;
+import br.unitins.ecommerce.service.HashService;
 import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -27,6 +28,9 @@ public class UsuarioImplService implements UsuarioService {
 
     @Inject
     UsuarioRepository usuarioRepository;
+
+    @Inject
+    HashService hashService;
 
     private Sort sort = Sort.by("id").ascending();
 
@@ -69,7 +73,7 @@ public class UsuarioImplService implements UsuarioService {
 
         entity.setLogin(usuarioDto.login());
 
-        entity.setSenha(usuarioDto.senha());
+        entity.setSenha(hashService.getHashSenha(usuarioDto.senha()));
 
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 
@@ -102,7 +106,7 @@ public class UsuarioImplService implements UsuarioService {
 
         entity.setLogin(usuarioDto.login());
 
-        entity.setSenha(usuarioDto.senha());
+        entity.setSenha(hashService.getHashSenha(usuarioDto.senha()));
 
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 

@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage-service';
 import { ItemCarrinho } from '../models/item-carrinho.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarrinhoService {
+  private baseURL: string =  'http://localhost:8080';
+
   private carrinhoSubject = new BehaviorSubject<ItemCarrinho[]>([]);
   carrinho$ = this.carrinhoSubject.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(private localStorageService: LocalStorageService,
+              private http: HttpClient) {
     const carrinhoArmazenado = localStorageService.getItem('carrinho') || [];
     this.carrinhoSubject.next(carrinhoArmazenado);
   }
@@ -18,9 +22,6 @@ export class CarrinhoService {
   adicionar(game: ItemCarrinho): void {
     const carrinhoAtual = this.carrinhoSubject.value;
 
-    console.log(game);
-    console.log(game.id);
-    console.log(carrinhoAtual);
     const itemExistente = carrinhoAtual.find(item => item.id === game.id);
 
     if (itemExistente) {
