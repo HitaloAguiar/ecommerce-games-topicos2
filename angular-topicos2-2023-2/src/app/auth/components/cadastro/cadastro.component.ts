@@ -30,7 +30,7 @@ export class CadastroComponent {
       email:[(usuario && usuario.email)? usuario.email : '', Validators.required],
       login:[(usuario && usuario.login)? usuario.login : '', Validators.required],
       senha:[(usuario && usuario.senha)? usuario.senha : '', Validators.required],
-      perfil:[(usuario && usuario.perfil)? usuario.perfil : '', Validators.required],
+      perfil:"USER",
       telefones: (usuario && usuario.telefones)? this.formBuilder.array(usuario.telefones) : this.formBuilder.array([])
     })
   }
@@ -51,6 +51,8 @@ export class CadastroComponent {
     if (this.formGroup.valid) {
       const novoUsuario = this.formGroup.value;
       if (novoUsuario.id == null) {
+
+        console.log(novoUsuario);
 
         this.usuarioService.save(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {

@@ -39,15 +39,6 @@
                 {{ formGroup.get('senha')?.getError('apiError') }}
               </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="full-width-input" color="accent">
-            <mat-label>Perfil</mat-label>
-            <mat-select formControlName="perfil" name="perfil">
-              <mat-option value="USER">Usuário</mat-option>
-            </mat-select>
-            <mat-error *ngIf="formGroup.get('perfil')?.hasError('apiError')">
-              {{ formGroup.get('perfil')?.getError('apiError') }}
-            </mat-error>
-          </mat-form-field>
           <div formArrayName="telefones">
             <div *ngFor="let telefone of telefones.controls; let i = index">
                 <mat-form-field appearance="outline" color="accent">
