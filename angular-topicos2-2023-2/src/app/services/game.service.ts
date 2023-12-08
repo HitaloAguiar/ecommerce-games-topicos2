@@ -69,8 +69,8 @@ export class GameService {
     return this.http.patch<Game>(`${this.baseURL}/games/image/upload`, formData);
   }
 
-  gerarRelatorio(): Observable<any> {
-    const url = `${this.baseURL}/games/relatorio`;
+  gerarRelatorio(filtro: string): Observable<any> {
+    const url = `${this.baseURL}/games/relatorio/${filtro}`;
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json', // Change Content-Type to application/json

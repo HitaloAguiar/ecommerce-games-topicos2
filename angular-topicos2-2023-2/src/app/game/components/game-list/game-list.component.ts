@@ -50,8 +50,8 @@ export class GameListComponent implements OnInit {
     }
   }
 
-  gerarRelatorio(): void {
-    this.gameService.gerarRelatorio().subscribe({
+  gerarRelatorio(filtro: string): void {
+    this.gameService.gerarRelatorio(filtro).subscribe({
       next: (data: any) => {
         const blob = new Blob([data], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);

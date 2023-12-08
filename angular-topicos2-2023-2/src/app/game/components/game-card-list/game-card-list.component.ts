@@ -57,8 +57,8 @@ export class GameCardListComponent implements OnInit {
     }
   }
 
-  gerarRelatorio() {
-    this.gameService.gerarRelatorio().subscribe(
+  gerarRelatorio(filtro: string) {
+    this.gameService.gerarRelatorio(filtro).subscribe(
       (response: any) => {
         const blob = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);

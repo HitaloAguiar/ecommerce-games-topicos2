@@ -181,12 +181,12 @@ public class GameResource {
     @GET
     // @RolesAllowed("Admin")
     @Produces("application/pdf")
-    @Path("/relatorio")
-    public Response gerarRelatorio(){
+    @Path("/relatorio/{filtro}")
+    public Response gerarRelatorio(@PathParam("filtro") String filtro){
         LOG.info("Baixando relatório de games");
         LOG.debug("ERRO DE DEBUG.");
 
-        byte[] pdf = gameService.criarRelatorioGames("");
+        byte[] pdf = gameService.criarRelatorioGames(filtro);
         return Response.ok(pdf).header("Content-Disposition", "filename=attachment;relatorioGames.pdf").build();
     }
 }

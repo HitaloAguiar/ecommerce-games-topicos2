@@ -281,15 +281,15 @@ public class GameImplService implements GameService {
             // Adicione a tabela ao documento
             document.add(table);
 
-            LocalDateTime agora = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            String dataHoraFormatada = agora.format(formatter);
+            // LocalDateTime agora = LocalDateTime.now();
+            // DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            // String dataHoraFormatada = agora.format(formatter);
 
-            Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
-                    .setFontSize(11f)
-                    .setTextAlignment(TextAlignment.RIGHT);
+            // Paragraph dataHora = new Paragraph("Gerado em: " + dataHoraFormatada)
+            //         .setFontSize(11f)
+            //         .setTextAlignment(TextAlignment.RIGHT);
 
-            document.add(dataHora);
+            // document.add(dataHora);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,7 +301,18 @@ public class GameImplService implements GameService {
     @Override
 
     public byte[] criarRelatorioGames(String filtro) {
-        List<Game> games = gameRepository.findAll().list();
+
+        List<Game> games;
+
+        if (filtro == null) {
+
+            games = gameRepository.findAll().list();
+        }
+            
+        else {
+
+            games = gameRepository.findByNome(filtro, sort).list();
+        }
         return gerarPdf(games);
     }
 
