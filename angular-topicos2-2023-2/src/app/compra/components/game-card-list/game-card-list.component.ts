@@ -127,7 +127,7 @@ export class GameCardListComponent implements OnInit {
   adicionarAoCarrinho(card: Card): void {
     this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
     this.carrinhoService.adicionar({
-      id: 1,
+      id: card.id,
       nome: card.titulo,
       preco: card.preco,
       quantidade: 1,

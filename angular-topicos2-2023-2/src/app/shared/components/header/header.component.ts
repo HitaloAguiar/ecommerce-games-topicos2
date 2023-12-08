@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    //  this.obterQtdItensCarrinho();
+     this.obterQtdItensCarrinho();
       this.obterUsuarioLogado();
   }
 
