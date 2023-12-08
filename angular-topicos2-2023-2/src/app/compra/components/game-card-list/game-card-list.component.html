@@ -20,13 +20,13 @@
         <mat-card-title class="centered-text"> {{card.titulo}} </mat-card-title>
 
         <mat-card-content class="centered-text"> {{card.developer}} </mat-card-content>
-        
+
         <mat-card-content class="centered-text"> {{card.preco | currency:'BRL'}} </mat-card-content>
 
           <mat-card-actions class="centered-text" >
             <button mat-button color="accent" [routerLink]="'/user/compras/jogo/' + card.id">Ver mais ...</button>
           </mat-card-actions>
-        
+
         <ng-template #deslogado>
           <mat-card-actions class="centered-text">
             <button mat-button color="accent" [routerLink]="'/compras/jogo/' + card.id">Ver mais ...</button>
@@ -34,7 +34,7 @@
         </ng-template>
 
         <mat-card-footer>
-          <button mat-flat-button color="primary" style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
+          <button mat-flat-button color="primary" routerLink="/user/compras/carrinho" style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
         </mat-card-footer>
       </mat-card>
     </div>

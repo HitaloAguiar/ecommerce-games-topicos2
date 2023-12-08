@@ -8,7 +8,7 @@ import { gameViewResolver } from './resolver/game-view-resolver';
 const routes: Routes = [
   {path: 'produtos', component: GameCardListComponent},
   {path: 'carrinho', component: CarrinhoComponent},
-  { path: 'compras/jogo/:id', component: GameViewComponent}
+  { path: 'compras/jogo/:id', component: GameViewComponent, resolve: {game: gameViewResolver}}
 ];
 
 @NgModule({
