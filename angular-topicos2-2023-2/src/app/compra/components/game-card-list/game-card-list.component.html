@@ -31,8 +31,9 @@
   </div>
   <br>
   <div class="mat-elevation-z8">
-    <mat-paginator [pageSizeOptions]="[6, 12, 24, 32]" [pageSize]="pageSize" [length]="totalRegistros"
-      (page)="paginar($event)">
-    </mat-paginator>
+    
   </div>
+  <mat-paginator class="paginacao" [pageSizeOptions]="[6, 12, 24, 32]" [pageSize]="pageSize" [length]="totalRegistros"
+  (page)="paginar($event)">
+</mat-paginator>
 </div>

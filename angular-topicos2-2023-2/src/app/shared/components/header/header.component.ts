@@ -17,19 +17,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   usuarioLogado: Usuario | null = null;
   private subscription = new Subscription();
 
-  qtdItensCarrinho:number = 0;
+  qtdItensCarrinho: number = 0;
 
   constructor(private sidebarService: SidebarService,
-              private carrinhoService: CarrinhoService,
-              private authService: AuthService,
-              private router: Router,
-              private localStorageService: LocalStorageService) {
+    private carrinhoService: CarrinhoService,
+    private authService: AuthService,
+    private router: Router,
+    private localStorageService: LocalStorageService) {
 
   }
 
   ngOnInit(): void {
-     this.obterQtdItensCarrinho();
-      this.obterUsuarioLogado();
+    this.obterQtdItensCarrinho();
+    this.obterUsuarioLogado();
   }
 
   ngOnDestroy() {
@@ -53,10 +53,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   deslogar() {
+
+    this.router.navigateByUrl('/compras/produtos');
+    this.finishLogout();
+
+
+  }
+  finishLogout() {
     this.authService.removeToken()
     this.authService.removeUsuarioLogado();
     this.carrinhoService.removerTudo();
-
-    this.router.navigateByUrl('/compras/produtos');
   }
+
+  acessarPerfil() {
+    if (this.usuarioLogado?.perfil == 'ADMIN') {
+      this.router.navigateByUrl('/admin/perfil/view');
+    } else if (this.usuarioLogado?.perfil == 'USER') {
+      this.router.navigateByUrl('/user/perfil/view');
+    }
+  }
+
 }
+

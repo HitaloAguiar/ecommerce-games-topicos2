@@ -1,17 +1,18 @@
 .main-container {
   background-color: #252525 ; /* ou qualquer outra cor de fundo desejada */
-  margin: 0;
+  margin: 30px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6; /* Espaçamento entre linhas */
+  height: auto 100%;
   
 }/* Estilos para o contêiner principal */
 
 .main-container {
   max-width: 100%; /* ou defina uma largura máxima desejada */
   margin: 0 auto;
-  padding: 20px;
+  height: auto 100%;
 }
 
 body, html {
@@ -29,6 +30,7 @@ mat-card {
 
 
 .container-input {
+  background-color: #252525 ; /* ou qualquer outra cor de fundo desejada */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,6 +106,11 @@ img {
   margin: 0 auto;
 }
 
+.paginacao{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
 /* Estilos para os cards dentro do grid responsivo */
 .responsive-grid {

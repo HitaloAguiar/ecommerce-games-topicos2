@@ -1,0 +1,42 @@
+.corFundo{
+    background-color: #252525;
+    height: 100%;
+    color: azure;
+}
+
+.container {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: #3b3b3b;
+    height: auto 100%;
+    height: 100%;
+}
+
+.profile,
+nav,
+nav > span,
+.title,
+.flex-container,
+.adress-container,
+.adress > div {
+  display: flex;
+}
+
+.profile {
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
+.profile,
+nav,
+nav>span,
+.title,
+.flex-container,
+.adress-container,
+.adress>div {
+    display: flex;
+}

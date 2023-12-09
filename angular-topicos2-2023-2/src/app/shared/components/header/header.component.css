@@ -21,3 +21,8 @@
   margin-right: 50px;
 }
 
+span.hovered {
+  border-bottom: 1px solid #000; /* Adicione o estilo desejado para a linha em baixo do nome */
+  cursor: pointer; /* Adicione um estilo de cursor para indicar que é clicável */
+}
+

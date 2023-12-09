@@ -63,6 +63,11 @@ const routes: Routes = [
         path: 'usuarios', loadChildren:
           () => import('./usuario/usuario.module')
             .then(m => m.UsuarioModule)
+      },
+      {
+        path: 'perfil', loadChildren:
+          () => import('./perfil/perfil.module')
+            .then(m => m.PerfilModule)
       }
     ],
   },
@@ -75,7 +80,11 @@ const routes: Routes = [
         path: 'compras', loadChildren:
           () => import('./compra/compra.module')
             .then(m => m.CompraModule)
-      },
+      },{
+        path: 'perfil', loadChildren:
+          () => import('./perfil/perfil.module')
+            .then(m => m.PerfilModule)
+      }
       // { path: 'register', component: RegisterComponent },
     ],
   },
