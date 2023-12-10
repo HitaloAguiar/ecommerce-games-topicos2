@@ -2,6 +2,8 @@ package br.unitins.ecommerce.service.usuario;
 
 import java.util.List;
 
+import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
+import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.usuario.Usuario;
@@ -28,4 +30,8 @@ public interface UsuarioService {
     Long count();
 
     Long countByNome(String nome);
+
+    EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO);
+    
+    EnderecoResponseDTO update(Long id, @Valid EnderecoDTO enderecoDTO);
 }

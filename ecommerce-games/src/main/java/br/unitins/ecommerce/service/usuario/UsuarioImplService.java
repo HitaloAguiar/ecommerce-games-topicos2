@@ -3,11 +3,16 @@ package br.unitins.ecommerce.service.usuario;
 import java.util.List;
 import java.util.Set;
 
+import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
+import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
+import br.unitins.ecommerce.model.endereco.Endereco;
 import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
+import br.unitins.ecommerce.repository.CidadeRepository;
+import br.unitins.ecommerce.repository.EnderecoRepository;
 import br.unitins.ecommerce.repository.UsuarioRepository;
 import br.unitins.ecommerce.service.HashService;
 import io.quarkus.panache.common.Sort;
@@ -28,6 +33,12 @@ public class UsuarioImplService implements UsuarioService {
 
     @Inject
     UsuarioRepository usuarioRepository;
+
+    @Inject
+    EnderecoRepository enderecoRepository;
+    
+    @Inject
+    CidadeRepository cidadeRepository;
 
     @Inject
     HashService hashService;
@@ -158,6 +169,63 @@ public class UsuarioImplService implements UsuarioService {
 
         return usuarioRepository.findByNome(nome, sort).count();
     }
+
+    @Override
+    public Usuario findByLoginAndSenha(String login, String senha) {
+
+        Usuario usuario = usuarioRepository.findByLoginAndSenha(login, senha);
+
+        return usuario;
+    }
+
+    @Override
+    @Transactional
+    public EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO) {
+
+        Endereco endereco = new Endereco();
+
+        endereco.setLogradouro(enderecoDTO.logradouro());
+
+        endereco.setBairro(enderecoDTO.bairro());
+
+        endereco.setNumero(enderecoDTO.numero());
+
+        if (enderecoDTO.complemento() != null)
+            endereco.setComplemento(enderecoDTO.complemento());
+
+        endereco.setCep(enderecoDTO.cep());
+
+        endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
+        
+        return new EnderecoResponseDTO(endereco);
+    }
+
+    @Override
+    @Transactional
+    public EnderecoResponseDTO update(Long id, @Valid EnderecoDTO enderecoDTO) {
+
+        Endereco endereco = enderecoRepository.findById(id);
+
+        if (endereco == null)
+            throw new NotFoundException("Endereço fora das opções disponíveis");
+
+        endereco.setLogradouro(enderecoDTO.logradouro());
+
+        endereco.setBairro(enderecoDTO.bairro());
+
+        endereco.setNumero(enderecoDTO.numero());
+
+        if (enderecoDTO.complemento() != null)
+            endereco.setComplemento(enderecoDTO.complemento());
+
+        endereco.setCep(enderecoDTO.cep());
+
+        endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
+
+        enderecoRepository.persist(endereco);
+        
+        return new EnderecoResponseDTO(endereco);
+    }
     
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {
 
@@ -166,13 +234,5 @@ public class UsuarioImplService implements UsuarioService {
         if (!violations.isEmpty())
             throw new ConstraintViolationException(violations);
 
-    }
-
-    @Override
-    public Usuario findByLoginAndSenha(String login, String senha) {
-
-        Usuario usuario = usuarioRepository.findByLoginAndSenha(login, senha);
-
-        return usuario;
     }
 }
