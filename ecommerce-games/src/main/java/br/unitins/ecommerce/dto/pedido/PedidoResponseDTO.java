@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.itempedido.ItemPedidoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
-import br.unitins.ecommerce.model.Pedido;
+import br.unitins.ecommerce.model.pedido.Pedido;
 
 public record PedidoResponseDTO(
     Long id,
@@ -17,6 +17,6 @@ public record PedidoResponseDTO(
     
     public PedidoResponseDTO (Pedido pedido) {
 
-        this(pedido.getId(), pedido.getDataHora(), new UsuarioResponseDTO(pedido.getUsuario(), pedido.getUsuario().getPerfil().getLabel()), pedido.getTotalPedido(), ItemPedidoResponseDTO.valueOf(pedido.getItens()));
+        this(pedido.getId(), pedido.getDataHoraCompra(), new UsuarioResponseDTO(pedido.getUsuario(), pedido.getUsuario().getPerfil().getLabel()), pedido.getTotalPedido(), ItemPedidoResponseDTO.valueOf(pedido.getItens()));
     }
 }

@@ -9,8 +9,8 @@ import org.jboss.logging.Logger;
 import br.unitins.ecommerce.dto.itempedido.ItemPedidoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoResponseDTO;
-import br.unitins.ecommerce.model.ItemPedido;
-import br.unitins.ecommerce.model.Pedido;
+import br.unitins.ecommerce.model.pedido.ItemPedido;
+import br.unitins.ecommerce.model.pedido.Pedido;
 import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.repository.GameRepository;
 import br.unitins.ecommerce.repository.PedidoRepository;
@@ -37,7 +37,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Transactional
     public PedidoResponseDTO insert(PedidoDTO dto, String login) {
         Pedido pedido = new Pedido();
-        pedido.setDataHora(LocalDateTime.now());
+        pedido.setDataHoraCompra(LocalDateTime.now());
 
         LOG.info(dto);
         LOG.info(dto.itens());
