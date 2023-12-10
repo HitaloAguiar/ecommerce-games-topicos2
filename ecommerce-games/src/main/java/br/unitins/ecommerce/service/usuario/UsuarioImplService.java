@@ -179,8 +179,26 @@ public class UsuarioImplService implements UsuarioService {
     }
 
     @Override
+    public EnderecoResponseDTO getEndereco(Long idUsuario) throws NullPointerException, NotFoundException {
+        
+        if (idUsuario == null)
+            throw new NullPointerException("Id do Usuário está nulo");
+
+        Usuario usuario = usuarioRepository.findById(idUsuario);
+
+        if (usuario == null)
+            throw new NotFoundException("Nenhum Usuário encontrado com este ID");
+
+        if (usuario.getEndereco() != null)
+            return new EnderecoResponseDTO(usuario.getEndereco(), usuario.getLogin());
+
+        else
+            throw new NotFoundException("Este Usuário ainda não possui endereço");
+    }
+
+    @Override
     @Transactional
-    public EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO) {
+    public EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario) {
 
         Endereco endereco = new Endereco();
 
@@ -196,18 +214,26 @@ public class UsuarioImplService implements UsuarioService {
         endereco.setCep(enderecoDTO.cep());
 
         endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
+
+        enderecoRepository.persist(endereco);
+
+        Usuario usuario = usuarioRepository.findById(idUsuario);
+
+        usuario.setEndereco(endereco);
         
-        return new EnderecoResponseDTO(endereco);
+        return new EnderecoResponseDTO(endereco, usuario.getLogin());
     }
 
     @Override
     @Transactional
-    public EnderecoResponseDTO update(Long id, @Valid EnderecoDTO enderecoDTO) {
+    public EnderecoResponseDTO update(Long idusuario, @Valid EnderecoDTO enderecoDTO) {
 
-        Endereco endereco = enderecoRepository.findById(id);
+        Usuario usuario = usuarioRepository.findById(idusuario);
+
+        Endereco endereco = usuario.getEndereco();
 
         if (endereco == null)
-            throw new NotFoundException("Endereço fora das opções disponíveis");
+            throw new NotFoundException("Usuário não possui endereço ainda");
 
         endereco.setLogradouro(enderecoDTO.logradouro());
 
@@ -221,10 +247,8 @@ public class UsuarioImplService implements UsuarioService {
         endereco.setCep(enderecoDTO.cep());
 
         endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
-
-        enderecoRepository.persist(endereco);
         
-        return new EnderecoResponseDTO(endereco);
+        return new EnderecoResponseDTO(endereco, usuario.getLogin());
     }
     
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {

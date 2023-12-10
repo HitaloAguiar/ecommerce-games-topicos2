@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 
+import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
+import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
@@ -13,6 +15,7 @@ import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -34,7 +37,7 @@ public class UsuarioResource {
     private static final Logger LOG = Logger.getLogger(UsuarioResource.class);
 
     @GET
-    public List<UsuarioResponseDTO> getAllUsuario() {
+    public List<UsuarioResponseDTO> getAll() {
 
         LOG.info("Buscando todos os usuários");
         LOG.debug("ERRO DE DEBUG.");
@@ -63,10 +66,19 @@ public class UsuarioResource {
     @GET
     @Path("/{id}")
     public UsuarioResponseDTO getById(@PathParam("id") Long id) throws NotFoundException {
-        LOG.info("Buscando usuário por nome");
+        LOG.info("Buscando usuário por id");
         LOG.debug("ERRO DE DEBUG.");
 
         return usuarioService.getById(id);
+    }
+
+    @GET
+    @Path("/endereco/{id}")
+    public EnderecoResponseDTO getEndereco(@PathParam("id") Long id) throws NullPointerException, NotFoundException {
+        LOG.info("Buscando endereço do usuário");
+        LOG.debug("ERRO DE DEBUG.");
+
+        return usuarioService.getEndereco(id);
     }
 
     @POST
@@ -77,6 +89,30 @@ public class UsuarioResource {
         return Response
                 .status(Status.CREATED) // 201
                 .entity(usuarioService.insert(usuarioDto))
+                .build();
+    }
+
+    @PATCH
+    @Path("/endereco/insert/{id}")
+    public Response insert(@PathParam("id") Long id, EnderecoDTO enderecoDTO) {
+
+        LOG.infof("Endereço criado com sucesso.");
+
+        return Response
+                .status(Status.CREATED) // 201
+                .entity(usuarioService.insert(enderecoDTO, id))
+                .build();
+    }
+
+    @PATCH
+    @Path("/endereco/update/{id}")
+    public Response update(@PathParam("id") Long id, EnderecoDTO enderecoDTO) {
+
+        usuarioService.update(id, enderecoDTO);
+        LOG.infof("Endereço do usuário (%d) atualizado com sucesso.", id);
+
+        return Response
+                .status(Status.NO_CONTENT) // 204
                 .build();
     }
 

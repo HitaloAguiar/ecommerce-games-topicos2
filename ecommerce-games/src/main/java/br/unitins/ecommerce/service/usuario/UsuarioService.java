@@ -31,7 +31,9 @@ public interface UsuarioService {
 
     Long countByNome(String nome);
 
-    EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO);
+    EnderecoResponseDTO getEndereco(Long idUsuario);
+
+    EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario);
     
-    EnderecoResponseDTO update(Long id, @Valid EnderecoDTO enderecoDTO);
+    EnderecoResponseDTO update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
 }

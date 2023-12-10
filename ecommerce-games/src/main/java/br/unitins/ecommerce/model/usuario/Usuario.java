@@ -83,7 +83,7 @@ public class Usuario extends DefaultEntity {
         return telefones;
     }
 
-    public void setTelefone(List<Telefone> telefones) {
+    public void setTelefones(List<Telefone> telefones) {
         this.telefones = telefones;
     }
 
@@ -101,5 +101,13 @@ public class Usuario extends DefaultEntity {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }
