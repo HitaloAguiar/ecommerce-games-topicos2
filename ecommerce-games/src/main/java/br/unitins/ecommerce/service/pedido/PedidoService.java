@@ -7,11 +7,12 @@ import br.unitins.ecommerce.dto.pedido.PedidoResponseDTO;
 
 public interface PedidoService {
 
+    public List<PedidoResponseDTO> findByAll(String login);
+    
     public PedidoResponseDTO insert(PedidoDTO dto, String login);
 
     public PedidoResponseDTO findById(Long id);
 
     public List<PedidoResponseDTO> findByAll();
 
-    public List<PedidoResponseDTO> findByAll(String login);
 }

@@ -17,7 +17,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Pedido extends DefaultEntity {
     
-    private LocalDateTime dataHoraCompra;
+    private LocalDateTime dataHoraPedido;
     
     private Double totalPedido;
 
@@ -38,12 +38,12 @@ public class Pedido extends DefaultEntity {
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
-    public LocalDateTime getDataHoraCompra() {
-        return dataHoraCompra;
+    public LocalDateTime getDataHoraPedido() {
+        return dataHoraPedido;
     }
 
-    public void setDataHoraCompra(LocalDateTime dataHora) {
-        this.dataHoraCompra = dataHora;
+    public void setDataHoraPedido(LocalDateTime dataHora) {
+        this.dataHoraPedido = dataHora;
     }
 
     public Usuario getUsuario() {
@@ -84,5 +84,13 @@ public class Pedido extends DefaultEntity {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 }

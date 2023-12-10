@@ -37,7 +37,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Transactional
     public PedidoResponseDTO insert(PedidoDTO dto, String login) {
         Pedido pedido = new Pedido();
-        pedido.setDataHoraCompra(LocalDateTime.now());
+        pedido.setDataHoraPedido(LocalDateTime.now());
 
         LOG.info(dto);
         LOG.info(dto.itens());
