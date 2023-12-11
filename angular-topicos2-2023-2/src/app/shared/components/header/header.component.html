@@ -24,6 +24,7 @@
   <ng-container *ngIf="usuarioLogado; else loginButton">
     <!-- Botão de saída -->
     <button value="blah" mat-icon-button class="mat-toolbar-content" (click)="deslogar()">
+      <a routerLink="/compras/produtos"></a>
       <mat-icon>exit_to_app</mat-icon>
       <!-- <span>{{usuarioLogado.nome}}</span> -->
     </button>
