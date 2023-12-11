@@ -94,11 +94,14 @@ img {
 /* Estilos para a div que envolve os cards */
 .cards {
   display: flex;
+  flex-wrap: wrap; /* Permite que os cards passem para a próxima linha */
   justify-content: center;
+  gap: 20px;
   max-width: 1200px; /* Adicione uma largura máxima conforme necessário */
   margin: 20px auto; /* Centralize o contêiner */
   overflow: hidden; /* Adicione overflow: hidden para evitar overflow dos elementos filhos */
 }
+
 
 /* Estilos para o contêiner dos cards */
 .container-input {
@@ -130,6 +133,13 @@ img {
   max-width: 1200px; /* Adicione uma largura máxima conforme necessário */
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ajuste a altura mínima da seção de cards */
+.cards {
+  min-height: 350px; /* Ajuste conforme necessário para evitar a falta de conteúdo */
 }
 
 

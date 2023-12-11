@@ -77,17 +77,18 @@ INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
 INSERT INTO plataforma (nome, descricao, anoLancamento, id_fabricante)
        VALUES ('PlayStation 4', '', '2016-06-09', 2);--6
 
-INSERT INTO produto (nome, descricao, preco) VALUES ('Super Mario Odyssey', 'Super Mario Odyssey: Mario viaja por mundos incríveis usando seu chapéu mágico para capturar inimigos e objetos, embarcando em uma missão emocionante para salvar a Princesa Peach das garras de Bowser', 289.90);--1
-INSERT INTO produto (nome, descricao, preco) VALUES ('God of War Ragnarok', 'God of War: Ragnarok é a continuação da saga de Kratos e Atreus. Ambientado no mundo nórdico, o jogo promete intensidade mitológica, batalhas colossais e uma narrativa envolvente enquanto pai e filho enfrentando desafios durante o apocalipse nórdico', 193.51);--2
-INSERT INTO produto (nome, descricao, preco) VALUES ('Zelda: Tears of the Kingdom', 'The Legend of Zelda: mergulha os jogadores em um épico reino de fantasia, onde Link enfrenta trevas e transformações para salvar Hyrule. Com gráficos aprimorados, narrativa envolvente, jornada cativante com quebra-cabeças desafiadores e batalhas épicas.', 306.90);--3
-INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'The Last of Us Part II, da Naughty Dog, é uma saga de Ellie em um mundo pós-apocalíptico. Com narrativa envolvente e gráficos deslumbrantes, o jogo explora temas profundos, como vingança e compaixão, oferecendo uma experiência emocional e impactante.', 150.15);--4
-INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'Doom Eternal, da id Software, é um frenesi demoníaco. O Doom Slayer enfrenta hordas do inferno com armas poderosas em ambientes épicos, proporcionando ação intensa e brutal. Um espetáculo infernal de destruição e sobrevivência.', 160.90);--5
+
+INSERT INTO produto (nome, descricao, preco) VALUES ('GRIS', 'Gris é uma obra de arte visual e emocional. Sem palavras, a protagonista enfrenta a tristeza, explorando um mundo deslumbrante. Com bela trilha sonora, Gris é uma experiência poética de superação e descoberta.', 46.99);--1
+INSERT INTO produto (nome, descricao, preco) VALUES ('Outer Wilds', 'Outer Wilds: Exploração cósmica em loop temporal. Desvende segredos celestiais antes da supernova. Narrativa não linear, física cativante e uma jornada cósmica envolvente e única.', 59.99);--2
+INSERT INTO produto (nome, descricao, preco) VALUES ('Hollow Knight', 'Hollow Knight, obra-prima indie, mergulha jogadores em um mundo sombrio e encantador. Explore cavernas, enfrente criaturas e desvende mistérios, enquanto o cavaleiro vence desafios. Uma jornada atmosférica, rica em detalhes e repleta de descobertas', 62.50);--3
+INSERT INTO produto (nome, descricao, preco) VALUES ('Baldur''s Gate 3', 'Baldur''s Gate 3, da Larian Studios, é uma épica aventura de RPG baseada em Dungeons & Dragons. Com gráficos deslumbrantes e escolhas impactantes, os jogadores exploram traições, monstros e magias, moldando o destino em um mundo rico e cheio de perigos.', 199.90);--4
+INSERT INTO produto (nome, descricao, preco) VALUES ('Sekiro: Shadows Die Twice', 'Sekiro: Shadows Die Twice, da FromSoftware, é um jogo de ação desafiador ambientado no Japão feudal. Controle o astuto shinobi, enfrentando inimigos implacáveis, desvendando mistérios e dominando a arte da espada em um mundo sombrio e implacável.', 274.00);--5
 INSERT INTO produto (nome, descricao, preco) VALUES ('Elden Ring', 'Elden Ring, criação da FromSoftware em parceria com George R. R. Martin, é um épico de fantasia sombria. Com vastos reinos, combate desafiador e uma narrativa envolvente, o jogo promete uma jornada inesquecível em um mundo repleto de mistérios e perigos.', 229.90);--6
-INSERT INTO produto (nome, descricao, preco) VALUES ('GRIS', 'Gris é uma obra de arte visual e emocional. Sem palavras, a protagonista enfrenta a tristeza, explorando um mundo deslumbrante. Com bela trilha sonora, Gris é uma experiência poética de superação e descoberta.', 46.99);--7
-INSERT INTO produto (nome, descricao, preco) VALUES ('Outer Wilds', 'Outer Wilds: Exploração cósmica em loop temporal. Desvende segredos celestiais antes da supernova. Narrativa não linear, física cativante e uma jornada cósmica envolvente e única.', 59.99);--8
-INSERT INTO produto (nome, descricao, preco) VALUES ('Hollow Knight', 'Hollow Knight, obra-prima indie, mergulha jogadores em um mundo sombrio e encantador. Explore cavernas, enfrente criaturas e desvende mistérios, enquanto o cavaleiro vence desafios. Uma jornada atmosférica, rica em detalhes e repleta de descobertas', 62.50);--9
-INSERT INTO produto (nome, descricao, preco) VALUES ('Baldur''s Gate 3', 'Baldur''s Gate 3, da Larian Studios, é uma épica aventura de RPG baseada em Dungeons & Dragons. Com gráficos deslumbrantes e escolhas impactantes, os jogadores exploram traições, monstros e magias, moldando o destino em um mundo rico e cheio de perigos.', 199.90);--10
-INSERT INTO produto (nome, descricao, preco) VALUES ('Sekiro: Shadows Die Twice', 'Sekiro: Shadows Die Twice, da FromSoftware, é um jogo de ação desafiador ambientado no Japão feudal. Controle o astuto shinobi, enfrentando inimigos implacáveis, desvendando mistérios e dominando a arte da espada em um mundo sombrio e implacável.', 274.00);--11
+INSERT INTO produto (nome, descricao, preco) VALUES ('Super Mario Odyssey', 'Super Mario Odyssey: Mario viaja por mundos incríveis usando seu chapéu mágico para capturar inimigos e objetos, embarcando em uma missão emocionante para salvar a Princesa Peach das garras de Bowser', 289.90);--7
+INSERT INTO produto (nome, descricao, preco) VALUES ('God of War Ragnarok', 'God of War: Ragnarok é a continuação da saga de Kratos e Atreus. Ambientado no mundo nórdico, o jogo promete intensidade mitológica, batalhas colossais e uma narrativa envolvente enquanto pai e filho enfrentando desafios durante o apocalipse nórdico', 193.51);--8
+INSERT INTO produto (nome, descricao, preco) VALUES ('Zelda: Tears of the Kingdom', 'The Legend of Zelda: mergulha os jogadores em um épico reino de fantasia, onde Link enfrenta trevas e transformações para salvar Hyrule. Com gráficos aprimorados, narrativa envolvente, jornada cativante com quebra-cabeças desafiadores e batalhas épicas.', 306.90);--9
+INSERT INTO produto (nome, descricao, preco) VALUES ('The Last Of Us 2', 'The Last of Us Part II, da Naughty Dog, é uma saga de Ellie em um mundo pós-apocalíptico. Com narrativa envolvente e gráficos deslumbrantes, o jogo explora temas profundos, como vingança e compaixão, oferecendo uma experiência emocional e impactante.', 150.15);--10
+INSERT INTO produto (nome, descricao, preco) VALUES ('Doom Eternal', 'Doom Eternal, da id Software, é um frenesi demoníaco. O Doom Slayer enfrenta hordas do inferno com armas poderosas em ambientes épicos, proporcionando ação intensa e brutal. Um espetáculo infernal de destruição e sobrevivência.', 160.90);--11
 INSERT INTO produto (nome, descricao, preco) VALUES ('Alan Wake 2', 'Alan Wake 2 é um jogo de sobrevivência e terror feito pela Remedy Entertainment. É a sequência de Alan Wake, lançado em 2010. Alan Wake, um escritor de suspense, está preso em um mundo obscuro, onde seus pesadelos e medos se manifestam como realidade. ', 225.00);--12
 INSERT INTO produto (nome, descricao, preco) VALUES ('Star Wars Jedi: Survivor', 'Star Wars Jedi: Survivor é um jogo de ação e aventura que se passa cinco anos após a queda da Ordem Jedi. Cal Kestis, um Jedi sobrevivente, precisa encontrar um novo lugar para se esconder e treinar, enquanto é perseguido pelo Império.', 299.00);--13
 INSERT INTO produto (nome, descricao, preco) VALUES ('Mega Man X Legacy Collection', 'Mega Man X, clássico da Capcom, oferece ação intensa com o herói X enfrentando robôs rebeldes. Com gráficos avançados, armaduras poderosas e desafios eletrizantes, o jogo define a excelência dos jogos de plataforma e a nostalgia dos fãs.', 66.90);--14
@@ -99,17 +100,17 @@ INSERT INTO produto (nome, descricao, preco) VALUES ('Devil May Cry 5', 'Devil M
 INSERT INTO produto (nome, descricao, preco) VALUES ('Dark Souls 3', 'Dark Souls III: RPG implacável em mundo sombrio. Enfrente inimigos desafiadores, explore cenários detalhados e mergulhe na atmosfera épica. Com mecânicas profundas, é uma jornada desafiadora e inesquecível.', 229.90);--20
 
 
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-10-27', 3, 'super-mario-odyssey-cover.png', 'mario1.jpg', 'mario2.jpg', 'mario3.jpg', 1);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2022-11-09', 2, 'gow-cover.jpg', 'gow1.jpg', 'gow2.jpg', 'gow3.jpg', 2);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-05-17', 3, 'zelda-totk-cover.jpg', 'zelda1.jpg', 'zelda2.jpg' ,'zelda3.png', 3);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-06-19', 4, 'tlou-2-cover.jpg', 'tlou1.jpg', 'tlou2.jpg', 'tlou3.jpg', 4);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-03-20', 5, 'doom-eternal-cover.png', 'doom1.jpg', 'doom2.jpg', 'doom3.jpg', 5);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2018-12-13', 8, 'gris-cover.jpg', 'gris1.jpg', 'gris2.jpg', 'gris2.jpg', 1);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-05-28', 9, 'outer-wilds-cover.jpg', 'outer1.jpg', 'outer2.jpg', 'outer3.jpg', 2);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-02-24', 10, 'hollow-knight-cover.jpg', 'hk1.jpg', 'hk2.jpg', 'hk3.jpg', 3);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-08-03', 11, 'bg3-cover.png', 'bg1.jpg', 'bg2.jpg', 'bg33.jpg', 4);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-03-22', 7, 'sekiro-cover.jpg', 'sekiro1.jpg', 'sekiro2.jpg', 'sekiro3.jpg', 5);
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2022-02-25', 7, 'elden-ring-cover.jpg', 'elden1.jpg', 'elden2.jpg', 'elden3.jpg', 6);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2018-12-13', 8, 'gris-cover.jpg', 'gris1.jpg', 'gris2.jpg', 'gris2.jpg', 7);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-05-28', 9, 'outer-wilds-cover.jpg', 'outer1.jpg', 'outer2.jpg', 'outer3.jpg', 8);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-02-24', 10, 'hollow-knight-cover.jpg', 'hk1.jpg', 'hk2.jpg', 'hk3.jpg', 9);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-08-03', 11, 'bg3-cover.png', 'bg1.jpg', 'bg2.jpg', 'bg33.jpg', 10);
-INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-03-22', 7, 'sekiro-cover.jpg', 'sekiro1.jpg', 'sekiro2.jpg', 'sekiro3.jpg', 11);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2017-10-27', 3, 'super-mario-odyssey-cover.png', 'mario1.jpg', 'mario2.jpg', 'mario3.jpg', 7);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2022-11-09', 2, 'gow-cover.jpg', 'gow1.jpg', 'gow2.jpg', 'gow3.jpg', 8);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-05-17', 3, 'zelda-totk-cover.jpg', 'zelda1.jpg', 'zelda2.jpg' ,'zelda3.png', 9);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-06-19', 4, 'tlou-2-cover.jpg', 'tlou1.jpg', 'tlou2.jpg', 'tlou3.jpg', 10);
+INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2020-03-20', 5, 'doom-eternal-cover.png', 'doom1.jpg', 'doom2.jpg', 'doom3.jpg', 11);
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-10-17', 12, 'alan-wake-2-cover.png', 'wake1.jpg', 'wake2.jpg', 'wake3.png', 12);
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2023-04-28', 13, 'star-wars-jedi-survivor-cover.jpg', 'star1.jpg', 'star2.jpg', 'star3.jpg', 13);
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2018-07-24', 14, 'mega-man-x-cover.jpg', 'mega1.jpg', 'mega2.jpg', 'mega3.jpg', 14);
@@ -120,18 +121,30 @@ INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImag
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2019-04-08', 14, 'dmc5-cover.jpg', 'dmc1.jpg', 'dmc2.jpg', 'dmc3.jpg', 19);
 INSERT INTO game (anoLancamento, id_developer, nomeImagem, nomeImagem1, nomeImagem2, nomeImagem3, id) VALUES ('2016-04-16', 7, 'dark-souls-3-cover.png', 'dark1.jpg', 'dark2.jpg', 'dark3.jpg', 20);
 
+
 INSERT INTO generos_game (id_game, id_genero) VALUES (1, 3);
-INSERT INTO generos_game (id_game, id_genero) VALUES (1, 6);
+INSERT INTO generos_game (id_game, id_genero) VALUES (1, 4);
+INSERT INTO generos_game (id_game, id_genero) VALUES (1, 15);
+INSERT INTO generos_game (id_game, id_genero) VALUES (1, 17);
+INSERT INTO generos_game (id_game, id_genero) VALUES (2, 4);
 INSERT INTO generos_game (id_game, id_genero) VALUES (2, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (2, 7);
-INSERT INTO generos_game (id_game, id_genero) VALUES (3, 4);
+INSERT INTO generos_game (id_game, id_genero) VALUES (2, 17);
+INSERT INTO generos_game (id_game, id_genero) VALUES (2, 18);
 INSERT INTO generos_game (id_game, id_genero) VALUES (3, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (3, 2);
-INSERT INTO generos_game (id_game, id_genero) VALUES (4, 1);
-INSERT INTO generos_game (id_game, id_genero) VALUES (5, 8);
-INSERT INTO generos_game (id_game, id_genero) VALUES (5, 1);
-INSERT INTO generos_game (id_game, id_genero) VALUES (5, 3);
+INSERT INTO generos_game (id_game, id_genero) VALUES (3, 11);
+INSERT INTO generos_game (id_game, id_genero) VALUES (3, 18);
+INSERT INTO generos_game (id_game, id_genero) VALUES (3, 19);
+INSERT INTO generos_game (id_game, id_genero) VALUES (4, 5);
+INSERT INTO generos_game (id_game, id_genero) VALUES (4, 6);
+INSERT INTO generos_game (id_game, id_genero) VALUES (4, 9);
+INSERT INTO generos_game (id_game, id_genero) VALUES (4, 14);
+INSERT INTO generos_game (id_game, id_genero) VALUES (4, 17);
+INSERT INTO generos_game (id_game, id_genero) VALUES (5, 2);
 INSERT INTO generos_game (id_game, id_genero) VALUES (5, 6);
+INSERT INTO generos_game (id_game, id_genero) VALUES (5, 11);
+INSERT INTO generos_game (id_game, id_genero) VALUES (5, 14);
+INSERT INTO generos_game (id_game, id_genero) VALUES (5, 16);
+
 INSERT INTO generos_game (id_game, id_genero) VALUES (6, 2);
 INSERT INTO generos_game (id_game, id_genero) VALUES (6, 6);
 INSERT INTO generos_game (id_game, id_genero) VALUES (6, 11);
@@ -139,27 +152,17 @@ INSERT INTO generos_game (id_game, id_genero) VALUES (6, 14);
 INSERT INTO generos_game (id_game, id_genero) VALUES (6, 16);
 INSERT INTO generos_game (id_game, id_genero) VALUES (6, 17);
 INSERT INTO generos_game (id_game, id_genero) VALUES (7, 3);
-INSERT INTO generos_game (id_game, id_genero) VALUES (7, 4);
-INSERT INTO generos_game (id_game, id_genero) VALUES (7, 15);
-INSERT INTO generos_game (id_game, id_genero) VALUES (7, 17);
-INSERT INTO generos_game (id_game, id_genero) VALUES (8, 4);
+INSERT INTO generos_game (id_game, id_genero) VALUES (7, 6);
 INSERT INTO generos_game (id_game, id_genero) VALUES (8, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (8, 17);
-INSERT INTO generos_game (id_game, id_genero) VALUES (8, 18);
+INSERT INTO generos_game (id_game, id_genero) VALUES (8, 7);
+INSERT INTO generos_game (id_game, id_genero) VALUES (8, 4);
 INSERT INTO generos_game (id_game, id_genero) VALUES (9, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (9, 11);
-INSERT INTO generos_game (id_game, id_genero) VALUES (9, 18);
-INSERT INTO generos_game (id_game, id_genero) VALUES (9, 19);
-INSERT INTO generos_game (id_game, id_genero) VALUES (10, 5);
-INSERT INTO generos_game (id_game, id_genero) VALUES (10, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (10, 9);
-INSERT INTO generos_game (id_game, id_genero) VALUES (10, 14);
-INSERT INTO generos_game (id_game, id_genero) VALUES (10, 17);
-INSERT INTO generos_game (id_game, id_genero) VALUES (11, 2);
+INSERT INTO generos_game (id_game, id_genero) VALUES (9, 2);
+INSERT INTO generos_game (id_game, id_genero) VALUES (10, 1);
+INSERT INTO generos_game (id_game, id_genero) VALUES (11, 8);
+INSERT INTO generos_game (id_game, id_genero) VALUES (11, 1);
+INSERT INTO generos_game (id_game, id_genero) VALUES (11, 3);
 INSERT INTO generos_game (id_game, id_genero) VALUES (11, 6);
-INSERT INTO generos_game (id_game, id_genero) VALUES (11, 11);
-INSERT INTO generos_game (id_game, id_genero) VALUES (11, 14);
-INSERT INTO generos_game (id_game, id_genero) VALUES (11, 16);
 INSERT INTO generos_game (id_game, id_genero) VALUES (12, 1);
 INSERT INTO generos_game (id_game, id_genero) VALUES (12, 4);
 INSERT INTO generos_game (id_game, id_genero) VALUES (12, 6);
@@ -199,16 +202,25 @@ INSERT INTO generos_game (id_game, id_genero) VALUES (20, 11);
 INSERT INTO generos_game (id_game, id_genero) VALUES (20, 14);
 INSERT INTO generos_game (id_game, id_genero) VALUES (20, 16);
 
+
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (1, 1);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (1, 2);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (1, 3);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (1, 5);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (1, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (2, 1);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (2, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (2, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (2, 6);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (3, 1);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (3, 2);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (3, 3);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (3, 5);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (3, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (4, 1);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (4, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (4, 5);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (4, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 1);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 2);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (5, 6);
@@ -216,24 +228,16 @@ INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (6, 1);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (6, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (6, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (6, 6);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (7, 1);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (7, 2);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (7, 3);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (7, 5);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (7, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (8, 1);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (8, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (8, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (8, 6);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (9, 1);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (9, 2);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (9, 3);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (9, 5);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (9, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (10, 1);
-INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (10, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (10, 5);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (10, 6);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (11, 1);
+INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (11, 2);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (11, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (11, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (11, 6);
@@ -268,9 +272,13 @@ INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (20, 3);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (20, 5);
 INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (20, 6);
 
+
+INSERT INTO endereco (logradouro, bairro, numero, complemento, cep, id_cidade) 
+       VALUES ('Algum aí','Aquele lá', '000', 'em frente à rua', '11111000', 2);
+
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('José Alencar', '09112332145', 'jose_alencar@hotmail.com', 'JoseAlen', '1234', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Aguiar', '89114182345', 'joao_aguia@gmail.com', 'Joao123', 'senha', 'ADMIN');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('John Dev', '19429301284', 'johndev@hotmail.com', 'johndev', 'h1KDIE+Ewow56JmrlT7GlkSbpRLU8BUfHTTZxObDNMYz/eQaHR0gBniTsIng4epGIOvigtDvyd0YjHlwymhsOw==', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil, id_endereco) VALUES ('John Dev', '19429301284', 'johndev@hotmail.com', 'johndev', 'h1KDIE+Ewow56JmrlT7GlkSbpRLU8BUfHTTZxObDNMYz/eQaHR0gBniTsIng4epGIOvigtDvyd0YjHlwymhsOw==', 'USER', 1);
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '92874291092', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
 INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('hitalo', '1111111111', 'hitalo@gmail.com','hitalo','TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'ADMIN');
 
@@ -282,6 +290,8 @@ INSERT INTO telefone (numero, id_usuario) VALUES ('(078) 98203-3301', 3);
 INSERT INTO telefone (numero, id_usuario) VALUES ('(092) 98382-0912', 3);
 INSERT INTO telefone (numero, id_usuario) VALUES ('(012) 99928-0912', 4);
 INSERT INTO telefone (numero, id_usuario) VALUES ('(071) 99283-8723', 4);
+
+
 
 INSERT INTO noticia (titulo, conteudo, dataPublicacao, autor, topicoPrincipal)
        VALUES ('Nostalgia total: 7 games que eram sucesso em lan houses',
