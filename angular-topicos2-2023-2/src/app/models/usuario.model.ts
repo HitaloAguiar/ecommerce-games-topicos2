@@ -1,4 +1,3 @@
-import { Endereco } from "./endereco.model";
 import { Telefone } from "./telefone.model";
 
 export class Usuario {
@@ -10,6 +9,5 @@ export class Usuario {
   login!: string;
   senha!: string;
   perfil!: string;
-  telefones!: Telefone[];
-  endereco!: Endereco;
+  telefones!: string[];
 }

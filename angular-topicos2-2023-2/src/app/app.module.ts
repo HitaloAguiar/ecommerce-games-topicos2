@@ -19,13 +19,17 @@ import { CompraModule } from 'src/app/compra/compra.module';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CustomPaginatorIntl } from 'src/app/models/custom-paginator-intl';
 import { ViewComponent } from './perfil/components/view/view.component';
+import { UpdateComponent } from './perfil/components/update/update.component'
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ViewComponent,
+    UpdateComponent
+
   ],
   imports: [
     JwtModule.forRoot({

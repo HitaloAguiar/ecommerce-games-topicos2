@@ -25,7 +25,6 @@ type Card = {
 export class GameCardListComponent implements OnInit {
   usuarioLogado: Usuario | null = null;
   private subscription = new Subscription();
-  jogosEncontrados: boolean = true
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
 
@@ -52,21 +51,33 @@ export class GameCardListComponent implements OnInit {
   }
 
   carregarGames() {
+
     if (this.filtro) {
       this.gameService.findByNome(this.filtro, this.pagina, this.pageSize).subscribe(data => {
         this.games = data;
-        this.jogosEncontrados = this.games.length > 0; // Atualiza jogosEncontrados aqui
         this.carregarCards();
       });
     } else {
+      // buscando todos os games
       this.gameService.findAllPaginado(this.pagina, this.pageSize).subscribe(data => {
         this.games = data;
-        this.jogosEncontrados = this.games.length > 0; // Atualiza jogosEncontrados aqui
         this.carregarCards();
       });
     }
   }
 
+  gerarRelatorio(filtro: string) {
+    this.gameService.gerarRelatorio(filtro).subscribe(
+      (response: any) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      (error) => {
+        console.error('Erro ao gerar relatório', error);
+      }
+    );
+  }
 
   obterUsuarioLogado() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(
