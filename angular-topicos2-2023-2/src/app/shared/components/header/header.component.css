@@ -13,7 +13,8 @@
 }
 
 .titulo{
-  margin-right: 100px; /* Ajuste a margem conforme necessário */
+  margin-right: 100px; /* Ajuste a margem conforme necessário */  
+  transition: background-color 0.3s;
 }
 
 .login-button {
@@ -25,4 +26,3 @@ span.hovered {
   border-bottom: 1px solid #000; /* Adicione o estilo desejado para a linha em baixo do nome */
   cursor: pointer; /* Adicione um estilo de cursor para indicar que é clicável */
 }
-

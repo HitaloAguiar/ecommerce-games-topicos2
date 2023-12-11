@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario.model';
+import { Endereco } from '../models/endereco.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,17 @@ export class UsuarioService {
 
   countByNome(nome: string): Observable<number> {
     return this.http.get<number>(`${this.baseURL}/usuarios/search/${nome}/count`);
+  }
+
+  getEndereco(idUsuario: string): Observable<Endereco> {
+    return this.http.get<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`);
+  }
+
+  salvarEndereco(endereco: Endereco, idUsuario: number): Observable<Endereco> {
+    return this.http.post<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`, endereco);
+  }
+
+  atualizarEndereco( idUsuario: number, endereco: Endereco): Observable<Endereco> {
+    return this.http.put<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`, endereco);
   }
 }
