@@ -2,7 +2,7 @@ package br.unitins.ecommerce.dto.itempedido;
 
 import java.util.List;
 
-import br.unitins.ecommerce.model.pedido.ItemPedido;
+import br.unitins.ecommerce.model.ItemPedido;
 
 public record ItemPedidoResponseDTO (
     Integer quantidade,
