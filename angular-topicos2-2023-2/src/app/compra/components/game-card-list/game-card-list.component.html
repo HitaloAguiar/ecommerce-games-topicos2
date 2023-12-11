@@ -13,7 +13,6 @@
 
   <div class="cards">
     <div class="container responsive-grid">
-      <ng-container *ngIf="jogosEncontrados; else nenhumJogoEncontrado">
       <mat-card  *ngFor="let card of cards()">
 
         <img mat-card-image [src]="card.urlImagem">
@@ -28,15 +27,10 @@
           <button mat-flat-button color="primary" (click)="adicionarAoCarrinho(card)" style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
         </mat-card-footer>
       </mat-card>
-    </ng-container>
-    <ng-template #nenhumJogoEncontrado>
-      <p>Nenhum jogo foi encontrado.</p>
-    </ng-template>
     </div>
   </div>
   <br>
   <div class="mat-elevation-z8">
-    
     
   </div>
   <mat-paginator class="paginacao" [pageSizeOptions]="[6, 12, 24, 32]" [pageSize]="pageSize" [length]="totalRegistros"
