@@ -2,16 +2,28 @@ package br.unitins.ecommerce.service.pedido;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.pedido.PedidoDTO;
+import br.unitins.ecommerce.dto.itempedido.ItemPedidoDTO;
+import br.unitins.ecommerce.dto.pedido.CartaoCreditoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoResponseDTO;
 
 public interface PedidoService {
 
-    public PedidoResponseDTO insert(PedidoDTO dto, String login);
+    public List<PedidoResponseDTO> getAll(String login);
 
-    public PedidoResponseDTO findById(Long id);
+    PedidoResponseDTO getPedidoEmAndamento (Long idUsuario);
+    
+    void insertItemIntoPedido (Long idUsuario, ItemPedidoDTO itemPedidoDTO);
 
-    public List<PedidoResponseDTO> findByAll();
+    void removeItemPedido (Long idUsuario, Long idItemCompra);
 
-    public List<PedidoResponseDTO> findByAll(String login);
+    void efetuarPagamentoBoleto(Long idUsuario);
+
+    void efetuarPagamentoPix(Long idUsuario);
+
+    void efetuarPagamentoCartaoCredito(Long idUsuario, CartaoCreditoDTO cartaoCreditoDTO);
+
+    void cancelarPedido(Long idUsuario);
+
+    void finishPedido (Long idCompra);
+
 }
