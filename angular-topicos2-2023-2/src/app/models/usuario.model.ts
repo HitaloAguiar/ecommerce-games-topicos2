@@ -12,4 +12,5 @@ export class Usuario {
   perfil!: string;
   telefones!: Telefone[];
   endereco!: Endereco;
+  nomeImagem!: string
 }

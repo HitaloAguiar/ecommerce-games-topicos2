@@ -14,7 +14,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Usuario extends DefaultEntity {
-    
+
     @Column(nullable = false)
     private String nome;
 
@@ -26,9 +26,11 @@ public class Usuario extends DefaultEntity {
 
     @Column(nullable = false)
     private String login;
-    
+
     @Column(nullable = false)
     private String senha;
+
+    private String nomeImagem;
 
     @OneToOne
     @JoinColumn(name = "id_endereco")
@@ -79,7 +81,7 @@ public class Usuario extends DefaultEntity {
 
             telefones = new ArrayList<>();
         }
-        
+
         return telefones;
     }
 
@@ -109,5 +111,13 @@ public class Usuario extends DefaultEntity {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 }
