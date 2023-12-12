@@ -10,9 +10,9 @@ import br.unitins.ecommerce.model.usuario.Usuario;
 import jakarta.validation.Valid;
 
 public interface UsuarioService {
-    
+
     List<UsuarioResponseDTO> getAll();
-    
+
     List<UsuarioResponseDTO> getAll(int page, int pageSize);
 
     UsuarioResponseDTO getById(Long id);
@@ -23,10 +23,12 @@ public interface UsuarioService {
 
     void delete(Long id);
 
+    UsuarioResponseDTO salvarImage(Long id, String nomeImagem);
+
     List<UsuarioResponseDTO> getByNome(String nome, int page, int pageSize);
 
     public Usuario findByLoginAndSenha(String login, String senha);
-    
+
     Long count();
 
     Long countByNome(String nome);
@@ -34,6 +36,6 @@ public interface UsuarioService {
     EnderecoResponseDTO getEndereco(Long idUsuario);
 
     EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario);
-    
+
     EnderecoResponseDTO update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
 }

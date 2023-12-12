@@ -90,7 +90,7 @@ const routes: Routes = [
   },
   
   { path: '', redirectTo: '/compras/produtos', pathMatch: 'full' }, // Rota padrão
-  // { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
+   //{ path: '**', redirectTo: '/compras/produtos' }, // Rota para tratamento de erro
 
 
 ];

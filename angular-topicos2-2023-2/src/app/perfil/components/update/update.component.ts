@@ -69,7 +69,11 @@ export class UpdateComponent {
 
         this.usuarioService.save(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {
-            this.router.navigateByUrl('/admin/usuarios/list');
+            if (this.usuarioLogado?.perfil == 'ADMIN') {
+              this.router.navigateByUrl('/admin/perfil/view');
+            } else if (this.usuarioLogado?.perfil == 'USER') {
+              this.router.navigateByUrl('/user/perfil/view');
+            }
           },
           error: (errorResponse) => {
 
@@ -92,7 +96,11 @@ export class UpdateComponent {
 
         this.usuarioService.update(novoUsuario).subscribe({
           next: (usuarioCadastrado) => {
-            this.router.navigateByUrl('/admin/usuarios/list');
+            if (this.usuarioLogado?.perfil == 'ADMIN') {
+              this.router.navigateByUrl('/admin/perfil/view');
+            } else if (this.usuarioLogado?.perfil == 'USER') {
+              this.router.navigateByUrl('/user/perfil/view');
+            }
           },
           error: (errorResponse) => {
 

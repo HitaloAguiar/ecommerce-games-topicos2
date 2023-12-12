@@ -68,4 +68,18 @@ export class UsuarioService {
   atualizarEndereco( idUsuario: number, endereco: Endereco): Observable<Endereco> {
     return this.http.put<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`, endereco);
   }
+
+  getUrlImagem(nomeImagem: string): string {
+    return `${this.baseURL}/usuarios/image/download/${nomeImagem}`;
+  }
+
+  uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('nomeImagem', nomeImagem);
+    formData.append('imagem', imagem, imagem.name);
+
+    return this.http.patch<Usuario>(`${this.baseURL}/usuarios/image/upload`, formData);
+  }
+
 }

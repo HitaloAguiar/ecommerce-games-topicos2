@@ -5,9 +5,11 @@ import java.util.Set;
 
 import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
 import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
+import br.unitins.ecommerce.dto.game.GameResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.endereco.Endereco;
+import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
@@ -150,6 +152,16 @@ public class UsuarioImplService implements UsuarioService {
 
         else
             throw new NotFoundException("Nenhum usuario encontrado");
+    }
+
+    @Override
+    @Transactional
+    public UsuarioResponseDTO salvarImage(Long id, String nomeImagem) {
+
+        Usuario entity = usuarioRepository.findById(id);
+        entity.setNomeImagem(nomeImagem);
+
+        return new UsuarioResponseDTO(entity, entity.getPerfil().toString());
     }
 
     @Override

@@ -3,7 +3,9 @@
         <span class="titulo">Minha Conta</span>
         <div class="profile-container">
             <div class="profile">
-                <img src="/assets/profile.png">
+                <div class="profile-overlay">
+                    <img src="/assets/profile.png">
+                </div>
                 <div class="nomes">
                     <span class="text-nome">{{usuarioLogado?.nome}}</span><br>
                     <span class="text-user">{{usuarioLogado?.login}}</span><br>
@@ -27,9 +29,12 @@
                         <p><strong>Email:</strong> {{usuarioLogado?.email}}</p>
                         <p><strong>Nome de Usuário:</strong> {{usuarioLogado?.login}}</p>
 
-                        <ng-container *ngFor="let telefone of usuarioLogado?.telefones">
-                            <p><strong>Telefone: </strong> {{usuarioLogado?.telefones}} </p>
-                        </ng-container>
+                            <p><strong>Telefones:</strong></p>
+                            <ul>
+                                <li *ngFor="let telefone of usuarioLogado?.telefones">
+                                    {{ telefone.numero }}
+                                </li>
+                            </ul>
 
                         <button class="corBotao" aria-label="button para editar registro" color="primary"
                             (click)="editar()"> Editar Informações
