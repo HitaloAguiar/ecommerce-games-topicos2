@@ -1,5 +1,6 @@
 package br.unitins.ecommerce.model.endereco;
 
+import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
 import br.unitins.ecommerce.model.DefaultEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +27,23 @@ public class Endereco extends DefaultEntity {
     @ManyToOne
     @JoinColumn(name = "id_cidade", nullable = false)
     private Cidade cidade;
+
+    public Endereco(EnderecoDTO enderecoDTO, Cidade cidade) {
+        
+        this.logradouro = enderecoDTO.logradouro();
+        this.bairro = enderecoDTO.bairro();
+        this.numero = enderecoDTO.numero();
+
+        if (enderecoDTO.complemento() != null)
+            this.complemento = enderecoDTO.complemento();
+
+        this.cep = enderecoDTO.cep();
+        this.cidade = cidade;
+    }
+
+    public Endereco () {
+
+    }
 
     public String getLogradouro() {
         return logradouro;

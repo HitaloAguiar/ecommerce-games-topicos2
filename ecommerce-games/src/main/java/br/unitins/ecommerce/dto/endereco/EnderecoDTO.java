@@ -16,6 +16,7 @@ public record EnderecoDTO(
 
     @NotBlank(message = "O campo cep não pode estar vazio")
     String cep,
+    
     Long cidade
 ) {
     

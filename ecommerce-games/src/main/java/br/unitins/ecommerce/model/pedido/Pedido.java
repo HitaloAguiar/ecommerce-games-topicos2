@@ -21,20 +21,21 @@ public class Pedido extends DefaultEntity {
     
     private Double totalPedido;
 
-    private Boolean ifConcluida;
+    // private Boolean ifConcluida;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_pagamento", unique = true)
     private Pagamento pagamento;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pedido")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_pedido")
     private List<ItemPedido> itens;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
@@ -70,13 +71,13 @@ public class Pedido extends DefaultEntity {
         this.totalPedido = totalPedido;
     }
 
-    public Boolean getIfConcluida() {
-        return ifConcluida;
-    }
+    // public Boolean getIfConcluida() {
+    //     return ifConcluida;
+    // }
 
-    public void setIfConcluida(Boolean ifConcluida) {
-        this.ifConcluida = ifConcluida;
-    }
+    // public void setIfConcluida(Boolean ifConcluida) {
+    //     this.ifConcluida = ifConcluida;
+    // }
 
     public Endereco getEndereco() {
         return endereco;

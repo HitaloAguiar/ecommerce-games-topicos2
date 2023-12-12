@@ -9,6 +9,8 @@ import br.unitins.ecommerce.dto.itempedido.ItemPedidoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.pedido.Pedido;
 import br.unitins.ecommerce.model.pedido.pagamento.BoletoBancario;
+import br.unitins.ecommerce.model.pedido.pagamento.CartaoCredito;
+import br.unitins.ecommerce.model.pedido.pagamento.Pagamento;
 import br.unitins.ecommerce.model.pedido.pagamento.Pix;
 
 public record PedidoResponseDTO(
@@ -16,9 +18,9 @@ public record PedidoResponseDTO(
     LocalDateTime dataHoraPedido,
     String totalPedido,
     String formaPagamento,
+    String numeroCartaoUsado,
     String statusPagamento,
     LocalDate dataPagamento,
-    String statusPedido,
     EnderecoResponseDTO enderecoResponseDTO,
     UsuarioResponseDTO usuario,
     List<ItemPedidoResponseDTO> itens
@@ -30,6 +32,7 @@ public record PedidoResponseDTO(
             pedido.getDataHoraPedido(),
             "R$ " + String.format("%.2f", pedido.getTotalPedido()),
             pedido.getPagamento() instanceof Pix ? "Pix" : pedido.getPagamento() instanceof BoletoBancario ? "Boleto Bancário" : "Cartão de Crédito",
+            pedido.getPagamento() instanceof CartaoCredito ? getNumeroCartao(pedido.getPagamento()) : null,
             pedido.getPagamento() != null?
                 pedido.getPagamento().getConfirmacaoPagamento() == true?
                     "Pagamento efetuado":
@@ -38,9 +41,15 @@ public record PedidoResponseDTO(
             pedido.getPagamento() != null ?
                 pedido.getPagamento().getDataConfirmacaoPagamento() :
                 null,
-            pedido.getIfConcluida() == true ? "Compra concluída" : "Compra em andamento",
             new EnderecoResponseDTO(pedido.getEndereco(), pedido.getUsuario().getLogin()),
             new UsuarioResponseDTO(pedido.getUsuario(), pedido.getUsuario().getPerfil().getLabel()),
             ItemPedidoResponseDTO.valueOf(pedido.getItens()));
+    }
+
+    private static String getNumeroCartao (Pagamento pagamento) {
+
+        CartaoCredito cartaoCredito = (CartaoCredito) pagamento;
+
+        return cartaoCredito.getNumeroDoCartao();
     }
 }

@@ -4,19 +4,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.ecommerce.dto.itempedido.ItemPedidoDTO;
-import br.unitins.ecommerce.dto.pedido.CartaoCreditoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoResponseDTO;
+import br.unitins.ecommerce.model.endereco.Endereco;
 import br.unitins.ecommerce.model.pedido.ItemPedido;
 import br.unitins.ecommerce.model.pedido.Pedido;
+import br.unitins.ecommerce.model.pedido.pagamento.BandeiraCartao;
+import br.unitins.ecommerce.model.pedido.pagamento.BoletoBancario;
+import br.unitins.ecommerce.model.pedido.pagamento.CartaoCredito;
+import br.unitins.ecommerce.model.pedido.pagamento.Pix;
 import br.unitins.ecommerce.model.produto.Game;
-import br.unitins.ecommerce.repository.BoletoBancarioRepository;
-import br.unitins.ecommerce.repository.CartaoCreditoRepository;
+import br.unitins.ecommerce.repository.CidadeRepository;
 import br.unitins.ecommerce.repository.GameRepository;
-import br.unitins.ecommerce.repository.ItemPedidoRepository;
 import br.unitins.ecommerce.repository.PedidoRepository;
-import br.unitins.ecommerce.repository.PixRepository;
 import br.unitins.ecommerce.repository.UsuarioRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -35,73 +38,91 @@ public class PedidoServiceImpl implements PedidoService {
     PedidoRepository pedidoRepository;
     
     @Inject
-    BoletoBancarioRepository boletoBancarioRepository;
-    
-    @Inject
-    PixRepository pixRepository;
-    
-    @Inject
-    CartaoCreditoRepository cartaoCreditoRepository;
-    
-    @Inject
-    ItemPedidoRepository itemPedidoRepository;
+    CidadeRepository cidadeRepository;
+
+    private static final Logger LOG = Logger.getLogger(PedidoServiceImpl.class);
 
     @Override
-    public List<PedidoResponseDTO> getAll(String login) {
+    @Transactional
+    public PedidoResponseDTO insert(PedidoDTO pedidoDTO, String login) {
+        Pedido pedido = new Pedido();
+        pedido.setDataHoraPedido(LocalDateTime.now());
+
+        LOG.info(pedidoDTO);
+        LOG.info(pedidoDTO.itens());
+
+        // calculo do total do pedido
+        Double total = 0.0;
+        for (ItemPedidoDTO itemDto : pedidoDTO.itens()) {
+            total += (itemDto.preco() * itemDto.quantidade());
+        }
+        pedido.setTotalPedido(total);
+
+        // adicionando os itens do pedido
+        pedido.setItens(new ArrayList<ItemPedido>());
+        for (ItemPedidoDTO itemDto : pedidoDTO.itens()) {
+            ItemPedido item = new ItemPedido();
+            item.setPreco(itemDto.preco());
+            item.setQuantidade(itemDto.quantidade());
+            LOG.info(itemDto.idGame());
+            Game game = gameRepository.findById(itemDto.idGame());
+            item.setGame(game);
+
+            pedido.getItens().add(item);
+        }
+
+        // buscando o usuario pelo login
+        pedido.setUsuario(usuarioRepository.findByLogin(login));
+
+        switch (pedidoDTO.pagamento()) {
+            case 1:
+                
+                BoletoBancario boletoBancario = new BoletoBancario(pedido.getTotalPedido(), pedido.getUsuario().getNome(), pedido.getUsuario().getCpf());
+
+                pedido.setPagamento(boletoBancario);
+            break;
         
-        List<Pedido> list = pedidoRepository.findByUsuarioWhereIsFinished(usuarioRepository.findByLogin(login));
+            case 2:
 
-        if (list == null)
-            throw new NullPointerException("pedido não encontrada");
+                Pix pix = new Pix(pedido.getTotalPedido(), pedido.getUsuario().getNome(), pedido.getUsuario().getCpf());
 
-        return list.stream().map(PedidoResponseDTO::new).toList();
+                pedido.setPagamento(pix);
+            break;
+
+            case 3:
+
+                CartaoCredito cartaoCredito = new CartaoCredito(pedido.getTotalPedido(),
+                                            pedidoDTO.cartaoCreditoDTO().numeroCartao(),
+                                            pedidoDTO.cartaoCreditoDTO().nomeImpressoCartao(),
+                                            pedido.getUsuario().getCpf(),
+                                            BandeiraCartao.valueOf(pedidoDTO.cartaoCreditoDTO().bandeiraCartao()));
+                pedido.setPagamento(cartaoCredito);
+            break;
+        }
+
+        pedido.setEndereco(new Endereco(pedidoDTO.enderecoDTO(), cidadeRepository.findById(pedidoDTO.enderecoDTO().cidade())));
+
+        // salvando no banco
+        pedidoRepository.persist(pedido);  
+
+        return new PedidoResponseDTO(pedido);
     }
 
     @Override
-    public PedidoResponseDTO getPedidoEmAndamento(Long idUsuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPedidoEmAndamento'");
+    public PedidoResponseDTO findById(Long id) {
+        return new PedidoResponseDTO(pedidoRepository.findById(id));
     }
 
     @Override
-    public void insertItemIntoPedido(Long idUsuario, ItemPedidoDTO itemPedidoDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertItemIntoPedido'");
+    public List<PedidoResponseDTO> findByAll() {
+        return pedidoRepository.listAll().stream()
+            .map(PedidoResponseDTO::new).toList();
     }
 
     @Override
-    public void removeItemPedido(Long idUsuario, Long idItemPedido) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeItemPedido'");
-    }
-
-    @Override
-    public void efetuarPagamentoBoleto(Long idUsuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'efetuarPagamentoBoleto'");
-    }
-
-    @Override
-    public void efetuarPagamentoPix(Long idUsuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'efetuarPagamentoPix'");
-    }
-
-    @Override
-    public void efetuarPagamentoCartaoCredito(Long idUsuario, CartaoCreditoDTO cartaoCreditoDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'efetuarPagamentoCartaoCredito'");
-    }
-
-    @Override
-    public void cancelarPedido(Long idUsuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cancelarPedido'");
-    }
-
-    @Override
-    public void finishPedido(Long idPedido) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'finishPedido'");
+    public List<PedidoResponseDTO> findByAll(String login) {
+        
+        return pedidoRepository.findAll(login).stream()
+            .map(PedidoResponseDTO::new).toList();
     }
 }
