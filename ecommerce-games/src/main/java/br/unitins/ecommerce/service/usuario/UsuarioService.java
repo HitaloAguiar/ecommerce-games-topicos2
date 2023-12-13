@@ -35,7 +35,7 @@ public interface UsuarioService {
 
     EnderecoResponseDTO getEndereco(Long idUsuario);
 
-    EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario);
+    Usuario insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario);
 
-    EnderecoResponseDTO update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
+    Usuario update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
 }

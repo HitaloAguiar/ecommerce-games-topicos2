@@ -57,16 +57,18 @@ export class UsuarioService {
     return this.http.get<number>(`${this.baseURL}/usuarios/search/${nome}/count`);
   }
 
-  getEndereco(idUsuario: string): Observable<Endereco> {
-    return this.http.get<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`);
+  getEndereco(idUsuario: number): Observable<Endereco> {
+    return this.http.get<Endereco>(`${this.baseURL}/usuarios/endereco/${idUsuario}`);
   }
 
-  salvarEndereco(endereco: Endereco, idUsuario: number): Observable<Endereco> {
-    return this.http.post<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`, endereco);
+  salvarEndereco(endereco: Endereco, idUsuario: number): Observable<any> {
+    console.log(endereco);
+    console.log(idUsuario);
+    return this.http.patch(`${this.baseURL}/usuarios/endereco/insert/${idUsuario}`, endereco);
   }
 
-  atualizarEndereco( idUsuario: number, endereco: Endereco): Observable<Endereco> {
-    return this.http.put<Endereco>(`${this.baseURL}/usuarios/${idUsuario}/endereco`, endereco);
+  atualizarEndereco(idUsuario: number, endereco: Endereco): Observable<any> {
+    return this.http.patch(`${this.baseURL}/usuarios/endereco/update/${idUsuario}`, endereco);
   }
 
   getUrlImagem(nomeImagem: string): string {

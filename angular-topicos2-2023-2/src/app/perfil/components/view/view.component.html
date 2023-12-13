@@ -49,7 +49,7 @@
                     </div>
                 </ng-container>
                 <ng-container *ngIf="selecionado === 'endereco'">
-                    <ng-container *ngIf="usuarioLogado?.endereco !== null">
+                    <ng-container *ngIf="usuarioLogado?.endereco != null">
                         <div class="info">
                             <h1>
                                 Endereço de {{usuarioLogado?.nome}}
@@ -108,7 +108,7 @@
                                         <mat-form-field appearance="outline" class="full-width-input" color="accent">
                                             <mat-label>Cidade</mat-label>
                                             <mat-select formControlName="cidade" name="cidade">
-                                                <mat-option *ngFor="let cidade of cidades" [value]="cidade">{{
+                                                <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">{{
                                                     cidade.nome }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>

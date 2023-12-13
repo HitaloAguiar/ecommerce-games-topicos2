@@ -8,6 +8,7 @@ import br.unitins.ecommerce.model.endereco.Endereco;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -36,7 +37,7 @@ public class Usuario extends DefaultEntity {
     @JoinColumn(name = "id_endereco")
     private Endereco endereco;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private List<Telefone> telefones;
 

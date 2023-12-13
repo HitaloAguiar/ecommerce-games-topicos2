@@ -41,7 +41,7 @@ public record PedidoResponseDTO(
             pedido.getPagamento() != null ?
                 pedido.getPagamento().getDataConfirmacaoPagamento() :
                 null,
-            new EnderecoResponseDTO(pedido.getEndereco(), pedido.getUsuario().getLogin()),
+            new EnderecoResponseDTO(pedido.getEndereco()),
             new UsuarioResponseDTO(pedido.getUsuario(), pedido.getUsuario().getPerfil().getLabel()),
             ItemPedidoResponseDTO.valueOf(pedido.getItens()));
     }

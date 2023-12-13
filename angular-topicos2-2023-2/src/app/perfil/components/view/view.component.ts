@@ -15,6 +15,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
+
   mostrarBotaoAdicionar: boolean = false;
   usuarioLogado: Usuario | null = null;
   private subscription = new Subscription();
@@ -22,7 +23,7 @@ export class ViewComponent {
   selecionado: 'conta' | 'historico' | 'endereco' = 'conta';
   formGroup: FormGroup;
   cidades: Cidade[] = [];
-  
+
   fileName: string = '';
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
@@ -40,7 +41,8 @@ export class ViewComponent {
       complemento: [(endereco && endereco.complemento) ? endereco.complemento : ''],
       bairro: [(endereco && endereco.bairro) ? endereco.bairro : '', Validators.required],
       cep: [(endereco && endereco.cep) ? endereco.cep : '', Validators.required],
-      cidade: [(endereco && endereco.cidade) ? endereco.cidade : '', Validators.required],
+      cidade: [(endereco && endereco.cidade) ? endereco.cidade.id : '', Validators.required],
+      // idUsuario: 0
     });
 
   }
@@ -68,7 +70,7 @@ export class ViewComponent {
   inserirImagem() {
     // Lógica para inserir a imagem
     console.log('Inserir imagem!');
-}
+  }
 
   obterUsuarioLogado() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(
@@ -81,12 +83,13 @@ export class ViewComponent {
       const novoEndereco = this.formGroup.value;
 
       if (this.usuarioLogado && this.usuarioLogado.id) {
-        novoEndereco.idUsuario = this.usuarioLogado.id; // Substitua 'idUsuario' pelo campo correto no seu modelo Endereco
+        // novoEndereco.idUsuario = this.usuarioLogado.id; // Substitua 'idUsuario' pelo campo correto no seu modelo Endereco
 
         if (!novoEndereco.id) {
           this.usuarioService.salvarEndereco(novoEndereco, this.usuarioLogado.id).subscribe({
-            next: (enderecoCadastrado) => {
-              console.log('Endereço cadastrado com sucesso:', enderecoCadastrado);
+            next: (usuarioAtualizado) => {
+              console.log('Endereço do usuário cadastrado com sucesso:', usuarioAtualizado);
+              this.authService.updateUsuarioLogado(usuarioAtualizado);
             },
             error: (errorResponse) => {
               this.apiResponse = errorResponse.error;
@@ -95,8 +98,9 @@ export class ViewComponent {
           });
         } else {
           this.usuarioService.atualizarEndereco(this.usuarioLogado.id, novoEndereco).subscribe({
-            next: (enderecoAtualizado) => {
-              console.log('Endereço atualizado com sucesso:', enderecoAtualizado);
+            next: (usuarioAtualizado) => {
+              console.log('Endereço do usuário atualizado com sucesso:', usuarioAtualizado);
+              this.authService.updateUsuarioLogado(usuarioAtualizado);
             },
             error: (errorResponse) => {
               this.apiResponse = errorResponse.error;
@@ -119,15 +123,15 @@ export class ViewComponent {
 
     if (this.selectedFile) {
       this.usuarioService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
-      .subscribe({
-        next: () => {
-          this.router.navigateByUrl('/admin/games/list');
-        },
-        error: err => {
-          console.log('Erro ao fazer o upload da imagem');
-          // tratar o erro
-        }
-      })
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl('/admin/games/list');
+          },
+          error: err => {
+            console.log('Erro ao fazer o upload da imagem');
+            // tratar o erro
+          }
+        })
     } else {
       this.router.navigateByUrl('/admin/games/list');
     }

@@ -1,3 +1,4 @@
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -16,7 +17,8 @@ export class AuthService {
 
   constructor(private http: HttpClient,
     @Inject(LocalStorageService) private localStorageService: LocalStorageService,
-              private jwtHelper: JwtHelperService) {
+    private jwtHelper: JwtHelperService,
+    private usuarioService: UsuarioService) {
 
     this.initUsuarioLogado();
 
@@ -40,7 +42,7 @@ export class AuthService {
     }
 
     //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
-    return this.http.post(`${this.baseURL}`, params, {observe: 'response'}).pipe(
+    return this.http.post(`${this.baseURL}`, params, { observe: 'response' }).pipe(
       tap((res: any) => {
         const authToken = res.headers.get('Authorization') ?? '';
         if (authToken) {
@@ -57,7 +59,14 @@ export class AuthService {
   }
 
   setUsuarioLogado(usuario: Usuario): void {
+
     this.localStorageService.setItem(this.usuarioLogadoKey, usuario);
+  }
+
+  updateUsuarioLogado(usuario: any): void {
+
+    this.localStorageService.setItem(this.usuarioLogadoKey, usuario);
+    this.usuarioLogadoSubject.next(usuario);
   }
 
   setToken(token: string): void {

@@ -202,7 +202,7 @@ public class UsuarioImplService implements UsuarioService {
             throw new NotFoundException("Nenhum Usuário encontrado com este ID");
 
         if (usuario.getEndereco() != null)
-            return new EnderecoResponseDTO(usuario.getEndereco(), usuario.getLogin());
+            return new EnderecoResponseDTO(usuario.getEndereco());
 
         else
             throw new NotFoundException("Este Usuário ainda não possui endereço");
@@ -210,7 +210,7 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     @Transactional
-    public EnderecoResponseDTO insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario) {
+    public Usuario insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario) {
 
         Endereco endereco = new Endereco();
 
@@ -233,12 +233,12 @@ public class UsuarioImplService implements UsuarioService {
 
         usuario.setEndereco(endereco);
         
-        return new EnderecoResponseDTO(endereco, usuario.getLogin());
+        return usuario;
     }
 
     @Override
     @Transactional
-    public EnderecoResponseDTO update(Long idusuario, @Valid EnderecoDTO enderecoDTO) {
+    public Usuario update(Long idusuario, @Valid EnderecoDTO enderecoDTO) {
 
         Usuario usuario = usuarioRepository.findById(idusuario);
 
@@ -260,7 +260,7 @@ public class UsuarioImplService implements UsuarioService {
 
         endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
         
-        return new EnderecoResponseDTO(endereco, usuario.getLogin());
+        return usuario;
     }
     
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {

@@ -12,6 +12,7 @@ import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
+import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
 import br.unitins.ecommerce.service.file.FileService;
 import jakarta.inject.Inject;
@@ -107,9 +108,11 @@ public class UsuarioResource {
 
         LOG.infof("Endereço criado com sucesso.");
 
+        Usuario usuario = usuarioService.insert(enderecoDTO, id);
+
         return Response
                 .status(Status.CREATED) // 201
-                .entity(usuarioService.insert(enderecoDTO, id))
+                .entity(usuario)
                 .build();
     }
 

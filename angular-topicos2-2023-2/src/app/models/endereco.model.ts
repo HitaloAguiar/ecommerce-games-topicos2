@@ -5,7 +5,7 @@ export class Endereco {
     logradouro!: string;
     bairro!: string;
     numero!: string;
-    complemento!: String
+    complemento!: string
     cep!: string;
     cidade!: Cidade
 }

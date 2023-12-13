@@ -9,12 +9,11 @@ public record EnderecoResponseDTO(
     String numero,
     String complemento,
     String cep,
-    String cidade,
-    String usuario
+    String cidade
 ) {
 
-    public EnderecoResponseDTO (Endereco endereco, String usuario) {
+    public EnderecoResponseDTO (Endereco endereco) {
 
-        this(endereco.getId(), endereco.getLogradouro(), endereco.getBairro(), endereco.getNumero(), endereco.getComplemento() == null ? null : endereco.getComplemento(), endereco.getCep(), endereco.getCidade().getNome() + " - " + endereco.getCidade().getEstado().getSigla(), usuario);
+        this(endereco.getId(), endereco.getLogradouro(), endereco.getBairro(), endereco.getNumero(), endereco.getComplemento() == null ? null : endereco.getComplemento(), endereco.getCep(), endereco.getCidade().getNome() + " - " + endereco.getCidade().getEstado().getSigla());
     }    
 }
