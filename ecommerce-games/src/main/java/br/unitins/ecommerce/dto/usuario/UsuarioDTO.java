@@ -23,7 +23,7 @@ public record UsuarioDTO(
     @Size(max = 30, message = "O campo nome deve possuir no máximo 30 caracteres.")
     String login,
 
-    @NotBlank(message = "O campo senha não pode estar nulo")
+    // @NotBlank(message = "O campo senha não pode estar nulo")
     @Size(min = 8, message = "A senha deve possuir no mínimo 8 caracteres")
     String senha,
 

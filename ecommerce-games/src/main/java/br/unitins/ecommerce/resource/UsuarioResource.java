@@ -132,11 +132,13 @@ public class UsuarioResource {
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, UsuarioDTO usuarioDto) {
     
-        usuarioService.update(id, usuarioDto);
+        Usuario usuario = usuarioService.update(id, usuarioDto);
         LOG.infof("Usuário (%d) atualizado com sucesso.", id);
+        // LOG.info(usuario.getLogin());
 
         return Response
-                .status(Status.NO_CONTENT) // 204
+                .status(Status.CREATED) // 204
+                .entity(usuario)
                 .build();
     }
 

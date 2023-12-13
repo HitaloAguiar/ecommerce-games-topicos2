@@ -276,11 +276,11 @@ INSERT INTO plataformas_game (id_game, id_plataforma) VALUES (20, 6);
 --INSERT INTO endereco (logradouro, bairro, numero, complemento, cep, id_cidade) 
  --      VALUES ('Algum aí','Aquele lá', '000', 'em frente à rua', '11111000', 2);
 
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('José Alencar', '09112332145', 'jose_alencar@hotmail.com', 'JoseAlen', '1234', 'USER');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Aguiar', '89114182345', 'joao_aguia@gmail.com', 'Joao123', 'senha', 'ADMIN');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('John Dev', '19429301284', 'johndev@hotmail.com', 'johndev', 'h1KDIE+Ewow56JmrlT7GlkSbpRLU8BUfHTTZxObDNMYz/eQaHR0gBniTsIng4epGIOvigtDvyd0YjHlwymhsOw==', 'USER');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '92874291092', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
-INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('hitalo', '1111111111', 'hitalo@gmail.com','hitalo','TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'ADMIN');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('José Alencar', '091.123.321-45', 'jose_alencar@hotmail.com', 'JoseAlen', '1234', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('João Aguiar', '891.141.823-45', 'joao_aguia@gmail.com', 'Joao123', 'senha', 'ADMIN');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('John Dev', '194.293.012-84', 'johndev@hotmail.com', 'johndev', 'h1KDIE+Ewow56JmrlT7GlkSbpRLU8BUfHTTZxObDNMYz/eQaHR0gBniTsIng4epGIOvigtDvyd0YjHlwymhsOw==', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('Julia Ramos', '928.742.910-92', 'julia.ra@gmail.com', 'Juh', 'Juh276', 'USER');
+INSERT INTO usuario (nome, cpf, email, login, senha, perfil) VALUES ('hitalo', '111.111.111-11', 'hitalo@gmail.com','hitalo','TRwn0XU29Gwl2sagG00bvjrNJvLuYo+dbOBJ7R3xFpU4m/FAUc5q8OoGbVNwPF7F5713RaYkN4qyufNCDHm/mA==', 'ADMIN');
 
 INSERT INTO telefone (numero, id_usuario) VALUES ('(011) 98456-7812', 1);
 INSERT INTO telefone (numero, id_usuario) VALUES ('(061) 99901-5842', 1);

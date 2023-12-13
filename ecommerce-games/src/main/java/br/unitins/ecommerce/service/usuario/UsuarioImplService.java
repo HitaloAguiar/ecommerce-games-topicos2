@@ -102,7 +102,7 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     @Transactional
-    public UsuarioResponseDTO update(Long id, @Valid UsuarioDTO usuarioDto) throws ConstraintViolationException {
+    public Usuario update(Long id, @Valid UsuarioDTO usuarioDto) throws ConstraintViolationException {
         
         validar(usuarioDto);
 
@@ -119,7 +119,7 @@ public class UsuarioImplService implements UsuarioService {
 
         entity.setLogin(usuarioDto.login());
 
-        entity.setSenha(hashService.getHashSenha(usuarioDto.senha()));
+        // entity.setSenha(hashService.getHashSenha(usuarioDto.senha()));
 
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 
@@ -135,7 +135,7 @@ public class UsuarioImplService implements UsuarioService {
             entity.getTelefones().add(new Telefone(telefones));
         }
 
-        return new UsuarioResponseDTO(entity, null);
+        return entity;
     }
 
     @Override

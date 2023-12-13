@@ -32,7 +32,6 @@ export class UpdateComponent {
       cpf: [(usuario && usuario.cpf) ? usuario.cpf : '', Validators.required],
       email: [(usuario && usuario.email) ? usuario.email : '', Validators.required],
       login: [(usuario && usuario.login) ? usuario.login : '', Validators.required],
-      senha: [(usuario && usuario.senha) ? usuario.senha : '', Validators.required],
       perfil: [(usuario && usuario.perfil) ? usuario.perfil : '', Validators.required],
       telefones: (usuario && usuario.telefones) ? this.formBuilder.array(usuario.telefones) : this.formBuilder.array([])
     })
@@ -65,60 +64,32 @@ export class UpdateComponent {
   salvar() {
     if (this.formGroup.valid) {
       const novoUsuario = this.formGroup.value;
-      if (novoUsuario.id == null) {
 
-        this.usuarioService.save(novoUsuario).subscribe({
-          next: (usuarioCadastrado) => {
-            if (this.usuarioLogado?.perfil == 'ADMIN') {
-              this.router.navigateByUrl('/admin/perfil/view');
-            } else if (this.usuarioLogado?.perfil == 'USER') {
-              this.router.navigateByUrl('/user/perfil/view');
-            }
-          },
-          error: (errorResponse) => {
-
-            this.apiResponse = errorResponse.error;
-
-            // Associar erros aos campos do formulário
-            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
-            this.formGroup.get('cpf')?.setErrors({ apiError: this.getErrorMessage('cpf') });
-            this.formGroup.get('email')?.setErrors({ apiError: this.getErrorMessage('email') });
-            this.formGroup.get('login')?.setErrors({ apiError: this.getErrorMessage('login') });
-            this.formGroup.get('senha')?.setErrors({ apiError: this.getErrorMessage('senha') });
-            this.formGroup.get('perfil')?.setErrors({ apiError: this.getErrorMessage('perfil') });
-            this.formGroup.get('telefones')?.setErrors({ apiError: this.getErrorMessage('telefones') });
-
-            console.log('Erro ao incluir' + JSON.stringify(errorResponse));
+      this.usuarioService.update(novoUsuario).subscribe({
+        next: (usuarioCadastrado) => {
+          if (this.usuarioLogado?.perfil == 'ADMIN') {
+            this.router.navigateByUrl('/admin/perfil/view');
+          } else if (this.usuarioLogado?.perfil == 'USER') {
+            this.router.navigateByUrl('/user/perfil/view');
           }
-        })
-      }
-      else {
+          this.authService.updateUsuarioLogado(usuarioCadastrado);
+        },
+        error: (errorResponse) => {
 
-        this.usuarioService.update(novoUsuario).subscribe({
-          next: (usuarioCadastrado) => {
-            if (this.usuarioLogado?.perfil == 'ADMIN') {
-              this.router.navigateByUrl('/admin/perfil/view');
-            } else if (this.usuarioLogado?.perfil == 'USER') {
-              this.router.navigateByUrl('/user/perfil/view');
-            }
-          },
-          error: (errorResponse) => {
+          this.apiResponse = errorResponse.error;
 
-            this.apiResponse = errorResponse.error;
+          // Associar erros aos campos do formulário
+          this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
+          this.formGroup.get('cpf')?.setErrors({ apiError: this.getErrorMessage('cpf') });
+          this.formGroup.get('email')?.setErrors({ apiError: this.getErrorMessage('email') });
+          this.formGroup.get('login')?.setErrors({ apiError: this.getErrorMessage('login') });
+          this.formGroup.get('senha')?.setErrors({ apiError: this.getErrorMessage('senha') });
+          this.formGroup.get('perfil')?.setErrors({ apiError: this.getErrorMessage('perfil') });
+          this.formGroup.get('telefones')?.setErrors({ apiError: this.getErrorMessage('telefones') });
 
-            // Associar erros aos campos do formulário
-            this.formGroup.get('nome')?.setErrors({ apiError: this.getErrorMessage('nome') });
-            this.formGroup.get('cpf')?.setErrors({ apiError: this.getErrorMessage('cpf') });
-            this.formGroup.get('email')?.setErrors({ apiError: this.getErrorMessage('email') });
-            this.formGroup.get('login')?.setErrors({ apiError: this.getErrorMessage('login') });
-            this.formGroup.get('senha')?.setErrors({ apiError: this.getErrorMessage('senha') });
-            this.formGroup.get('perfil')?.setErrors({ apiError: this.getErrorMessage('perfil') });
-            this.formGroup.get('telefones')?.setErrors({ apiError: this.getErrorMessage('telefones') });
-
-            console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
-          }
-        })
-      }
+          console.log('Erro ao atualizar' + JSON.stringify(errorResponse));
+        }
+      })
     }
   }
 
