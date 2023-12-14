@@ -136,11 +136,12 @@ public class UsuarioResource {
     @Path("/endereco/update/{id}")
     public Response update(@PathParam("id") Long id, EnderecoDTO enderecoDTO) {
 
-        usuarioService.update(id, enderecoDTO);
+        Usuario usuario = usuarioService.update(id, enderecoDTO);
         LOG.infof("Endereço do usuário (%d) atualizado com sucesso.", id);
 
         return Response
-                .status(Status.NO_CONTENT) // 204
+                .status(Status.CREATED) // 204
+                .entity(usuario)
                 .build();
     }
 

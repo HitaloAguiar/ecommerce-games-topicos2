@@ -57,7 +57,7 @@ export class UsuarioService {
     return this.http.get<number>(`${this.baseURL}/usuarios/search/${nome}/count`);
   }
 
-  getEndereco(idUsuario: number): Observable<Endereco> {
+  getEndereco(idUsuario: string): Observable<Endereco> {
     return this.http.get<Endereco>(`${this.baseURL}/usuarios/endereco/${idUsuario}`);
   }
 

@@ -121,6 +121,8 @@ export class ViewComponent {
         console.error('ID do usuário não disponível.');
       }
     }
+
+    this.cancelarEdicaoEndereco();
   }
 
   getErrorMessage(fieldName: string): string {
