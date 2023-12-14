@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
+import { CartaoCredito } from 'src/app/models/cartao-credito.model';
 
 @Component({
   selector: 'app-carrinho',
@@ -16,7 +17,7 @@ import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirm
   styleUrls: ['./carrinho.component.css'],
 })
 export class CarrinhoComponent implements OnInit {
-  
+
   carrinhoItens: ItemCarrinho[] = [];
   continuar: boolean = false;
   pagando: boolean = false;
@@ -77,7 +78,30 @@ export class CarrinhoComponent implements OnInit {
   }
 
   finalizarCompra() {
-    this.pedidoService.save(this.carrinhoItens).subscribe({
+
+    let pagamento: number = 0;
+
+    switch (this.selectedOption) {
+
+      case 'boleto':
+
+        pagamento = 1;
+      break;
+
+      case 'pix':
+
+        pagamento = 2;
+      break;
+
+      case 'cartao':
+
+        pagamento = 3;
+      break;
+    }
+
+    let cartaoCredito: CartaoCredito = new CartaoCredito();
+
+    this.pedidoService.save(this.carrinhoItens, this.usuarioLogado?.endereco, pagamento, cartaoCredito).subscribe({
       next: () => {
         this.carrinhoService.removerTudo();
         this.router.navigateByUrl('/user/compras/produtos');

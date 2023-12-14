@@ -7,7 +7,7 @@ public record CartaoCreditoDTO(
     String nomeImpressoCartao,
     LocalDate dataValidade,
     String codigoSeguranca,
-    Integer bandeiraCartao
+    String bandeiraCartao
 ) {
     
 }

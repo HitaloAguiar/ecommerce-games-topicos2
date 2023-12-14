@@ -3,6 +3,8 @@ import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Estado } from '../models/estado.model';
 import { ItemCarrinho } from '../models/item-carrinho.interface';
+import { Endereco } from '../models/endereco.model';
+import { CartaoCredito } from '../models/cartao-credito.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +15,46 @@ export class PedidoService {
 
   constructor(private http: HttpClient) {}
 
-  save(carrinho: ItemCarrinho[] ): Observable<any> {
+  save(carrinho: ItemCarrinho[], endereco: Endereco | undefined, pagamento: number, cartaoCredito: CartaoCredito): Observable<any> {
     const itens = carrinho.map(item => ({
       quantidade: item.quantidade,
       preco: item.preco,
       idGame: item.id
     }));
 
-    const produtos = {
+    const enderecoDTO = {
+
+      logradouro: endereco?.logradouro,
+      bairro: endereco?.bairro,
+      numero: endereco?.numero,
+      complemento: endereco?.complemento,
+      cep: endereco?.cep,
+      cidade: endereco?.cidade.id
+    }
+
+    let cartaoCreditoDTO = null;
+
+    console.log(cartaoCredito);
+
+    if (cartaoCredito != null) {
+
+      cartaoCreditoDTO = {
+
+        numeroCartao: cartaoCredito.numeroCartao,
+        nomeImpressoCartao: cartaoCredito.nomeImpressoCartao,
+        dataValidade: cartaoCredito.dataValidade,
+        codigoSeguranca: cartaoCredito.codigoSeguranca,
+        bandeiraCartao: cartaoCredito.bandeiraCartao
+      }
+    }
+
+    const params = {
+      enderecoDTO: enderecoDTO,
+      pagamento: pagamento,
+      cartaoCreditoDTO: cartaoCreditoDTO,
       itens: itens
     };
 
-    return this.http.post<any>(`${this.baseURL}/pedidos`, produtos);
+    return this.http.post<any>(`${this.baseURL}/pedidos`, params);
   }
 }
