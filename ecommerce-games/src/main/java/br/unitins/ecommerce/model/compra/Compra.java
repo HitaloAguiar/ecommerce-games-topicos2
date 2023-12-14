@@ -12,7 +12,7 @@ import jakarta.persistence.OneToOne;
 
 import br.unitins.ecommerce.model.DefaultEntity;
 import br.unitins.ecommerce.model.endereco.Endereco;
-import br.unitins.ecommerce.model.pagamento.Pagamento;
+import br.unitins.ecommerce.model.pedido.pagamento.Pagamento;
 import br.unitins.ecommerce.model.usuario.Usuario;
 
 @Entity
