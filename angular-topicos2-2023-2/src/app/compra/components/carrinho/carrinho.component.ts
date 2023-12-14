@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
 import { CartaoCredito } from 'src/app/models/cartao-credito.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-carrinho',
@@ -25,17 +26,27 @@ export class CarrinhoComponent implements OnInit {
   private subscription = new Subscription();
   usuarioLogado: Usuario | null = null;
   enderecoSelecionado: boolean = false;
+  formularioCartao!: FormGroup;
+
 
   constructor(private carrinhoService: CarrinhoService,
     private router: Router,
     private pedidoService: PedidoService,
     private authService: AuthService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.carrinhoItens = itens;
     });
+    this.formularioCartao = this.formBuilder.group({
+      numeroCartao: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      nomeImpressoCartao: ['', [Validators.required]],
+      dataValidade: ['', [Validators.required]],
+      codigoSeguranca: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+      bandeiraCartao: ['', [Validators.required]]
+  });
     this.obterUsuarioLogado();
     this.enderecoSelecionado = false;
   }

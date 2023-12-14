@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CidadeService } from 'src/app/services/cidade.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ElementRef, Renderer2 } from '@angular/core';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
   selector: 'app-view',
@@ -19,12 +20,16 @@ export class ViewComponent {
 
   mostrarBotaoAdicionar: boolean = false;
   usuarioLogado: Usuario | null = null;
+
   private subscription = new Subscription();
+
   apiResponse: any = null;
   selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
+
   formGroup: FormGroup;
   formGroupSenhaAtual: FormGroup;
   formGroupSenhaNova: FormGroup;
+
   cidades: Cidade[] = [];
   urlImage: string = '';
 
@@ -37,11 +42,14 @@ export class ViewComponent {
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
 
+  historicoCompras: any[] = [];
+
   constructor(private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
     private usuarioService: UsuarioService,
     private activatedRoute: ActivatedRoute,
+    private pedidoService: PedidoService,
     private cidadeService: CidadeService,
     private el: ElementRef,
     private renderer: Renderer2) {
@@ -69,10 +77,35 @@ export class ViewComponent {
   ngOnInit(): void {
     this.cidadeService.findAll().subscribe((cidades: Cidade[]) => {
       this.cidades = cidades;
-    });
+    }); // Substitua pelo valor real
 
     this.obterUsuarioLogado();
+    const userLogin = this.usuarioLogado?.login || ''; // Substitua pelo campo real que contém o login
     this.setUrlImage();
+
+  this.pedidoService.findAll(userLogin).subscribe(
+      response => {
+        console.log(response);
+        this.historicoCompras = response;
+      },
+      error => {
+        console.error('Erro ao obter pedidos:', error);
+        // Trate o erro conforme necessário
+      }
+    );
+  }
+
+  obterDescricaoFormaPagamento(formaPagamento: number): string {
+    switch (formaPagamento) {
+      case 1:
+        return 'Boleto Bancário';
+      case 2:
+        return 'PIX';
+      case 3:
+        return 'Cartão de Crédito';
+      default:
+        return 'Forma de pagamento não especificada';
+    }
   }
 
   setUrlImage() {
@@ -140,9 +173,9 @@ export class ViewComponent {
 
           this.apiResponse = errorResponse.error;
 
-         // Associar erros aos campos do formulário
-         this.formGroupSenhaAtual.get('senhaAtual')?.setErrors({ apiError: this.getErrorMessage('senhaAtual') });
-         console.log('Erro ao verificar senha' + JSON.stringify(errorResponse));
+          // Associar erros aos campos do formulário
+          this.formGroupSenhaAtual.get('senhaAtual')?.setErrors({ apiError: this.getErrorMessage('senhaAtual') });
+          console.log('Erro ao verificar senha' + JSON.stringify(errorResponse));
         }
       })
     }
@@ -187,10 +220,10 @@ export class ViewComponent {
 
           this.apiResponse = errorResponse.error;
 
-         // Associar erros aos campos do formulário
-         this.formGroupSenhaNova.get('senhaNova')?.setErrors({ apiError: this.getErrorMessage('senhaNova') });
-         this.formGroupSenhaNova.get('confirmarSenha')?.setErrors({ apiError: this.getErrorMessage('confirmarSenha') });
-         console.log('Erro ao atualizar senha' + JSON.stringify(errorResponse));
+          // Associar erros aos campos do formulário
+          this.formGroupSenhaNova.get('senhaNova')?.setErrors({ apiError: this.getErrorMessage('senhaNova') });
+          this.formGroupSenhaNova.get('confirmarSenha')?.setErrors({ apiError: this.getErrorMessage('confirmarSenha') });
+          console.log('Erro ao atualizar senha' + JSON.stringify(errorResponse));
         }
       })
     }

@@ -57,4 +57,8 @@ export class PedidoService {
 
     return this.http.post<any>(`${this.baseURL}/pedidos`, params);
   }
+
+  findAll(login: string): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/pedidos/${login}`);
+}
 }

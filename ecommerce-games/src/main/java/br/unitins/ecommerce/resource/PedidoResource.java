@@ -43,7 +43,7 @@ public class PedidoResource {
 
     @GET
     @Path("/{login}")
-    @RolesAllowed({"User", "Admin"})
+  //  @RolesAllowed({"User", "Admin"})
     public Response findAll(@PathParam("login") String login) {
         
         return Response.ok(pedidoService.findByAll(login)).build();

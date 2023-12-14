@@ -34,7 +34,7 @@
                     [ngClass]="{'selected': selecionado === 'Informacoes do Usuario'}">Informações do Usuário</button>
                 <button (click)="selecionado = 'historico'"
                     [ngClass]="{'selected': selecionado === 'historico'}">Histórico de Compras</button>
-                    <!-- TODO::página de histórico de compras -->
+                <!-- TODO::página de histórico de compras -->
                 <button (click)="selecionado = 'endereco'"
                     [ngClass]="{'selected': selecionado === 'endereco'}">Endereço</button>
                 <button (click)="selecionado = 'senha'" [ngClass]="{'selected': selecionado === 'senha'}">Alterar
@@ -67,6 +67,28 @@
                 <ng-container *ngIf="selecionado === 'historico'">
                     <div class="info">
                         <h1>Histórico de Compras de {{usuarioLogado?.nome}}</h1>
+                        <div *ngFor="let pedido of historicoCompras">
+                            <div class="pedido-info history-item">
+                                <!-- Exiba as informações do pedido -->
+                                <p>Número do Pedido: {{ pedido.id }}</p>
+                                <p>Nome do Comprador: {{ pedido.usuario.nome }}</p>
+                                <p>Data do Pedido: {{ pedido.dataHoraPedido | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+                                <p>Total do Pedido: {{ pedido.totalPedido }}</p>
+                                <p>Forma de Pagamento: {{ pedido.formaPagamento }}</p>
+                                <p>Status do Pagamento: {{ pedido.statusPagamento }}</p>
+                                <p>Data do Pagamento: {{ pedido.dataPagamento | date:'dd/MM/yyyy' }}</p>
+                                <p>Endereço: {{ pedido.enderecoResponseDTO.logradouro }}, {{
+                                    pedido.enderecoResponseDTO.numero }},
+                                    {{ pedido.enderecoResponseDTO.bairro }}, {{ pedido.enderecoResponseDTO.cidade }}</p>
+
+                                <h2>Itens do Pedido:</h2>
+                                <ul>
+                                    <li *ngFor="let item of pedido.itens">
+                                        {{ item.nome }} - Quantidade: {{ item.quantidade }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="selecionado === 'senha'">
@@ -75,44 +97,44 @@
                         <ng-container *ngIf="editandoSenha == false">
                             <h2>Confirme sua Senha atual</h2>
                             <form [formGroup]="formGroupSenhaAtual">
-                              <mat-form-field appearance="outline" class="full-width-input" color="accent">
-                                  <mat-label>Senha</mat-label>
-                                  <input matInput type="password" formControlName="senhaAtual" />
-                                  <mat-error *ngIf="formGroupSenhaAtual.get('senhaAtual')?.hasError('apiError')">
-                                      {{ formGroupSenhaAtual.get('senhaAtual')?.getError('apiError') }}
-                                  </mat-error>
-                              </mat-form-field>
-                              <button class="corBotao" aria-label="button para editar registro" color="primary"
-                                  (click)="verificarSenha()"> Editar Senha
-                              </button>
+                                <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                    <mat-label>Senha</mat-label>
+                                    <input matInput type="password" formControlName="senhaAtual" />
+                                    <mat-error *ngIf="formGroupSenhaAtual.get('senhaAtual')?.hasError('apiError')">
+                                        {{ formGroupSenhaAtual.get('senhaAtual')?.getError('apiError') }}
+                                    </mat-error>
+                                </mat-form-field>
+                                <button class="corBotao" aria-label="button para editar registro" color="primary"
+                                    (click)="verificarSenha()"> Editar Senha
+                                </button>
                             </form>
                         </ng-container>
 
                         <ng-container *ngIf="editandoSenha == true">
-                          <form [formGroup]="formGroupSenhaNova">
-                            <h2>Escreva a Nova Senha</h2>
-                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
-                                <mat-label>Senha</mat-label>
-                                <input matInput type="password" formControlName="senhaNova" />
-                                <mat-error *ngIf="formGroupSenhaNova.get('senhaNova')?.hasError('apiError')">
-                                  {{ formGroupSenhaNova.get('senhaNova')?.getError('apiError') }}
-                              </mat-error>
-                            </mat-form-field>
+                            <form [formGroup]="formGroupSenhaNova">
+                                <h2>Escreva a Nova Senha</h2>
+                                <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                    <mat-label>Senha</mat-label>
+                                    <input matInput type="password" formControlName="senhaNova" />
+                                    <mat-error *ngIf="formGroupSenhaNova.get('senhaNova')?.hasError('apiError')">
+                                        {{ formGroupSenhaNova.get('senhaNova')?.getError('apiError') }}
+                                    </mat-error>
+                                </mat-form-field>
 
-                            <h2>Confirme a Nova Senha</h2>
-                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
-                                <mat-label>Confirme a Senha</mat-label>
-                                <input matInput type="password" formControlName="confirmarSenha"/>
-                                <mat-error *ngIf="formGroupSenhaNova.get('confirmarSenha')?.hasError('apiError')">
-                                  {{ formGroupSenhaNova.get('confirmarSenha')?.getError('apiError') }}
-                              </mat-error>
-                            </mat-form-field>
+                                <h2>Confirme a Nova Senha</h2>
+                                <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                    <mat-label>Confirme a Senha</mat-label>
+                                    <input matInput type="password" formControlName="confirmarSenha" />
+                                    <mat-error *ngIf="formGroupSenhaNova.get('confirmarSenha')?.hasError('apiError')">
+                                        {{ formGroupSenhaNova.get('confirmarSenha')?.getError('apiError') }}
+                                    </mat-error>
+                                </mat-form-field>
 
-                            <button class="botaosalvarsenha" color="primary" mat-raised-button color="primary"
-                                (click)="salvarNovaSenha()" [disabled]="formGroupSenhaNova.invalid">Salvar</button>
+                                <button class="botaosalvarsenha" color="primary" mat-raised-button color="primary"
+                                    (click)="salvarNovaSenha()" [disabled]="formGroupSenhaNova.invalid">Salvar</button>
 
-                            <button mat-raised-button color="warn" (click)="terminarEdicao()">Cancelar</button>
-                          </form>
+                                <button mat-raised-button color="warn" (click)="terminarEdicao()">Cancelar</button>
+                            </form>
                         </ng-container>
 
 

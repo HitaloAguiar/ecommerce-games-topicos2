@@ -12,6 +12,20 @@ h2{
   background-color: green;
 }
 
+.history-item {
+  border-top: 1px solid #fff; /* Borda na parte superior de cada item */
+  border-bottom: 1px solid #fff; /* Borda na parte inferior de cada item */
+  padding: 15px 0; /* Adicione espaçamento para separar visualmente cada item do histórico */
+}
+
+.history-item:first-child {
+  border-top: 1px solid #fff; /* Adicione a borda superior ao primeiro item */
+}
+
+.history-item:last-child {
+  border-bottom: 1px solid #fff; /* Adicione a borda inferior ao último item */
+}
+
 .container {
   margin: auto;
   width: 60%;
