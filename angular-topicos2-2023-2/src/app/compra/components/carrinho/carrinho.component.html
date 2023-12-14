@@ -17,8 +17,10 @@
           </div>
         </div>
         <div class="carrinho-total mat-elevation-z2">
-          <p>Total do Carrinho: {{ calcularTotal() | currency:'BRL':'symbol':'1.2-2' }}</p>
-          <button (click)="finalizarCompra()" mat-raised-button color="primary">Finalizar Compra</button>
+          <p><strong>Total do Carrinho: {{ calcularTotal() | currency:'BRL':'symbol':'1.2-2' }}</strong></p>
+
+          <button mat-raised-button color="primary" routerLink="/compras/produtos">Escolher mais produtos</button>
+          <button (click)="finalizarCompra()" mat-raised-button color="accent">Finalizar Compra</button>
         </div>
 
       </ng-container>

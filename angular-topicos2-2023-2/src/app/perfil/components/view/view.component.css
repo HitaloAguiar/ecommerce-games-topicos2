@@ -18,29 +18,6 @@ h1{
   text-transform: uppercase;
 }
 
-.cancelar-edicao-btn,
-.salvar-imagem-btn {
-  margin-top: 10px;
-  padding: 3px 6px; /* Ajuste o padding para alterar o tamanho do botão */
-  font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */
-  display: inline-block; /* Torna os botões compactos horizontalmente */
-  width: auto; /* Permite que a largura seja determinada pelo conteúdo */
-  height: 20px;
-  margin-left: 12px;
-}
-
-.salvar-imagem-btn {
-  background-color: #4caf50;
-  color: white;
-  border: white;
-}
-
-.cancelar-edicao-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-}
-
 .profile-container {
   border-radius: 1%;
   background-color: #3b3b3b;
@@ -60,14 +37,23 @@ h1{
 }
 
 .profile-overlay img {
-  transition: filter 0.3s ease;
+  width: 100%; /* Certifica-se de que a imagem ocupa 100% do contêiner */
 }
 
-.profile-overlay:hover img {
-  filter: brightness(70%);
+.overlay-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semi-transparente (preto) */
+  opacity: 0; /* Inicialmente transparente */
+  transition: opacity 0.3s ease; /* Efeito de transição suave */
 }
 
-
+.profile-overlay:hover .overlay-background {
+  opacity: 1; /* Torna-se opaco ao passar o mouse sobre a imagem */
+}
 
 .botao-adicionar {
   position: absolute;
