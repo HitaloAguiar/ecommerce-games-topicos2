@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CidadeService } from 'src/app/services/cidade.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-view',
@@ -27,6 +28,7 @@ export class ViewComponent {
 
   selecionado2: string = 'Informacoes do Usuario'; // Pode ser inicializado com o valor padrão
   editandoEndereco: boolean = false;
+  editandoFoto: boolean = false;
 
   fileName: string = '';
   selectedFile: File | null = null;
@@ -37,7 +39,9 @@ export class ViewComponent {
     private router: Router,
     private usuarioService: UsuarioService,
     private activatedRoute: ActivatedRoute,
-    private cidadeService: CidadeService) {
+    private cidadeService: CidadeService,
+    private el: ElementRef,
+    private renderer: Renderer2) {
     const endereco: Endereco = this.activatedRoute.snapshot.data['endereco'];
     this.formGroup = formBuilder.group({
       logradouro: [(endereco && endereco.logradouro) ? endereco.logradouro : '', Validators.required],
@@ -95,6 +99,10 @@ export class ViewComponent {
     ));
   }
 
+  editarImagem() {
+    this.editandoFoto = true;
+  }
+
   salvar() {
     if (this.formGroup.valid) {
       const novoEndereco = this.formGroup.value;
@@ -136,28 +144,6 @@ export class ViewComponent {
   getErrorMessage(fieldName: string): string {
     const error = this.apiResponse.errors.find((error: any) => error.fieldName === fieldName);
     return error ? error.message : '';
-  }
-
-  private uploadImage(faixaId: number) {
-
-    if (this.selectedFile) {
-      this.usuarioService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
-        .subscribe({
-          next: () => {
-            this.router.navigateByUrl('/admin/games/list');
-          },
-          error: err => {
-            console.log('Erro ao fazer o upload da imagem');
-            // tratar o erro
-          }
-        })
-    } else {
-      if (this.usuarioLogado?.perfil == 'ADMIN') {
-        this.router.navigateByUrl('/admin/perfil/view');
-      } else if (this.usuarioLogado?.perfil == 'USER') {
-        this.router.navigateByUrl('/user/perfil/view');
-      }
-    }
   }
 
   salvarImagem() {
@@ -216,5 +202,21 @@ export class ViewComponent {
       reader.onload = e => this.imagePreview = reader.result;
       reader.readAsDataURL(this.selectedFile);
     }
+  }
+
+  onMouseOver() {
+    // Adicionar lógica para escurecer gradualmente quando o mouse passar sobre a imagem
+    this.renderer.setStyle(this.el.nativeElement.querySelector('img'), 'filter', 'brightness(70%)');
+  }
+
+  onMouseOut() {
+    // Remover o efeito de escurecimento quando o mouse sair da imagem
+    this.renderer.removeStyle(this.el.nativeElement.querySelector('img'), 'filter');
+  }
+
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  selecionarImagem() {
+    this.fileInput.nativeElement.click();
   }
 }
