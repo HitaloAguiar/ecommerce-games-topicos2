@@ -2,8 +2,6 @@ package br.unitins.ecommerce.service.pedido;
 
 import java.util.List;
 
-import br.unitins.ecommerce.dto.itempedido.ItemPedidoDTO;
-import br.unitins.ecommerce.dto.pedido.CartaoCreditoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoDTO;
 import br.unitins.ecommerce.dto.pedido.PedidoResponseDTO;
 

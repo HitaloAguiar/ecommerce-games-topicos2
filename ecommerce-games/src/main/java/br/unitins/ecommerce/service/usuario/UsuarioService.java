@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
 import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
+import br.unitins.ecommerce.dto.usuario.SenhaDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.usuario.Usuario;
@@ -38,4 +39,6 @@ public interface UsuarioService {
     Usuario insert(@Valid EnderecoDTO enderecoDTO, Long idUsuario);
 
     Usuario update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
+
+    Usuario update(SenhaDTO senhaDTO, Long idUsuario);
 }

@@ -3,21 +3,24 @@ package br.unitins.ecommerce.service.usuario;
 import java.util.List;
 import java.util.Set;
 
+import org.jboss.logging.Logger;
+
 import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
 import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
-import br.unitins.ecommerce.dto.game.GameResponseDTO;
+import br.unitins.ecommerce.dto.usuario.SenhaDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.model.endereco.Endereco;
-import br.unitins.ecommerce.model.produto.Game;
 import br.unitins.ecommerce.model.usuario.Perfil;
 import br.unitins.ecommerce.model.usuario.Telefone;
 import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.repository.CidadeRepository;
 import br.unitins.ecommerce.repository.EnderecoRepository;
 import br.unitins.ecommerce.repository.UsuarioRepository;
+import br.unitins.ecommerce.resource.UsuarioResource;
 import br.unitins.ecommerce.service.HashService;
 import io.quarkus.panache.common.Sort;
+import io.quarkus.security.UnauthorizedException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -25,6 +28,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
@@ -46,6 +50,8 @@ public class UsuarioImplService implements UsuarioService {
     HashService hashService;
 
     private Sort sort = Sort.by("id").ascending();
+
+    private static final Logger LOG = Logger.getLogger(UsuarioImplService.class);
 
     @Override
     public List<UsuarioResponseDTO> getAll() {
@@ -261,6 +267,41 @@ public class UsuarioImplService implements UsuarioService {
         endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
         
         return usuario;
+    }
+
+    @Override
+    public Usuario update(SenhaDTO senhaDTO, Long idUsuario) throws BadRequestException {
+        
+        Usuario usuario = usuarioRepository.findById(idUsuario);
+
+        String senhaAntiga = hashService.getHashSenha(senhaDTO.senhaAntiga());
+
+        LOG.info(senhaDTO.senhaAntiga());
+        LOG.info(senhaAntiga);
+        LOG.info(usuario.getSenha());
+
+        if (usuario.getSenha().equals(senhaAntiga)) {
+
+            LOG.info(senhaDTO.novaSenha());
+            LOG.info(senhaDTO.confirmarNovaSenha());
+
+            if (senhaDTO.novaSenha().equals(senhaDTO.confirmarNovaSenha())) {
+
+                usuario.setSenha(hashService.getHashSenha(senhaDTO.novaSenha()));
+
+                return usuario;
+            }
+
+            else {
+
+                throw new BadRequestException("Os campos nova senha e confirmação da senha não correspondem");
+            }
+        }
+
+        else {
+
+            throw new UnauthorizedException("Senha atual não está correta");
+        }
     }
     
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {

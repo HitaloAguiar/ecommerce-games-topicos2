@@ -9,6 +9,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import br.unitins.ecommerce.application.Result;
 import br.unitins.ecommerce.dto.endereco.EnderecoDTO;
 import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
+import br.unitins.ecommerce.dto.usuario.SenhaDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
@@ -16,6 +17,7 @@ import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
 import br.unitins.ecommerce.service.file.FileService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
@@ -99,6 +101,20 @@ public class UsuarioResource {
         return Response
                 .status(Status.CREATED) // 201
                 .entity(usuarioService.insert(usuarioDto))
+                .build();
+    }
+
+    @PATCH
+    @Path("/update/senha/{id}")
+    public Response update(@PathParam("id") Long id, SenhaDTO senhaDTO) throws BadRequestException {
+
+        LOG.infof("Senha atualizada com sucesso.");
+
+        Usuario usuario = usuarioService.update(senhaDTO, id);
+
+        return Response
+                .status(Status.CREATED) // 201
+                .entity(usuario)
                 .build();
     }
 
