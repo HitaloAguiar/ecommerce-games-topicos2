@@ -29,6 +29,7 @@ export class ViewComponent {
   selecionado2: string = 'Informacoes do Usuario'; // Pode ser inicializado com o valor padrão
   editandoEndereco: boolean = false;
   editandoFoto: boolean = false;
+  editandoSenha: boolean = false;
 
   fileName: string = '';
   selectedFile: File | null = null;
@@ -103,6 +104,14 @@ export class ViewComponent {
 
   editarImagem() {
     this.editandoFoto = true;
+  }
+
+  editarSenha() {
+    this.editandoSenha = true;
+  }
+
+  terminarEdicao() {
+    this.editandoSenha = false;
   }
 
   salvar() {
@@ -220,5 +229,9 @@ export class ViewComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   selecionarImagem() {
     this.fileInput.nativeElement.click();
+  }
+
+  salvarNovaSenha(){
+    
   }
 }

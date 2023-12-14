@@ -71,6 +71,40 @@
                 <ng-container *ngIf="selecionado === 'senha'">
                     <div class="info">
                         <h1>Alterar Senha</h1>
+                        <ng-container *ngIf="editandoSenha == false">
+                            <h2>Confirme sua Senha atual</h2>
+                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                <mat-label>Senha</mat-label>
+                                <input matInput type="password" formControlName="senha" />
+                                <mat-error *ngIf="formGroup.get('senha')?.hasError('apiError')">
+                                    {{ formGroup.get('senha')?.getError('apiError') }}
+                                </mat-error>
+                            </mat-form-field>
+                            <button class="corBotao" aria-label="button para editar registro" color="primary"
+                                (click)="editarSenha()"> Editar Senha
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="editandoSenha == true">
+                            <h2>Escreva a Nova Senha</h2>
+                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                <mat-label>Senha</mat-label>
+                                <input matInput type="password" formControlName="novaSenha" />
+                            </mat-form-field>
+
+                            <h2>Confirme a Nova Senha</h2>
+                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                <mat-label>Confirme a Senha</mat-label>
+                                <input matInput type="password" formControlName="confirmarSenha" />
+                            </mat-form-field>
+
+                            <button class="botaosalvarsenha" color="primary" mat-raised-button color="primary"
+                                (click)="salvarNovaSenha()" [disabled]="formGroup.invalid">Salvar</button>
+
+                            <button mat-raised-button color="warn" (click)="terminarEdicao()">Cancelar</button>
+                        </ng-container>
+
+
                     </div>
                 </ng-container>
                 <ng-container *ngIf="selecionado === 'endereco'">
@@ -86,7 +120,8 @@
                             <p><strong>Cep: </strong> {{usuarioLogado?.endereco?.cep}}</p>
                             <p><strong>Cidade: </strong> {{usuarioLogado?.endereco?.cidade?.nome}}</p>
                         </div>
-                        <button class="corBotao" aria-label="button para editar registro" (click)="editarEndereco()" color="primary"> Editar Endereço
+                        <button class="corBotao" aria-label="button para editar registro" (click)="editarEndereco()"
+                            color="primary"> Editar Endereço
                         </button><br>
                     </ng-container>
 
@@ -143,8 +178,10 @@
                                     </form>
                                 </mat-card-content>
                                 <mat-card-actions>
-                                    <button mat-raised-button color="primary" (click)="salvar()" [disabled]="formGroup.invalid">Salvar</button>
-                                    <button mat-raised-button color="warn" (click)="cancelarEdicaoEndereco()">Cancelar</button>
+                                    <button mat-raised-button color="primary" (click)="salvar()"
+                                        [disabled]="formGroup.invalid">Salvar</button>
+                                    <button mat-raised-button color="warn"
+                                        (click)="cancelarEdicaoEndereco()">Cancelar</button>
                                 </mat-card-actions>
                             </mat-card>
                         </div>

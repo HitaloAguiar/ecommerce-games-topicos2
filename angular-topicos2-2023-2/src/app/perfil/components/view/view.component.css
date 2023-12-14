@@ -4,6 +4,13 @@
   color: azure;
   min-height: 800px;
 }
+h2{
+  text-align: center;
+}
+
+.botaosalvarsenha{
+  background-color: green;
+}
 
 .container {
   margin: auto;
