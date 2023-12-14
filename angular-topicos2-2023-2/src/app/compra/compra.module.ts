@@ -29,11 +29,13 @@ import { GameCardListComponent } from './components/game-card-list/game-card-lis
 import { Injectable } from '@angular/core';
 import { CustomPaginatorIntl } from '../models/custom-paginator-intl';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FinalizarCompraComponent } from './finalizar-compra/finalizar-compra.component';
 
 @NgModule({
   declarations: [
     CarrinhoComponent,
-    GameCardListComponent
+    GameCardListComponent,
+    FinalizarCompraComponent
   ],
   imports: [
     CommonModule,
