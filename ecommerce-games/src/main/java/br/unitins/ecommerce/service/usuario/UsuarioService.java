@@ -40,5 +40,7 @@ public interface UsuarioService {
 
     Usuario update(Long idUsuario, @Valid EnderecoDTO enderecoDTO);
 
+    Boolean verificaSenhaAtual(Long idUsuario, String senhaAtual);
+
     Usuario update(SenhaDTO senhaDTO, Long idUsuario);
 }

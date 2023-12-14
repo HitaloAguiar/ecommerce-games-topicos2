@@ -17,7 +17,6 @@ import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.repository.CidadeRepository;
 import br.unitins.ecommerce.repository.EnderecoRepository;
 import br.unitins.ecommerce.repository.UsuarioRepository;
-import br.unitins.ecommerce.resource.UsuarioResource;
 import br.unitins.ecommerce.service.HashService;
 import io.quarkus.panache.common.Sort;
 import io.quarkus.security.UnauthorizedException;
@@ -270,6 +269,21 @@ public class UsuarioImplService implements UsuarioService {
     }
 
     @Override
+    public Boolean verificaSenhaAtual(Long idUsuario, String senhaAtual) {
+        
+        Usuario usuario = usuarioRepository.findById(idUsuario);
+
+        senhaAtual = hashService.getHashSenha(senhaAtual);
+
+        if (senhaAtual.equals(usuario.getSenha()))
+            return true;
+        
+        else
+            return false;
+    }
+
+    @Override
+    @Transactional
     public Usuario update(SenhaDTO senhaDTO, Long idUsuario) throws BadRequestException {
         
         Usuario usuario = usuarioRepository.findById(idUsuario);

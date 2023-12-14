@@ -73,16 +73,18 @@
                         <h1>Alterar Senha</h1>
                         <ng-container *ngIf="editandoSenha == false">
                             <h2>Confirme sua Senha atual</h2>
-                            <mat-form-field appearance="outline" class="full-width-input" color="accent">
-                                <mat-label>Senha</mat-label>
-                                <input matInput type="password" formControlName="senha" />
-                                <mat-error *ngIf="formGroup.get('senha')?.hasError('apiError')">
-                                    {{ formGroup.get('senha')?.getError('apiError') }}
-                                </mat-error>
-                            </mat-form-field>
-                            <button class="corBotao" aria-label="button para editar registro" color="primary"
-                                (click)="editarSenha()"> Editar Senha
-                            </button>
+                            <form [formGroup]="formGroupSenhaAtual">
+                              <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                  <mat-label>Senha</mat-label>
+                                  <input matInput type="password" formControlName="senhaAtual" />
+                                  <mat-error *ngIf="formGroupSenhaAtual.get('senhaAtual')?.hasError('apiError')">
+                                      {{ formGroupSenhaAtual.get('senhaAtual')?.getError('apiError') }}
+                                  </mat-error>
+                              </mat-form-field>
+                              <button class="corBotao" aria-label="button para editar registro" color="primary"
+                                  (click)="editarSenha()"> Editar Senha
+                              </button>
+                            </form>
                         </ng-container>
 
                         <ng-container *ngIf="editandoSenha == true">

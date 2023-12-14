@@ -23,6 +23,7 @@ export class ViewComponent {
   apiResponse: any = null;
   selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
   formGroup: FormGroup;
+  formGroupSenhaAtual: FormGroup;
   cidades: Cidade[] = [];
   urlImage: string = '';
 
@@ -44,6 +45,10 @@ export class ViewComponent {
     private el: ElementRef,
     private renderer: Renderer2) {
     const endereco: Endereco = this.activatedRoute.snapshot.data['endereco'];
+    this.formGroupSenhaAtual = formBuilder.group({
+      senhaAtual: ['', Validators.required],
+    });
+
     this.formGroup = formBuilder.group({
       logradouro: [(endereco && endereco.logradouro) ? endereco.logradouro : '', Validators.required],
       numero: [(endereco && endereco.numero) ? endereco.numero : '', Validators.required],
@@ -107,7 +112,38 @@ export class ViewComponent {
   }
 
   editarSenha() {
-    this.editandoSenha = true;
+
+    if (this.formGroupSenhaAtual.valid) {
+
+      console.log(this.formGroupSenhaAtual.value.senhaAtual);
+
+      const formSenha = this.formGroupSenhaAtual.value;
+
+      this.usuarioService.verificaSenha(this.usuarioLogado?.id, formSenha.senhaAtual).subscribe({
+        next: (isValid) => {
+
+          if (isValid == false) {
+
+            this.formGroupSenhaAtual.get('senhaAtual')?.setErrors({ apiError: "Senha inserida não corresponde a senha atual" });
+          }
+
+          console.log(isValid);
+          this.editandoSenha = isValid;
+        },
+        error: (errorResponse) => {
+
+          this.apiResponse = errorResponse.error;
+
+         // Associar erros aos campos do formulário
+         this.formGroupSenhaAtual.get('senhaAtual')?.setErrors({ apiError: this.getErrorMessage('senhaAtual') });
+         console.log('Erro ao verificar senha' + JSON.stringify(errorResponse));
+        }
+      })
+    }
+
+    this.formGroupSenhaAtual = this.formBuilder.group({
+      senhaAtual: ['', Validators.required],
+    });
   }
 
   terminarEdicao() {
@@ -232,6 +268,6 @@ export class ViewComponent {
   }
 
   salvarNovaSenha(){
-    
+
   }
 }

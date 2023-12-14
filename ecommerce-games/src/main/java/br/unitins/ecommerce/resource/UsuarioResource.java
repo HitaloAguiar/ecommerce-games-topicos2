@@ -12,11 +12,9 @@ import br.unitins.ecommerce.dto.endereco.EnderecoResponseDTO;
 import br.unitins.ecommerce.dto.usuario.SenhaDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
-import br.unitins.ecommerce.form.GameImageForm;
 import br.unitins.ecommerce.form.UserImageForm;
 import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
-import br.unitins.ecommerce.service.file.FileService;
 import br.unitins.ecommerce.service.file.UserFileService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.BadRequestException;
@@ -93,6 +91,15 @@ public class UsuarioResource {
         LOG.debug("ERRO DE DEBUG.");
 
         return usuarioService.getEndereco(id);
+    }
+
+    @GET
+    @Path("/verifica/{senha}/{id}")
+    public Boolean verificaSenhaAtual(@PathParam("id") Long id, @PathParam("senha") String senhaAtual) throws NullPointerException, NotFoundException {
+        LOG.info("Verificando se a senha inserida pelo usuário corresponde a cadastrada no banco");
+        LOG.debug("ERRO DE DEBUG.");
+
+        return usuarioService.verificaSenhaAtual(id, senhaAtual);
     }
 
     @POST

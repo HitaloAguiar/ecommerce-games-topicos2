@@ -84,4 +84,8 @@ export class UsuarioService {
     return this.http.patch<Usuario>(`${this.baseURL}/usuarios/image/upload`, formData);
   }
 
+  verificaSenha(idUsuario: number | undefined, senha: string): Observable<boolean> {
+
+    return this.http.get<boolean>(`${this.baseURL}/usuarios/verifica/${senha}/${idUsuario}`);
+  }
 }
