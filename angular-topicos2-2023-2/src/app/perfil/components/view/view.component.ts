@@ -57,13 +57,15 @@ export class ViewComponent {
   ngOnInit(): void {
     this.cidadeService.findAll().subscribe((cidades: Cidade[]) => {
       this.cidades = cidades;
-      this.obterUsuarioLogado();
     });
 
+    this.obterUsuarioLogado();
     this.setUrlImage();
   }
 
   setUrlImage() {
+
+    console.log(this.usuarioLogado);
 
     this.urlImage = this.usuarioLogado?.nomeImagem == undefined ? '' : this.usuarioService.getUrlImagem(this.usuarioLogado?.nomeImagem);
   }
@@ -159,7 +161,7 @@ export class ViewComponent {
 
             this.setUrlImage();
 
-            console.log("Até aqui chegaste?");
+            // console.log("Até aqui chegaste?");
             // Lógica para exibir a imagem no perfil após o upload bem-sucedido
             // this.usuarioLogado!.nomeImagem = response.nomeImagem;  // Atualize conforme necessário
 
