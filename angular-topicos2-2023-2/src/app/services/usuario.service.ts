@@ -71,7 +71,7 @@ export class UsuarioService {
     return this.http.patch(`${this.baseURL}/usuarios/endereco/update/${idUsuario}`, endereco);
   }
 
-  getUrlImagem(nomeImagem: string): string {
+  getUrlImagem(nomeImagem: string | undefined): string {
     return `${this.baseURL}/usuarios/image/download/${nomeImagem}`;
   }
 

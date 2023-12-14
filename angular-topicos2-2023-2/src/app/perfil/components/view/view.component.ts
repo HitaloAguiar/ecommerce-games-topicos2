@@ -24,6 +24,7 @@ export class ViewComponent {
   selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
   formGroup: FormGroup;
   cidades: Cidade[] = [];
+  urlImage: string = '';
 
   selecionado2: string = 'Informacoes do Usuario'; // Pode ser inicializado com o valor padrão
   editandoEndereco: boolean = false;
@@ -58,6 +59,13 @@ export class ViewComponent {
       this.cidades = cidades;
       this.obterUsuarioLogado();
     });
+
+    this.setUrlImage();
+  }
+
+  setUrlImage() {
+
+    this.urlImage = this.usuarioLogado?.nomeImagem == undefined ? '' : this.usuarioService.getUrlImagem(this.usuarioLogado?.nomeImagem);
   }
 
   editarEndereco() {
@@ -164,40 +172,48 @@ export class ViewComponent {
 
   salvarImagem() {
     if (this.selectedFile) {
-        // Chame seu serviço para fazer o upload da imagem
-        this.usuarioService.uploadImagem(this.usuarioLogado!.id, this.selectedFile.name, this.selectedFile)
-            .subscribe({
-                next: (response) => {
-                    // Lógica para exibir a imagem no perfil após o upload bem-sucedido
-                    this.usuarioLogado!.nomeImagem = response.nomeImagem;  // Atualize conforme necessário
+      // Chame seu serviço para fazer o upload da imagem
+      this.usuarioService.uploadImagem(this.usuarioLogado!.id, this.selectedFile.name, this.selectedFile)
+        .subscribe({
+          next: (response) => {
 
-                    // Navegue para a visualização do perfil ou faça alguma outra ação
-                    if (this.usuarioLogado?.perfil == 'ADMIN') {
-                        this.router.navigateByUrl('/admin/perfil/view');
-                    } else if (this.usuarioLogado?.perfil == 'USER') {
-                        this.router.navigateByUrl('/user/perfil/view');
-                    }
-                },
-                error: err => {
-                    console.log('Erro ao fazer o upload da imagem');
-                    // Trate o erro conforme necessário
-                }
-            });
+            this.authService.updateUsuarioLogado(response);
+
+            console.log(this.usuarioLogado?.nomeImagem);
+
+            this.setUrlImage();
+
+            console.log("Até aqui chegaste?");
+            // Lógica para exibir a imagem no perfil após o upload bem-sucedido
+            // this.usuarioLogado!.nomeImagem = response.nomeImagem;  // Atualize conforme necessário
+
+            // Navegue para a visualização do perfil ou faça alguma outra ação
+            if (this.usuarioLogado?.perfil == 'ADMIN') {
+              this.router.navigateByUrl('/admin/perfil/view');
+            } else if (this.usuarioLogado?.perfil == 'USER') {
+              this.router.navigateByUrl('/user/perfil/view');
+            }
+          },
+          error: err => {
+            console.log('Erro ao fazer o upload da imagem');
+            // Trate o erro conforme necessário
+          }
+        });
     } else {
-        // Lógica para lidar com o caso em que nenhuma imagem é selecionada
-        console.log('Nenhuma imagem selecionada.');
+      // Lógica para lidar com o caso em que nenhuma imagem é selecionada
+      console.log('Nenhuma imagem selecionada.');
     }
 
     // Restaure o estado inicial
     this.cancelarEdicaoFoto();
-}
+  }
 
-cancelarEdicaoFoto() {
+  cancelarEdicaoFoto() {
     this.editandoFoto = false;
     this.selectedFile = null;
     this.fileName = '';
     this.imagePreview = null;
-}
+  }
 
   carregarImagemSelecionada(event: any) {
     this.selectedFile = event.target.files[0];

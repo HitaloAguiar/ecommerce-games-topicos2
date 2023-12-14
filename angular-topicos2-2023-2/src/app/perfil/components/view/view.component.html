@@ -4,16 +4,16 @@
         <div class="profile-container">
             <div class="profile">
                 <div class="profile-overlay" *ngIf="editandoFoto == false" (click)="editarImagem()">
-                    <ng-container *ngIf="usuarioLogado?.nomeImagem === null; else fotoPerfil">
+                    <ng-container *ngIf="urlImage === ''; else fotoPerfil">
                         <img src="/assets/profile.png" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
                     </ng-container>
 
                     <ng-template #fotoPerfil>
-                        <img [src]="usuarioLogado?.nomeImagem" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+                        <img [src]="urlImage" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
                     </ng-template>
 
                 </div>
-                
+
                 <ng-container *ngIf="editandoFoto">
                     <input type="file" #fileInput (change)="carregarImagemSelecionada($event)">
                     <button class="salvar-imagem-btn" (click)="salvarImagem()">Salvar</button>

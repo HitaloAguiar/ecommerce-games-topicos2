@@ -137,10 +137,10 @@ export class GameFormComponent {
     }
   }
 
-  private uploadImage(faixaId: number) {
+  private uploadImage(gameId: number) {
 
     if (this.selectedFile) {
-      this.gameService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
+      this.gameService.uploadImagem(gameId, this.selectedFile.name, this.selectedFile)
       .subscribe({
         next: () => {
           this.router.navigateByUrl('/admin/games/list');

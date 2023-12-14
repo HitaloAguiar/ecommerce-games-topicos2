@@ -13,9 +13,11 @@ import br.unitins.ecommerce.dto.usuario.SenhaDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioDTO;
 import br.unitins.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.unitins.ecommerce.form.GameImageForm;
+import br.unitins.ecommerce.form.UserImageForm;
 import br.unitins.ecommerce.model.usuario.Usuario;
 import br.unitins.ecommerce.service.usuario.UsuarioService;
 import br.unitins.ecommerce.service.file.FileService;
+import br.unitins.ecommerce.service.file.UserFileService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
@@ -44,7 +46,7 @@ public class UsuarioResource {
     UsuarioService usuarioService;
     
     @Inject
-    FileService fileService;
+    UserFileService fileService;
 
     private static final Logger LOG = Logger.getLogger(UsuarioResource.class);
 
@@ -191,13 +193,13 @@ public class UsuarioResource {
     // @RolesAllowed("Admin")
     @Path("/image/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response salvarImagem(@MultipartForm GameImageForm form) {
+    public Response salvarImagem(@MultipartForm UserImageForm form) {
         
         LOG.info("chegou aqui?");
 
         try {
-            fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
-            return Response.noContent().build();
+            Usuario usuario = fileService.salvar(form.getId(), form.getNomeImagem(), form.getImagem());
+            return Response.status(Status.CREATED).entity(usuario).build();
         } catch (IOException e) {
             Result result = new Result(e.getMessage());
             return Response.status(Status.CONFLICT).entity(result).build();

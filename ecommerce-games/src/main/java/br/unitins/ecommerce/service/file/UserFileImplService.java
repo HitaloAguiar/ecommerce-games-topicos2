@@ -32,13 +32,16 @@ public class UserFileImplService implements UserFileService {
 
     @Override
     @Transactional
-    public void salvar(Long id, String nomeImagem, byte[] imagem)  throws IOException {
+    public Usuario salvar(Long id, String nomeImagem, byte[] imagem)  throws IOException {
         Usuario usuario = usuarioRepository.findById(id);
 
         try {
             String novoNomeImagem = salvarImagem(imagem, nomeImagem);
             LOG.info("chegou aqui");
             usuario.setNomeImagem(novoNomeImagem);
+            LOG.info(usuario.getNomeImagem());
+
+            return usuario;
         } catch (IOException e) {
             LOG.error(e.getMessage());
             throw e;
