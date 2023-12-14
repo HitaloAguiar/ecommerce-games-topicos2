@@ -71,6 +71,17 @@ export class UsuarioService {
     return this.http.patch(`${this.baseURL}/usuarios/endereco/update/${idUsuario}`, endereco);
   }
 
+  atualizarSenha(idUsuario: number | undefined, senhaNova: string, confirmarSenha: string): Observable<any> {
+
+    const params = {
+
+      novaSenha: senhaNova,
+      confirmarNovaSenha: confirmarSenha
+    }
+
+    return this.http.patch(`${this.baseURL}/usuarios/update/senha/${idUsuario}`, params);
+  }
+
   getUrlImagem(nomeImagem: string | undefined): string {
     return `${this.baseURL}/usuarios/image/download/${nomeImagem}`;
   }

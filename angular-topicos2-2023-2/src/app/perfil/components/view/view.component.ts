@@ -24,6 +24,7 @@ export class ViewComponent {
   selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
   formGroup: FormGroup;
   formGroupSenhaAtual: FormGroup;
+  formGroupSenhaNova: FormGroup;
   cidades: Cidade[] = [];
   urlImage: string = '';
 
@@ -47,6 +48,11 @@ export class ViewComponent {
     const endereco: Endereco = this.activatedRoute.snapshot.data['endereco'];
     this.formGroupSenhaAtual = formBuilder.group({
       senhaAtual: ['', Validators.required],
+    });
+
+    this.formGroupSenhaNova = formBuilder.group({
+      senhaNova: ['', Validators.required],
+      confirmarSenha: ['', Validators.required]
     });
 
     this.formGroup = formBuilder.group({
@@ -111,7 +117,7 @@ export class ViewComponent {
     this.editandoFoto = true;
   }
 
-  editarSenha() {
+  verificarSenha() {
 
     if (this.formGroupSenhaAtual.valid) {
 
@@ -146,11 +152,55 @@ export class ViewComponent {
     });
   }
 
+  salvarNovaSenha() {
+
+    if (this.formGroupSenhaNova.valid) {
+
+      console.log(this.formGroupSenhaNova.value.senhaAtual);
+
+      const formSenha = this.formGroupSenhaNova.value;
+
+      this.usuarioService.atualizarSenha(this.usuarioLogado?.id, formSenha.senhaNova, formSenha.confirmarSenha).subscribe({
+        next: (usuarioAtualizado) => {
+
+          console.log(usuarioAtualizado);
+
+          if (usuarioAtualizado == null) {
+
+            this.formGroupSenhaNova.get('senhaNova')?.setErrors({ apiError: "As senhas inseridas não estão iguais" });
+            this.formGroupSenhaNova.get('confirmarSenha')?.setErrors({ apiError: "As senhas inseridas não estão iguais" });
+          }
+
+          else {
+
+            console.log('Senha do usuário atualizada com sucesso:', usuarioAtualizado);
+            this.authService.updateUsuarioLogado(usuarioAtualizado);
+            this.editandoSenha = false;
+
+            this.formGroupSenhaNova = this.formBuilder.group({
+              senhaNova: ['', Validators.required],
+              confirmarSenha: ['', Validators.required]
+            });
+          }
+        },
+        error: (errorResponse) => {
+
+          this.apiResponse = errorResponse.error;
+
+         // Associar erros aos campos do formulário
+         this.formGroupSenhaNova.get('senhaNova')?.setErrors({ apiError: this.getErrorMessage('senhaNova') });
+         this.formGroupSenhaNova.get('confirmarSenha')?.setErrors({ apiError: this.getErrorMessage('confirmarSenha') });
+         console.log('Erro ao atualizar senha' + JSON.stringify(errorResponse));
+        }
+      })
+    }
+  }
+
   terminarEdicao() {
     this.editandoSenha = false;
   }
 
-  salvar() {
+  salvarEndereco() {
     if (this.formGroup.valid) {
       const novoEndereco = this.formGroup.value;
 
@@ -265,9 +315,5 @@ export class ViewComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   selecionarImagem() {
     this.fileInput.nativeElement.click();
-  }
-
-  salvarNovaSenha(){
-
   }
 }

@@ -82,28 +82,36 @@
                                   </mat-error>
                               </mat-form-field>
                               <button class="corBotao" aria-label="button para editar registro" color="primary"
-                                  (click)="editarSenha()"> Editar Senha
+                                  (click)="verificarSenha()"> Editar Senha
                               </button>
                             </form>
                         </ng-container>
 
                         <ng-container *ngIf="editandoSenha == true">
+                          <form [formGroup]="formGroupSenhaNova">
                             <h2>Escreva a Nova Senha</h2>
                             <mat-form-field appearance="outline" class="full-width-input" color="accent">
                                 <mat-label>Senha</mat-label>
-                                <input matInput type="password" formControlName="novaSenha" />
+                                <input matInput type="password" formControlName="senhaNova" />
+                                <mat-error *ngIf="formGroupSenhaNova.get('senhaNova')?.hasError('apiError')">
+                                  {{ formGroupSenhaNova.get('senhaNova')?.getError('apiError') }}
+                              </mat-error>
                             </mat-form-field>
 
                             <h2>Confirme a Nova Senha</h2>
                             <mat-form-field appearance="outline" class="full-width-input" color="accent">
                                 <mat-label>Confirme a Senha</mat-label>
-                                <input matInput type="password" formControlName="confirmarSenha" />
+                                <input matInput type="password" formControlName="confirmarSenha"/>
+                                <mat-error *ngIf="formGroupSenhaNova.get('confirmarSenha')?.hasError('apiError')">
+                                  {{ formGroupSenhaNova.get('confirmarSenha')?.getError('apiError') }}
+                              </mat-error>
                             </mat-form-field>
 
                             <button class="botaosalvarsenha" color="primary" mat-raised-button color="primary"
-                                (click)="salvarNovaSenha()" [disabled]="formGroup.invalid">Salvar</button>
+                                (click)="salvarNovaSenha()" [disabled]="formGroupSenhaNova.invalid">Salvar</button>
 
                             <button mat-raised-button color="warn" (click)="terminarEdicao()">Cancelar</button>
+                          </form>
                         </ng-container>
 
 
@@ -180,7 +188,7 @@
                                     </form>
                                 </mat-card-content>
                                 <mat-card-actions>
-                                    <button mat-raised-button color="primary" (click)="salvar()"
+                                    <button mat-raised-button color="primary" (click)="salvarEndereco()"
                                         [disabled]="formGroup.invalid">Salvar</button>
                                     <button mat-raised-button color="warn"
                                         (click)="cancelarEdicaoEndereco()">Cancelar</button>
@@ -241,7 +249,7 @@
                                     </form>
                                 </mat-card-content>
                                 <mat-card-actions>
-                                    <button mat-raised-button color="primary" (click)="salvar()"
+                                    <button mat-raised-button color="primary" (click)="salvarEndereco()"
                                         [disabled]="formGroup.invalid">Salvar</button>
                                     <button mat-raised-button color="warn"
                                         (click)="selecionado = 'Informacoes do Usuario'">Cancelar</button>

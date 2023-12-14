@@ -117,14 +117,20 @@ public class UsuarioResource {
     @Path("/update/senha/{id}")
     public Response update(@PathParam("id") Long id, SenhaDTO senhaDTO) throws BadRequestException {
 
-        LOG.infof("Senha atualizada com sucesso.");
+        try {
+            
+            LOG.infof("Senha atualizada com sucesso.");
 
-        Usuario usuario = usuarioService.update(senhaDTO, id);
+            Usuario usuario = usuarioService.update(senhaDTO, id);
 
-        return Response
-                .status(Status.CREATED) // 201
-                .entity(usuario)
-                .build();
+            return Response
+                    .status(Status.CREATED) // 201
+                    .entity(usuario)
+                    .build();
+        } catch (BadRequestException e) {
+            
+            return null;
+        }
     }
 
     @PATCH

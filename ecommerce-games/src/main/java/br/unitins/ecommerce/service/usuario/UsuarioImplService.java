@@ -41,7 +41,7 @@ public class UsuarioImplService implements UsuarioService {
 
     @Inject
     EnderecoRepository enderecoRepository;
-    
+
     @Inject
     CidadeRepository cidadeRepository;
 
@@ -54,19 +54,20 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     public List<UsuarioResponseDTO> getAll() {
-        
+
         return usuarioRepository.findAll(sort).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
     }
 
     @Override
     public List<UsuarioResponseDTO> getAll(int page, int pageSize) {
-        
-        return usuarioRepository.findAll(sort).page(page, pageSize).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
+
+        return usuarioRepository.findAll(sort).page(page, pageSize).stream()
+                .map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
     }
 
     @Override
     public UsuarioResponseDTO getById(Long id) {
-        
+
         Usuario usuario = usuarioRepository.findById(id);
 
         if (usuario == null)
@@ -78,7 +79,7 @@ public class UsuarioImplService implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO insert(@Valid UsuarioDTO usuarioDto) throws ConstraintViolationException {
-        
+
         validar(usuarioDto);
 
         Usuario entity = new Usuario();
@@ -96,7 +97,7 @@ public class UsuarioImplService implements UsuarioService {
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 
         for (String telefone : usuarioDto.telefones()) {
-            
+
             entity.getTelefones().add(new Telefone(telefone));
         }
 
@@ -108,7 +109,7 @@ public class UsuarioImplService implements UsuarioService {
     @Override
     @Transactional
     public Usuario update(Long id, @Valid UsuarioDTO usuarioDto) throws ConstraintViolationException {
-        
+
         validar(usuarioDto);
 
         Usuario entity = usuarioRepository.findById(id);
@@ -129,14 +130,14 @@ public class UsuarioImplService implements UsuarioService {
         entity.setPerfil(Perfil.valueOf(usuarioDto.perfil()));
 
         // for (Telefone telefone : entity.getTelefones()) {
-            
-        //     entity.getTelefones().remove(telefone);
+
+        // entity.getTelefones().remove(telefone);
         // }
 
         entity.getTelefones().clear();
 
         for (String telefones : usuarioDto.telefones()) {
-            
+
             entity.getTelefones().add(new Telefone(telefones));
         }
 
@@ -146,7 +147,7 @@ public class UsuarioImplService implements UsuarioService {
     @Override
     @Transactional
     public void delete(Long id) {
-        
+
         if (id == null)
             throw new IllegalArgumentException("Número inválido");
 
@@ -171,8 +172,9 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     public List<UsuarioResponseDTO> getByNome(String nome, int page, int pageSize) {
-        
-        return usuarioRepository.findByNome(nome, sort).page(page, pageSize).stream().map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();        
+
+        return usuarioRepository.findByNome(nome, sort).page(page, pageSize).stream()
+                .map(usuario -> new UsuarioResponseDTO(usuario, null)).toList();
     }
 
     @Override
@@ -197,7 +199,7 @@ public class UsuarioImplService implements UsuarioService {
 
     @Override
     public EnderecoResponseDTO getEndereco(Long idUsuario) throws NullPointerException, NotFoundException {
-        
+
         if (idUsuario == null)
             throw new NullPointerException("Id do Usuário está nulo");
 
@@ -237,7 +239,7 @@ public class UsuarioImplService implements UsuarioService {
         Usuario usuario = usuarioRepository.findById(idUsuario);
 
         usuario.setEndereco(endereco);
-        
+
         return usuario;
     }
 
@@ -264,20 +266,20 @@ public class UsuarioImplService implements UsuarioService {
         endereco.setCep(enderecoDTO.cep());
 
         endereco.setCidade(cidadeRepository.findById(enderecoDTO.cidade()));
-        
+
         return usuario;
     }
 
     @Override
     public Boolean verificaSenhaAtual(Long idUsuario, String senhaAtual) {
-        
+
         Usuario usuario = usuarioRepository.findById(idUsuario);
 
         senhaAtual = hashService.getHashSenha(senhaAtual);
 
         if (senhaAtual.equals(usuario.getSenha()))
             return true;
-        
+
         else
             return false;
     }
@@ -285,39 +287,24 @@ public class UsuarioImplService implements UsuarioService {
     @Override
     @Transactional
     public Usuario update(SenhaDTO senhaDTO, Long idUsuario) throws BadRequestException {
-        
+
+        LOG.info(senhaDTO);
+
         Usuario usuario = usuarioRepository.findById(idUsuario);
 
-        String senhaAntiga = hashService.getHashSenha(senhaDTO.senhaAntiga());
+        if (senhaDTO.novaSenha().equals(senhaDTO.confirmarNovaSenha())) {
 
-        LOG.info(senhaDTO.senhaAntiga());
-        LOG.info(senhaAntiga);
-        LOG.info(usuario.getSenha());
+            usuario.setSenha(hashService.getHashSenha(senhaDTO.novaSenha()));
 
-        if (usuario.getSenha().equals(senhaAntiga)) {
-
-            LOG.info(senhaDTO.novaSenha());
-            LOG.info(senhaDTO.confirmarNovaSenha());
-
-            if (senhaDTO.novaSenha().equals(senhaDTO.confirmarNovaSenha())) {
-
-                usuario.setSenha(hashService.getHashSenha(senhaDTO.novaSenha()));
-
-                return usuario;
-            }
-
-            else {
-
-                throw new BadRequestException("Os campos nova senha e confirmação da senha não correspondem");
-            }
+            return usuario;
         }
 
         else {
 
-            throw new UnauthorizedException("Senha atual não está correta");
+            throw new BadRequestException("Os campos nova senha e confirmação da senha não correspondem");
         }
     }
-    
+
     private void validar(UsuarioDTO usuarioDTO) throws ConstraintViolationException {
 
         Set<ConstraintViolation<UsuarioDTO>> violations = validator.validate(usuarioDTO);
