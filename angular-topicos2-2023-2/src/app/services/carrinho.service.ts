@@ -34,6 +34,32 @@ export class CarrinhoService {
     this.atualizarArmazenamentoLocal();
   }
 
+  diminuirQuantidade(item: ItemCarrinho): void {
+    const carrinhoAtual = this.carrinhoSubject.value;
+    const carrinhoAtualizado = carrinhoAtual.map((itemCarrinho) => {
+      if (itemCarrinho === item) {
+        return { ...itemCarrinho, quantidade: itemCarrinho.quantidade - 1 };
+      }
+      return itemCarrinho;
+    });
+
+    this.carrinhoSubject.next(carrinhoAtualizado);
+    this.atualizarArmazenamentoLocal();
+  }
+
+  aumentarQuantidade(item: ItemCarrinho): void {
+    const carrinhoAtual = this.carrinhoSubject.value;
+    const carrinhoAtualizado = carrinhoAtual.map((itemCarrinho) => {
+      if (itemCarrinho === item) {
+        return { ...itemCarrinho, quantidade: itemCarrinho.quantidade + 1 };
+      }
+      return itemCarrinho;
+    });
+
+    this.carrinhoSubject.next(carrinhoAtualizado);
+    this.atualizarArmazenamentoLocal();
+  }
+
   removerTudo(): void {
     this.localStorageService.removeItem('carrinho');
     window.location.reload(); // reload na página
@@ -55,4 +81,6 @@ export class CarrinhoService {
   private atualizarArmazenamentoLocal(): void {
     localStorage.setItem('carrinho', JSON.stringify(this.carrinhoSubject.value));
   }
+
+
 }

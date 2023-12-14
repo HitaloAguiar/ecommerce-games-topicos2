@@ -146,4 +146,18 @@ export class CarrinhoComponent implements OnInit {
     });
   }
 
+  aumentarQuantidade(item: ItemCarrinho): void {
+    // Verifica se a quantidade é menor que um valor máximo (opcional)
+    if (item.quantidade < 10) {
+      // Aumenta a quantidade do item no carrinho
+      this.carrinhoService.aumentarQuantidade(item);
+    }
+  }
+
+  diminuirQuantidade(item: ItemCarrinho): void {
+    if (item.quantidade > 1) {
+      this.carrinhoService.diminuirQuantidade(item);
+    }
+  }
+
 }

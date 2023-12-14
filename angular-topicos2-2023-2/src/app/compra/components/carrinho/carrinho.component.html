@@ -9,7 +9,16 @@
               <div class="carrinho-item-details">
                 <h3>{{ item.nome }}</h3>
                 <p>Preço: {{ item.preco | currency:'BRL':'symbol':'1.2-2' }}</p>
-                <p>Quantidade: {{ item.quantidade }}</p>
+                <div class="quantidade-container">
+                  Quantidade
+                  <button mat-icon-button class="quantidade-button" color="warn" (click)="diminuirQuantidade(item)">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                  <span class="quantidade-label">{{ item.quantidade }}</span>
+                  <button mat-icon-button class="quantidade-button" color="primary" (click)="aumentarQuantidade(item)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
                 <p>Total: {{ item.quantidade * item.preco | currency:'BRL':'symbol':'1.2-2' }}</p>
                 <button mat-raised-button color="warn" (click)="removerItem(item)">Remover do Carrinho</button>
               </div>
