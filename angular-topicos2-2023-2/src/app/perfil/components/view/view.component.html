@@ -16,12 +16,18 @@
         </div>
         <div class="option">
             <div class="selecao">
-                <button (click)="selecionado = 'conta'">Conta</button>
-                <button (click)="selecionado = 'historico'">Histórico de Compras</button>
-                <button (click)="selecionado = 'endereco'">Endereço</button>
+                <button (click)="selecionado = 'Informacoes do Usuario'"
+                    [ngClass]="{'selected': selecionado === 'Informacoes do Usuario'}">Informações do Usuário</button>
+                <button (click)="selecionado = 'historico'"
+                    [ngClass]="{'selected': selecionado === 'historico'}">Histórico de Compras</button>
+                <button (click)="selecionado = 'endereco'"
+                    [ngClass]="{'selected': selecionado === 'endereco'}">Endereço</button>
+                <button (click)="selecionado = 'senha'" [ngClass]="{'selected': selecionado === 'senha'}">Alterar
+                    Senha</button>
             </div>
+
             <div class="update">
-                <ng-container *ngIf="selecionado === 'conta'">
+                <ng-container *ngIf="selecionado === 'Informacoes do Usuario'">
                     <div class="info">
                         <h1>Informações do Usuário</h1>
                         <p><strong>Nome Completo:</strong> {{usuarioLogado?.nome}}</p>
@@ -29,12 +35,12 @@
                         <p><strong>Email:</strong> {{usuarioLogado?.email}}</p>
                         <p><strong>Nome de Usuário:</strong> {{usuarioLogado?.login}}</p>
 
-                            <p><strong>Telefones:</strong></p>
-                            <ul>
-                                <li *ngFor="let telefone of usuarioLogado?.telefones">
-                                    {{ telefone.numero }}
-                                </li>
-                            </ul>
+                        <p><strong>Telefones:</strong></p>
+                        <ul>
+                            <li *ngFor="let telefone of usuarioLogado?.telefones">
+                                {{ telefone.numero }}
+                            </li>
+                        </ul>
 
                         <button class="corBotao" aria-label="button para editar registro" color="primary"
                             (click)="editar()"> Editar Informações
@@ -46,6 +52,11 @@
                 <ng-container *ngIf="selecionado === 'historico'">
                     <div class="info">
                         <h1>Histórico de Compras de {{usuarioLogado?.nome}}</h1>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="selecionado === 'senha'">
+                    <div class="info">
+                        <h1>Alterar Senha</h1>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="selecionado === 'endereco'">
@@ -60,6 +71,68 @@
                             <p><strong>Complemento: </strong> {{usuarioLogado?.endereco?.complemento}}</p>
                             <p><strong>Cep: </strong> {{usuarioLogado?.endereco?.cep}}</p>
                             <p><strong>Cidade: </strong> {{usuarioLogado?.endereco?.cidade?.nome}}</p>
+                        </div>
+                        <button class="corBotao" aria-label="button para editar registro" (click)="editarEndereco()" color="primary"> Editar Endereço
+                        </button><br>
+                    </ng-container>
+
+                    <ng-container *ngIf="editandoEndereco">
+                        <mat-toolbar class="centered-toolbar">
+                            <h1>Editar Endereço</h1>
+                        </mat-toolbar>
+                        <div class="form-container">
+                            <mat-card>
+                                <mat-card-content>
+                                    <form [formGroup]="formGroup">
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>Logradouro</mat-label>
+                                            <input matInput type="text" formControlName="logradouro" />
+                                            <mat-error *ngIf="formGroup.get('logradouro')?.hasError('apiError')">
+                                                {{ formGroup.get('logradouro')?.getError('apiError') }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>Bairro</mat-label>
+                                            <input matInput type="text" formControlName="bairro" />
+                                            <mat-error *ngIf="formGroup.get('bairro')?.hasError('apiError')">
+                                                {{ formGroup.get('bairro')?.getError('apiError') }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>Número</mat-label>
+                                            <input matInput type="text" formControlName="numero" />
+                                            <mat-error *ngIf="formGroup.get('numero')?.hasError('apiError')">
+                                                {{ formGroup.get('numero')?.getError('apiError') }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>Complemento</mat-label>
+                                            <input matInput type="text" formControlName="complemento" />
+                                            <mat-error *ngIf="formGroup.get('complemento')?.hasError('apiError')">
+                                                {{ formGroup.get('complemento')?.getError('apiError') }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>CEP</mat-label>
+                                            <input matInput type="text" formControlName="cep" />
+                                            <mat-error *ngIf="formGroup.get('cep')?.hasError('apiError')">
+                                                {{ formGroup.get('cep')?.getError('apiError') }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                                            <mat-label>Cidade</mat-label>
+                                            <mat-select formControlName="cidade" name="cidade">
+                                                <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">{{
+                                                    cidade.nome }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </form>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" (click)="salvar()" [disabled]="formGroup.invalid">Salvar</button>
+                                    <button mat-raised-button color="warn" (click)="cancelarEdicaoEndereco()">Cancelar</button>
+                                </mat-card-actions>                                
+                            </mat-card>
                         </div>
                     </ng-container>
                     <ng-container *ngIf="usuarioLogado?.endereco === null">
@@ -118,11 +191,10 @@
                                     <button mat-raised-button color="primary" (click)="salvar()"
                                         [disabled]="formGroup.invalid">Salvar</button>
                                     <button mat-raised-button color="warn"
-                                        (click)="selecionado = 'conta'">Cancelar</button>
+                                        (click)="selecionado = 'Informacoes do Usuario'">Cancelar</button>
                                 </mat-card-actions>
                             </mat-card>
                         </div>
-
                     </ng-container>
                 </ng-container>
             </div>

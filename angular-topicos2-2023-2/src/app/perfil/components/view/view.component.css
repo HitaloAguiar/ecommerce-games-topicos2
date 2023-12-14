@@ -155,6 +155,11 @@ img {
   background-color: #1a1a1a;
 }
 
+.selecao button.selected {
+  background-color: #181818; /* Cor mais clara quando selecionado */
+  color: #fff;
+}
+
  
 .full-width-input {
   width: 100%;

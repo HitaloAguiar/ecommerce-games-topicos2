@@ -20,9 +20,12 @@ export class ViewComponent {
   usuarioLogado: Usuario | null = null;
   private subscription = new Subscription();
   apiResponse: any = null;
-  selecionado: 'conta' | 'historico' | 'endereco' = 'conta';
+  selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
   formGroup: FormGroup;
   cidades: Cidade[] = [];
+
+  selecionado2: string = 'Informacoes do Usuario'; // Pode ser inicializado com o valor padrão
+  editandoEndereco: boolean = false;
 
   fileName: string = '';
   selectedFile: File | null = null;
@@ -53,7 +56,13 @@ export class ViewComponent {
     });
   }
 
+  editarEndereco() {
+    this.editandoEndereco = true;
+  }
 
+  cancelarEdicaoEndereco() {
+    this.editandoEndereco = false;
+  }
 
   editar() {
     if (this.usuarioLogado && this.usuarioLogado.id) {
