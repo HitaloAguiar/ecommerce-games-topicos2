@@ -24,7 +24,7 @@ export class ViewComponent {
   private subscription = new Subscription();
 
   apiResponse: any = null;
-  selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
+  selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' | 'cartao' = 'Informacoes do Usuario';
 
   formGroup: FormGroup;
   formGroupSenhaAtual: FormGroup;

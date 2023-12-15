@@ -5,11 +5,13 @@
             <div class="profile">
                 <div class="profile-overlay" *ngIf="editandoFoto == false" (click)="editarImagem()">
                     <ng-container *ngIf="urlImage === ''; else fotoPerfil">
-                        <img class="profile-image" src="/assets/profile.png" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+                        <img class="profile-image" src="/assets/profile.png" (mouseover)="onMouseOver()"
+                            (mouseout)="onMouseOut()">
                     </ng-container>
 
                     <ng-template #fotoPerfil>
-                        <img class="profile-image" [src]="urlImage" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+                        <img class="profile-image" [src]="urlImage" (mouseover)="onMouseOver()"
+                            (mouseout)="onMouseOut()">
                     </ng-template>
 
                 </div>
@@ -39,6 +41,8 @@
                     [ngClass]="{'selected': selecionado === 'endereco'}">Endereço</button>
                 <button (click)="selecionado = 'senha'" [ngClass]="{'selected': selecionado === 'senha'}">Alterar
                     Senha</button>
+                <button (click)="selecionado = 'cartao'" [ngClass]="{'selected': selecionado === 'cartao'}">Formas de
+                    Pagamento</button>
             </div>
 
             <div class="update">
@@ -280,6 +284,19 @@
                             </mat-card>
                         </div>
                     </ng-container>
+                </ng-container>
+                <ng-container *ngIf="selecionado === 'cartao'">
+                    <div class="info">
+                        <h1>Formas de Pagamento</h1>
+                        <ng-template class="cartaoCredito" *ngIf="usuarioLogado?.cartao != null ; else cadastroCartao">
+                            <h2>Cartões de {{usuarioLogado?.nome}}</h2>
+                            <p><strong>Bandeira: </strong> {{usuarioLogado?.cartao?.bandeiraCartao}}</p>
+                            <p><strong>Bairro: </strong> {{usuarioLogado?.cartao?.nomeImpressoCartao}}</p>
+                        </ng-template>
+                        <ng-template #cadastroCartao>
+                            <p>Implementar Formulário</p>
+                        </ng-template>
+                    </div>
                 </ng-container>
             </div>
         </div>
