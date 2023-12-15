@@ -145,19 +145,19 @@ mat-form-field {
 input[type="text"] {
   width: 100%;
   color: black;
-  background-color: #888;
+  background-color: #404040;
 }
 
 /* Estilo para o placeholder do número do cartão */
 ::placeholder {
-  background-color: #888;
+  background-color: #404040;
   color: black;
 }
 
 /* Estilo para o cartãoCss (ajuste conforme necessário) */
 /* Estilo para o cartãoCss (ajuste conforme necessário) */
 .cartaoCss {
-  background-color: #888;
+  background-color: #404040;
   display: flex;
   flex-direction: column;
   gap: 15px;

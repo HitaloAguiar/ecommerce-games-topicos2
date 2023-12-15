@@ -36,7 +36,6 @@
                     [ngClass]="{'selected': selecionado === 'Informacoes do Usuario'}">Informações do Usuário</button>
                 <button (click)="selecionado = 'historico'"
                     [ngClass]="{'selected': selecionado === 'historico'}">Histórico de Compras</button>
-                <!-- TODO::página de histórico de compras -->
                 <button (click)="selecionado = 'endereco'"
                     [ngClass]="{'selected': selecionado === 'endereco'}">Endereço</button>
                 <button (click)="selecionado = 'senha'" [ngClass]="{'selected': selecionado === 'senha'}">Alterar
@@ -77,6 +76,7 @@
                                 <p>Data do Pedido: {{ pedido.dataHoraPedido | date:'dd/MM/yyyy HH:mm:ss' }}</p>
                                 <p>Total do Pedido: {{ pedido.totalPedido }}</p>
                                 <p>Forma de Pagamento: {{ pedido.formaPagamento }}</p>
+                                <p>Número do cartão usado: {{ pedido.numeroCartaoUsado == null? "---" : pedido.numeroCartaoUsado }}</p>
                                 <p>Status do Pagamento: {{ pedido.statusPagamento }}</p>
                                 <p>Data do Pagamento: {{ pedido.dataPagamento | date:'dd/MM/yyyy' }}</p>
                                 <p>Endereço de Entrega: {{ pedido.enderecoResponseDTO.logradouro }}, {{

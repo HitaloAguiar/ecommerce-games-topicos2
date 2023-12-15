@@ -256,18 +256,16 @@ public class GameImplService implements GameService {
             table.addCell("Preço");
 
             for (Game game : games) {
-                Text idText = new Text("ID: " + game.getId())
-                        .setFontSize(12f)
-                        .setBold();
+                Text idText = new Text(game.getId().toString())
+                        .setFontSize(12f);
 
-                Text nomeText = new Text("Nome: " + game.getNome())
+                Text nomeText = new Text(game.getNome())
 
-                        .setFontSize(14f)
-                        .setItalic();
+                        .setFontSize(12f);
 
-                Text precoText = new Text("Preço: " + game.getPreco())
+                Text precoText = new Text(game.getPreco().toString())
 
-                        .setFontSize(16f);
+                        .setFontSize(12f);
 
                 // Adicione as células à tabela
                 table.addCell(new Cell().add(new Paragraph().add(idText)));
@@ -296,7 +294,6 @@ public class GameImplService implements GameService {
     }
 
     @Override
-
     public byte[] criarRelatorioGames(String filtro) {
 
         List<Game> games;

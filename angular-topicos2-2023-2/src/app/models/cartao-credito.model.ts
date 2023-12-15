@@ -4,7 +4,7 @@ export class CartaoCredito {
   numeroCartao!: string;
   nomeImpressoCartao!: string;
   dataValidade!: Date;
-  cpfTitular!: string;
+  // cpfTitular!: string;
   bandeiraCartao!: string;
   codigoSeguranca!: string
 }

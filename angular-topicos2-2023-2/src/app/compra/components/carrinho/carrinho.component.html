@@ -128,17 +128,17 @@
                           </mat-error>
                       </mat-form-field>
 
-                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                      <!-- <mat-form-field appearance="outline" class="full-width-input" color="accent">
                           <mat-label>CPF do Titular</mat-label>
                           <input matInput type="text" formControlName="cpfTitular" />
                           <mat-error *ngIf="formGroup.get('cpfTitular')?.hasError('apiError')">
                               {{ formGroup.get('cpfTitular')?.getError('apiError') }}
                           </mat-error>
-                      </mat-form-field>
+                      </mat-form-field> -->
 
                       <mat-form-field appearance="outline" class="full-width-input" color="accent">
                           <mat-label> Bandeira do Cartão </mat-label>
-                          <mat-select formControlName="bandeirasCartao" name="bandeirasCartao">
+                          <mat-select formControlName="bandeiraCartao" name="bandeiraCartao">
                               <mat-option value="VISA">Visa</mat-option>
                               <mat-option value="AMERICAN_EXPRESS">American Express</mat-option>
                               <mat-option value="HIPERCARD">Hipercard</mat-option>
@@ -155,6 +155,7 @@
                               {{ formGroup.get('codigoSeguranca')?.getError('apiError') }}
                           </mat-error>
                       </mat-form-field>
+                      <button (click)="finalizarCompra()" [disabled]="formGroup.invalid" mat-raised-button color="accent">Finalizar Compra</button>
                   </form>
               </ng-container>
 

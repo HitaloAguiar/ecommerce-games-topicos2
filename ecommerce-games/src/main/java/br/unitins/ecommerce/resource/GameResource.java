@@ -190,4 +190,16 @@ public class GameResource {
         byte[] pdf = gameService.criarRelatorioGames(filtro);
         return Response.ok(pdf).header("Content-Disposition", "filename=attachment;relatorioGames.pdf").build();
     }
+
+    @GET
+    // @RolesAllowed("Admin")
+    @Produces("application/pdf")
+    @Path("/relatorio")
+    public Response gerarRelatorio(){
+        LOG.info("Baixando relatório de games");
+        LOG.debug("ERRO DE DEBUG.");
+
+        byte[] pdf = gameService.criarRelatorioGames(null);
+        return Response.ok(pdf).header("Content-Disposition", "filename=attachment;relatorioGames.pdf").build();
+    }
 }

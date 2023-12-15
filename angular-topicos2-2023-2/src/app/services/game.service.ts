@@ -70,7 +70,18 @@ export class GameService {
   }
 
   gerarRelatorio(filtro: string): Observable<any> {
-    const url = `${this.baseURL}/games/relatorio/${filtro}`;
+
+    let url;
+
+    if (filtro == null) {
+
+      url = `${this.baseURL}/games/relatorio`;
+    }
+
+    else {
+
+      url = `${this.baseURL}/games/relatorio/${filtro}`;
+    }
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json', // Change Content-Type to application/json

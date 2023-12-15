@@ -85,13 +85,13 @@ const routes: Routes = [
           () => import('./perfil/perfil.module')
             .then(m => m.PerfilModule)
       },
-      
+
       // { path: 'register', component: RegisterComponent },
     ],
   },
-  
+
   { path: '', redirectTo: '/compras/produtos', pathMatch: 'full' }, // Rota padrão
-   //{ path: '**', redirectTo: '/compras/produtos' }, // Rota para tratamento de erro
+   { path: '**', redirectTo: '/compras/produtos' }, // Rota para tratamento de erro
 
 
 ];

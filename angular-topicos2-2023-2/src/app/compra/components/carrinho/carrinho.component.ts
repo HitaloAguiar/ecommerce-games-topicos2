@@ -42,7 +42,7 @@ export class CarrinhoComponent implements OnInit {
       numeroCartao: [cartao?.numeroCartao || '', Validators.required],
       nomeImpressoCartao: [cartao?.nomeImpressoCartao || '', Validators.required],
       dataValidade: [cartao?.dataValidade || '', Validators.required],
-      cpfTitular: [cartao?.cpfTitular || '', Validators.required],
+      // cpfTitular: [cartao?.cpfTitular || '', Validators.required],
       bandeiraCartao: [cartao?.bandeiraCartao || '', Validators.required],
       codigoSeguranca: [cartao?.codigoSeguranca || '', Validators.required],
     });
@@ -51,13 +51,6 @@ export class CarrinhoComponent implements OnInit {
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.carrinhoItens = itens;
-    });
-    this.formGroup = this.formBuilder.group({
-      numeroCartao: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-      nomeImpressoCartao: ['', [Validators.required]],
-      dataValidade: ['', [Validators.required]],
-      codigoSeguranca: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-      bandeiraCartao: ['', [Validators.required]]
     });
     this.obterUsuarioLogado();
     this.enderecoSelecionado = false;
@@ -82,7 +75,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   salvarCartao() {
-      
+
   }
 
   continuarCompra() {
@@ -139,6 +132,16 @@ export class CarrinhoComponent implements OnInit {
 
     let cartaoCredito: CartaoCredito = new CartaoCredito();
 
+    if (this.formGroup.valid) {
+
+      console.log(this.formGroup.value);
+
+      const formCartao = this.formGroup.value;
+
+      cartaoCredito = this.formGroup.value;
+    }
+
+    console.log(cartaoCredito);
     this.pedidoService.save(this.carrinhoItens, this.usuarioLogado?.endereco, pagamento, cartaoCredito).subscribe({
       next: () => {
         this.carrinhoService.removerTudo();
