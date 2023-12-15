@@ -41,8 +41,6 @@
                     [ngClass]="{'selected': selecionado === 'endereco'}">Endereço</button>
                 <button (click)="selecionado = 'senha'" [ngClass]="{'selected': selecionado === 'senha'}">Alterar
                     Senha</button>
-                <button (click)="selecionado = 'cartao'" [ngClass]="{'selected': selecionado === 'cartao'}">Formas de
-                    Pagamento</button>
             </div>
 
             <div class="update">
@@ -81,7 +79,7 @@
                                 <p>Forma de Pagamento: {{ pedido.formaPagamento }}</p>
                                 <p>Status do Pagamento: {{ pedido.statusPagamento }}</p>
                                 <p>Data do Pagamento: {{ pedido.dataPagamento | date:'dd/MM/yyyy' }}</p>
-                                <p>Endereço: {{ pedido.enderecoResponseDTO.logradouro }}, {{
+                                <p>Endereço de Entrega: {{ pedido.enderecoResponseDTO.logradouro }}, {{
                                     pedido.enderecoResponseDTO.numero }},
                                     {{ pedido.enderecoResponseDTO.bairro }}, {{ pedido.enderecoResponseDTO.cidade }}</p>
 
@@ -284,40 +282,6 @@
                             </mat-card>
                         </div>
                     </ng-container>
-                </ng-container>
-                <ng-container *ngIf="selecionado === 'cartao'">
-                    <div class="info">
-                        <h1>Formas de Pagamento</h1>
-                        <ng-template class="cartaoCredito" *ngIf="usuarioLogado?.cartao != null ; else cadastroCartao">
-                            <h2>Cartões de {{usuarioLogado?.nome}}</h2>
-                            <p><strong>Bandeira: </strong> {{usuarioLogado?.cartao?.bandeiraCartao}}</p>
-                            <p><strong>Bairro: </strong> {{usuarioLogado?.cartao?.nomeImpressoCartao}}</p>
-                            <button mat-raised-button (click)="formularioCartao" color="accent">Cadastrar Cartão</button>
-                        </ng-template>
-                        <ng-template #cadastroCartao>
-                            <form class="cartaoCss" [formGroup]="formularioCartao">
-                                <label for="numeroCartao">Número do Cartão:</label>
-                                <input type="text" id="numeroCartao" formControlName="numeroCartao">
-                            
-                                <label for="nomeImpressoCartao">Nome Impresso no Cartão:</label>
-                                <input type="text" id="nomeImpressoCartao" formControlName="nomeImpressoCartao">
-
-                                <label for="cpfTitular">CPF do Titular do Cartão:</label>
-                                <input type="text" id="cpfTitular" formControlName="cpfTitular">
-                                
-                                <label for="bandeiraCartao">Bandeira do Cartão:</label>
-                                <input type="text" id="bandeiraCartao" formControlName="bandeiraCartao">
-                            
-                                <label for="dataValidade">Data de Validade:</label>
-                                <input type="text" id="dataValidade" formControlName="dataValidade">
-                            
-                                <label for="codigoSeguranca">Código de Segurança:</label>
-                                <input type="text" id="codigoSeguranca" formControlName="codigoSeguranca">
-                            
-                                <button mat-raised-button (click)="salvarCartao()" color="accent">Salvar Cartão</button>
-                              </form>
-                        </ng-template>
-                    </div>
                 </ng-container>
             </div>
         </div>

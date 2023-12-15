@@ -99,4 +99,16 @@ export class UsuarioService {
 
     return this.http.get<boolean>(`${this.baseURL}/usuarios/verifica/${senha}/${idUsuario}`);
   }
+
+  getCartao(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/usuarios/cartao/${id}`);
+  }
+
+  insertCartao(id: number, cartaoDTO: any): Observable<any> {
+    return this.http.post(`${this.baseURL}/usuarios/cartao/insert/${id}`, cartaoDTO);
+  }
+
+  deleteCartao(id: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}/usuarios/cartao/delete/${id}`);
+  }
 }

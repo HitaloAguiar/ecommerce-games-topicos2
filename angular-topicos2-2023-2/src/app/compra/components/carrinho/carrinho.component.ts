@@ -1,6 +1,6 @@
 // carrinho.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ItemCarrinho } from 'src/app/models/item-carrinho.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { CarrinhoService } from 'src/app/services/carrinho.service';
@@ -26,7 +26,7 @@ export class CarrinhoComponent implements OnInit {
   private subscription = new Subscription();
   usuarioLogado: Usuario | null = null;
   enderecoSelecionado: boolean = false;
-  formularioCartao!: FormGroup;
+  formGroup: FormGroup;
 
 
   constructor(private carrinhoService: CarrinhoService,
@@ -34,19 +34,31 @@ export class CarrinhoComponent implements OnInit {
     private pedidoService: PedidoService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute) {
+
+    const cartao: CartaoCredito = this.activatedRoute.snapshot.data['cartaocredito'];
+    this.formGroup = formBuilder.group({
+      numeroCartao: [cartao?.numeroCartao || '', Validators.required],
+      nomeImpressoCartao: [cartao?.nomeImpressoCartao || '', Validators.required],
+      dataValidade: [cartao?.dataValidade || '', Validators.required],
+      cpfTitular: [cartao?.cpfTitular || '', Validators.required],
+      bandeiraCartao: [cartao?.bandeiraCartao || '', Validators.required],
+      codigoSeguranca: [cartao?.codigoSeguranca || '', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.carrinhoItens = itens;
     });
-    this.formularioCartao = this.formBuilder.group({
+    this.formGroup = this.formBuilder.group({
       numeroCartao: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       nomeImpressoCartao: ['', [Validators.required]],
       dataValidade: ['', [Validators.required]],
       codigoSeguranca: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
       bandeiraCartao: ['', [Validators.required]]
-  });
+    });
     this.obterUsuarioLogado();
     this.enderecoSelecionado = false;
   }
@@ -56,6 +68,21 @@ export class CarrinhoComponent implements OnInit {
     if (!this.enderecoSelecionado) {
       this.pagando = false;
     }
+  }
+
+  get bandeirasCartao() {
+    return [
+      { nome: 'Visa', valor: 'VISA' },
+      { nome: 'American Express', valor: 'AMERICAN_EXPRESS' },
+      { nome: 'Hipercard', valor: 'HIPERCARD' },
+      { nome: 'Diners', valor: 'DINERS' },
+      { nome: 'Mastercard', valor: 'MASTERCARD' },
+      { nome: 'Elo', valor: 'ELO' },
+    ];
+  }
+
+  salvarCartao() {
+      
   }
 
   continuarCompra() {
@@ -97,17 +124,17 @@ export class CarrinhoComponent implements OnInit {
       case 'boleto':
 
         pagamento = 1;
-      break;
+        break;
 
       case 'pix':
 
         pagamento = 2;
-      break;
+        break;
 
       case 'cartao':
 
         pagamento = 3;
-      break;
+        break;
     }
 
     let cartaoCredito: CartaoCredito = new CartaoCredito();

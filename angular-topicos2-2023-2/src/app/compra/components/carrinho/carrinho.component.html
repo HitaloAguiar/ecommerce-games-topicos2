@@ -100,25 +100,63 @@
               </div>
 
               <div *ngIf="selectedOption === 'cartao'">
-                <p>Opção selecionada: Cartão</p>
-                <form  [formGroup]="formularioCartao">
-                  <label for="numeroCartao">Número do Cartão:</label>
-                  <input type="text" id="numeroCartao" formControlName="numeroCartao">
-              
-                  <label for="nomeImpressoCartao">Nome Impresso no Cartão:</label>
-                  <input type="text" id="nomeImpressoCartao" formControlName="nomeImpressoCartao">
-              
-                  <label for="dataValidade">Data de Validade:</label>
-                  <input type="text" id="dataValidade" formControlName="dataValidade">
-              
-                  <label for="codigoSeguranca">Código de Segurança:</label>
-                  <input type="text" id="codigoSeguranca" formControlName="codigoSeguranca">
-              
-                  <label for="bandeiraCartao">Bandeira do Cartão:</label>
-                  <input type="text" id="bandeiraCartao" formControlName="bandeiraCartao">
-              
-                  <button (click)="finalizarCompra()" mat-raised-button color="accent">Finalizar Compra</button>
-                </form>
+                <ng-container>
+                  <form class="cartaoCss" [formGroup]="formGroup">
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label>Número do Cartão</mat-label>
+                          <input matInput type="text" formControlName="numeroCartao" />
+                          <mat-error *ngIf="formGroup.get('numeroCartao')?.hasError('apiError')">
+                              {{ formGroup.get('numeroCartao')?.getError('apiError') }}
+                          </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label>Nome Impresso no Cartão</mat-label>
+                          <input matInput type="text" formControlName="nomeImpressoCartao" />
+                          <mat-error *ngIf="formGroup.get('nomeImpressoCartao')?.hasError('apiError')">
+                              {{ formGroup.get('nomeImpressoCartao')?.getError('apiError') }}
+                          </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label>Data de Validade</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="dataValidade">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                          <mat-error *ngIf="formGroup.get('dataValidade')?.hasError('apiError')">
+                              {{ formGroup.get('dataValidade')?.getError('apiError') }}
+                          </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label>CPF do Titular</mat-label>
+                          <input matInput type="text" formControlName="cpfTitular" />
+                          <mat-error *ngIf="formGroup.get('cpfTitular')?.hasError('apiError')">
+                              {{ formGroup.get('cpfTitular')?.getError('apiError') }}
+                          </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label> Bandeira do Cartão </mat-label>
+                          <mat-select formControlName="bandeirasCartao" name="bandeirasCartao">
+                              <mat-option value="VISA">Visa</mat-option>
+                              <mat-option value="AMERICAN_EXPRESS">American Express</mat-option>
+                              <mat-option value="HIPERCARD">Hipercard</mat-option>
+                              <mat-option value="DINERS">Diners</mat-option>
+                              <mat-option value="MASTERCARD">Mastercard</mat-option>
+                              <mat-option value="ELO">Elo</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="full-width-input" color="accent">
+                          <mat-label>Código de Segurança</mat-label>
+                          <input matInput type="text" formControlName="codigoSeguranca" />
+                          <mat-error *ngIf="formGroup.get('codigoSeguranca')?.hasError('apiError')">
+                              {{ formGroup.get('codigoSeguranca')?.getError('apiError') }}
+                          </mat-error>
+                      </mat-form-field>
+                  </form>
+              </ng-container>
 
               </div>
 

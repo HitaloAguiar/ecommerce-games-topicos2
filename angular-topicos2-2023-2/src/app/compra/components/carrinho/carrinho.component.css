@@ -137,3 +137,34 @@ button {
   background-color: #1b2838;
 }
 
+mat-form-field {
+  width: 100%;
+  color: black;
+}
+
+input[type="text"] {
+  width: 100%;
+  color: black;
+  background-color: #888;
+}
+
+/* Estilo para o placeholder do número do cartão */
+::placeholder {
+  background-color: #888;
+  color: black;
+}
+
+/* Estilo para o cartãoCss (ajuste conforme necessário) */
+/* Estilo para o cartãoCss (ajuste conforme necessário) */
+.cartaoCss {
+  background-color: #888;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: black;
+  padding: 20px; /* Adiciona algum preenchimento ao redor do formulário */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+

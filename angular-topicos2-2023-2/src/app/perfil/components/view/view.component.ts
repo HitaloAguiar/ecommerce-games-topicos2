@@ -10,6 +10,7 @@ import { CidadeService } from 'src/app/services/cidade.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ElementRef, Renderer2 } from '@angular/core';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { CartaoCredito } from 'src/app/models/cartao-credito.model';
 
 @Component({
   selector: 'app-view',
@@ -24,12 +25,11 @@ export class ViewComponent {
   private subscription = new Subscription();
 
   apiResponse: any = null;
-  selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' | 'cartao' = 'Informacoes do Usuario';
+  selecionado: 'Informacoes do Usuario' | 'historico' | 'endereco' | 'senha' = 'Informacoes do Usuario';
 
   formGroup: FormGroup;
   formGroupSenhaAtual: FormGroup;
   formGroupSenhaNova: FormGroup;
-  formularioCartao!: FormGroup;
 
   cidades: Cidade[] = [];
   urlImage: string = '';
@@ -73,15 +73,6 @@ export class ViewComponent {
       cidade: [(endereco && endereco.cidade) ? endereco.cidade.id : '', Validators.required],
       // idUsuario: 0
     });
-
-    this.formularioCartao = this.formBuilder.group({
-      numeroCartao: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-      nomeImpressoCartao: ['', [Validators.required]],
-      dataValidade: ['', [Validators.required]],
-      codigoSeguranca: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
-      bandeiraCartao: ['', [Validators.required]]
-    });
-
   }
   ngOnInit(): void {
     this.cidadeService.findAll().subscribe((cidades: Cidade[]) => {
@@ -359,8 +350,4 @@ export class ViewComponent {
     this.fileInput.nativeElement.click();
   }
 
-  salvarCartao() {
-
-  }
-  
 }

@@ -17,6 +17,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ViewComponent } from './components/view/view.component';
 import { UpdateComponent } from './components/update/update.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { UpdateComponent } from './components/update/update.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatTableModule,
     MatIconModule,
     MatSelectModule,
