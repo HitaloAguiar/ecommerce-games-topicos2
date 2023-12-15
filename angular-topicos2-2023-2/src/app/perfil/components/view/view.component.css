@@ -76,6 +76,47 @@ h1{
   aspect-ratio: 1/1;
 }
 
+.cartaoCss {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #3b3b3b;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cartaoCss label {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.cartaoCss input {
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #252525;
+  color: white;
+}
+
+.cartaoCss button {
+  background-color: green;
+  color: white;
+  border: none;
+  width: fit-content;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cartaoCss button:hover {
+  background-color: darkgreen;
+}
+
 
 .profile {
   padding: 20px;

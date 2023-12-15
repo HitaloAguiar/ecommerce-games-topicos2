@@ -29,6 +29,7 @@ export class ViewComponent {
   formGroup: FormGroup;
   formGroupSenhaAtual: FormGroup;
   formGroupSenhaNova: FormGroup;
+  formularioCartao!: FormGroup;
 
   cidades: Cidade[] = [];
   urlImage: string = '';
@@ -73,6 +74,14 @@ export class ViewComponent {
       // idUsuario: 0
     });
 
+    this.formularioCartao = this.formBuilder.group({
+      numeroCartao: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      nomeImpressoCartao: ['', [Validators.required]],
+      dataValidade: ['', [Validators.required]],
+      codigoSeguranca: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
+      bandeiraCartao: ['', [Validators.required]]
+    });
+
   }
   ngOnInit(): void {
     this.cidadeService.findAll().subscribe((cidades: Cidade[]) => {
@@ -83,7 +92,7 @@ export class ViewComponent {
     const userLogin = this.usuarioLogado?.login || ''; // Substitua pelo campo real que contém o login
     this.setUrlImage();
 
-  this.pedidoService.findAll(userLogin).subscribe(
+    this.pedidoService.findAll(userLogin).subscribe(
       response => {
         console.log(response);
         this.historicoCompras = response;
@@ -349,4 +358,9 @@ export class ViewComponent {
   selecionarImagem() {
     this.fileInput.nativeElement.click();
   }
+
+  salvarCartao() {
+
+  }
+  
 }
