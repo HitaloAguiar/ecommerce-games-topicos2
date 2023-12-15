@@ -67,6 +67,16 @@ h1{
   background-color: #3b3b3b;
 }
 
+.profile-image {
+  width: 175px; /* Ajuste a largura conforme necessário */
+  height: 175px; /* Ajuste a altura conforme necessário */
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+
 .profile {
   padding: 20px;
   display: flex;
