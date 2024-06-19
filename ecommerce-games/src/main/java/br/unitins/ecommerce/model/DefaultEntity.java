@@ -16,31 +16,31 @@ public abstract class DefaultEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime dataInsert;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime dataUpdate;
+    private LocalDateTime updatedAt;
 
     @PostPersist
-    private void gerarDataInsert() {
+    private void gerarCreatedAt() {
 
-        dataInsert = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
-    private void gerarDataUpdate() {
+    private void gerarUpdateAt() {
 
-        dataUpdate = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     public Long getId() {
         return id;
     }
 
-    public LocalDateTime getDataInsert() {
-        return dataInsert;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public LocalDateTime getDataUpdate() {
-        return dataUpdate;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
